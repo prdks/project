@@ -18,7 +18,7 @@
         <div id="page-wrapper">
             <div class="row">
               <div class="col-lg-12">
-                <h3 class="page-header">บันทึกขออนุมัติใช้รถยนยนต์</h3>
+                <h3 class="page-header">บันทึกขออนุมัติใช้รถยนต์</h3>
               </div>
             </div>
             <div class="row">
@@ -73,102 +73,88 @@
                               <div class="tab-content">
                                 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx STEP 1 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
                                 <div class="tab-pane active" role="tabpanel" id="step1">
-                                  <form id="formdetail">
+                                  <form id="formdetail" class="form-horizontal">
                                     <!-- ชิ้อผู้ทำรายการ -->
-                                    <div class="row" style="padding:4px;">
-                                      <div class="form-group">
-                                        <label class="control-label col-lg-3 col-md-3 col-sm-4 text-right" style="margin-top:6px;">
-                                          ชื่อผู้ขออนุมัติ :
-                                        </label>
-                                        <div class="col-lg-4 col-md-4 col-sm-6 ">
-                                          <input  type="text"  class="form-control" name="user_name"
-                                          value="<?php echo $_SESSION['title_name']." ".$_SESSION['user_name'] ;?>"
-                                          required readonly/>
-                                        </div>
+                                    <div class="form-group">
+                                      <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                        ชื่อผู้ขออนุมัติ :
+                                      </label>
+                                      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                        <input  type="text"  class="form-control" name="user_name"
+                                        value="<?php echo $_SESSION['title_name']." ".$_SESSION['user_name'] ;?>"
+                                        required readonly/>
                                       </div>
                                     </div>
                                     <!-- ตำแหน่ง -->
-                                    <div class="row" style="padding:4px;">
-                                      <div class="form-group">
-                                        <label class="control-label col-lg-3 col-md-3 col-sm-4 text-right" style="margin-top:6px;">
-                                          ตำแหน่ง :
-                                        </label>
-                                        <div class="col-lg-4 col-md-4 col-sm-6 ">
-                                          <input  type="text"  class="form-control" name="user_position"
-                                          value="<?php echo $_SESSION['position'] ;?>"
-                                          required readonly/>
-                                        </div>
+                                    <div class="form-group">
+                                      <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                        ตำแหน่ง :
+                                      </label>
+                                      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                        <input  type="text"  class="form-control" name="user_position"
+                                        value="<?php echo $_SESSION['position'] ;?>"
+                                        required readonly/>
                                       </div>
                                     </div>
                                     <!-- รายละเอียดความประสงค์ -->
-                                    <div class="row" style="padding:4px;">
-                                      <div class="form-group">
-                                        <label class="control-label col-lg-3 col-md-3 col-sm-4 text-right" style="margin-top:6px;">
-                                          <span class="text-danger">*</span> ความประสงค์ขอใช้รถยนต์ :
-                                        </label>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                          <textarea  rows="5" type="text" class="form-control" id="detail" name="detail"
-                                          placeholder="พิมพ์รายละเอียดความประสงค์ขอใช้รถยนต์" required></textarea>
-                                        </div>
+                                    <div class="form-group">
+                                      <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                        <span class="requestfield">*</span> ความประสงค์ขอใช้รถยนต์ :
+                                      </label>
+                                      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                        <textarea  rows="5" type="text" class="form-control" id="detail" name="detail"
+                                        placeholder="พิมพ์รายละเอียดความประสงค์ขอใช้รถยนต์" required></textarea>
                                       </div>
                                     </div>
                                     <!-- วันแรกที่จองใช้ -->
-                                    <div class="row" style="padding:4px;">
-                                      <div class="form-group">
-                                        <label class="control-label col-lg-3 col-md-3 col-sm-4 text-right" style="margin-top:6px;">
-                                          <span class="text-danger">*</span> วันแรกที่ต้องการจอง :
-                                        </label>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                            <div class="input-group">
-                                              <!-- วันที่เริ่ม  -->
-                                              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                              <input class="form-control" name="date_start" id="date_start" type="date" required>
-                                            </div>
-
+                                    <div class="form-group">
+                                      <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                        <span class="requestfield">*</span> วันแรกที่ต้องการจอง :
+                                      </label>
+                                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-group">
+                                          <!-- วันที่เริ่ม  -->
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                          <input class="form-control" name="date_start" id="date_start" type="date" required>
                                         </div>
                                       </div>
                                     </div>
                                     <!-- วันสุดท้ายที่จองใช้ -->
-                                    <div class="row" style="padding:4px;">
-                                      <div class="form-group">
-                                        <label class="control-label col-lg-3 col-md-3 col-sm-4 text-right" style="margin-top:6px;">
-                                          <span class="text-danger">*</span> วันสุดท้ายที่ต้องการจอง :
-                                        </label>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                            <div class="input-group">
-                                              <!-- วันที่สิ้นสุด  -->
-                                              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                              <input class="form-control" name="date_end" id="date_end" type="date" required>
-                                            </div>
+                                    <div class="form-group">
+                                      <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                        <span class="requestfield">*</span> วันสุดท้ายที่ต้องการจอง :
+                                      </label>
+                                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-group">
+                                          <!-- วันที่สิ้นสุด  -->
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                          <input class="form-control" name="date_end" id="date_end" type="date" required>
                                         </div>
                                       </div>
                                     </div>
                                     <!-- เวลาที่จองใช้ -->
-                                    <div class="row" style="padding:4px;">
-                                      <div class="form-group">
-                                        <label class="control-label col-lg-3 col-md-3 col-sm-4 text-right" style="margin-top:6px;">
-                                          <span class="text-danger">*</span> ช่วงเวลาเริ่มต้น :
-                                        </label>
-                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                            <div class="input-group">
-                                              <!-- เวลาเริ่มต้น -->
-                                              <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                              <input class="form-control" name="time_start" id="time_start" type="time" required>
-                                            </div>
+                                    <div class="form-group">
+                                      <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                        <span class="requestfield">*</span> ช่วงเวลาเริ่มต้น :
+                                      </label>
+                                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-group">
+                                          <!-- เวลาเริ่มต้น -->
+                                          <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                          <input class="form-control" name="time_start" id="time_start" type="time" required>
                                         </div>
                                       </div>
                                     </div>
                                     <!-- เวลาที่จองใช้ -->
-                                    <div class="row" style="padding:4px;">
-                                      <div class="form-group">
-                                        <label class="control-label col-lg-3 col-md-3 col-sm-4 text-right" style="margin-top:6px;">
-                                          <span class="text-danger">*</span> ช่วงเวลาสิ้นสุด :
-                                        </label>
-                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                            <div class="input-group">
-                                              <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                              <input class="form-control" name="time_end" id="time_end" type="time" required>
-                                            </div>
+                                    <div class="form-group">
+                                      <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                        <span class="requestfield">*</span> ช่วงเวลาสิ้นสุด :
+                                      </label>
+                                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-group">
+                                          <!-- เวลาสิ้นสุด -->
+                                          <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                          <input class="form-control" name="time_end" id="time_end" type="time" required>
                                         </div>
                                       </div>
                                     </div>
@@ -214,7 +200,8 @@
                                   </div>
                                   <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx STEP 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
                                   <div class="tab-pane" role="tabpanel" id="step3">
-                                    <form id="forminsertlocation">
+                                    <form id="forminsertlocation" class="form-horizontal">
+
                                       <div class="row" style="padding:4px;">
                                         <!-- ใส่ข้อมูลสถานที่ -->
                                         <div class="col-lg-6">
@@ -222,21 +209,22 @@
                                             <div class="panel-heading">เพิ่มสถานที่</div>
                                             <div class="panel-body">
 
-                                              <div class="row" style="padding:4px;">
-                                                <div class="form-group">
-                                                  <label class="control-label col-lg-12">ชื่อสถานที่</label>
-                                                  <div class="col-lg-12">
-                                                    <input type="text" id="location_name" class="form-control" placeholder="พิมพ์ชื่อสถานที่ต้องการไป" />
-                                                  </div>
+                                              <div class="form-group">
+                                                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                                  <span class="requestfield">*</span> ชื่อสถานที่ :
+                                                </label>
+                                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                                                  <input type="text" id="location_name" class="form-control"
+                                                  placeholder="พิมพ์ชื่อสถานที่ต้องการไป" />
                                                 </div>
                                               </div>
 
-                                              <div class="row" style="padding:4px;">
-                                                <div class="form-group">
-                                                  <label class="control-label col-lg-12">จังหวัด</label>
-                                                  <div class="col-lg-12">
-                                                    <select class="form-control" id="province"></select>
-                                                  </div>
+                                              <div class="form-group">
+                                                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                                  <span class="requestfield">*</span> เลือกจังหวัด :
+                                                </label>
+                                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                                                  <select class="form-control" id="province"></select>
                                                 </div>
                                               </div>
 
@@ -269,7 +257,7 @@
                                                       <th id="tb_detail_main">จังหวัด</th>
                                                     </tr>
                                                   </thead>
-                                                  <tbody class="text-center">
+                                                  <tbody>
                                                   </tbody>
                                                 </table>
                                             </div>
@@ -285,13 +273,26 @@
                                   </div>
                                   <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx STEP 4 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
                                   <div class="tab-pane" role="tabpanel" id="step4">
-                                    <div class="row" style="padding:4px;">
+                                    <div class="row">
                                       <!-- ใส่ข้อมูลค้นหาบุคลากร -->
-                                      <div class="col-lg-6">
-                                        <label for="email">เพิ่มผู้โดยสาร:</label>
-                                        <label class="radio-inline"><input type="radio" name="select_mode" value=1>เลือกจากรายชื่อในระบบ</label>
-                                        <label class="radio-inline"><input type="radio" name="select_mode" value=2>กำหนดรายชื่อเอง</label>
-                                      </div>
+                                      <form class="form-inline col-lg-12">
+                                        <div class="form-group">
+                                          <label for="email">เพิ่มผู้โดยสาร : </label>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="radio-inline">
+                                            <input type="radio" name="select_mode" value=1>
+                                            เลือกจากรายชื่อในระบบ
+                                          </label>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="radio-inline">
+                                            <input type="radio" name="select_mode" value=2>
+                                            กำหนดรายชื่อเอง
+                                          </label>
+                                        </div>
+
+                                      </form>
 
                                       <div id="getPersonFromDB" class="col-lg-12">
                                         <div class="panel panel-default">
@@ -358,18 +359,17 @@
                                             เพิ่มรายชื่อกำหนดเอง
                                           </div>
                                           <div class="panel-body">
-
-                                            <!-- คำนำหน้าชื่อ -->
-                                            <div class="row" style="padding:4px;">
+                                            <form class="form-horizontal">
+                                              <!-- คำนำหน้าชื่อ -->
                                               <div class="form-group">
-                                                <label class="control-label col-lg-3 col-md-3 col-sm-4 text-right" style="margin-top:6px;">
-                                                  คำนำหน้าชื่อ :
+                                                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                                  <span class="requestfield">*</span> คำนำหน้าชื่อ :
                                                 </label>
-                                                <div class="col-lg-4 col-md-4 col-sm-6 ">
+                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                   <?php
                                                   $sql = "select * from title_name ORDER BY title_name ASC";
                                                   $result = $conn->query($sql);
-                                                  echo "<select class='form-control' id='select_title_name' style='width:100px;'>";
+                                                  echo "<select class='form-control' id='select_title_name'>";
                                                   while ($row=$result->fetch_assoc()) {
                                                     echo "<option values='".$row['title_name']."'>
                                                     ".$row['title_name']."
@@ -379,25 +379,22 @@
                                                   ?>
                                                 </div>
                                               </div>
-                                            </div>
-                                            <!-- ชื่อนามสกุล -->
-                                            <div class="row" style="padding:4px;">
+                                              <!-- ชื่อนามสกุล -->
                                               <div class="form-group">
-                                                <label class="control-label col-lg-3 col-md-3 col-sm-4 text-right" style="margin-top:6px;">
-                                                  ชื่อ-นามสกุล :
+                                                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                                  <span class="requestfield">*</span> ชื่อ-นามสกุล :
                                                 </label>
-                                                <div class="col-lg-4 col-md-4 col-sm-6 ">
-                                                  <input  type="text"  class="form-control" id="person_name"  placeholder="พิมพ์ชื่อ-นามสกุล" required/>
+                                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                                  <input  type="text"  class="form-control" id="person_name"
+                                                  placeholder="พิมพ์ชื่อ-นามสกุล" required/>
                                                 </div>
                                               </div>
-                                            </div>
-                                            <!-- หน่วยงาน -->
-                                            <div class="row" style="padding:4px;">
+                                              <!-- หน่วยงาน -->
                                               <div class="form-group">
-                                                <label class="control-label col-lg-3 col-md-3 col-sm-4 text-right" style="margin-top:6px;">
-                                                  ชื่อ-นามสกุล :
+                                                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                                  <span class="requestfield">*</span> หน่วยงาน :
                                                 </label>
-                                                <div class="col-lg-4 col-md-4 col-sm-6 ">
+                                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                                   <?php
                                                   $sql = "select * from department ORDER BY department_name ASC";
                                                   $result = $conn->query($sql);
@@ -412,7 +409,7 @@
                                                   ?>
                                                 </div>
                                               </div>
-                                            </div>
+                                            </form>
 
                                           </div>
                                           <div class="panel-footer">

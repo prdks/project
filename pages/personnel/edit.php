@@ -9,7 +9,6 @@ $phone = $_POST['phonenumber'];
 $title = $_POST['title_name'];
 $department = $_POST['department'];
 $position = $_POST['position'];
-$user_type = $_POST['user_type'];
 
 $sql = "select * from personnel where personnel_name ='".$name."'";
 $result = $conn->query($sql);
@@ -22,7 +21,6 @@ if($result)
   ,title_name_id = '".$title."'
   ,department_id = '".$department."'
   ,position_id = '".$position."'
-  ,user_type_id = '".$user_type."'
   where personnel_id= '".$id."'";
 
   if($conn->query($sql)===true)

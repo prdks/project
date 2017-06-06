@@ -23,59 +23,63 @@ $result = $conn->query($sql);
 while($row = $result->fetch_assoc())
 {
   echo "
+  <div class='row'>
+
   <!-- ชื่อนามสกุล -->
-  <div class='row' style='margin-left:5px;margin-right:5px;'>
-    <div class='form-group'>
-    <label class='control-label col-md-3 col-sm-3 col-xs-12'>ชื่อ-นามสกุล :</label>
-    <div class='col-md-7 col-sm-7 col-xs-12'>
-    <p>".$row['title_name']." ".$row['personnel_name']."</p>
-    </div>
+  <div class='form-group'>
+    <label class='col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label'>
+       ชื่อ-นามสกุล :
+    </label>
+    <div class='col-lg-7 col-md-7 col-sm-7 col-xs-12'>
+      <p>".$row['title_name']." ".$row['personnel_name']."</p>
     </div>
   </div>
   <!-- อีเมลล์ -->
-  <div class='row' style='margin-left:5px;margin-right:5px;'>
-    <div class='form-group'>
-    <label class='control-label col-md-3 col-sm-3 col-xs-12'>อีเมลล์ :</label>
-    <div class='col-md-7 col-sm-7 col-xs-12'>
-    <p>".$row['email']."</p>
-    </div>
+  <div class='form-group'>
+    <label class='col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label'>
+      อีเมลล์ :
+    </label>
+    <div class='col-lg-7 col-md-7 col-sm-7 col-xs-12'>
+      <p>".$row['email']."</p>
     </div>
   </div>
   <!-- เบอร์โทรศัพท์ -->
-  <div class='row' style='margin-left:5px;margin-right:5px;'>
-    <div class='form-group'>
-    <label class='control-label col-md-3 col-sm-3 col-xs-12'>เบอร์โทรศัพท์ :</label>
-    <div class='col-md-7 col-sm-7 col-xs-12'>
-    <p>".$row['phone_number']."</p>
-    </div>
+  <div class='form-group'>
+    <label class='col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label'>
+      เบอร์โทรศัพท์ :
+    </label>
+    <div class='col-lg-7 col-md-7 col-sm-7 col-xs-12'>
+      <p>".$row['phone_number']."</p>
     </div>
   </div>
   <!-- หน่วยงาน -->
-  <div class='row' style='margin-left:5px;margin-right:5px;'>
-    <div class='form-group'>
-      <label class='control-label col-md-3 col-sm-3 col-xs-12'>หน่วยงาน :</label>
-      <div class='col-md-7 col-sm-7 col-xs-12'>
+  <div class='form-group'>
+    <label class='col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label'>
+      หน่วยงาน :
+    </label>
+    <div class='col-lg-7 col-md-7 col-sm-7 col-xs-12'>
       <p>".$row['department_name']."</p>
-      </div>
     </div>
   </div>
   <!-- ตำแหน่ง -->
-  <div class='row' style='margin-left:5px;margin-right:5px;'>
-    <div class='form-group'>
-      <label class='control-label col-md-3 col-sm-3 col-xs-12'>ตำแหน่ง :</label>
-      <div class='col-md-5 col-sm-5 col-xs-12'>
+  <div class='form-group'>
+    <label class='col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label'>
+      ตำแหน่ง :
+    </label>
+    <div class='col-lg-7 col-md-7 col-sm-7 col-xs-12'>
       <p>".$row['position_name']."</p>
-      </div>
     </div>
   </div>
   <!-- ประเภท -->
-  <div class='row' style='margin-left:5px;margin-right:5px;'>
-    <div class='form-group'>
-      <label class='control-label col-md-3 col-sm-3 col-xs-12'>ระดับผู้ใช้งาน :</label>
-      <div class='col-md-5 col-sm-5 col-xs-12'>
+  <div class='form-group'>
+    <label class='col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label'>
+      ประเภทผู้ใช้งาน :
+    </label>
+    <div class='col-lg-7 col-md-7 col-sm-7 col-xs-12'>
       <p>".$row['user_type_name']."</p>
-      </div>
     </div>
+  </div>
+
   </div>
   ";
 }
