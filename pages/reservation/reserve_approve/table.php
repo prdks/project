@@ -7,7 +7,7 @@ LEFT JOIN personnel p
 ON r.personnel_id = p.personnel_id
 LEFT JOIN title_name t
 ON p.title_name_id = t.title_name_id
-WHERE reservation_status = 'กำลังดำเนินการ'
+WHERE reservation_status = 'รออนุมัติ'
 ORDER BY date_start ASC , reserv_stime ASC";
 $result = $conn->query($sql);
 $result_row = mysqli_num_rows($result);
@@ -15,7 +15,7 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
 {
   echo "
   <div class='table-responsive'>
-  <table id='reservation_tablelist' class='table table-striped table-bordered table-hover'>
+  <table id='approve_tablelist' class='table table-striped table-bordered table-hover'>
       <thead>
           <tr>
               <th id='tb_detail_sub-th'>วันที่จอง</th>
@@ -38,8 +38,8 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
       <td>".$row['requirement_detail']."</td>
       <td class='text-center'>".$row['car_reg']."</td>
       <td class='text-center'>";
-      if ($row['reservation_status'] === 'กำลังดำเนินการ') {
-        echo "<span class='label label-md label-primary'>กำลังดำเนินการ</span>";
+      if ($row['reservation_status'] === 'รออนุมัติ') {
+        echo "<span class='label label-md label-primary'>รออนุมัติ</span>";
       }elseif ($row['reservation_status'] === 'อนุมัติ') {
         echo "<span class='label label-md label-success'>อนุมัติ</span>";
       }elseif ($row['reservation_status'] === 'ยกเลิก') {
@@ -47,8 +47,8 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
       }
 echo" </td>
       <td class='text-center'>";
-      if ($row['usage_status'] === 'ยังไม่ดำเนินการ') {
-        echo "<span class='label label-md label-warning'>ยังไม่ดำเนินการ</span>";
+      if ($row['usage_status'] === 'รออนุมัติ') {
+        echo "<span class='label label-md label-warning'>รออนุมัติ</span>";
       }elseif ($row['usage_status'] === 'ดำเนินการเสร็จสิ้น') {
         echo "<span class='label label-md label-success'>ดำเนินการเสร็จสิ้น</span>";
       }elseif ($row['usage_status'] === 'ยกเลิก') {

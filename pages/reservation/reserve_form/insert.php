@@ -10,8 +10,8 @@ $time_end = $_POST['time_end'];
 $selecter_cars = $_POST['checked'];
 $LocationData = $_POST['LocationData'];
 $PassengerData = $_POST['PassengerData'];
-$reserv_status = 'กำลังดำเนินการ';
-$usage_status = 'ยังไม่ดำเนินการ';
+$reserv_status = 'รออนุมัติ';
+$usage_status = 'รออนุมัติ';
 $timestamp = date("Y-m-d H:i:s");
 
 // INSERT RESERVAION detail

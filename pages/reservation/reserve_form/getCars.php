@@ -23,8 +23,8 @@ WHERE c.car_id NOT IN (
    SELECT car_id FROM reservation r
   WHERE (date_start BETWEEN '".$date_start."' AND '".$date_end."')
   OR (date_end BETWEEN '".$date_start."' AND '".$date_end."')
-  OR (reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
-  OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
+  OR ((reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
+  OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."'))
   )
   AND department_name = '".$department."'
   AND c.status <> 'งดจอง'
