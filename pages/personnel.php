@@ -23,16 +23,19 @@
             </div>
 
             <div class="row" style="margin-bottom:10px;">
-              <div class="col-lg-6 col-md-6  col-sm-6 col-xs-6" colspan="3">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <a class="btn btn-success" id="btn_insert_modal" data-toggle="modal" data-target="#Insert_modal">
                   เพิ่มข้อมูล
                 </a>
                 <a class="btn btn-danger" id="btn_delet_modal" data-toggle="modal" data-target="#Delete_modal">
                   ลบข้อมูล
                 </a>
+                <a class="btn btn-info" href="permission.php">
+                  กำหนดสิทธิ์
+                </a>
               </div>
 
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
                   <div class="input-group">
                     <input name="search_box" type="text" class="form-control" placeholder="พิมพ์เพื่อค้นหา">

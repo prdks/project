@@ -3,7 +3,7 @@
     <li class="pull-right">
         <a id="signin-button" onclick="handleSignInClick()" role="button" type="submit">
           <i class="fa fa-sign-in fa-fw"></i>
-          เข้าสู่ระบบ
+          ลงชื่อเข้าสู่ระบบ
         </a>
         <input type="hidden" id="hd_email" name="hd_email" value="">
         <input type="hidden" id="name" name="name" value="">

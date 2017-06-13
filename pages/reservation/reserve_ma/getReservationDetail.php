@@ -127,8 +127,8 @@ echo"</td>
     <tr>
     <td class='col-lg-2 col-md-2 col-sm-2 col-xs-2 topic'>ผลการจอง :</td>
     <td>";
-    if ($row['reservation_status'] === 'กำลังดำเนินการ') {
-      echo "<span class='label label-primary'>กำลังดำเนินการ</span>";
+    if ($row['reservation_status'] === 'รออนุมัติ') {
+      echo "<span class='label label-primary'>รออนุมัติ</span>";
     }elseif ($row['reservation_status'] === 'อนุมัติ') {
       echo "<span class='label label-success'>อนุมัติ</span>";
     }elseif ($row['reservation_status'] === 'ยกเลิก') {

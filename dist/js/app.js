@@ -327,6 +327,15 @@ $(function () {
        $('#reserv_detail_modal').modal('show');
     });
 
+    $("#approve_tablelist tbody tr").click(function(e) {
+      $.post("reservation/reserve_approve/getReservationDetail.php"
+      ,{reservation_id : $(this).attr('id')}
+      ,function(data){
+        $('#show_reservation_approve').html(data);
+      });
+       $('#reserv_approve_modal').modal('show');
+    });
+
     $("#user_reservation_tablelist tbody tr").click(function() {
       $.post("user/getDetail.php"
       ,{reservation_id : $(this).attr('id')}

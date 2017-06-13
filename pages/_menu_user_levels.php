@@ -4,7 +4,7 @@ $type = $_SESSION['user_type'];
 $sql = "
 SELECT COUNT(reservation_id) as reservecout
 FROM reservation
-WHERE reservation_status = 'กำลังดำเนินการ'
+WHERE reservation_status = 'รออนุมัติ'
 ";
 $result = $conn->query($sql);
 $row = $result->fetch_array();
@@ -37,7 +37,6 @@ switch ($type) {
           <li><a href='personnel.php'>ข้อมูลบุคลากร</a></li>
           <li><a href='cars.php'>ข้อมูลรถยนต์</a></li>
           <li><a href='reserve_ma.php'>ข้อมูลการจองและการใช้รถยนต์</a></li>
-          <li><a href='permission.php'>กำหนดสิทธิ์</a></li>
           </ul>
       </li>
       <li>
@@ -141,7 +140,6 @@ switch ($type) {
                 <li><a href='personnel.php'>ข้อมูลบุคลากร</a></li>
                 <li><a href='cars.php'>ข้อมูลรถยนต์</a></li>
                 <li><a href='reserve_ma.php'>ข้อมูลการจองและการใช้รถยนต์</a></li>
-                <li><a href='permission.php'>กำหนดสิทธิ์</a></li>
               </ul>
           </li>
             ";

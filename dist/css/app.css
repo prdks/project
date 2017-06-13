@@ -2,10 +2,10 @@ body{
   font-family: 'Kanit', sans-serif;
 }
 
-dd {
+/*dd {
     display: block;
     margin-left: 10px;
-}
+}*/
 
 thead#Table_Default{
   background-color: #fff;

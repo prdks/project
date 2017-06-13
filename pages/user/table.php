@@ -38,8 +38,8 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
       <td>".$row['requirement_detail']."</td>
       <td class='text-center'>".$row['car_reg']."</td>
       <td class='text-center'>";
-      if ($row['reservation_status'] === 'กำลังดำเนินการ') {
-        echo "<span class='label label-md label-primary'>กำลังดำเนินการ</span>";
+      if ($row['reservation_status'] === 'รออนุมัติ') {
+        echo "<span class='label label-md label-primary'>รออนุมัติ</span>";
       }elseif ($row['reservation_status'] === 'อนุมัติ') {
         echo "<span class='label label-md label-success'>อนุมัติ</span>";
       }elseif ($row['reservation_status'] === 'ยกเลิก') {
@@ -47,8 +47,8 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
       }
 echo" </td>
       <td class='text-center'>";
-      if ($row['usage_status'] === 'ยังไม่ดำเนินการ') {
-        echo "<span class='label label-md label-warning'>ยังไม่ดำเนินการ</span>";
+      if ($row['usage_status'] === 'รออนุมัติ') {
+        echo "<span class='label label-md label-warning'>รออนุมัติ</span>";
       }elseif ($row['usage_status'] === 'ดำเนินการเสร็จสิ้น') {
         echo "<span class='label label-md label-success'>ดำเนินการเสร็จสิ้น</span>";
       }elseif ($row['usage_status'] === 'ยกเลิก') {
