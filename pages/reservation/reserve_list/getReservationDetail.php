@@ -136,11 +136,13 @@ echo"</td>
     <td class='col-lg-2 col-md-2 col-sm-2 col-xs-2 topic'>ผลการจอง :</td>
     <td>";
     if ($row['reservation_status'] === 'รออนุมัติ') {
-      echo "<span class='label label-primary'>รออนุมัติ</span>";
+      echo "<span class='label label-md label-primary'>รออนุมัติ</span>";
     }elseif ($row['reservation_status'] === 'อนุมัติ') {
-      echo "<span class='label label-success'>อนุมัติ</span>";
+      echo "<span class='label label-md label-success'>อนุมัติ</span>";
+    }elseif ($row['reservation_status'] === 'ไม่อนุมัติ') {
+      echo "<span class='label label-md label-warning'>ไม่อนุมัติ</span>";
     }elseif ($row['reservation_status'] === 'ยกเลิก') {
-      echo "<span class='label label-danger'>ยกเลิก</span>";
+      echo "<span class='label label-md label-default'>ยกเลิก</span>";
     }
 echo" &nbsp;&nbsp;&nbsp;<b>บันทึกโดย</b> ";
     if($row['first_approver_id'] == null){
@@ -160,9 +162,9 @@ echo" &nbsp;&nbsp;&nbsp;<b>บันทึกโดย</b> ";
     }
 echo" &nbsp;&nbsp;&nbsp;<b>วันที่บันทึกผล</b> ";
   if ($row['update_status_date'] == null) {
-    echo "-";
+    echo " - ";
   }else {
-    echo $row['update_status_date'];
+    echo DateTimeThai($row['update_status_date'])."น.";
   }
 echo"
     </td>

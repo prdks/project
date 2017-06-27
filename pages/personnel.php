@@ -40,7 +40,7 @@
                   <div class="input-group">
                     <input name="search_box" type="text" class="form-control" placeholder="พิมพ์เพื่อค้นหา">
                     <div class="input-group-btn">
-                      <button class="btn btn-default handleSearch" name="handleSearch" type="submit">
+                      <button class="btn btn-default" name="handleSearch" type="submit">
                         <i class="glyphicon glyphicon-search"></i>
                       </button>
                     </div>
@@ -71,54 +71,5 @@
 
     </div>
     <!-- /#wrapper -->
-
-<script>
-$(document).ready(function() {
-
-    // Send data to modal_delete
-    $('#btn_delet_modal').click(function() {
-      var checked = []
-      $("input[name='checked_id[]']:checked").each(function ()
-      {
-        checked.push(parseInt($(this).val()));
-      });
-      $.post("personnel/modal_delete.php" ,
-        {checked_id: checked} ,
-        function(data) {
-          $('#respone').html(data);
-        }
-      );
-    });
-
-    // send data to Delete
-    $('#delete-btn').on('click',function() {
-      var checked = []
-      $("input[name='checked_id[]']:checked").each(function ()
-      {
-        checked.push(parseInt($(this).val()));
-      });
-      $.post("personnel/delete.php" ,{checked_id: checked});
-    });
-
-    // send data to modal detail
-    $('.handleDetail').click(function() {
-      $.post("personnel/modal_detail.php"
-      ,{personnel_id : $(this).attr('id')}
-      ,function(data){
-        $('#body_modal').html(data);
-      });
-    });
-
-    //send data to modal Edit
-    $('.handleEdit').click(function() {
-      $.post("personnel/modal_edit.php"
-      ,{personnel_id : $(this).attr('id')}
-      ,function(data){
-        $('#body_Edit').html(data);
-      });
-    });
-
-});
-</script>
 </body>
 </html>

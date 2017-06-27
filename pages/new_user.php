@@ -69,7 +69,7 @@
                   <span class="requestfield">*</span> เบอร์โทรศัพท์ :
                 </label>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                  <input type="tel" name="phonenumber" class="form-control"
+                  <input type="tel" name="phone_number" class="form-control"
                   value="<?php echo $_SESSION['phone_number'] ?>"
                   maxlength="15" required>
                 </div>

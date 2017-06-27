@@ -6,7 +6,7 @@ if(isset($_POST['save_btn']))
 {
   $title = $_POST['title_name'];
   $name = $_POST['user_name'];
-  $phone = $_POST['phonenumber'];
+  $phone = $_POST['phone_number'];
   $department = $_POST['department'];
   $position = $_POST['position'];
 

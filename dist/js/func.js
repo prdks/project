@@ -14,6 +14,7 @@ function getProvince() {
     sorting(province_group, 'name');
         $.each(province_group, function(i, field){
           $('#province').append($('<option>').text(field.name).attr('value', field.name));
+          $('#display-province').append($('<option>').text(field.name).attr('value', field.name));
         });
   });
 }

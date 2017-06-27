@@ -3,7 +3,7 @@ require '../_connect.php';
 
 $name = $_POST['user_name'];
 $email = $_POST['email'];
-$phone = $_POST['phonenumber'];
+$phone = $_POST['phone_number'];
 
 $title = $_POST['title_name'];
 $department = $_POST['department'];

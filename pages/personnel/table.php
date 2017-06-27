@@ -76,14 +76,14 @@ switch ($_SESSION['user_type']) {
         <td>".$row['department_name']."</td>
         <td class='text-center'>
 
-        <button type='submit' class='btn btn-primary handleDetail' role='button'
-        data-toggle='modal' data-target='#Detail_modal' id='".$row['personnel_id']."'>
-        <span class='fa fa-user handleEdit_id' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
+        <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+        data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+          <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
         </button>
 
-        <button type='submit' class='btn btn-warning handleEdit' role='button'
-      data-toggle='modal' data-target='#Edit_modal' name='handleEdit' id='".$row['personnel_id']."'>
-        <span class='fa fa-edit handleEdit_id' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
+        <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
         </button>
 
         </td>
@@ -175,15 +175,14 @@ switch ($_SESSION['user_type']) {
         <td class='text-center'>
 
 
-        <button  type='submit' class='btn btn-primary handleDetail' role='button'
-        data-toggle='modal' data-target='#Detail_modal' id='".$row['personnel_id']."'>
-        <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล'></span>
+        <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+        data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+          <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
         </button>
 
-        <button type='submit' class='btn btn-warning handleEdit' role='button'
-        data-toggle='modal' data-target='#Edit_modal'
-         id='".$row['personnel_id']."'>
-        <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
+        <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
         </button>
 
         </td>
@@ -296,14 +295,14 @@ switch ($_SESSION['user_type']) {
         <td class='text-center'>".$row['position_name']."</td>
         <td class='text-center'>
 
-        <button type='submit' class='btn btn-primary handleDetail' role='button'
-        data-toggle='modal' data-target='#Detail_modal' id='".$row['personnel_id']."'>
-        <span class='fa fa-user handleEdit_id' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
+        <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+        data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+          <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
         </button>
 
-        <button type='submit' class='btn btn-warning handleEdit' role='button'
-      data-toggle='modal' data-target='#Edit_modal' name='handleEdit' id='".$row['personnel_id']."'>
-        <span class='fa fa-edit handleEdit_id' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
+        <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
         </button>
 
         </td>
@@ -393,15 +392,14 @@ switch ($_SESSION['user_type']) {
         <td class='text-center'>
 
 
-        <button  type='submit' class='btn btn-primary handleDetail' role='button'
-        data-toggle='modal' data-target='#Detail_modal' id='".$row['personnel_id']."'>
-        <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล'></span>
+        <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+        data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+          <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
         </button>
 
-        <button type='submit' class='btn btn-warning handleEdit' role='button'
-        data-toggle='modal' data-target='#Edit_modal'
-         id='".$row['personnel_id']."'>
-        <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
+        <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
         </button>
 
         </td>

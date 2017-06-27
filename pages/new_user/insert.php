@@ -3,7 +3,7 @@ session_start();
 require '../_connect.php';
 $title = $_POST['title_name'];
 $name = $_POST['user_name'];
-$phone = $_POST['phonenumber'];
+$phone = $_POST['phone_number'];
 $email = $_POST['email'];
 $department = $_POST['department'];
 $position = $_POST['position'];

@@ -1,6 +1,7 @@
 <?php
 require '../../_connect.php';
 session_start();
+date_default_timezone_set("Asia/Bangkok");
 
 $require_detail = $_POST['require_detail'];
 $date_start = $_POST['date_start'];

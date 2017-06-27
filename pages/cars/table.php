@@ -73,23 +73,19 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
           }
           echo "
           <td class='text-center'>
-          <button type='submit' class='btn btn-primary handleDetail' role='button'
-          data-toggle='modal' data-target='#Detail_modal' id='".$row['car_id']."'>
-            <span class='fa fa-search'
-            data-toggle='tooltip' data-placement='top' title='ดูข้อมูล'>
-            </span>
+          <button type='submit' class='btn btn-primary handleCarDetail' role='button'
+          data-toggle='modal' data-target='#Detail_modal' data-id='".$row['car_id']."'>
+            <span class='fa fa-search' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล'></span>
           </button>
 
-          <button type='submit' class='btn btn-warning handleEdit' role='button'
-          data-toggle='modal' data-target='#Edit_modal' id='".$row['car_id']."' name='".$row['personnel_id']."'>
-            <span class='fa fa-edit handleEdit_id'
-            data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
+          <button type='submit' class='btn btn-warning handleCarEdit' role='button'
+          data-toggle='modal' data-target='#Edit_modal' data-id='".$row['car_id']."'>
+            <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
           </button>
 
-          <button class='btn btn-danger handleDelete' role='button'
-          data-toggle='modal' data-target='#Delete_modal' id='".$row['car_id']."'>
-            <span class='fa fa-trash-o handleDelete_id'
-            data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
+          <button class='btn btn-danger handleCarDelete' role='button'
+          data-toggle='modal' data-target='#Delete_modal' data-id='".$row['car_id']."'>
+            <span class='fa fa-trash-o' data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
           </button>
           </td>
           </tr>
@@ -165,21 +161,21 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
         }
         echo "
         <td class='text-center'>
-        <button type='submit' class='btn btn-primary handleDetail' role='button'
-        data-toggle='modal' data-target='#Detail_modal' id='".$row['car_id']."'>
+        <button type='submit' class='btn btn-primary handleCarDetail' role='button'
+        data-toggle='modal' data-target='#Detail_modal' data-id='".$row['car_id']."'>
           <span class='fa fa-search'
           data-toggle='tooltip' data-placement='top' title='ดูข้อมูล'>
           </span>
         </button>
 
-        <button type='submit' class='btn btn-warning handleEdit' role='button'
-        data-toggle='modal' data-target='#Edit_modal' id='".$row['car_id']."' name='".$row['personnel_id']."'>
+        <button type='submit' class='btn btn-warning handleCarEdit' role='button'
+        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['car_id']."'>
           <span class='fa fa-edit'
           data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
         </button>
 
-        <button class='btn btn-danger handleDelete' role='button'
-        data-toggle='modal' data-target='#Delete_modal' id='".$row['car_id']."'>
+        <button class='btn btn-danger handleCarDelete' role='button'
+        data-toggle='modal' data-target='#Delete_modal' data-id='".$row['car_id']."'>
           <span class='fa fa-trash-o'
           data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
         </button>

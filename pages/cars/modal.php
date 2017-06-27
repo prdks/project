@@ -220,7 +220,7 @@
             placeholder="พิมพ์หมายเหตุที่งดจองรถยนต์" style="resize:none;"></textarea>
           </div>
         </div>
-        
+
       </div>
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
@@ -243,7 +243,46 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">ข้อมูลรถยนต์</h4>
       </div>
-      <div class="modal-body" id="body_modal">
+      <div class="modal-body">
+        <dl class="dl-horizontal">
+          <dt>ทะเบียนรถยนต์ :</dt>
+          <dd id="show-reg"></dd>
+          <br />
+          <dt>ยี่ห้อ :</dt>
+          <dd id="show-brand"></dd>
+          <br />
+          <dt>รุ่น :</dt>
+          <dd id="show-kind"></dd>
+          <br />
+          <dt>รายละเอียด :</dt>
+          <dd id="show-detail"></dd>
+          <br />
+          <dt>จำนวนที่นั่ง :</dt>
+          <dd id="show-seat"></dd>
+          <br />
+          <dt>คนขับรถยนต์ :</dt>
+          <dd id="show-driver"></dd>
+          <br />
+          <?php
+          switch ($_SESSION['user_type'])
+          {
+            case 'เจ้าหน้าที่ดูแลระบบ':
+              ?>
+              <dt>สังกัด :</dt>
+              <dd id="show-department"></dd>
+              <br />
+              <?php
+              break;
+          }
+          ?>
+          <dt>สถานะรถยนต์ :</dt>
+          <dd id="show-status"></dd>
+          <br />
+          <div id="status_note" hidden>
+            <dt class="text-danger">หมายเหตุ :</dt>
+            <dd id="show-note" class="text-danger"></dd>
+          </div>
+        </dl>
       </div>
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
@@ -265,7 +304,232 @@
         <h4 class="modal-title">แก้ไขข้อมูลรถยนต์</h4>
       </div>
       <form class="form-horizontal" action="cars/edit.php" method="post">
-        <div class="modal-body" id="body_Edit"></div>
+        <div class="modal-body">
+          <!-- ทะเบียนรถยนต์ -->
+          <div class="form-group">
+            <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+              <span class="requestfield">*</span> ทะเบียนรถยนต์ :
+            </label>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+            <input type="text" class="form-control" name="car_reg"
+            id="display-reg" value="" placeholder="พิมพ์เลขทะเบียน" required>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+            <select class="form-control" id="display-province" name="province"></select>
+            </div>
+          </div>
+        </div>
+        <!-- ยี่ห้อ -->
+        <div class="form-group">
+          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+            <span class="requestfield">*</span> เลือกยี่ห้อ :
+          </label>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <select id="display-brand" name="car_brand" class="form-control" required>"
+          <?php
+          $sql = "Select * from car_brand order by car_brand_name ASC";
+          $result = $conn->query($sql);
+          if(mysqli_num_rows($result) !== 0)
+          {
+            while ($r= $result->fetch_assoc())
+            {
+                ?>
+                <option value="<?php echo $r["car_brand_name"];?>"><?php echo $r["car_brand_name"];?></option>
+                <?php
+            }
+          }
+          else
+          {
+              ?>
+              <option value=null>ไม่พบข้อมูลยี่ห้อรถยนต์</option>
+              <?php
+          }
+          ?>
+        </select>
+          </div>
+        </div>
+        <!-- รุ่น -->
+        <div class="form-group">
+          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+            <span class="requestfield">*</span> รุ่น :
+          </label>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <input type="text" class="form-control" name="car_kind"
+          id="display-kind" value="" placeholder="พิมพ์รุ่นของรถยนต์" required>
+          </div>
+        </div>
+        <!-- รายละเอียด -->
+        <div class="form-group">
+          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+            รายละเอียด :
+          </label>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <textarea  rows="3" type="text" class="form-control" id="display-detail" name="car_detail"
+          placeholder="พิมพ์รายละเอียดของรถยนต์" style="resize:none;"></textarea>
+          </div>
+        </div>
+        <!-- จำนวนที่นั่ง -->
+        <div class="form-group">
+          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+            <span class="requestfield">*</span> จำนวนที่นั่ง :
+          </label>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+          <input class="form-control" type="number" name="seat" min="1" max="50"
+          id="display-seat" placeholder="0" required value="">
+          </div>
+        </div>
+        <!-- คนขับรถยนต์ -->
+        <div class="form-group">
+          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+            <span class="requestfield">*</span> เลือกคนขับ :
+          </label>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <?php
+            switch ($_SESSION['user_type']) {
+              case 'เจ้าหน้าที่ดูแลระบบ':
+              $sql = "
+                SELECT
+                  psn.* , t.* , p.* , d.*
+                FROM personnel psn
+                LEFT OUTER JOIN title_name t
+                  ON psn.title_name_id = t.title_name_id
+                LEFT OUTER JOIN  position p
+                  ON psn.position_id = p.position_id
+                LEFT OUTER JOIN  department  d
+                  ON psn.department_id = d.department_id
+                WHERE position_name = 'คนขับรถยนต์'
+                ORDER BY department_name ASC";
+                $result = $conn->query($sql);
+                if(mysqli_num_rows($result) !== 0)
+                {
+                  ?>
+                  <select id="display-driver" name='driver' class='form-control' required>
+                  <?php
+                  $sql2 = "SELECT d.*FROM department d
+                  LEFT OUTER JOIN personnel p
+                  ON p.department_id= d.department_id
+                  LEFT OUTER JOIN cars c
+                  ON c.personnel_id = p.personnel_id
+                  GROUP BY department_name
+                  ORDER BY COUNT(car_reg) DESC
+                  , department_name ASC";
+                  $result2 = $conn->query($sql2);
+                  while ($r = $result2->fetch_assoc())
+                  {
+                        $sql = "
+                          SELECT
+                            psn.* , t.* , p.* , d.*
+                          FROM personnel psn
+                          LEFT OUTER JOIN title_name t
+                            ON psn.title_name_id = t.title_name_id
+                          LEFT OUTER JOIN  position p
+                            ON psn.position_id = p.position_id
+                          LEFT OUTER JOIN  department  d
+                            ON psn.department_id = d.department_id
+                          WHERE position_name = 'คนขับรถยนต์'
+                          AND department_name = '".$r['department_name']."'
+                          ORDER BY department_name ASC";
+                        $result = $conn->query($sql);
+                        if(mysqli_num_rows($result) !== 0)
+                        {
+                          ?>
+                          <optgroup label="<?php echo $r['department_name'];?>">
+                          <?php
+                          while ($r = $result->fetch_assoc())
+                          {
+                            ?>
+                            <option value="<?php echo $r['personnel_name'];?>" selected>
+                            <?php echo $r['title_name']." ".$r['personnel_name']; ?>
+                            </option>
+                            <?php
+                          }
+                        }else {
+                          ?>
+                          <optgroup label="<?php echo $r['department_name'];?>" disabled style='color:#cccccc;'>
+                            <option value=null style="color:#dfdfdf;" disabled>ไม่พบข้อมูลคนขับรถยนต์</option>
+                          <?php
+                        }
+
+                  }
+                }
+                else
+                {
+                  ?>
+                  <select id="display-driver" name="driver" class="form-control" readonly disable >
+                  <option value=null>ไม่พบข้อมูลคนขับรถยนต์</option>
+                  <?php
+                }
+                ?>
+                </select>
+                <?php
+                break;
+              case 'ผู้อนุมัติประจำหน่วยงาน ลำดับที่ 1':
+              $sql = "
+                SELECT
+                  psn.* , t.* , p.* , d.*
+                FROM personnel psn
+                LEFT OUTER JOIN title_name t
+                  ON psn.title_name_id = t.title_name_id
+                LEFT OUTER JOIN  position p
+                  ON psn.position_id = p.position_id
+                LEFT OUTER JOIN  department  d
+                  ON psn.department_id = d.department_id
+                WHERE position_name = 'คนขับรถยนต์'
+                AND department_name = '".$_SESSION['department']."'";
+                $result = $conn->query($sql);
+                if(mysqli_num_rows($result) !== 0)
+                {
+                  ?>
+                  <select id="display-driver" name='driver' class='form-control' required>
+                  <?php
+                  while ($r = $result->fetch_assoc())
+                  {
+                    ?>
+                    <option value="<?php echo $r['personnel_name'];?>" selected>
+                    <?php echo $r['title_name']." ".$r['personnel_name']; ?>
+                    </option>
+                    <?php
+                  }
+                }
+                else
+                {
+                  ?>
+                  <select id="display-driver" name="driver" class="form-control" readonly disable >
+                  <option value=null>ไม่พบข้อมูลคนขับรถยนต์</option>
+                  <?php
+                }
+                ?>
+                </select>
+                <?php
+                break;
+            }
+            ?>
+          </div>
+        </div>
+        <!-- สถานะ -->
+        <div class="form-group">
+          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+            สถานะรถยนต์ :
+          </label>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <select id="display-status" name="status" class="form-control">
+              <option value="จองได้" selected>จองได้</option>
+              <option value="งดจอง">งดจอง</option>
+            </select>
+          </div>
+        </div>
+        <!-- ถ้้าสถานะงดจอง -->
+        <div class="form-group" id="display-note-area">
+          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+            <span class="requestfield">*</span> หมายเหตุ : </label>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <textarea  rows="3" type="text" class="form-control" id="display-note" name="note"
+            placeholder="พิมพ์หมายเหตุที่งดจองรถยนต์" style="resize:none;"></textarea>
+          </div>
+        </div>
+        <input type="hidden" id="display-id" name="car_id" value=""/>
+
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
         <button type="submit" class="btn btn-primary">แก้ไขข้อมูล</button>
@@ -279,7 +543,7 @@
 
 <!--************************************************************** Delete Modal **************************************************************-->
 <div id="Delete_modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -288,7 +552,16 @@
         <h4 class="modal-title">ลบข้อมูลรถยนต์</h4>
       </div>
       <form class="form-horizontal" action="cars/delete.php" method="post">
-      <div class="modal-body" id="body_Delete">
+      <div class="modal-body">
+
+        <div class="form-group">
+          <center>
+            <label class="control-label">ข้อมูลที่ต้องการลบคือ</label>
+            <label id="show-delete-label" class="control-label"></label>
+          </center>
+          <input type="hidden" id="show-delete-id" name="car_id" value=""/>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>

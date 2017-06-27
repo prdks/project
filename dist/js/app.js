@@ -7,7 +7,8 @@ $(function () {
     $(this).find('input,textarea').val('').end();
     $(this).find("option").prop('selectedIndex', 0).end();
   });
-  $('input[name=phonenumber]').mask("999-999-9999");
+  $('input[name=phone_number]').mask("999-999-9999");
+// -------------------------------------------------------------
   //  เมื่อกดปุ่มแก้ไข จะส่งค่าไปที่ box
   $('.handleEdit').click(function() {
     var id = $(this).attr('id');
@@ -23,7 +24,177 @@ $(function () {
     var name = $(this).attr('name');
     $('#show_delete').text('\n\" '+name+' \"');
   });
+// ----------------------- personnel ----------------------------
+  //  เมื่อกดปุ่มดูลายระเอียด จะส่งค่าไปที่ box
+  $('.handlePersonDetail').click(function() {
+    var id = $(this).attr('data-id');
 
+    $.ajax({
+      type: "POST",
+      url: "personnel/controller.php",
+      data: {id: id, mode: 'getDetail'},
+      dataType: 'json',
+      success: function(data){
+        $('#show-name').html(data.name);
+        $('#show-email').html(data.email);
+        $('#show-phone').html(data.phone);
+        $('#show-department').html(data.department);
+        $('#show-position').html(data.position);
+        $('#show-usertype').html(data.type);
+      }
+    });
+
+  });
+
+  //  เมื่อกดปุ่มแก้ไข จะส่งค่าไปที่ box
+  $('.handlePersonEdit').click(function() {
+    var id = $(this).attr('data-id');
+
+    $.ajax({
+      type: "POST",
+      url: "personnel/controller.php",
+      data: {id: id, mode: 'getEdit'},
+      dataType: 'json',
+      success: function(data){
+        $('#display-title').val(data.title);
+        $('#display-name').val(data.name);
+        $('#display-email').val(data.email);
+        $('#display-phone').val(data.phone);
+        $('#display-department').val(data.department);
+        $('#display-position').val(data.position);
+        $('#display-usertype').val(data.type);
+        $('#display-id').val(data.id);
+      }
+    });
+
+  });
+
+  // Send data to modal_delete
+  $('#btn_delet_modal').click(function() {
+    var checked = []
+    $("input[name='checked_id[]']:checked").each(function ()
+    {
+      checked.push(parseInt($(this).val()));
+    });
+    $.post("personnel/controller.php" ,
+      {checked_id: checked , mode: 'getDelete'} ,
+      function(data) {
+        $('#respone').html(data);
+      }
+    );
+
+  });
+
+  // send data to Delete
+  $('#delete-btn').on('click',function() {
+    var checked = []
+    $("input[name='checked_id[]']:checked").each(function ()
+    {
+      checked.push(parseInt($(this).val()));
+    });
+    $.post("personnel/delete.php" ,{checked_id: checked});
+  });
+// ----------------------- Cars ----------------------------
+  $('#status_note').hide();
+  $('#display-note-area').hide();
+  $('#display-status').change(function(){
+      var s = $(this).val();
+      if(s == 'งดจอง') {
+          $('#display-note').prop('required',true);
+          $('#display-note-area').show();
+      } else {
+          $('#display-note').prop('required',false);
+          $('#display-note-area').hide();
+      }
+  });
+
+  //  เมื่อกดปุ่มดูลายระเอียด จะส่งค่าไปที่ box
+  $('.handleCarDetail').click(function() {
+    var id = $(this).attr('data-id');
+
+    $.ajax({
+      type: "POST",
+      url: "cars/controller.php",
+      data: {id: id, mode: 'getDetail'},
+      dataType: 'json',
+      success: function(data){
+        $('#show-reg').html(data.reg);
+        $('#show-provine').html(data.provine);
+        $('#show-brand').html(data.brand);
+        $('#show-kind').html(data.kind);
+        if (data.detail == "") {
+          $('#show-detail').html(" - ");
+        }else {
+          $('#show-detail').html(data.detail);
+        }
+        $('#show-seat').html(data.seat);
+        $('#show-driver').html(data.driver);
+        $('#show-department').html(data.department);
+        $('#show-status').html(data.status);
+        if (data.status == 'จองได้')
+        {
+          $('#status_note').hide();
+        }
+        else
+        {
+          $('#status_note').show();
+          $('#show-note').html(data.note);
+        }
+
+      }
+    });
+
+  });
+
+  //  เมื่อกดปุ่มแก้ไข จะส่งค่าไปที่ box
+  $('.handleCarEdit').click(function() {
+    var id = $(this).attr('data-id');
+    $.ajax({
+      type: "POST",
+      url: "cars/controller.php",
+      data: {id: id, mode: 'getEdit'},
+      dataType: 'json',
+      success: function(data){
+        $('#display-reg').val(data.reg);
+        $('#display-province').val(data.province);
+        $('#display-brand').val(data.brand);
+        $('#display-kind').val(data.kind);
+        $('#display-detail').val(data.detail);
+        $('#display-seat').val(data.seat);
+        $('#display-driver').val(data.driver);
+        $('#display-department').val(data.department);
+        $('#display-status').val(data.status);
+        if (data.status == 'จองได้')
+        {
+          $('#display-note-area').hide();
+        }
+        else
+        {
+          $('#display-note-area').show();
+          $('#display-note').val(data.note);
+        }
+        $('#display-id').val(data.id);
+      }
+    });
+
+  });
+
+
+  $('.handleCarDelete').click(function() {
+      var id = $(this).attr('data-id');
+      $.ajax({
+        type: "POST",
+        url: "cars/controller.php",
+        data: {id: id, mode: 'getDelete'},
+        dataType: 'json',
+        success: function(data){
+          $('#show-delete-label').html('\" รถยนต์ทะเบียน '+ data.reg +' \"' );
+          $('#show-delete-id').val(data.id);
+        }
+      });
+
+  });
+// -------------------------------------------------------------
   // คลิกเลือกทั้งหมด
   $('#select_all').on('click',function(){
     if(this.checked){
@@ -48,7 +219,8 @@ $(function () {
 
   $('#note').hide();
   $('#status').change(function(){
-      if($('#status').val() == 'งดจอง') {
+      var s = $(this).val();
+      if( s == 'งดจอง') {
           $('#note_area').prop('required',true);
           $('#note').show();
       } else {
@@ -318,6 +490,7 @@ $(function () {
     //------------- Set Province BOX ---------------
     getProvince();
     // ---------------คลิกดูรายละเอียดในตาราง-------------
+    //ตารางรวม
     $("#reservation_tablelist tbody tr").click(function() {
       $.post("reservation/reserve_list/getReservationDetail.php"
       ,{reservation_id : $(this).attr('id')}
@@ -327,15 +500,60 @@ $(function () {
        $('#reserv_detail_modal').modal('show');
     });
 
+    //ตารางยืนยัน
     $("#approve_tablelist tbody tr").click(function(e) {
-      $.post("reservation/reserve_approve/getReservationDetail.php"
-      ,{reservation_id : $(this).attr('id')}
-      ,function(data){
-        $('#show_reservation_approve').html(data);
+      var id = $(this).attr('id');
+      $.ajax({
+        type: "POST",
+        url: "reservation/controller.php",
+        data: {id: id, mode: 'getDetail_approve'},
+        dataType: 'json',
+        success: function(data){
+          console.log(data);
+          $('#show-detail').html(data.reserv_detail.detail);
+          $('#show-cars').html(data.reserv_detail.cars);
+          $('#show-date').html(data.reserv_detail.date);
+          if (data.reserv_detail.meet == null) {
+            $('#show-meet').html("ยังไม่กำหนด");
+          }else {
+            $('#show-meet').html(data.reserv_detail.meet);
+          }
+          $('#show-person').html(data.reserv_detail.person);
+          $('#show-phone').html(data.reserv_detail.phone);
+
+          //passenger
+          var passenger_str = "";
+          $.each( data.passenger, function( index, value )
+          {
+              passenger_str += value
+          });
+          $('#show-passenger').html(passenger_str);
+
+          //location
+          var location_str = "";
+          $.each( data.location, function( index, value )
+          {
+              location_str += value
+          });
+          $('#show-location').html(location_str);
+
+          $('#show-status').val(data.status);
+          $('#note_area').html(data.note);
+
+          $('#reserve_id').val(id);
+
+          }
       });
+
+      // $.post("reservation/reserve_approve/getReservationDetail.php"
+      // ,{reservation_id : $(this).attr('id')}
+      // ,function(data){
+      //   $('#show_reservation_approve').html(data);
+      // });
        $('#reserv_approve_modal').modal('show');
     });
 
+    //ตารางของยูเซอร์
     $("#user_reservation_tablelist tbody tr").click(function() {
       $.post("user/getDetail.php"
       ,{reservation_id : $(this).attr('id')}
@@ -345,6 +563,7 @@ $(function () {
        $('#detail_modal').modal('show');
        var reservation_id = localStorage['reservation_id'];
        if (!reservation_id) localStorage['reservation_id'] = $(this).attr('id');
+
     });
     // --------------------------------------------------
 

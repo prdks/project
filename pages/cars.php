@@ -44,17 +44,17 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        ข้อมูลบุคลากร
+                                    </div>
+                                    <!-- /.panel-heading -->
+                                    <div class='table-responsive'>
+                                    <?php include 'cars/table2.php';?>
+                                    </div>
+                                    <?php include 'cars/modal.php'; ?>
+                                    </div>
 
-                        <!-- /.panel-heading -->
-                              <!-- /.panel-body -->
-
-                                    <?php include 'cars/table.php'; ?>
-
-                                <!-- /.table-responsive -->
-                                <?php include 'cars/modal.php'; ?>
-                            <!-- /.panel-body -->
-
-                        <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -64,39 +64,6 @@
 
     </div>
     <!-- /#wrapper -->
-<script>
-$(document).ready(function(){
 
-    // Send data to modal_delete
-    $('.handleDelete').click(function() {
-      $.post("cars/modal_delete.php" ,
-        {car_id: $(this).attr('id')} ,
-        function(data) {
-          $('#body_Delete').html(data);
-        }
-      );
-    });
-
-    // send data to modal detail
-    $('.handleDetail').click(function() {
-      $.post("cars/modal_detail.php"
-      ,{car_id : $(this).attr('id')}
-      ,function(data){
-        $('#body_modal').html(data);
-      });
-    });
-    //send data to modal Edit
-    $('.handleEdit').click(function() {
-      $.post("cars/modal_edit.php"
-      ,{car_id : $(this).attr('id')}
-      ,function(data){
-        $('#body_Edit').html(data);
-      });
-    });
-
-    
-
-});
-</script>
 </body>
 </html>
