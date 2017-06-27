@@ -136,7 +136,11 @@ echo"</td>
     <td class='col-lg-2 col-md-2 col-sm-2 col-xs-2 topic'>ผลการจอง :</td>
     <td>";
     if ($row['reservation_status'] === 'รออนุมัติ') {
+<<<<<<< HEAD
       echo "<span class='label label-md label-primary'>รออนุมัติ</span>";
+=======
+      echo "<span class='label label-primary'>รออนุมัติ</span>";
+>>>>>>> 99f409bad9fca3eecbbcd3c5aa6dd66e21f751f6
     }elseif ($row['reservation_status'] === 'อนุมัติ') {
       echo "<span class='label label-md label-success'>อนุมัติ</span>";
     }elseif ($row['reservation_status'] === 'ไม่อนุมัติ') {

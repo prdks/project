@@ -48,11 +48,19 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
       }
 echo" </td>
       <td class='text-center'>";
+<<<<<<< HEAD
       if ($row['reservation_status'] === 'รออนุมัติ') {
         echo "<span class='label label-md label-default'>รออนุมัติ</span>";
       }elseif ($row['reservation_status'] === 'อนุมัติ') {
         echo "<span class='label label-md label-warning'>กำลังดำเนินการ</span>";
       }elseif ($row['reservation_status'] === 'ไม่อนุมัติ' || $row['reservation_status'] === 'ยกเลิก' ) {
+=======
+      if ($row['usage_status'] === 'รออนุมัติ') {
+        echo "<span class='label label-md label-warning'>รออนุมัติ</span>";
+      }elseif ($row['usage_status'] === 'ดำเนินการเสร็จสิ้น') {
+        echo "<span class='label label-md label-success'>ดำเนินการเสร็จสิ้น</span>";
+      }elseif ($row['usage_status'] === 'ยกเลิก') {
+>>>>>>> 99f409bad9fca3eecbbcd3c5aa6dd66e21f751f6
         echo "<span class='label label-md label-danger'>ยกเลิก</span>";
       }
 echo" </td>

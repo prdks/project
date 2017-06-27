@@ -500,6 +500,7 @@ $(function () {
        $('#reserv_detail_modal').modal('show');
     });
 
+<<<<<<< HEAD
     //ตารางยืนยัน
     $("#approve_tablelist tbody tr").click(function(e) {
       var id = $(this).attr('id');
@@ -554,6 +555,17 @@ $(function () {
     });
 
     //ตารางของยูเซอร์
+=======
+    $("#approve_tablelist tbody tr").click(function(e) {
+      $.post("reservation/reserve_approve/getReservationDetail.php"
+      ,{reservation_id : $(this).attr('id')}
+      ,function(data){
+        $('#show_reservation_approve').html(data);
+      });
+       $('#reserv_approve_modal').modal('show');
+    });
+
+>>>>>>> 99f409bad9fca3eecbbcd3c5aa6dd66e21f751f6
     $("#user_reservation_tablelist tbody tr").click(function() {
       $.post("user/getDetail.php"
       ,{reservation_id : $(this).attr('id')}

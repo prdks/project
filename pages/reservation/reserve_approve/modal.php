@@ -8,6 +8,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">รายละเอียดการจองรถยนต์</h4>
       </div>
+<<<<<<< HEAD
       <form class="form-horizontal" action="reservation/reserve_approve/edit.php" method="post">
       <div class="modal-body">
         <div id="show_reservation_approve"></div>
@@ -65,6 +66,13 @@
           </div>
         </div>
         <input type="hidden" id="reserve_id" name="reserve_id" value="">
+=======
+      <form class="form-horizontal" action="index.html" method="post">
+      <div class="modal-body">
+        <div id="show_reservation_approve"></div>
+
+
+>>>>>>> 99f409bad9fca3eecbbcd3c5aa6dd66e21f751f6
       </div>
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
