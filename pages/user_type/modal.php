@@ -1,5 +1,5 @@
 <!-- Insert Modal -->
-<div id="Insert_modal" class="modal fade" role="dialog">
+<div id="Insert_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -19,6 +19,15 @@
             name="user_type_name" placeholder="พิมพ์ข้อมูลประเภทผู้ใช้งาน" required>
           </div>
         </div>
+        <div class="form-group">
+          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+            <span class="requestfield">*</span> ระดับผู้ใช้งาน :
+          </label>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+            <input type="number" class="form-control" id="user_level"
+            name="level" min="-1" max="50" placeholder="0" required>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
@@ -32,7 +41,7 @@
 <!-- END Insert Modal -->
 
 <!-- Edit Modal -->
-<div id="Edit_modal" class="modal fade" role="dialog">
+<div id="Edit_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -50,9 +59,18 @@
           <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
             <input type="text" class="form-control" id="show_update"
             name="str" placeholder="พิมพ์ข้อมูลประเภทผู้ใช้งาน" required>
-            <input type="hidden" id="update_id" name="id" value="">
           </div>
         </div>
+        <div class="form-group">
+          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+            <span class="requestfield">*</span> ระดับผู้ใช้งาน :
+          </label>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+            <input type="number" class="form-control" id="show_level"
+            name="level" min="-1" max="50" placeholder="0" required>
+          </div>
+        </div>
+        <input type="hidden" id="update_id" name="id" value="">
       </div>
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
@@ -66,7 +84,7 @@
 <!-- END Edit Modal -->
 
 <!-- Delete Modal -->
-<div id="Delete_modal" class="modal fade" role="dialog">
+<div id="Delete_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-sm">
 
     <!-- Modal content-->

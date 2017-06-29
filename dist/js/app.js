@@ -1,7 +1,6 @@
 $(function () {
   //ชี้แล้วโชว์อธิบายปุ่ม
   $('[data-toggle="tooltip"]').tooltip();
-
   //ปิด Modal แล้วจะเคลียร์ textbox
   $('.modal').on('hidden.bs.modal', function () {
     $(this).find('input,textarea').val('').end();
@@ -11,18 +10,48 @@ $(function () {
 // -------------------------------------------------------------
   //  เมื่อกดปุ่มแก้ไข จะส่งค่าไปที่ box
   $('.handleEdit').click(function() {
-    var id = $(this).attr('id');
-    $('#update_id').val(id)
-    var name = $(this).attr('name');
-    $('#show_update').val(name)
+    var id = $(this).attr('data-id');
+    var npage = $(this).attr('data-npage');
+
+    var url = npage+"/controller.php";
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {id: id, mode: 'getDetail'},
+      dataType: 'json',
+      success: function(data){
+
+          if (npage === 'user_type') {
+            $('#update_id').val(id)
+            $('#show_update').val(data.name)
+            $('#show_level').val(data.user_level)
+          }else{
+            $('#update_id').val(id)
+            $('#show_update').val(data.name)
+          }
+      }
+    });
   });
 
   //  เมื่อกดปุ่มลบ จะส่งค่าไปที่ box
   $('.handleDelete').click(function() {
-    var id = $(this).attr('id');
-    $('#delete_id').val(id);
-    var name = $(this).attr('name');
-    $('#show_delete').text('\n\" '+name+' \"');
+
+    var id = $(this).attr('data-id');
+    var npage = $(this).attr('data-npage');
+
+    var url = npage+"/controller.php";
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {id: id, mode: 'getDetail'},
+      dataType: 'json',
+      success: function(data){
+        $('#delete_id').val(id);
+        $('#show_delete').text('\n\" '+data.name+' \"');
+      }
+    });
   });
 // ----------------------- personnel ----------------------------
   //  เมื่อกดปุ่มดูลายระเอียด จะส่งค่าไปที่ box
@@ -40,7 +69,6 @@ $(function () {
         $('#show-phone').html(data.phone);
         $('#show-department').html(data.department);
         $('#show-position').html(data.position);
-        $('#show-usertype').html(data.type);
       }
     });
 
@@ -62,7 +90,6 @@ $(function () {
         $('#display-phone').val(data.phone);
         $('#display-department').val(data.department);
         $('#display-position').val(data.position);
-        $('#display-usertype').val(data.type);
         $('#display-id').val(data.id);
       }
     });
@@ -94,6 +121,28 @@ $(function () {
     });
     $.post("personnel/delete.php" ,{checked_id: checked});
   });
+
+  // ******* Permission ************
+  $('.handlePermission').click(function () {
+    var id = $(this).attr('data-id');
+
+    $.ajax({
+      type: "POST",
+      url: "personnel/controller.php",
+      data: {id: id, mode: 'getDetail'},
+      dataType: 'json',
+      success: function(data){
+        $('#show-name').html(data.name);
+        $('#show-email').html(data.email);
+        $('#show-phone').html(data.phone);
+        $('#show-department').html(data.department);
+        $('#show-position').html(data.position);
+        $('#show-usertype').val(data.type);
+        $('#show-id').val(id);
+      }
+    });
+
+  })
 // ----------------------- Cars ----------------------------
   $('#status_note').hide();
   $('#display-note-area').hide();
@@ -491,26 +540,27 @@ $(function () {
     getProvince();
     // ---------------คลิกดูรายละเอียดในตาราง-------------
     //ตารางรวม
-    $("#reservation_tablelist tbody tr").click(function() {
-      $.post("reservation/reserve_list/getReservationDetail.php"
-      ,{reservation_id : $(this).attr('id')}
-      ,function(data){
-        $('#show_reservation_detail').html(data);
-      });
-       $('#reserv_detail_modal').modal('show');
-    });
+    // $("#reservation_tablelist tbody tr").click(function() {
+    //   $.post("reservation/reserve_list/getReservationDetail.php"
+    //   ,{reservation_id : $(this).attr('id')}
+    //   ,function(data){
+    //     $('#show_reservation_detail').html(data);
+    //   });
+    //    $('#reserv_detail_modal').modal('show');
+    // });
 
-<<<<<<< HEAD
+    //-------------------------------------------------------
     //ตารางยืนยัน
-    $("#approve_tablelist tbody tr").click(function(e) {
-      var id = $(this).attr('id');
+    $(".handleApproveDetail").click(function() {
+      var id = $(this).attr('data-id');
+      //window.location.href = 'approve.php?id='+id;
       $.ajax({
         type: "POST",
         url: "reservation/controller.php",
         data: {id: id, mode: 'getDetail_approve'},
         dataType: 'json',
         success: function(data){
-          console.log(data);
+
           $('#show-detail').html(data.reserv_detail.detail);
           $('#show-cars').html(data.reserv_detail.cars);
           $('#show-date').html(data.reserv_detail.date);
@@ -538,34 +588,67 @@ $(function () {
           });
           $('#show-location').html(location_str);
 
-          $('#show-status').val(data.status);
+          $('#show-status').val('0');
           $('#note_area').html(data.note);
 
           $('#reserve_id').val(id);
 
           }
       });
-
-      // $.post("reservation/reserve_approve/getReservationDetail.php"
-      // ,{reservation_id : $(this).attr('id')}
-      // ,function(data){
-      //   $('#show_reservation_approve').html(data);
-      // });
-       $('#reserv_approve_modal').modal('show');
     });
 
+
+
+    $('button[name=approve_btn]').click(function () {
+        var result = $(this).val()
+
+        if (result == 1)
+        {
+          $('#note_approve').hide()
+          $('#note_area').attr('required', false)
+          $('#show-status').val(result)
+          $(this).addClass('btn-success')
+        }
+        else if (result == 2)
+        {
+          $('#note_area').val('')
+          $('#note_approve').show()
+          $('#show-status').val(result)
+          $('#note_area').attr('required', true)
+          $(this).addClass('btn-danger')
+        }
+        else if (result == 3)
+        {
+          $('#note_area').val('')
+          $('#note_approve').show()
+          $('#show-status').val(result)
+          $('#note_area').attr('required', true)
+          $(this).addClass('btn-warning')
+        }
+        $('button[name=approve_btn]').each(function () {
+          if ($(this).val() !== result) {
+            $(this).attr('class', 'btn btn-sm btn-default')
+          }
+        });
+    });
+
+    $('#reserv_approve_modal').on('hidden.bs.modal', function () {
+        $('button[name=approve_btn]').each(function () {
+          $(this).attr('class', 'btn btn-sm btn-default')
+        });
+        $('#note_approve').hide()
+    })
+    //-------------------------------------------------------
     //ตารางของยูเซอร์
-=======
-    $("#approve_tablelist tbody tr").click(function(e) {
-      $.post("reservation/reserve_approve/getReservationDetail.php"
-      ,{reservation_id : $(this).attr('id')}
-      ,function(data){
-        $('#show_reservation_approve').html(data);
-      });
-       $('#reserv_approve_modal').modal('show');
-    });
+    // $("#approve_tablelist tbody tr").click(function(e) {
+    //   $.post("reservation/reserve_approve/getReservationDetail.php"
+    //   ,{reservation_id : $(this).attr('id')}
+    //   ,function(data){
+    //     $('#show_reservation_approve').html(data);
+    //   });
+    //    $('#reserv_approve_modal').modal('show');
+    // });
 
->>>>>>> 99f409bad9fca3eecbbcd3c5aa6dd66e21f751f6
     $("#user_reservation_tablelist tbody tr").click(function() {
       $.post("user/getDetail.php"
       ,{reservation_id : $(this).attr('id')}

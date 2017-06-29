@@ -50,10 +50,10 @@
                                     </div>
                                     <!-- /.panel-heading -->
                                     <div class='table-responsive'>
-                                    <?php include 'cars/table2.php';?>
+                                    <?php include 'cars/table.php';?>
                                     </div>
                                     <?php include 'cars/modal.php'; ?>
-                                    </div>
+                                </div>
 
                 </div>
                 <!-- /.col-lg-12 -->

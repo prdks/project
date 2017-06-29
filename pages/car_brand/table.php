@@ -31,12 +31,12 @@ if(isset($_POST['handleSearch']))
 
       <td class='text-center'>
       <button type='submit' class='btn btn-warning handleEdit' role='button'
-      data-toggle='modal' data-target='#Edit_modal' id='".$row['car_brand_id']."' name='".$row['car_brand_name']."'>
+      data-toggle='modal' data-target='#Edit_modal' data-id='".$row['car_brand_id']."' data-npage='car_brand'>
         <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
       </button>
 
       <button class='btn btn-danger handleDelete' role='button'
-      data-toggle='modal' data-target='#Delete_modal' id='".$row['car_brand_id']."' name='".$row['car_brand_name']."'>
+      data-toggle='modal' data-target='#Delete_modal' data-id='".$row['car_brand_id']."' data-npage='car_brand'>
         <span class='fa fa-trash-o handleDelete_id' data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
       </button>
 
@@ -101,12 +101,12 @@ else
 
       <td class='text-center'>
       <button type='submit' class='btn btn-warning handleEdit' role='button'
-      data-toggle='modal' data-target='#Edit_modal' id='".$row['car_brand_id']."' name='".$row['car_brand_name']."'>
+      data-toggle='modal' data-target='#Edit_modal' data-id='".$row['car_brand_id']."' data-npage='car_brand'>
         <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
       </button>
 
       <button class='btn btn-danger handleDelete' role='button'
-      data-toggle='modal' data-target='#Delete_modal' id='".$row['car_brand_id']."' name='".$row['car_brand_name']."'>
+      data-toggle='modal' data-target='#Delete_modal' data-id='".$row['car_brand_id']."' data-npage='car_brand'>
         <span class='fa fa-trash-o handleDelete_id' data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
       </button>
 

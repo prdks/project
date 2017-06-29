@@ -52,6 +52,8 @@ date_default_timezone_set("Asia/Bangkok");
 <!-- Custom Fonts -->
 <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
+
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
 <script src="../dist/js/app.js"></script>

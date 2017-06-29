@@ -37,20 +37,24 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
       <td>".$row['requirement_detail']."</td>
       <td class='text-center'>".$row['car_reg']."</td>
       <td class='text-center'>";
-      if ($row['reservation_status'] === 'รออนุมัติ') {
-        echo "<span class='label label-md label-primary'>รออนุมัติ</span>";
-      }elseif ($row['reservation_status'] === 'อนุมัติ') {
-        echo "<span class='label label-md label-success'>อนุมัติ</span>";
-      }elseif ($row['reservation_status'] === 'ยกเลิก') {
-        echo "<span class='label label-md label-danger'>ยกเลิก</span>";
+      if ($row['reservation_status'] == 0) {
+        echo "<span class='label label-md label-primary'>รอยืนยัน</span>";
+      }elseif ($row['reservation_status'] == 1) {
+        echo "<span class='label label-md label-success'>จองสำเร็จ</span>";
+      }elseif ($row['reservation_status'] == 2) {
+        echo "<span class='label label-md label-danger'>จองไม่สำเร็จ</span>";
+      }elseif ($row['reservation_status'] == 3) {
+        echo "<span class='label label-md label-danger'>ยกเลิกการจอง</span>";
       }
 echo" </td>
       <td class='text-center'>";
-      if ($row['usage_status'] === 'รออนุมัติ') {
-        echo "<span class='label label-md label-warning'>รออนุมัติ</span>";
-      }elseif ($row['usage_status'] === 'ดำเนินการเสร็จสิ้น') {
+      if ($row['usage_status'] == 0) {
+        echo "<span class='label label-md label-primary'>รอยืนยัน</span>";
+      }elseif ($row['usage_status'] == 1) {
+        echo "<span class='label label-md label-warning'>กำลังดำเนินการ</span>";
+      }elseif ($row['usage_status'] == 2) {
         echo "<span class='label label-md label-success'>ดำเนินการเสร็จสิ้น</span>";
-      }elseif ($row['usage_status'] === 'ยกเลิก') {
+      }elseif ($row['usage_status'] == 3) {
         echo "<span class='label label-md label-danger'>ยกเลิก</span>";
       }
 echo" </td>

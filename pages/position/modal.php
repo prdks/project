@@ -1,5 +1,5 @@
 <!-- Insert Modal -->
-<div id="Insert_modal" class="modal fade" role="dialog">
+<div id="Insert_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -32,7 +32,7 @@
 <!-- END Insert Modal -->
 
 <!-- Edit Modal -->
-<div id="Edit_modal" class="modal fade" role="dialog">
+<div id="Edit_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -66,7 +66,7 @@
 <!-- END Edit Modal -->
 
 <!-- Delete Modal -->
-<div id="Delete_modal" class="modal fade" role="dialog">
+<div id="Delete_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-sm">
 
     <!-- Modal content-->

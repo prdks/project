@@ -7,8 +7,8 @@ LEFT JOIN personnel p
 ON r.personnel_id = p.personnel_id
 LEFT JOIN title_name t
 ON p.title_name_id = t.title_name_id
-WHERE reservation_status = 'รออนุมัติ'
-ORDER BY date_start ASC , reserv_stime ASC";
+WHERE reservation_status = 0
+ORDER BY reservation_id ASC ,date_start ASC , reserv_stime ASC";
 $result = $conn->query($sql);
 $result_row = mysqli_num_rows($result);
 if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
@@ -24,6 +24,7 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
               <th id='tb_detail_sub-th'>ทะเบียนรถยนต์</th>
               <th id='tb_detail_sub-sv'>สถานะคำร้อง</th>
               <th id='tb_detail_sub-sv'>สถานะการใช้</th>
+              <th id='tb_tools'>เครื่องมือ</th>
           </tr>
       </thead>
       <tbody>
@@ -38,26 +39,37 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
       <td>".$row['requirement_detail']."</td>
       <td class='text-center'>".$row['car_reg']."</td>
       <td class='text-center'>";
-      if ($row['reservation_status'] === 'รออนุมัติ') {
-        echo "<span class='label label-md label-primary'>รออนุมัติ</span>";
-      }elseif ($row['reservation_status'] === 'อนุมัติ') {
-        echo "<span class='label label-md label-success'>อนุมัติ</span>";
-      }elseif ($row['reservation_status'] === 'ยกเลิก') {
-        echo "<span class='label label-md label-danger'>ยกเลิก</span>";
+      if ($row['reservation_status'] == 0) {
+        echo "<span class='label label-md label-primary'>รอยืนยัน</span>";
+      }elseif ($row['reservation_status'] == 1) {
+        echo "<span class='label label-md label-success'>จองสำเร็จ</span>";
+      }elseif ($row['reservation_status'] == 2) {
+        echo "<span class='label label-md label-danger'>จองไม่สำเร็จ</span>";
+      }elseif ($row['reservation_status'] == 3) {
+        echo "<span class='label label-md label-danger'>ยกเลิกการจอง</span>";
       }
 echo" </td>
       <td class='text-center'>";
-      if ($row['usage_status'] === 'รออนุมัติ') {
-        echo "<span class='label label-md label-warning'>รออนุมัติ</span>";
-      }elseif ($row['usage_status'] === 'ดำเนินการเสร็จสิ้น') {
+      if ($row['usage_status'] == 0) {
+        echo "<span class='label label-md label-primary'>รอยืนยัน</span>";
+      }elseif ($row['usage_status'] == 1) {
+        echo "<span class='label label-md label-warning'>กำลังดำเนินการ</span>";
+      }elseif ($row['usage_status'] == 2) {
         echo "<span class='label label-md label-success'>ดำเนินการเสร็จสิ้น</span>";
-      }elseif ($row['usage_status'] === 'ยกเลิก') {
+      }elseif ($row['usage_status'] == 3) {
         echo "<span class='label label-md label-danger'>ยกเลิก</span>";
       }
 echo" </td>
+      <td class='text-center'>
+      <button class='btn btn-sm btn-primary handleApproveDetail' role='button'
+      data-toggle='modal' data-target='#reserv_approve_modal' data-id='".$row['reservation_id']."'>
+        <span class='fa fa-flag '></span> ทำรายการอนุมัติ
+      </button>
+      </td>
     </tr>";
   }
     echo "
+
     </tbody>
     </table>
     </div>

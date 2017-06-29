@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div id="detail_modal" class="modal fade" role="dialog">
+<div id="detail_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-lg">
 
     <!-- Modal content-->

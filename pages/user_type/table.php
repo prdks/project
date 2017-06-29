@@ -2,17 +2,16 @@
 if(isset($_POST['handleSearch']))
 {
   $word = $_POST['search_box'];
-  $sql = "select * from user_type WHERE user_type_name LIKE '%".$word."%' ORDER BY user_type_name ASC";
+  $sql = "select * from user_type WHERE user_type_name LIKE '%".$word."%' ORDER BY user_level ASC";
   $result = $conn->query($sql);
   $result_row = mysqli_num_rows($result);
   if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
   {
-    $count = 0;
     echo "
     <table id='myTable' class='table table-striped table-bordered table-hover'>
         <thead id='Table_Default'>
             <tr>
-                <th id='tb_sharp'>#</th>
+                <th id='tb_detail_sub-sv'>ระดับผู้ใช้งาน</th>
                 <th id='tb_detail_main'>ชือประเภทผู้ใช้งาน</th>
                 <th id='tb_tools'>เครื่องมือ</th>
             </tr>
@@ -21,27 +20,46 @@ if(isset($_POST['handleSearch']))
     ";
 
     while($row = $result->fetch_assoc()){
-      $count += 1;
-      echo "
-      <tr>
 
-      <td class='text-center'>".$count."</td>
+      if ($row['user_level'] == -1 || $row['user_level'] == 0) {
+        echo "
+        <tr>
+        <td class='text-center'>".$row['user_level']."</td>
+        <td>".$row['user_type_name']."</td>
 
-      <td>".$row['user_type_name']."</td>
+        <td class='text-center'>
+        <button type='submit' class='btn btn-warning handleEdit' role='button'
+        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['user_type_id']."' data-npage='user_type' disabled>
+          <span class='fa fa-edit'  data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
+        </button>
 
-      <td class='text-center'>
-      <button type='submit' class='btn btn-warning handleEdit' role='button'
-      data-toggle='modal' data-target='#Edit_modal' id='".$row['user_type_id']."' name='".$row['user_type_name']."'>
-        <span class='fa fa-edit'  data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
-      </button>
+        <button class='btn btn-danger handleDelete' role='button'
+        data-toggle='modal' data-target='#Delete_modal' data-id='".$row['user_type_id']."' data-npage='user_type' disabled>
+          <span class='fa fa-trash-o' data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
+        </button>
 
-      <button class='btn btn-danger handleDelete' role='button'
-      data-toggle='modal' data-target='#Delete_modal' id='".$row['user_type_id']."' name='".$row['user_type_name']."'>
-        <span class='fa fa-trash-o' data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
-      </button>
+        </td>
+        </tr>";
+      }else {
+        echo "
+        <tr>
+        <td class='text-center'>".$row['user_level']."</td>
+        <td>".$row['user_type_name']."</td>
 
-      </td>
-      </tr>";
+        <td class='text-center'>
+        <button type='submit' class='btn btn-warning handleEdit' role='button'
+        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['user_type_id']."' data-npage='user_type'>
+          <span class='fa fa-edit'  data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
+        </button>
+
+        <button class='btn btn-danger handleDelete' role='button'
+        data-toggle='modal' data-target='#Delete_modal' data-id='".$row['user_type_id']."' data-npage='user_type'>
+          <span class='fa fa-trash-o' data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
+        </button>
+
+        </td>
+        </tr>";
+      }
 
     }
       echo "
@@ -56,8 +74,9 @@ if(isset($_POST['handleSearch']))
     <table class='table table-striped table-bordered table-hover'>
         <thead id='Table_Default'>
             <tr>
-                <th id='tb_sharp'>#</th>
+                <th id='tb_detail_sub-sv'>ระดับผู้ใช้งาน</th>
                 <th id='tb_detail_main'>ชือประเภทผู้ใช้งาน</th>
+
                 <th id='tb_tools'>เครื่องมือ</th>
             </tr>
         </thead>
@@ -72,18 +91,18 @@ if(isset($_POST['handleSearch']))
 }
 else
 {
-  $sql = "select * from user_type ORDER BY user_type_name ASC";
+  $sql = "select * from user_type ORDER BY user_level ASC";
   $result = $conn->query($sql);
   $result_row = mysqli_num_rows($result);
   if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
   {
-    $count = 0;
     echo "
     <table id='myTable' class='table table-striped table-bordered table-hover'>
         <thead id='Table_Default'>
             <tr>
-                <th id='tb_sharp'>#</th>
+                <th id='tb_detail_sub-sv'>ระดับผู้ใช้งาน</th>
                 <th id='tb_detail_main'>ชือประเภทผู้ใช้งาน</th>
+
                 <th id='tb_tools'>เครื่องมือ</th>
             </tr>
         </thead>
@@ -91,27 +110,45 @@ else
     ";
 
     while($row = $result->fetch_assoc()){
-      $count += 1;
-      echo "
-      <tr>
+      if ($row['user_level'] == -1 || $row['user_level'] == 0) {
+        echo "
+        <tr>
+        <td class='text-center'>".$row['user_level']."</td>
+        <td>".$row['user_type_name']."</td>
 
-      <td class='text-center'>".$count."</td>
+        <td class='text-center'>
+        <button type='submit' class='btn btn-warning handleEdit' role='button'
+        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['user_type_id']."' data-npage='user_type' disabled>
+          <span class='fa fa-edit'  data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
+        </button>
 
-      <td>".$row['user_type_name']."</td>
+        <button class='btn btn-danger handleDelete' role='button'
+        data-toggle='modal' data-target='#Delete_modal' data-id='".$row['user_type_id']."' data-npage='user_type' disabled>
+          <span class='fa fa-trash-o' data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
+        </button>
 
-      <td class='text-center'>
-      <button type='submit' class='btn btn-warning handleEdit' role='button'
-      data-toggle='modal' data-target='#Edit_modal' id='".$row['user_type_id']."' name='".$row['user_type_name']."'>
-        <span class='fa fa-edit'  data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
-      </button>
+        </td>
+        </tr>";
+      }else {
+        echo "
+        <tr>
+        <td class='text-center'>".$row['user_level']."</td>
+        <td>".$row['user_type_name']."</td>
 
-      <button class='btn btn-danger handleDelete' role='button'
-      data-toggle='modal' data-target='#Delete_modal' id='".$row['user_type_id']."' name='".$row['user_type_name']."'>
-        <span class='fa fa-trash-o' data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
-      </button>
+        <td class='text-center'>
+        <button type='submit' class='btn btn-warning handleEdit' role='button'
+        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['user_type_id']."' data-npage='user_type'>
+          <span class='fa fa-edit'  data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล'></span>
+        </button>
 
-      </td>
-      </tr>";
+        <button class='btn btn-danger handleDelete' role='button'
+        data-toggle='modal' data-target='#Delete_modal' data-id='".$row['user_type_id']."' data-npage='user_type'>
+          <span class='fa fa-trash-o' data-toggle='tooltip' data-placement='top' title='ลบข้อมูล'></span>
+        </button>
+
+        </td>
+        </tr>";
+      }
 
     }
       echo "
@@ -125,7 +162,7 @@ else
     <table class='table table-striped table-bordered table-hover'>
         <thead id='Table_Default'>
             <tr>
-                <th id='tb_sharp'>#</th>
+                <th id='tb_detail_sub-sv'>ระดับผู้ใช้งาน</th>
                 <th id='tb_detail_main'>ชือประเภทผู้ใช้งาน</th>
                 <th id='tb_tools'>เครื่องมือ</th>
             </tr>

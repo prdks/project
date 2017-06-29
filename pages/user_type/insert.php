@@ -2,12 +2,13 @@
 require '../_connect.php';
 
 $user_type__txt = $_POST['user_type_name'];
+$level = $_POST['level'];
 
-$sql = "select * from user_type where user_type_name ='".$user_type__txt."'";
+$sql = "select * from user_type where user_type_name ='".$user_type__txt."' OR user_level = ".$level;
 $result = $conn->query($sql);
 if($result->num_rows === 0){
 
-  $sql = "insert into user_type (user_type_name) values ('".$user_type__txt."')
+  $sql = "insert into user_type (user_type_name,user_level) values ('".$user_type__txt."',".$level.")
   ON DUPLICATE KEY UPDATE user_type_id = user_type_id";
 
   if($conn->query($sql)===true){

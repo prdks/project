@@ -55,7 +55,7 @@ if ($mode == 'getDetail_approve')
 
   $reserv = array(
             'detail' => $row['requirement_detail'],
-            'cars' => $row['car_reg']." / ยี่ห้อ ".$row['car_brand_name']." / รุ่น ".$row['car_kind']." / ".$row['seat'],
+            'cars' => $row['car_reg']." / ยี่ห้อ ".$row['car_brand_name']." / รุ่น ".$row['car_kind']." / ".$row['seat'] ." ที่นั่ง",
             'date' => $date,
             'meet' => $row['appointment_place'],
             'person' => $row['title_name']." ".$row['personnel_name'],

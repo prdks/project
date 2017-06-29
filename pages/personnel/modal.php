@@ -1,6 +1,6 @@
 <?php include '_connect.php'; ?>
 <!-- Insert Modal -->
-<div id="Insert_modal" class="modal fade" role="dialog">
+<div id="Insert_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-md">
 
     <!-- Modal content-->
@@ -121,7 +121,7 @@
 <!-- END Insert Modal -->
 
 <!-- Detail Modal -->
-<div id="Detail_modal" class="modal fade" role="dialog">
+<div id="Detail_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-md">
 
     <!-- Modal content-->
@@ -146,9 +146,6 @@
           <br />
           <dt>ตำแหน่ง :</dt>
           <dd id="show-position"></dd>
-          <br />
-          <dt>ประเภทผู้ใช้งาน :</dt>
-          <dd id="show-usertype"></dd>
         </dl>
       </div>
       <div class="modal-footer">
@@ -160,7 +157,7 @@
 <!-- END Detail Modal -->
 
 <!-- Edit Modal -->
-<div id="Edit_modal" class="modal fade" role="dialog">
+<div id="Edit_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -282,7 +279,7 @@
 <!-- END Edit Modal -->
 
 <!-- Delete Modal -->
-<div id="Delete_modal" class="modal fade" role="dialog">
+<div id="Delete_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-sm">
     <!-- Modal content-->
     <form id="delete_form" action="personnel/delete.php" method="post">
