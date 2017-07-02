@@ -463,6 +463,7 @@ $(function () {
             if ($('#formdetail').valid()) {
             sendDatatoGetCars();
             setBtnOnDetailForm();
+
            }
           break;
         case 'btnSelectCars':
@@ -539,16 +540,63 @@ $(function () {
     //------------- Set Province BOX ---------------
     getProvince();
     // ---------------คลิกดูรายละเอียดในตาราง-------------
-    //ตารางรวม
-    // $("#reservation_tablelist tbody tr").click(function() {
-    //   $.post("reservation/reserve_list/getReservationDetail.php"
-    //   ,{reservation_id : $(this).attr('id')}
-    //   ,function(data){
-    //     $('#show_reservation_detail').html(data);
-    //   });
-    //    $('#reserv_detail_modal').modal('show');
-    // });
+    //ตารางจัดการ
+    $('.handleRMADetail').click(function () {
+      var id = $(this).attr('data-id');
+      $.ajax({
+        type: "POST",
+        url: "reservation/controller.php",
+        data: {id: id, mode: 'getDetail'},
+        dataType: 'json',
+        success: function(data){
 
+          $('#show-detail').html(data.reserv_detail.detail);
+          $('#show-cars').html(data.reserv_detail.cars);
+          $('#show-date').html(data.reserv_detail.date);
+          if (data.reserv_detail.meet == null) {
+            $('#show-meet').html("ยังไม่กำหนด");
+          }else {
+            $('#show-meet').html(data.reserv_detail.meet);
+          }
+          $('#show-person').html(data.reserv_detail.person);
+          $('#show-phone').html(data.reserv_detail.phone);
+
+          //passenger
+          var passenger_str = "";
+          $.each( data.passenger, function( index, value )
+          {
+              passenger_str += value
+          });
+          $('#show-passenger').html(passenger_str);
+
+          //location
+          var location_str = "";
+          $.each( data.location, function( index, value )
+          {
+              location_str += value
+          });
+          $('#show-location').html(location_str);
+
+          }
+      });
+    })
+
+    $('.handleRMADelete').click(function () {
+
+      var id = $(this).attr('data-id');
+      $.ajax({
+        type: "POST",
+        url: "reservation/controller.php",
+        data: {id: id, mode: 'getDelete'},
+        dataType: 'json',
+        success: function(data){
+          // console.log(data);
+          $('#show-delete-label').html(data.detail);
+          $('#show-delete-id').val(data.id);
+        }
+      });
+
+    })
     //-------------------------------------------------------
     //ตารางยืนยัน
     $(".handleApproveDetail").click(function() {
@@ -557,7 +605,7 @@ $(function () {
       $.ajax({
         type: "POST",
         url: "reservation/controller.php",
-        data: {id: id, mode: 'getDetail_approve'},
+        data: {id: id, mode: 'getDetail'},
         dataType: 'json',
         success: function(data){
 

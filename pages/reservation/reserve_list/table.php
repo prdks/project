@@ -12,59 +12,78 @@ $result = $conn->query($sql);
 $result_row = mysqli_num_rows($result);
 if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
 {
-  echo "
-  <div class='table-responsive'>
-  <table id='reservation_tablelist' class='table table-striped table-bordered table-hover'>
+  ?>
+  <div class="table-responsive">
+  <table id="reservation_tablelist" class="table table-striped table-bordered table-hover">
       <thead>
           <tr>
-              <th id='tb_detail_sub-th'>วันที่จอง</th>
-              <th id='tb_detail_sub-th'>เวลา</th>
-              <th id='tb_detail_main'>จองใช้เพื่อ</th>
-              <th id='tb_detail_sub-th'>ทะเบียนรถยนต์</th>
-              <th id='tb_detail_sub-sv'>สถานะคำร้อง</th>
-              <th id='tb_detail_sub-sv'>สถานะการใช้</th>
+              <th id="tb_detail_sub-th">วันที่จอง</th>
+              <th id="tb_detail_sub-th">เวลา</th>
+              <th id="tb_detail_main">จองใช้เพื่อ</th>
+              <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
+              <th id="tb_detail_sub-sv">สถานะคำร้อง</th>
+              <th id="tb_detail_sub-sv">สถานะการใช้</th>
           </tr>
       </thead>
       <tbody>
-  ";
+  <?php
 
-  while($row = $result->fetch_assoc()){
-
-    echo "
-    <tr id='".$row['reservation_id']."'>
-      <td class='text-center'>".DateThai($row['date_start'])."</td>
-      <td class='text-center'>".date("H:i",strtotime($row['reserv_stime']))." - ".date("H:i",strtotime($row['reserv_etime']))."น.</td>
-      <td>".$row['requirement_detail']."</td>
-      <td class='text-center'>".$row['car_reg']."</td>
-      <td class='text-center'>";
+  while($row = $result->fetch_assoc())
+  {
+    ?>
+    <tr id="<?php echo $row["reservation_id"];?>">
+      <td class="text-center"><?php echo DateThai($row["date_start"]) ?></td>
+      <td class="text-center"><?php echo date("H:i",strtotime($row["reserv_stime"]))." - ".date("H:i",strtotime($row["reserv_etime"]))."น."; ?></td>
+      <td><?php echo $row["requirement_detail"]; ?></td>
+      <td class="text-center"><?php echo $row["car_reg"]; ?></td>
+      <td class="text-center">
+    <?php
       if ($row['reservation_status'] == 0) {
-        echo "<span class='label label-md label-primary'>รอยืนยัน</span>";
+        ?>
+        <span class="label label-md label-primary">รออนุมัติ</span>
+        <?php
       }elseif ($row['reservation_status'] == 1) {
-        echo "<span class='label label-md label-success'>จองสำเร็จ</span>";
+        ?>
+        <span class="label label-md label-success">จองสำเร็จ</span>
+        <?php
       }elseif ($row['reservation_status'] == 2) {
-        echo "<span class='label label-md label-danger'>จองไม่สำเร็จ</span>";
+        ?>
+        <span class="label label-md label-danger">จองไม่สำเร็จ</span>
+        <?php
       }elseif ($row['reservation_status'] == 3) {
-        echo "<span class='label label-md label-danger'>ยกเลิกการจอง</span>";
+        ?>
+        <span class="label label-md label-danger">ยกเลิกการจอง</span>
+        <?php
       }
 echo" </td>
       <td class='text-center'>";
       if ($row['usage_status'] == 0) {
-        echo "<span class='label label-md label-primary'>รอยืนยัน</span>";
+        ?>
+        <span class="label label-md label-primary">รออนุมัติ</span>
+        <?php
       }elseif ($row['usage_status'] == 1) {
-        echo "<span class='label label-md label-warning'>กำลังดำเนินการ</span>";
+        ?>
+        <span class="label label-md label-warning">กำลังดำเนินการ</span>
+        <?php
       }elseif ($row['usage_status'] == 2) {
-        echo "<span class='label label-md label-success'>ดำเนินการเสร็จสิ้น</span>";
+        ?>
+        <span class="label label-md label-success">ดำเนินการเสร็จสิ้น</span>
+        <?php
       }elseif ($row['usage_status'] == 3) {
-        echo "<span class='label label-md label-danger'>ยกเลิก</span>";
+        ?>
+        <span class="label label-md label-danger">ยกเลิก</span>
+        <?php
       }
-echo" </td>
-    </tr>";
+      ?>
+    </td>
+    </tr>
+      <?php
   }
-    echo "
-    </tbody>
-    </table>
-    </div>
-    ";
+    ?>
+  </tbody>
+  </table>
+  </div>
+    <?php
 }else {
   $sql = "ALTER TABLE reservation AUTO_INCREMENT = 1";
   $conn->query($sql);
@@ -72,27 +91,27 @@ echo" </td>
   $conn->query($sql);
   $sql = "ALTER TABLE passenger AUTO_INCREMENT = 1";
   $conn->query($sql);
-  echo "
-  <div class='table-responsive'>
-  <table id='reservationtablelist' class='table table-striped table-bordered table-hover'>
+  ?>
+  <div class="table-responsive">
+  <table id="reservationtablelist" class="table table-striped table-bordered table-hover">
       <thead>
           <tr>
-              <th id='tb_detail_sub-th'>วันที่จองใช้</th>
-              <th id='tb_detail_sub-th'>เวลา</th>
-              <th id='tb_detail_main'>จองใช้เพื่อ</th>
-              <th id='tb_detail_sub-th'>ทะเบียนรถยนต์</th>
-              <th id='tb_detail_sub-sv'>สถานะคำร้อง</th>
-              <th id='tb_detail_sub-sv'>สถานะการใช้</th>
+              <th id="tb_detail_sub-th">วันที่จองใช้</th>
+              <th id="tb_detail_sub-th">เวลา</th>
+              <th id="tb_detail_main">จองใช้เพื่อ</th>
+              <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
+              <th id="tb_detail_sub-sv">สถานะคำร้อง</th>
+              <th id="tb_detail_sub-sv">สถานะการใช้</th>
           </tr>
       </thead>
       <tbody>
     <tr>
-    <td class='text-center' colspan='6'>ไม่พบข้อมูล</td>
+    <td class="text-center" colspan="6">ไม่พบข้อมูล</td>
     </tr>
     </tbody>
     </table>
     </div>
-    ";
+  <?php
 }
 
 function DateThai($strDate)

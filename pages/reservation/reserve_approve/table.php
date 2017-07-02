@@ -40,7 +40,7 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
       <td class='text-center'>".$row['car_reg']."</td>
       <td class='text-center'>";
       if ($row['reservation_status'] == 0) {
-        echo "<span class='label label-md label-primary'>รอยืนยัน</span>";
+        echo "<span class='label label-md label-primary'>รออนุมัติ</span>";
       }elseif ($row['reservation_status'] == 1) {
         echo "<span class='label label-md label-success'>จองสำเร็จ</span>";
       }elseif ($row['reservation_status'] == 2) {
@@ -51,7 +51,7 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
 echo" </td>
       <td class='text-center'>";
       if ($row['usage_status'] == 0) {
-        echo "<span class='label label-md label-primary'>รอยืนยัน</span>";
+        echo "<span class='label label-md label-primary'>รออนุมัติ</span>";
       }elseif ($row['usage_status'] == 1) {
         echo "<span class='label label-md label-warning'>กำลังดำเนินการ</span>";
       }elseif ($row['usage_status'] == 2) {

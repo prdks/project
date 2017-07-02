@@ -194,21 +194,55 @@ function getReservationData() {
      }
     PassengerData.push({'Name' : Name , 'Department': Department});
   }
-    $.post("reservation/reserve_form/getComplete.php"
-    ,{data , checked, LocationData,PassengerData},function(data){
-      $('#divCompletePage').html(data);
+
+    $.ajax({
+      type: "POST",
+      url: "reservation/controller.php",
+      data: {data , checked, LocationData,PassengerData, mode: 'getDetail_For_Submit'},
+      dataType: 'json',
+      success: function(data){
+
+        $('#show-user').html(data.user);
+        $('#show-position').html(data.position);
+        $('#show-department').html(data.department);
+        $('#show-detail').html(data.detail);
+        $('#show-fistdate').html(data.fistdate);
+        $('#show-lastdate').html(data.lastdate);
+        $('#show-time').html(data.time);
+        $('#show-cars').html(data.cars);
+        //passenger
+        var passenger_str = "";
+        $.each( data.passenger, function( index, value )
+        {
+            passenger_str += value
+        });
+        $('#show-passenger').html(passenger_str);
+
+        //location
+        var location_str = "";
+        $.each( data.location, function( index, value )
+        {
+            location_str += value
+        });
+        $('#show-location').html(location_str);
+
+      }
     });
 }
 
 function sendDatatoGetCars() {
-  $.post("reservation/reserve_form/getCars.php"
-  ,{ user_department : $('#user_department').val()
-    ,date_start : $('#date_start').val()
-    ,date_end : $('#date_end').val()
-    ,time_start : $('#time_start').val()
-    ,time_end : $('#time_end').val()
-  },function(data){
-    $('#tbody_cars').html(data);
+  $.ajax({
+    type: "POST",
+    url: "reservation/controller.php",
+    data: {user_department : $('#user_department').val()
+      ,date_start : $('#date_start').val()
+      ,date_end : $('#date_end').val()
+      ,time_start : $('#time_start').val()
+      ,time_end : $('#time_end').val()
+      , mode: 'getCars_For_Select'},
+    success: function(data){
+      $('#tbody_cars').html(data);
+    }
   });
 }
 

@@ -37,8 +37,26 @@
 
             <br />
 
-                  <?php include 'querydata/cars_detail/table.php';  ?>
-                  <?php include 'querydata/cars_detail/modal.php';  ?>
+            <div class="row">
+                <div class="col-lg-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        ข้อมูลบุคลากร
+                                    </div>
+                                    <!-- /.panel-heading -->
+                                    <div class='table-responsive'>
+                                    <?php include 'querydata/cars_detail/table.php';  ?>
+                                    </div>
+                                    <?php include 'querydata/cars_detail/modal.php';  ?>
+                                </div>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+
+
 
 
 
