@@ -387,4 +387,41 @@ elseif ($mode == 'get_location')
   echo json_encode($arr);
 
 }
+elseif ($mode == 'insertSelectPassenger')
+{
+  $person_id = $_POST['person_id'];
+  $reserve_id = $_POST['reserve_id'];
+
+  $sql = "insert into passenger (passenger_name,department_id,reservation_id) values
+  ((SELECT CONCAT(t.title_name, ' ', p.personnel_name) as passenger_name FROM personnel p
+    LEFT JOIN title_name t
+    ON p.title_name_id = t.title_name_id
+    WHERE p.personnel_id = ".$person_id.")
+  ,(SELECT d.department_id FROM personnel p
+    LEFT JOIN department d
+    ON p.department_id = d.department_id
+    WHERE p.personnel_id = ".$person_id.")
+  ,".$reserve_id.")
+  ON DUPLICATE KEY UPDATE passenger_id = passenger_id";
+
+  if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
+  else {echo json_encode(array('result' => '0'));}
+
+}
+elseif ($mode == 'insertKeysPassenger')
+{
+  $reserve_id = $_POST['reserve_id'];
+  $name = $_POST['title'].' '.$_POST['name'];
+  $dep = $_POST['dep'];
+
+  $sql = "insert into passenger (passenger_name,department_id,reservation_id) values
+  ('".$name."'
+  ,(SELECT department_id FROM department WHERE department_name = '".$dep."')
+  ,".$reserve_id.")
+  ON DUPLICATE KEY UPDATE passenger_id = passenger_id";
+
+  if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
+  else {echo json_encode(array('result' => '0'));}
+
+}
 ?>

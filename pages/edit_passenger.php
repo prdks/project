@@ -68,7 +68,8 @@
                       LEFT JOIN department d
                       ON p.department_id = d.department_id
                       WHERE p.reservation_id = ".$id."
-                      ";
+                      ORDER BY department_name ASC
+                      , passenger_name ASC";
 
                       $result = $conn->query($sql);
                       $result_row = mysqli_num_rows($result);
@@ -98,13 +99,13 @@
                                 <td><?php echo $row['passenger_name'] ?></td>
                                 <td><?php echo $row['department_name']; ?></td>
                                 <td class="text-center">
-                                  <button type="button" class="btn btn-warning handleCarEdit" role="button"
-                                  data-toggle="modal" data-target="#Edit_location_modal" data-id="<?php echo $r["passenger_id"];?>">
+                                  <button type="button" class="btn btn-warning handleEditPassenger" role="button"
+                                  data-toggle="modal" data-target="#edit_passenger_modal" data-id="<?php echo $r["passenger_id"];?>">
                                     <span class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></span>
                                   </button>
 
-                                  <button class="btn btn-danger handleCarDelete" role="button"
-                                  data-toggle="modal" data-target="#Delete_modal" data-id="<?php echo $r["passenger_id"];?>">
+                                  <button class="btn btn-danger handleDeletePassenger" role="button"
+                                  data-toggle="modal" data-target="#delete_passenger_modal" data-id="<?php echo $r["passenger_id"];?>">
                                     <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
                                   </button>
                                 </td>
