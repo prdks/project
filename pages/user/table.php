@@ -18,11 +18,11 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
   <table id='user_reservation_tablelist' class='table table-striped table-bordered table-hover'>
       <thead>
           <tr>
-              <th id='tb_detail_sub-th'>วันที่จอง</th>
+              <th id='tb_detail_sub-th'>วันที่ใช้รถยนต์</th>
               <th id='tb_detail_sub-th'>เวลา</th>
               <th id='tb_detail_main'>จองใช้เพื่อ</th>
               <th id='tb_detail_sub-th'>ทะเบียนรถยนต์</th>
-              <th id='tb_detail_sub-sv'>สถานะคำร้อง</th>
+              <th id='tb_detail_sub-sv'>สถานะการจอง</th>
               <th id='tb_detail_sub-sv'>สถานะการใช้</th>
           </tr>
       </thead>
@@ -74,11 +74,11 @@ echo" </td>
   <table id='reservationtablelist' class='table table-striped table-bordered table-hover'>
       <thead>
           <tr>
-              <th id='tb_detail_sub-th'>วันที่จองใช้</th>
+              <th id='tb_detail_sub-th'>วันที่ใช้รถยนต์ใช้</th>
               <th id='tb_detail_sub-th'>เวลา</th>
               <th id='tb_detail_main'>จองใช้เพื่อ</th>
               <th id='tb_detail_sub-th'>ทะเบียนรถยนต์</th>
-              <th id='tb_detail_sub-sv'>สถานะคำร้อง</th>
+              <th id='tb_detail_sub-sv'>สถานะการจอง</th>
               <th id='tb_detail_sub-sv'>สถานะการใช้</th>
           </tr>
       </thead>

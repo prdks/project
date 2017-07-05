@@ -23,7 +23,7 @@ function DateThai($strDate)
     $strSeconds= date("s",strtotime($strDate));
     $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
     $strMonthThai=$strMonthCut[$strMonth];
-    return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
+    return "$strDay $strMonthThai $strYear, เวลา : $strHour:$strMinute";
   }
 // -------------------------------------------------------------
 
@@ -133,8 +133,6 @@ while($r = $result->fetch_assoc()){
               'note' => $row['note']
             );
   echo json_encode($all);
-
-
 
 }
 elseif ($mode == 'getDelete')
@@ -336,5 +334,57 @@ elseif ($mode == 'getCars_For_Select')
       );
 
   echo json_encode($arr);
+}
+elseif ($mode == 'getEdit')
+{
+  $reservation_id = $_POST['id'];
+
+  $sql = "
+  SELECT * FROM reservation r
+  LEFT JOIN personnel p
+  ON r.personnel_id = p.personnel_id
+  LEFT JOIN position po
+  ON p.position_id = po.position_id
+  LEFT JOIN title_name t
+  ON p.title_name_id = t.title_name_id
+  WHERE reservation_id = '".$reservation_id."'";
+
+  $result = $conn->query($sql);
+
+  $row = $result->fetch_assoc();
+
+  $reserv = array(
+            'id' => $row['reservation_id'],
+            'user' => $row['title_name'].' '.$row['personnel_name'],
+            'position' => $row['position_name'],
+            'detail' => $row['requirement_detail'],
+            'fistdate' => $row['date_start'],
+            'lastdate' => $row['date_end'],
+            'timestart' => $row['reserv_stime'],
+            'timeend' => $row['reserv_etime']
+          );
+
+  echo json_encode($reserv);
+}
+elseif ($mode == 'get_location')
+{
+  $id = $_POST['id'];
+
+  $sql = "
+  SELECT * FROM location
+  WHERE location_id = ".$id;
+
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+
+  $arr = array(
+            'reserve_id' => $row['reservation_id'],
+            'id' => $row['location_id'],
+            'province' => $row['province'],
+            'location_name' => $row['location_name']
+          );
+
+  echo json_encode($arr);
+
 }
 ?>

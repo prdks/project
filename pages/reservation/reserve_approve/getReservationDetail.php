@@ -37,10 +37,10 @@ while($row = $result->fetch_assoc()){
         <p>".$row['car_reg']." / ยี่ห้อ ".$row['car_brand_name']." / รุ่น ".$row['car_kind']." / ".$row['seat']." ที่นั่ง</p>
       </div>
     </div>
-    <!-- วันที่จอง -->
+    <!-- วันที่ใช้รถยนต์ -->
     <div class='form-group'>
       <label class='col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label'>
-        วันที่จอง :
+        วันที่ใช้รถยนต์ :
       </label>
       <div class='col-lg-7 col-md-7 col-sm-7 col-xs-12'>
         <p>";
@@ -198,6 +198,6 @@ function DateThai($strDate)
 		$strSeconds= date("s",strtotime($strDate));
 		$strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
 		$strMonthThai=$strMonthCut[$strMonth];
-		return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
+		return "$strDay $strMonthThai $strYear, เวลา : $strHour:$strMinute";
 	}
 ?>

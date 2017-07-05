@@ -1,12 +1,16 @@
 body{
   font-family: 'Kanit', sans-serif;
+  /*font-family: 'Trirong', serif;*/
+
 }
 
 /*dd {
     display: block;
     margin-left: 10px;
 }*/
-
+.badge-danger{
+  background-color: #d9534f;
+}
 thead#Table_Default{
   background-color: #fff;
 }

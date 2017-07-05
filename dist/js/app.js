@@ -579,7 +579,64 @@ $(function () {
 
           }
       });
-    })
+    });
+
+    // ถ้ากดเลือกวันจองวันแรก
+    $('#dp-fistdate').click(function() {
+      var now = new Date();
+      var day = ("0" + now.getDate()).slice(-2);
+      var month = ("0" + (now.getMonth() + 1)).slice(-2);
+      var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+      $(this).attr('min',today);
+    });
+
+    // รีเซ็ตหากเลือกวันที่ไม่ถูกต้อง
+    $('#dp-fistdate').on("change",function () {
+      var date_start = $(this);
+      var date_end = $("#dp-lastdate");
+      if ($('#dp-lastdate').val() != '') {
+        date_end.attr('min', date_start.val());
+        date_end.val(date_start.val());
+      }
+    });
+    // ถ้ากดเลือกวันจองวันสุดท้าย
+    $('#dp-lastdate').click(function() {
+
+      var date_start = $("#dp-fistdate").val();
+      var date_end = $(this);
+
+      var now = new Date();
+      var day = ("0" + now.getDate()).slice(-2);
+      var month = ("0" + (now.getMonth() + 1)).slice(-2);
+      var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+        if (date_start != '') {
+          date_end.attr('min', date_start);
+        }else {
+          date_end.attr('min', today);
+        }
+
+    });
+
+    // ถ้าเลือกเวลาสิ้นสุดแต่ยังไม่เลือกเวลาเริ่มต้น
+      $('#dp-timeend').click(function() {
+        if($('#dp-timestart').val() == ''){
+          var start = $('#dp-timestart');
+          var end = $('#dp-timeend');
+          if (start.val() == '') {
+            end.prop('defaultValue','');
+            start.focus();
+          }
+        }else {
+          var start = $('#dp-timestart').val();
+          var end = $('#dp-timeend');
+
+          end.prop('defaultValue', start.substring(0,2)+":00");
+          end.attr('min', start.substring(0,2)+":00");
+          end.attr('max', "23:59");
+        }
+      });
 
     $('.handleRMADelete').click(function () {
 
@@ -596,7 +653,45 @@ $(function () {
         }
       });
 
-    })
+    });
+
+    //  Location
+    $('.handleAddLocation').click(function() {
+      var id = $(this).attr('data-id');
+      $('#add-reserve_id').val(id)
+    });
+
+    $('.handleEditLocation').click(function() {
+      var id = $(this).attr('data-id');
+      $.ajax({
+        type: "POST",
+        url: "reservation/controller.php",
+        data: {id: id, mode: 'get_location'},
+        dataType: 'json',
+        success: function(data){
+          $('#show-reserve_id').val(data.reserve_id);
+          $('#show-id').val(data.id);
+          $('#show_update').val(data.location_name);
+          $('#province').val(data.province);
+        }
+      });
+    });
+
+    //  เมื่อกดปุ่มลบ จะส่งค่าไปที่ box
+    $('.handleDeleteLocation').click(function() {
+      var id = $(this).attr('data-id');
+      $.ajax({
+        type: "POST",
+        url: "reservation/controller.php",
+        data: {id: id, mode: 'get_location'},
+        dataType: 'json',
+        success: function(data){
+          $('#delete_id').val(data.id);
+          $('#reserve_id').val(data.reserve_id);
+          $('#show_delete').text('\n\" '+data.location_name+' (จังหวัด'+data.province+') \"');
+        }
+      });
+    });
     //-------------------------------------------------------
     //ตารางยืนยัน
     $(".handleApproveDetail").click(function() {

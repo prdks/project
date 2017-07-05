@@ -31,9 +31,9 @@ while($row = $result->fetch_assoc()){
     <td class='field-label col-xs-3 topic'>รถยนต์ที่จอง :</td>
     <td>".$row['car_reg']." / ยี่ห้อ ".$row['car_brand_name']." / รุ่น ".$row['car_kind']." / ".$row['seat']." ที่นั่ง </td>
     </tr>
-    <!-- วันที่จอง -->
+    <!-- วันที่ใช้รถยนต์ -->
     <tr>
-    <td class='field-label col-xs-3 topic'>วันที่จอง :</td>
+    <td class='field-label col-xs-3 topic'>วันที่ใช้รถยนต์ :</td>
     <td>";
     if ($row['date_start'] === $row['date_end']) {
       echo DateThai($row['date_start'])." (วันที่ทำรายการ : ".DateTimeThai($row['timestamp'])."น. )";
@@ -201,6 +201,6 @@ function DateThai($strDate)
 		$strSeconds= date("s",strtotime($strDate));
 		$strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
 		$strMonthThai=$strMonthCut[$strMonth];
-		return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
+		return "$strDay $strMonthThai $strYear, เวลา : $strHour:$strMinute";
 	}
 ?>

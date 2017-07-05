@@ -66,7 +66,7 @@
                               ?>
                             </dd>
                             <br />
-                            <dt>วันที่จอง :</dt>
+                            <dt>วันที่ใช้รถยนต์ :</dt>
                             <dd id="show-date">
                               <?php
                               if ($row['date_start'] === $row['date_end']) {
@@ -228,7 +228,7 @@
       $strSeconds= date("s",strtotime($strDate));
       $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
       $strMonthThai=$strMonthCut[$strMonth];
-      return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
+      return "$strDay $strMonthThai $strYear, เวลา : $strHour:$strMinute";
     }
    ?>
 </body>

@@ -17,11 +17,11 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
   <table id="reservation_tablelist" class="table table-striped table-bordered table-hover">
       <thead>
           <tr>
-              <th id="tb_detail_sub-th">วันที่จอง</th>
+              <th id="tb_detail_sub-th">วันที่ใช้รถยนต์</th>
               <th id="tb_detail_sub-th">เวลา</th>
               <th id="tb_detail_main">จองใช้เพื่อ</th>
               <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
-              <th id="tb_detail_sub-sv">สถานะคำร้อง</th>
+              <th id="tb_detail_sub-sv">สถานะการจอง</th>
               <th id="tb_detail_sub-sv">สถานะการใช้</th>
               <th id="tb_tools_ismore">เครื่องมือ</th>
           </tr>
@@ -83,10 +83,9 @@ echo" </td>
         <span class="fa fa-search" data-toggle="tooltip" data-placement="top" title="ดูข้อมูล"></span>
       </button>
 
-      <button type="submit" class="btn btn-warning handleRMAEdit" role="button"
-      data-toggle="modal" data-target="#RMA_edit_modal" data-id="<?php echo $row["reservation_id"];?>">
+      <a class="btn btn-warning" href="reserve_ma_edit.php?id=<?php echo $row["reservation_id"];?>">
         <span class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></span>
-      </button>
+      </a>
 
       <button class="btn btn-danger handleRMADelete" role="button"
       data-toggle="modal" data-target="#RMA_delete_modal" data-id="<?php echo $row["reservation_id"];?>">
@@ -113,11 +112,11 @@ echo" </td>
   <table id="reservationtablelist" class="table table-striped table-bordered table-hover">
       <thead>
           <tr>
-              <th id="tb_detail_sub-th">วันที่จองใช้</th>
+              <th id="tb_detail_sub-th">วันที่ใช้รถยนต์ใช้</th>
               <th id="tb_detail_sub-th">เวลา</th>
               <th id="tb_detail_main">จองใช้เพื่อ</th>
               <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
-              <th id="tb_detail_sub-sv">สถานะคำร้อง</th>
+              <th id="tb_detail_sub-sv">สถานะการจอง</th>
               <th id="tb_detail_sub-sv">สถานะการใช้</th>
           </tr>
       </thead>

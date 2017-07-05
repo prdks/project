@@ -23,18 +23,44 @@ if($result){
   , first_approver_id = (select personnel_id from personnel where personnel_name = '".$_SESSION['user_name']."')
   ,update_status_date = '".$timestamp."'
   WHERE reservation_id = '".$id."'";
+  $result = $conn->query($sql);
 if($conn->query($sql)===true){
-  echo "
-  <!DOCTYPE html>
-  <script>
-  function redir()
-  {
-  alert('บันทึกข้อมูลสำเร็จ');
-  window.location.assign('../../reserve_approve.php');
-  }
-  </script>
-  <body onload='redir();'></body>
+  $sql = "
+  SELECT COUNT(reservation_id) as reservecout
+  FROM reservation
+  WHERE reservation_status = 0
   ";
+  $result = $conn->query($sql);
+  $row = $result->fetch_array();
+  $num_approve = $row['reservecout'];
+  if ($num_approve == 0) // ถ้าใน Table มีข้อมูล
+  {
+    echo "
+    <!DOCTYPE html>
+    <script>
+    function redir()
+    {
+    alert('บันทึกข้อมูลสำเร็จ');
+    window.location.assign('../../index.php');
+    }
+    </script>
+    <body onload='redir();'></body>
+    ";
+  }
+  else
+  {
+    echo "
+    <!DOCTYPE html>
+    <script>
+    function redir()
+    {
+    alert('บันทึกข้อมูลสำเร็จ');
+    window.location.assign('../../reserve_approve.php');
+    }
+    </script>
+    <body onload='redir();'></body>
+    ";
+  }
 }else {
   echo "
   <!DOCTYPE html>
