@@ -741,6 +741,90 @@ $(function () {
         }
       });
     });
+
+    //  เมื่อกดปุ่มลบ จะส่งค่าไปที่ box
+    $('.handleDeletePassenger').click(function() {
+      var id = $(this).attr('data-id');
+      $.ajax({
+        type: "POST",
+        url: "reservation/controller.php",
+        data: {id: id, mode: 'get_passenger'},
+        dataType: 'json',
+        success: function(data){
+          $('#delete_id').val(data.id);
+          $('#reserve_id').val(data.reserve_id);
+          $('#show_delete').text('\n\" '+data.title+' '+data.name+' \"');
+          $('#show_delete2').text('\n('+data.department+')');
+        }
+      });
+    });
+
+    $('.handleEditPassenger').click(function() {
+      var id = $(this).attr('data-id');
+      $.ajax({
+        type: "POST",
+        url: "reservation/controller.php",
+        data: {id: id, mode: 'get_passenger'},
+        dataType: 'json',
+        success: function(data){
+          $('.handleEditSelectPassenger').attr('data-old',id);
+          $('.handleEditKeysPassenger').attr('data-old',id);
+          $('#edit_title_name').val(data.title);
+          $('#edit_person_name').val(data.name);
+          $('#edit_department').val(data.department);
+        }
+      });
+    });
+
+    $('.handleEditSelectPassenger').click(function () {
+      var old = $(this).attr('data-old');
+      var person_id = $(this).attr('data-id');
+      var reserve_id = $(this).attr('data-reservekeys');
+      $.ajax({
+        type: "POST",
+        url: "reservation/controller.php",
+        data: {old:old, person_id: person_id, reserve_id: reserve_id, mode: 'editSelectPassenger'},
+        dataType: 'json',
+        success: function(data){
+          if (data.result == 1) //edit สำเร็จ
+          {
+            alert('แก้ไขข้อมูลสำเร็จ');
+            window.location.assign('edit_passenger.php?id='+reserve_id);
+          }
+          else if (data.result == 0) //edit ไม่สำเร็จ
+          {
+            alert('ไม่สามารถแก้ไขข้อมูลได้ กรุณาทำรายการใหม่');
+            window.location.assign('edit_passenger.php?id='+reserve_id);
+          }
+        }
+      });
+    });
+
+    $('.handleEditKeysPassenger').click(function () {
+      var old = $(this).attr('data-old');
+      var reserve_id = $(this).attr('data-reservekeys');
+      var title = $('#edit_title_name').val();
+      var name = $('#edit_person_name').val();
+      var dep = $('#edit_department').val();
+      $.ajax({
+        type: "POST",
+        url: "reservation/controller.php",
+        data: {old:old, title:title, name:name, dep:dep, reserve_id:reserve_id, mode:'editKeysPassenger'},
+        dataType: 'json',
+        success: function(data){
+          if (data.result == 1) //edit สำเร็จ
+          {
+            alert('แก้ไขข้อมูลสำเร็จ');
+            window.location.assign('edit_passenger.php?id='+reserve_id);
+          }
+          else if (data.result == 0) //edit ไม่สำเร็จ
+          {
+            alert('ไม่สามารถแก้ไขข้อมูลได้ กรุณาทำรายการใหม่');
+            window.location.assign('edit_passenger.php?id='+reserve_id);
+          }
+        }
+      });
+    });
     //-------------------------------------------------------
     //ตารางยืนยัน
     $(".handleApproveDetail").click(function() {

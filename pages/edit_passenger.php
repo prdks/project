@@ -33,7 +33,7 @@
             </div>
             <div class="row" style="margin-bottom:10px;">
               <div class="col-lg-6 col-xs-4">
-                <a class='btn btn-success' role='button' data-toggle="modal" data-target="#Insert_modal">
+                <a class='btn btn-success' role='button' data-toggle="modal" data-target="#insert_pasenger_modal">
                   เพิ่มข้อมูล
                 </a>
               </div>
@@ -100,12 +100,12 @@
                                 <td><?php echo $row['department_name']; ?></td>
                                 <td class="text-center">
                                   <button type="button" class="btn btn-warning handleEditPassenger" role="button"
-                                  data-toggle="modal" data-target="#edit_passenger_modal" data-id="<?php echo $r["passenger_id"];?>">
+                                  data-toggle="modal" data-target="#edit_passenger_modal" data-id="<?php echo $row["passenger_id"];?>">
                                     <span class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></span>
                                   </button>
 
                                   <button class="btn btn-danger handleDeletePassenger" role="button"
-                                  data-toggle="modal" data-target="#delete_passenger_modal" data-id="<?php echo $r["passenger_id"];?>">
+                                  data-toggle="modal" data-target="#delete_passenger_modal" data-id="<?php echo $row["passenger_id"];?>">
                                     <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
                                   </button>
                                 </td>

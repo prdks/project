@@ -424,4 +424,70 @@ elseif ($mode == 'insertKeysPassenger')
   else {echo json_encode(array('result' => '0'));}
 
 }
+elseif ($mode == 'get_passenger')
+{
+  $id = $_POST['id'];
+
+  $sql = "
+  SELECT *, SUBSTRING_INDEX(passenger_name,' ',-2) as name
+  , SUBSTRING_INDEX(passenger_name,' ',1) as title FROM passenger p
+  LEFT JOIN department d
+  ON p.department_id = d.department_id
+  WHERE passenger_id = ".$id;
+
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+
+  $arr = array(
+            'reserve_id' => $row['reservation_id'],
+            'id' => $row['passenger_id'],
+            'title' => $row['title'],
+            'name' => $row['name'],
+            'department' => $row['department_name']
+          );
+
+  echo json_encode($arr);
+}
+elseif ($mode == 'editSelectPassenger')
+{
+  $old = $_POST['old'];
+  $person_id = $_POST['person_id'];
+  $reserve_id = $_POST['reserve_id'];
+
+  $sql = "update passenger
+  set
+  passenger_name =
+  (SELECT CONCAT(t.title_name, ' ', p.personnel_name) as passenger_name FROM personnel p
+    LEFT JOIN title_name t
+    ON p.title_name_id = t.title_name_id
+    WHERE p.personnel_id = ".$person_id.")
+  ,department_id =
+  (SELECT d.department_id FROM personnel p
+    LEFT JOIN department d
+    ON p.department_id = d.department_id
+    WHERE p.personnel_id = ".$person_id.")
+  ,reservation_id = '".$reserve_id."'
+  where passenger_id = '".$old."'";
+
+  if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
+  else {echo json_encode(array('result' => '0'));}
+
+}
+elseif ($mode == 'editKeysPassenger')
+{
+  $old = $_POST['old'];
+  $reserve_id = $_POST['reserve_id'];
+  $name = $_POST['title'].' '.$_POST['name'];
+  $dep = $_POST['dep'];
+
+  $sql = "update passenger
+  set passenger_name = '".$name."'
+  ,department_id = (SELECT department_id FROM department WHERE department_name = '".$dep."')
+  ,reservation_id = '".$reserve_id."'
+  where passenger_id = '".$old."'";
+
+  if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
+  else {echo json_encode(array('result' => '0'));}
+
+}
 ?>
