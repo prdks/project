@@ -1,18 +1,15 @@
 <?php
 require '../../_connect.php';
 
-$reserve_id = $_POST['reserve_id'];
-$id = $_POST["id"];
-$str = $_POST["str"];
-$province = $_POST['province'];
+$reserve_id = $_GET['id'];
+$id = $_GET["carid"];
 
-$sql = "select * from location where location_id ='".$id."'";
+$sql = "select * from cars where car_id ='".$id."'";
 $result = $conn->query($sql);
 if($result){
-  $sql = "update location
-  set location_name = '".$str."'
-  , province = '".$province."'
-  where location_id = '".$id."'";
+  $sql = "update reservation
+  set car_id = '".$id."'
+  where reservation_id = '".$reserve_id."'";
 
   if($conn->query($sql)===true){
     echo "
@@ -21,7 +18,7 @@ if($result){
     function redir()
     {
     alert('แก้ไขข้อมูลสำเร็จ');
-    window.location.assign('../../edit_location.php?id=".$reserve_id."');
+    window.location.assign('../../reserve_ma_edit.php?id=".$reserve_id."');
     }
     </script>
     <body onload='redir();'></body>
@@ -33,7 +30,7 @@ if($result){
     function redir()
     {
     alert('ไม่สามารถแก้ไขข้อมูลได้ กรุณาทำรายการใหม่');
-    window.location.assign('../../edit_location.php?id=".$reserve_id."');
+    window.location.assign('../../reserve_ma_edit.php?id=".$reserve_id."');
     }
     </script>
     <body onload='redir();'></body>
@@ -46,7 +43,7 @@ if($result){
   function redir()
   {
   alert('ข้อมูลไม่ถูกต้อง ไม่สามารถแก้ไขข้อมูลได้ กรุณาทำรายการใหม่');
-  window.location.assign('../../edit_location.php?id=".$reserve_id."');
+
   }
   </script>
   <body onload='redir();'></body>

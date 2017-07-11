@@ -46,12 +46,6 @@
             <span class="requestfield">*</span> เลือกผลการจอง :
           </label>
           <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-            <!-- <select id="show-status" name="status" class="form-control">
-              <option value="รออนุมัติ" selected>รออนุมัติ</option>
-              <option value="อนุมัติ">อนุมัติ</option>
-              <option value="ไม่อนุมัติ">ไม่อนุมัติ</option>
-              <option value="ยกเลิก">ยกเลิก</option>
-            </select> -->
             <button class="btn btn-sm btn-defualt" type="button" name="approve_btn" value="1">
               <span class="glyphicon glyphicon-ok"></span> อนุมัติ
             </button>
@@ -67,11 +61,11 @@
         <!-- หมายเหตุ -->
         <div class="form-group" id="note_approve" hidden>
           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-            <span class="requestfield">*</span> หมายเหตุการอนุมัติ :
+            <span class="requestfield">*</span> หมายเหตุการไม่อนุมัติ :
           </label>
           <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
           <textarea  rows="3" type="text" class="form-control" id="note_area" name="note"
-          placeholder="พิมพ์หมายเหตุการอนุมัติ" style="resize:none;"></textarea>
+          placeholder="พิมพ์หมายเหตุการไม่อนุมัติ" style="resize:none;"></textarea>
           </div>
         </div>
         <input type="hidden" id="reserve_id" name="reserve_id" value="">

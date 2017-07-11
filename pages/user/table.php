@@ -38,20 +38,20 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
       <td>".$row['requirement_detail']."</td>
       <td class='text-center'>".$row['car_reg']."</td>
       <td class='text-center'>";
-      if ($row['reservation_status'] === 'รออนุมัติ') {
+      if ($row['reservation_status'] === '0') {
         echo "<span class='label label-md label-primary'>รออนุมัติ</span>";
-      }elseif ($row['reservation_status'] === 'อนุมัติ') {
+      }elseif ($row['reservation_status'] === '1') {
         echo "<span class='label label-md label-success'>อนุมัติ</span>";
-      }elseif ($row['reservation_status'] === 'ยกเลิก') {
+      }elseif ($row['reservation_status'] === '2') {
         echo "<span class='label label-md label-danger'>ยกเลิก</span>";
       }
 echo" </td>
       <td class='text-center'>";
-      if ($row['usage_status'] === 'รออนุมัติ') {
+      if ($row['usage_status'] === '0') {
         echo "<span class='label label-md label-warning'>รออนุมัติ</span>";
-      }elseif ($row['usage_status'] === 'ดำเนินการเสร็จสิ้น') {
+      }elseif ($row['usage_status'] === '1') {
         echo "<span class='label label-md label-success'>ดำเนินการเสร็จสิ้น</span>";
-      }elseif ($row['usage_status'] === 'ยกเลิก') {
+      }elseif ($row['usage_status'] === '2') {
         echo "<span class='label label-md label-danger'>ยกเลิก</span>";
       }
 echo" </td>
@@ -92,14 +92,4 @@ echo" </td>
     ";
 }
 
-function DateThai($strDate)
-	{
-		$strYear = date("Y",strtotime($strDate))+543;
-		$strMonth= date("n",strtotime($strDate));
-		$strDay= date("j",strtotime($strDate));
-		$strHour= date("H",strtotime($strDate));
-		$strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
-		$strMonthThai=$strMonthCut[$strMonth];
-		return " $strDay $strMonthThai $strYear";
-	}
 ?>

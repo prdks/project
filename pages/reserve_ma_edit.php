@@ -56,219 +56,32 @@
 
                     <form class="form-horizontal">
                       <div class="panel-body">
-                        <input type="hidden" name="id" value="<?php echo $row['reservation_id']?>">
-                        <!-- ชิ้อผู้ทำรายการ -->
-                        <div class="form-group">
-                          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                            ชื่อผู้ขออนุมัติ :
-                          </label>
-                          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <input  type="text"  class="form-control" name="user_name" value="<?php echo $row['title_name'].' '.$row['personnel_name']?>" required readonly/>
-                          </div>
-                        </div>
-                        <!-- ตำแหน่ง -->
-                        <div class="form-group">
-                          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                            ตำแหน่ง :
-                          </label>
-                          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <input  type="text"  class="form-control" name="user_position" value="<?php echo $row['position_name']?>" required readonly/>
-                          </div>
-                        </div>
-                        <!-- รายละเอียดความประสงค์ -->
-                        <div class="form-group">
-                          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                            <span class="requestfield">*</span> ความประสงค์ขอใช้รถยนต์ :
-                          </label>
-                          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <textarea  rows="5" type="text" class="form-control" name="detail"
-                            placeholder="พิมพ์รายละเอียดความประสงค์ขอใช้รถยนต์" required><?php echo $row['requirement_detail']?></textarea>
-                          </div>
-                        </div>
-                        <!-- วันแรกที่จองใช้ -->
-                        <div class="form-group">
-                          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                            <span class="requestfield">*</span> วันแรกที่ต้องการจอง :
-                          </label>
-                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <div class="input-group">
-                              <!-- วันที่เริ่ม  -->
-                              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                              <input class="form-control" name="date_start" id="dp-fistdate" type="date" value="<?php echo $row['date_start']?>" required>
+
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a data-toggle="tab" href="#home">ข้อมูลการจอง</a></li>
+                          <li><a data-toggle="tab" href="#cars">ข้อมูลรถยนต์</a></li>
+                          <li><a data-toggle="tab" href="#passenger">ข้อมูลผู้โดยสาร</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div id="home" class="tab-pane fade in active">
+                            <br>
+                            <input type="hidden" name="id" value="<?php echo $row['reservation_id']?>">
+                            <div class="pull-right text-danger">
+                              (วันที่ทำรายการ : <?php echo DateTimeThai($row['timestamp']); ?> )
                             </div>
+                            <?php include 'reservation/reserve_ma/detail.php'; ?>
+                          </div>
+                          <div id="cars" class="tab-pane fade">
+                            <?php include 'reservation/reserve_ma/cars.php'; ?>
+                          </div>
+
+                          <div id="passenger" class="tab-pane fade">
+                            <?php include 'reservation/reserve_ma/passenger.php'; ?>
                           </div>
                         </div>
-                        <!-- วันสุดท้ายที่จองใช้ -->
-                        <div class="form-group">
-                          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                            <span class="requestfield">*</span> วันสุดท้ายที่ต้องการจอง :
-                          </label>
-                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <div class="input-group">
-                              <!-- วันที่สิ้นสุด  -->
-                              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                              <input class="form-control" name="date_end" id="dp-lastdate" type="date" value="<?php echo $row['date_end']?>" required>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- เวลาที่จองใช้ -->
-                        <div class="form-group">
-                          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                            <span class="requestfield">*</span> ช่วงเวลาเริ่มต้น :
-                          </label>
-                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <div class="input-group">
-                              <!-- เวลาเริ่มต้น -->
-                              <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                              <input class="form-control" name="time_start" id="dp-timestart" type="time" value="<?php echo $row['reserv_stime']?>" required>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- เวลาที่จองใช้ -->
-                        <div class="form-group">
-                          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                            <span class="requestfield">*</span> ช่วงเวลาสิ้นสุด :
-                          </label>
-                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <div class="input-group">
-                              <!-- เวลาสิ้นสุด -->
-                              <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                              <input class="form-control" name="time_end" id="dp-timeend" type="time" value="<?php echo $row['reserv_etime']?>" required>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- สถานที่ต้องการไป -->
-                        <div class="form-group">
-                          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                            <span class="requestfield">*</span> สถานที่ต้องการไป :
-                          </label>
-                          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                              <div class="panel panel-default">
-                                <div class="panel-heading">รายชื่อสถานที่
-                                  <div class="pull-right">
-                                    <a href="edit_location.php?id=<?php echo $id;?>">
-                                      <span class="fa fa-edit"></span> แก้ไขข้อมูล
-                                    </a>
-                                  </div>
-                                </div>
-                                  <?php
-                                  $id = $_GET['id'];
 
-                                  $sql = "
-                                  SELECT * FROM location l
-                                  LEFT JOIN reservation r
-                                  ON l.reservation_id = r.reservation_id
-                                  WHERE l.reservation_id = ".$id."
-                                  ORDER BY l.province ASC";
 
-                                  $result = $conn->query($sql);
-
-                                  ?>
-                                  <div class="table-responsive">
-                                  <table class="table table-striped table-bordered table-hover">
-                                      <thead>
-                                          <tr>
-                                            <th id="tb_sharp">#</th>
-                                            <th>จังหวัด</th>
-                                            <th>ชื่อสถานที่</th>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                        <?php
-                                        $count = 0;
-                                        while($row = $result->fetch_assoc())
-                                        {
-                                          $count++;
-                                          ?>
-                                        <tr>
-                                          <td class="text-center"><?php echo $count; ?></td>
-                                          <td><?php echo $row['province'] ?></td>
-                                          <td><?php echo $row['location_name']; ?></td>
-                                        </tr>
-                                        <?php
-                                        }
-                                          ?>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                              </div>
-
-                          </div>
-                        </div>
-                        <!-- รายชื่อผู้โดยสาร -->
-                        <div class="form-group">
-                          <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                            <span class="requestfield">*</span> ผู้โดยสาร :
-                          </label>
-                          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-
-                              <div class="panel panel-default">
-                                <div class="panel-heading">รายชื่อผู้โดยสาร
-                                  <div class="pull-right">
-                                    <a href="edit_passenger.php?id=<?php echo $id;?>">
-                                      <span class="fa fa-edit"></span> แก้ไขข้อมูล
-                                    </a>
-                                  </div>
-                                </div>
-                                  <?php
-                                  $id = $_GET['id'];
-
-                                  $sql = "
-                                  SELECT * FROM passenger p
-                                  LEFT JOIN reservation r
-                                  ON p.reservation_id = r.reservation_id
-                                  LEFT JOIN department d
-                                  ON p.department_id = d.department_id
-                                  WHERE p.reservation_id = ".$id."
-                                  ";
-
-                                  $result = $conn->query($sql);
-
-                                  ?>
-                                  <div class="table-responsive">
-                                  <table class="table table-striped table-bordered table-hover">
-                                      <thead>
-                                          <tr>
-                                            <th id="tb_sharp">#</th>
-                                            <th>ชื่อผู้โดยสาร</th>
-                                            <th>หน่วยงาน</th>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                        <?php
-                                        $result_row = mysqli_num_rows($result);
-                                        if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
-                                        {
-                                            $count = 0;
-                                            while($row = $result->fetch_assoc())
-                                            {
-                                              $count++;
-                                              ?>
-                                            <tr>
-                                              <td class="text-center"><?php echo $count; ?></td>
-                                              <td><?php echo $row['passenger_name'] ?></td>
-                                              <td><?php echo $row['department_name']; ?></td>
-                                            </tr>
-                                            <?php
-                                            }
-
-                                        }
-                                        else
-                                        {
-                                          ?>
-                                          <tr>
-                                            <td colspan="3" class="text-center">ไม่พบรายชื่อผู้โดยสารเพิ่มเติม</td>
-                                          </tr>
-                                          <?php
-                                        }
-                                        ?>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                              </div>
-
-                          </div>
-                        </div>
 
                       </div>
                       <div class="panel-footer text-right">
@@ -285,6 +98,6 @@
         <!-- /#page-wrapper -->
 
     </div>
-
+<?php include 'reservation/reserve_ma/modal_cars.php'; ?>
 </body>
 </html>

@@ -19,8 +19,7 @@
         <div id="page-wrapper">
           <br />
               <div class="container-fluid">
-	               <!-- <div id="calendar"></div> -->
-                 <?php include 'calendar.php'; ?>
+	               <div id="calendar"></div>
                </div>
           <br />
         </div>

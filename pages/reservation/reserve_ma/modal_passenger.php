@@ -30,7 +30,7 @@
                   <table id="PersonnelTableSelect" class="table table-condensed table-bordered table-hover">
                     <thead id="Tb_sPersonnel">
                       <tr>
-                        <th id="tb_option">เพิ่ม</th>
+                        <th id="tb_option">เมนู</th>
                         <th id="tb_detail_main">ชื่อบุคลากร</th>
                         <th id="tb_detail_sub-nd">หน่วยงาน</th>
                       </tr>
@@ -125,7 +125,7 @@
                     <!-- หน่วยงาน -->
                     <div class="form-group">
                       <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                        <span class="requestfield">*</span> หน่วยงาน :
+                        หน่วยงาน :
                       </label>
                       <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                         <?php
@@ -138,6 +138,7 @@
                           ".$row['department_name']."
                           </option>";
                         }
+                        echo "<option values='0'>อื่นๆ</option>";
                         echo "</select>";
                         ?>
                       </div>
@@ -194,7 +195,7 @@
                   <table id="PersonnelTableEdit" class="table table-condensed table-bordered table-hover">
                     <thead id="Tb_sPersonnel">
                       <tr>
-                        <th id="tb_option">เพิ่ม</th>
+                        <th id="tb_option">เมนู</th>
                         <th id="tb_detail_main">ชื่อบุคลากร</th>
                         <th id="tb_detail_sub-nd">หน่วยงาน</th>
                       </tr>
@@ -290,7 +291,7 @@
                     <!-- หน่วยงาน -->
                     <div class="form-group">
                       <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                        <span class="requestfield">*</span> หน่วยงาน :
+                        หน่วยงาน :
                       </label>
                       <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                         <?php
@@ -303,6 +304,7 @@
                           ".$row['department_name']."
                           </option>";
                         }
+                        echo "<option values=null>อื่นๆ</option>";
                         echo "</select>";
                         ?>
                       </div>

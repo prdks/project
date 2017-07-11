@@ -75,11 +75,11 @@ for ($i=0; $i < sizeof($data)-2; $i++)
         break;
       case 3:
       echo "
-      <!-- วันแรกที่ต้องการจอง -->
+      <!-- วันแรกที่ต้องการใช้รถยนต์ -->
       <div class='row' style='padding:4px'>
         <div class='form-group'>
         <label class='control-label col-lg-3 col-md-3 col-sm-4 text-right'>
-        วันแรกที่ต้องการจอง :
+        วันแรกที่ต้องการใช้รถยนต์ :
         </label>
         <div class='col-lg-4 col-md-4 col-sm-4 col-xs-12'>
         <p>".DateThai($data[$i]['value'])."</p>
@@ -89,11 +89,11 @@ for ($i=0; $i < sizeof($data)-2; $i++)
         break;
       case 4:
       echo "
-      <!-- วันสุดท้ายที่ต้องการจอง -->
+      <!-- วันสุดท้ายที่ต้องการใช้รถยนต์ -->
       <div class='row' style='padding:4px'>
         <div class='form-group'>
         <label class='control-label col-lg-3 col-md-3 col-sm-4 text-right'>
-        วันสุดท้ายที่ต้องการจอง :
+        วันสุดท้ายที่ต้องการใช้รถยนต์ :
         </label>
         <div class='col-lg-4 col-md-4 col-sm-4 col-xs-12'>
         <p>".DateThai($data[$i]['value'])."</p>

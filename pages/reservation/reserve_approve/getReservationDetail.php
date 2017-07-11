@@ -167,11 +167,11 @@ while($row = $result->fetch_assoc()){
     <!-- หมายเหตุ -->
     <div class='form-group'>
       <label class='col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label'>
-        <span class='requestfield'>*</span> หมายเหตุการอนุมัติ :
+        <span class='requestfield'>*</span> หมายเหตุการไม่อนุมัติ :
       </label>
       <div class='col-lg-7 col-md-7 col-sm-7 col-xs-12'>
       <textarea  rows='3' type='text' class='form-control' id='note_area' name='note'
-      placeholder='พิมพ์หมายเหตุการอนุมัติ' style='resize:none;'></textarea>
+      placeholder='พิมพ์หมายเหตุการไม่อนุมัติ' style='resize:none;'></textarea>
       </div>
     </div>
     ";

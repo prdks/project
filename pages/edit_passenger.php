@@ -97,7 +97,15 @@
                               <tr>
                                 <td class="text-center"><?php echo $count; ?></td>
                                 <td><?php echo $row['passenger_name'] ?></td>
-                                <td><?php echo $row['department_name']; ?></td>
+                                <td>
+                                  <?php
+                                 if ($row['department_id'] != null) {
+                                  echo $row['department_name'];
+                                }else {
+                                  echo "-";
+                                }
+                                ?>
+                                </td>
                                 <td class="text-center">
                                   <button type="button" class="btn btn-warning handleEditPassenger" role="button"
                                   data-toggle="modal" data-target="#edit_passenger_modal" data-id="<?php echo $row["passenger_id"];?>">

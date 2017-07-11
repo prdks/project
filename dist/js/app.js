@@ -156,7 +156,6 @@ $(function () {
           $('#display-note-area').hide();
       }
   });
-
   //  เมื่อกดปุ่มดูลายระเอียด จะส่งค่าไปที่ box
   $('.handleCarDetail').click(function() {
     var id = $(this).attr('data-id');
@@ -535,7 +534,17 @@ $(function () {
     });
     // -------------Calendar-------------------------
     $('#calendar').fullCalendar({
-      locale: 'th'
+      locale: 'th',
+      header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+          },
+      events: [{
+                title: 'the title',
+                start: '2017-07-07',
+                end: '2017-07-11'
+            }]
     });
     //------------- Set Province BOX ---------------
     getProvince();
@@ -654,43 +663,24 @@ $(function () {
       });
 
     });
-
-    //  Location
-    $('.handleAddLocation').click(function() {
-      var id = $(this).attr('data-id');
-      $('#add-reserve_id').val(id)
+    $('input[name=kilometer_out]').change(function () {
+      $('input[name=kilometer_in]').prop('min', $(this).val());
+      $('input[name=kilometer_in]').val($(this).val());
     });
 
-    $('.handleEditLocation').click(function() {
-      var id = $(this).attr('data-id');
-      $.ajax({
-        type: "POST",
-        url: "reservation/controller.php",
-        data: {id: id, mode: 'get_location'},
-        dataType: 'json',
-        success: function(data){
-          $('#show-reserve_id').val(data.reserve_id);
-          $('#show-id').val(data.id);
-          $('#show_update').val(data.location_name);
-          $('#province').val(data.province);
+    $('input[name=kilometer_in]').click(function () {
+        var kout = $('input[name=kilometer_out]');
+        if (kout.val() == '') {
+          kout.focus();
         }
-      });
     });
 
-    //  เมื่อกดปุ่มลบ จะส่งค่าไปที่ box
-    $('.handleDeleteLocation').click(function() {
-      var id = $(this).attr('data-id');
-      $.ajax({
-        type: "POST",
-        url: "reservation/controller.php",
-        data: {id: id, mode: 'get_location'},
-        dataType: 'json',
-        success: function(data){
-          $('#delete_id').val(data.id);
-          $('#reserve_id').val(data.reserve_id);
-          $('#show_delete').text('\n\" '+data.location_name+' (จังหวัด'+data.province+') \"');
-        }
-      });
+    $('input[name=kilometer_in]').change(function () {
+
+      var kout = $('input[name=kilometer_out]').val();
+      var kin = $('input[name=kilometer_in]').val();
+      $('input[name=kilometer_total]').val(kin - kout);
+
     });
 
     // passenger
@@ -754,7 +744,9 @@ $(function () {
           $('#delete_id').val(data.id);
           $('#reserve_id').val(data.reserve_id);
           $('#show_delete').text('\n\" '+data.title+' '+data.name+' \"');
-          $('#show_delete2').text('\n('+data.department+')');
+          if (data.department !== null) {
+            $('#show_delete2').text('\n('+data.department+')');
+          }
         }
       });
     });
@@ -771,7 +763,12 @@ $(function () {
           $('.handleEditKeysPassenger').attr('data-old',id);
           $('#edit_title_name').val(data.title);
           $('#edit_person_name').val(data.name);
-          $('#edit_department').val(data.department);
+          if (data.department !== null) {
+            $('#edit_department').val(data.department)
+          }else {
+            $('#edit_department').val('อื่นๆ')
+          }
+
         }
       });
     });
@@ -822,6 +819,24 @@ $(function () {
             alert('ไม่สามารถแก้ไขข้อมูลได้ กรุณาทำรายการใหม่');
             window.location.assign('edit_passenger.php?id='+reserve_id);
           }
+        }
+      });
+    });
+
+    $('#linkEditCars').click(function () {
+      $.ajax({
+        type: "POST",
+        url: "reservation/controller.php",
+        data:
+         {date_start : $('#dp-fistdate').val()
+          ,date_end : $('#dp-lastdate').val()
+          ,time_start : $('#dp-timestart').val()
+          ,time_end : $('#dp-timeend').val()
+          ,car_id : $(this).attr('data-cars')
+          ,reserve_id : $(this).attr('data-reservekeys')
+          , mode: 'getCars_For_Edit'},
+        success: function(data){
+          $('#tbody_cars_edit').html(data);
         }
       });
     });

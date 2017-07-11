@@ -33,7 +33,7 @@
 <!-- วันแรกที่จองใช้ -->
 <div class="form-group">
   <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-    <span class="requestfield">*</span> วันแรกที่ต้องการจอง :
+    <span class="requestfield">*</span> วันแรกที่ต้องการใช้รถยนต์ :
   </label>
   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
     <div class="input-group">
@@ -46,7 +46,7 @@
 <!-- วันสุดท้ายที่จองใช้ -->
 <div class="form-group">
   <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-    <span class="requestfield">*</span> วันสุดท้ายที่ต้องการจอง :
+    <span class="requestfield">*</span> วันสุดท้ายที่ต้องการใช้รถยนต์ :
   </label>
   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
     <div class="input-group">
