@@ -9,6 +9,7 @@
         <input type="hidden" id="name" name="name" value="">
         <input type="hidden" id="phone" name="phone" value="">
         <input type="hidden" id="department" name="department" value="">
+        <input type="hidden" id="pqrcode" name="pqrcode" value="0">
     </li>
 </ul>
 </form>

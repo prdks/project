@@ -1,6 +1,6 @@
 <?php
 switch ($_SESSION['user_type']) {
-  case 'เจ้าหน้าที่ดูแลระบบ':
+  case 0:
   if(isset($_POST['handleSearch']))
   {
     $word = $_POST['search_box'];
@@ -218,7 +218,7 @@ switch ($_SESSION['user_type']) {
     }
   }
     break;
-  case 'ผู้อนุมัติประจำหน่วยงาน ลำดับที่ 1':
+  case 4:
   if(isset($_POST['handleSearch']))
   {
     $word = $_POST['search_box'];

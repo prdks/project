@@ -68,6 +68,7 @@ function makeApiCall() {
             document.getElementById("name").value = fname+' '+lname;
             document.getElementById("phone").value = phone;
             document.getElementById("department").value = department;
+            console.log(document.getElementById("pqrcode"));
             document.getElementById("form_login").submit();
           }else {
             gapi.auth2.getAuthInstance().signOut();
@@ -78,6 +79,8 @@ function makeApiCall() {
         }, function(reason) {
           console.log('Error: ' + reason.result.error.message);
         });
+
+
 }
 </script>
 <script async defer src="https://apis.google.com/js/api.js"

@@ -9,27 +9,54 @@
       ?>
 
 </head>
+<body id="enterkl">
 
-<body>
 
-    <div id="wrapper">
-      <!-- Navigation -->
-      <?php include '_navbar.php'; ?>
-      <!-- ./Navigation -->
-        <div id="page-wrapper">
-          <br />
-              <div class="row">
-                <div class="col-sm-12 col-xs-12">
-                  <i class="fa fa-square fa-fw c-ap"></i> : รอนุมัติ /
-                  <i class="fa fa-square fa-fw c-suc"></i> : อนุมัติแล้ว /
-                  <i class="fa fa-square fa-fw c-cancel"></i> : จองไม่สำเร็จ,ยกเลิก
-                </div>
+            <?php
+            if(!isset($_SESSION['loggedin'])){
+              ?>
+              <div class="wrapper-enterkl">
+              <span class="enterkl-content">
+                  <h3>กรุณาเข้าสู่ระบบ</h3>
+                  <form id="form_login" method="post">
+                    <center>
+                      <button type="button" class="btn btn-lg btn-block btn-danger" id="signin-button" onclick="handleSignInClick(1)">
+                        <i class="fa fa-google fa-fw"></i>เข้าสู่ระบบ
+                      </button>
+                    </center>
+                    <input type="hidden" id="hd_email" name="hd_email" value="">
+                    <input type="hidden" id="name" name="name" value="">
+                    <input type="hidden" id="phone" name="phone" value="">
+                    <input type="hidden" id="department" name="department" value="">
+                    <input type="hidden" id="pqrcode" name="pqrcode" value="1">
+                  </form>
+              </span>
               </div>
-          <br />
-        </div>
-        <!-- /#page-wrapper -->
+              <?php
+            }
+            if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+              if ($_SESSION['user_type'] == 3) {
+                include 'enterkl/form.php';
+                ?>
+                <center>
+                  <a class="btn btn-danger" href="_logout.php?key=enterkl" onclick="handleSignOutClick()"><i class="fa fa-sign-out fa-fw"></i>ออกจากระบบ</a>
+                </center>
+                <?php
+              }else {
+                session_destroy();
+                echo "
+                <!DOCTYPE html>
+                <script>
+                function redir()
+                {
+                window.location.assign('index.php');
+                }
+                </script>
+                <body onload='redir();'></body>
+                ";
+              }
+            }
+            ?>
 
-    </div>
-    <!-- /#wrapper -->
 </body>
 </html>

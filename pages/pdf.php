@@ -14,25 +14,20 @@ $result_row = mysqli_num_rows($result);
 
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<script type="text/javascript" src="../vendor/qrcode/qrcode.js"></script>
+<script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../vendor/jquery/jquery.maskedinput.js"></script>
+<script type="text/javascript" src="../vendor/jquery-ui/jquery-ui.js"></script>
+<script src="../dist/js/app.js"></script>
 </head>
 <body>
 
-  <table width="704" border="0" align="center" cellpadding="0" cellspacing="0">
-    <tr>
-      <td width="291" align="center"><span>ใบขออนุมัติใช้รถยนต์ <?php echo $_SESSION['department']; ?></span></td>
-    </tr>
-    <tr>
-      <td height="27" align="right"><span>วันที่ <?php echo date("d/m/y"); ?></span></td>
-    </tr>
-    <tr>
-      <td height="25" align="left"><span>เรียน คณบดี<?php echo $_SESSION['department']; ?></span></td>
-    </tr>
-  </table>
   <table width="200" border="0" align="center">
     <tbody>
       <tr>
 				<td>
 					test
+
 				</td>
       </tr>
     </tbody>

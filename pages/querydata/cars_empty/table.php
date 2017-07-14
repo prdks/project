@@ -7,7 +7,7 @@ if (isset($_POST['query_cars_empty'])) {
 
   if (($date_start !== '' && $date_end !== '') || ($time_start !== '' && $time_end !== '')) {
   switch ($_SESSION['user_type']) {
-    case 'เจ้าหน้าที่ดูแลระบบ':
+    case 0:
     $sql = "
     SELECT c.* , b.* , p.* , t.* , d.* FROM cars c
     LEFT JOIN reservation r
@@ -124,7 +124,7 @@ if (isset($_POST['query_cars_empty'])) {
     }
       break;
 
-    case 'ผู้อนุมัติประจำหน่วยงาน ลำดับที่ 1':
+    case 4:
     $sql = "
     SELECT c.* , b.* , p.* , t.* , d.* FROM cars c
     LEFT JOIN reservation r

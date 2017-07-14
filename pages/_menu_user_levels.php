@@ -12,7 +12,7 @@ $num_approve = $row['reservecout'];
 // ----------------------------------------------------------------
 
 switch ($type) {
-  case 'เจ้าหน้าที่ดูแลระบบ':
+  case 0:
     {
       ?>
       <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
@@ -62,7 +62,7 @@ switch ($type) {
       <?php
     }
     break;
-  case 'ผู้ใช้งานทั่วไป':
+  case 1:
     {
       ?>
       <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
@@ -78,7 +78,7 @@ switch ($type) {
       <?php
     }
     break;
-  case 'พนักงานขับรถยนต์':
+  case 2:
     {
       ?>
       <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
@@ -94,7 +94,7 @@ switch ($type) {
       <?php
     }
     break;
-  case 'พนักงานรักษาความปลอดภัย':
+  case 3:
     {
       ?>
       <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
@@ -110,53 +110,44 @@ switch ($type) {
       <?php
     }
     break;
-  case strpos($type, 'ผู้อนุมัติประจำหน่วยงาน'):
+  case 4:
     {
-      $sql = "
-      SELECT user_type_name
-      FROM user_type
-      WHERE user_type_name LIKE 'ผู้อนุมัติประจำหน่วยงาน%'
-      ORDER BY user_type_name ASC
-      ";
-      $result = $conn->query($sql);
-      $result_row = mysqli_num_rows($result);
+      ?>
+      <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
+      <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์</a></li>
+      <li>
+          <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+          <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
+          <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
+          <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
+          </ul>
+      </li>
+      <li>
+            <a href="#"><i class="fa fa-star fa-fw"></i> ประจำวัน<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
 
-      $arr_approve = array();
-      $i = 0;
-
-      while($row = $result->fetch_array()){
-        $arr_approve[$i] = $row['user_type_name'];
-        $i++;
-      }
-
-      $arrlength = count($arr_approve);
-
-      for($x = 0; $x < $arrlength; $x++)
-      {
-          if ($type === $arr_approve[$x])
-          {
-            ?>
-            <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
-            <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์</a></li>
-            <li>
-                <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
-                <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
-                <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-folder fa-fw"></i> การจัดการข้อมูล<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                  <li><a href="personnel.php">ข้อมูลบุคลากร</a></li>
-                  <li><a href="cars.php">ข้อมูลรถยนต์</a></li>
-                  <li><a href="reserve_ma.php">ข้อมูลการจองและการใช้รถยนต์</a></li>
-                </ul>
-            </li>
-            <?php
-          }
-      }
+            <li><a href="reserve_approve.php">รายการรออนุมัติการจอง
+              <?php
+              if ($num_approve != 0)
+              {
+                ?>
+              <span class="badge badge-danger pull-right"><?php echo $num_approve; ?></span>
+              <?php
+              }
+              ?>
+            </a></li>
+            </ul>
+      </li>
+      <li>
+          <a href="#"><i class="fa fa-folder fa-fw"></i> การจัดการข้อมูล<span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+            <li><a href="personnel.php">ข้อมูลบุคลากร</a></li>
+            <li><a href="cars.php">ข้อมูลรถยนต์</a></li>
+            <li><a href="reserve_ma.php">ข้อมูลการจองและการใช้รถยนต์</a></li>
+          </ul>
+      </li>
+      <?php
     }
     break;
   default:

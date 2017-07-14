@@ -24,7 +24,7 @@ if($result === true){
   $sql = "
     SELECT
       personnel_name, email, phone_number, title_name,
-      position_name , department_name,user_type_name
+      position_name , department_name,user_level
     FROM personnel psn
     LEFT OUTER JOIN title_name t
       ON psn.title_name_id = t.title_name_id
@@ -43,7 +43,7 @@ if($result === true){
     $_SESSION['title_name'] = $row['title_name'];
     $_SESSION['position'] = $row['position_name'];
     $_SESSION['department'] = $row['department_name'];
-    $_SESSION['user_type'] = $row['user_type_name'];
+    $_SESSION['user_type'] = $row['user_level'];
   }
     $_SESSION['loggedin'] = true;
 

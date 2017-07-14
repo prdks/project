@@ -96,7 +96,7 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <?php
                 switch ($_SESSION['user_type']) {
-                  case 'เจ้าหน้าที่ดูแลระบบ':
+                  case 0:
                   $sql = "
                     SELECT
                       psn.* , t.* , p.* , d.*
@@ -166,7 +166,7 @@
                     echo "
                     </select>";
                     break;
-                  case 'ผู้อนุมัติประจำหน่วยงาน ลำดับที่ 1':
+                  case 4:
                   $sql = "
                     SELECT
                       psn.* , t.* , p.* , d.*
@@ -319,7 +319,7 @@
           <?php
           switch ($_SESSION['user_type'])
           {
-            case 'เจ้าหน้าที่ดูแลระบบ':
+            case 0:
               ?>
               <dt>สังกัด :</dt>
               <dd id="show-department"></dd>
@@ -439,7 +439,7 @@
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <?php
             switch ($_SESSION['user_type']) {
-              case 'เจ้าหน้าที่ดูแลระบบ':
+              case 0:
               $sql = "
                 SELECT
                   psn.* , t.* , p.* , d.*
@@ -516,7 +516,7 @@
                 </select>
                 <?php
                 break;
-              case 'ผู้อนุมัติประจำหน่วยงาน ลำดับที่ 1':
+              case 4:
               $sql = "
                 SELECT
                   psn.* , t.* , p.* , d.*

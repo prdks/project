@@ -31,7 +31,7 @@
           <?php
           switch ($_SESSION['user_type'])
           {
-            case 'เจ้าหน้าที่ดูแลระบบ':
+            case 0:
               ?>
               <dt>สังกัด :</dt>
               <dd id="show-department"></dd>

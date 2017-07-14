@@ -183,7 +183,7 @@
                           <p><i class="fa fa-bookmark"></i> ลำดับการอนุมัติ</p>
                           <?php
                           switch ($_SESSION['user_type']) {
-                            case 'เจ้าหน้าที่ดูแลระบบ':
+                            case 0:
                             {
 
                             }
@@ -206,6 +206,6 @@
         <!-- /#page-wrapper -->
 
     </div>
-    
+
 </body>
 </html>

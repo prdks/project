@@ -6,6 +6,7 @@ $email = $_POST['hd_email'];
 $name = $_POST['name'];
 $phone = $_POST['phone'];
 $department = $_POST['department'];
+$s = $_POST['pqrcode'];
 
 if(  preg_match( '/^\+\d(\d{1})(\d{2})(\d{3})(\d{4})$/', $phone,  $matches ) )
 {
@@ -32,10 +33,11 @@ if($result->num_rows === 0){
   ";
 
 }elseif ($result->num_rows > 0) {
+  if ($s == 1) { // ถ้าล้อคอินจากหน้าที่แสกน qrcode
     $sql = "
       SELECT
         personnel_name, email,phone_number, title_name,
-        position_name , department_name,user_type_name
+        position_name , department_name,user_level
       FROM personnel psn
       LEFT OUTER JOIN title_name t
         ON psn.title_name_id = t.title_name_id
@@ -47,25 +49,63 @@ if($result->num_rows === 0){
         ON psn.user_type_id = type.user_type_id
       WHERE email = '".$email."'";
     $result = $conn->query($sql);
-  while($row = $result->fetch_assoc()){
-    $_SESSION['user_name'] = $row['personnel_name'];
-    $_SESSION['email'] = $row['email'];
-    $_SESSION['phone_number'] = $row['phone_number'];
-    $_SESSION['title_name'] = $row['title_name'];
-    $_SESSION['position'] = $row['position_name'];
-    $_SESSION['department'] = $row['department_name'];
-    $_SESSION['user_type'] = strtoupper($row['user_type_name']);
+    while($row = $result->fetch_assoc()){
+        $_SESSION['user_name'] = $row['personnel_name'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['phone_number'] = $row['phone_number'];
+        $_SESSION['title_name'] = $row['title_name'];
+        $_SESSION['position'] = $row['position_name'];
+        $_SESSION['department'] = $row['department_name'];
+        $_SESSION['user_type'] = $row['user_level'];
+    }
+    $_SESSION['loggedin'] = true;
+    echo "
+    <!DOCTYPE html>
+    <script>
+    function redir()
+    {
+    window.location.assign('../qrcode.php');
+    }
+    </script>
+    <body onload='redir();'></body>
+    ";
+  }else {
+      $sql = "
+        SELECT
+          personnel_name, email,phone_number, title_name,
+          position_name , department_name,user_level
+        FROM personnel psn
+        LEFT OUTER JOIN title_name t
+          ON psn.title_name_id = t.title_name_id
+        LEFT OUTER JOIN  position p
+          ON psn.position_id = p.position_id
+        LEFT OUTER JOIN  department  d
+          ON psn.department_id = d.department_id
+        LEFT OUTER JOIN  user_type type
+          ON psn.user_type_id = type.user_type_id
+        WHERE email = '".$email."'";
+      $result = $conn->query($sql);
+      while($row = $result->fetch_assoc()){
+          $_SESSION['user_name'] = $row['personnel_name'];
+          $_SESSION['email'] = $row['email'];
+          $_SESSION['phone_number'] = $row['phone_number'];
+          $_SESSION['title_name'] = $row['title_name'];
+          $_SESSION['position'] = $row['position_name'];
+          $_SESSION['department'] = $row['department_name'];
+          $_SESSION['user_type'] = $row['user_level'];
+      }
+      $_SESSION['loggedin'] = true;
+      echo "
+      <!DOCTYPE html>
+      <script>
+      function redir()
+      {
+        window.location.assign('../index.php');
+      }
+      </script>
+      <body onload='redir();'></body>
+      ";
   }
-  $_SESSION['loggedin'] = true;
-  echo "
-  <!DOCTYPE html>
-  <script>
-  function redir()
-  {
-  window.location.assign('../index.php');
-  }
-  </script>
-  <body onload='redir();'></body>
-  ";
+
 }
 ?>

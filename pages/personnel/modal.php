@@ -63,7 +63,7 @@
           <!-- หน่วยงาน -->
           <?php
           switch ($_SESSION['user_type']) {
-            case 'เจ้าหน้าที่ดูแลระบบ':
+            case 0:
               echo "
               <div class='form-group'>
                 <label class='col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label'>
@@ -83,7 +83,7 @@
                 </div>
               </div>";
               break;
-            case 'ผู้อนุมัติประจำหน่วยงาน ลำดับที่ 1':
+            case 4:
               echo "<input type='hidden' name='department' value='".$_SESSION['department']."' />";
               break;
           }
@@ -221,7 +221,7 @@
         <!-- หน่วยงาน -->
         <?php
         switch ($_SESSION['user_type']) {
-          case 'เจ้าหน้าที่ดูแลระบบ':
+          case 0:
         ?>
         <div class="form-group">
           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
