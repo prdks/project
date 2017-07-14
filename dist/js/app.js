@@ -533,19 +533,7 @@ $(function () {
       }
     });
     // -------------Calendar-------------------------
-    $('#calendar').fullCalendar({
-      locale: 'th',
-      header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-          },
-      events: [{
-                title: 'the title',
-                start: '2017-07-07',
-                end: '2017-07-11'
-            }]
-    });
+
     //------------- Set Province BOX ---------------
     getProvince();
     // ---------------คลิกดูรายละเอียดในตาราง-------------
@@ -577,14 +565,7 @@ $(function () {
               passenger_str += value
           });
           $('#show-passenger').html(passenger_str);
-
-          //location
-          var location_str = "";
-          $.each( data.location, function( index, value )
-          {
-              location_str += value
-          });
-          $('#show-location').html(location_str);
+          $('#show-location').html(data.reserv_detail.location);
 
           }
       });
@@ -605,13 +586,14 @@ $(function () {
       var date_start = $(this);
       var date_end = $("#dp-lastdate");
       if ($('#dp-lastdate').val() != '') {
-        date_end.attr('min', date_start.val());
+        date_end.attr('min', );
         date_end.val(date_start.val());
+        $('#dp-tout').attr('min',date_start.val());
+        $('#dp-tin').attr('min',date_start.val());
       }
     });
     // ถ้ากดเลือกวันจองวันสุดท้าย
     $('#dp-lastdate').click(function() {
-
       var date_start = $("#dp-fistdate").val();
       var date_end = $(this);
 
@@ -625,8 +607,20 @@ $(function () {
         }else {
           date_end.attr('min', today);
         }
-
     });
+    $('#dp-lastdate').on("change" , function () {
+      $('#dp-tout').attr('max',$(this).val());
+      $('#dp-tin').attr('max',$(this).val());
+    });
+
+    $('#dp-tout').on("change" , function () {
+      $('#dp-tin').attr('min',$(this).val());
+    });
+
+    $('#dp-tout').attr('min',$('#dp-fistdate').val());
+    $('#dp-tout').attr('max',$('#dp-lastdate').val());
+    $('#dp-tin').attr('min',$('#dp-fistdate').val());
+    $('#dp-tin').attr('max',$('#dp-lastdate').val());
 
     // ถ้าเลือกเวลาสิ้นสุดแต่ยังไม่เลือกเวลาเริ่มต้น
       $('#dp-timeend').click(function() {
@@ -683,6 +677,111 @@ $(function () {
 
     });
 
+    $('input[name=reservation_status]').each(function () {
+      var res = $('#hstatus').attr('data-rstatus');
+      var ues = $('#hstatus').attr('data-ustatus');
+      if ($(this).val() == res) {
+        $(this).click();
+
+        if (res == 0) {
+          $('input[name=usage_status]').each(function () {
+            if ($(this).val() == res) {
+              $(this).attr('disabled',false)
+              $(this).click();
+            }else {
+              $(this).attr('disabled',true)
+            }
+          });
+          $('#edit_note_area').val(''); $('#edit_note_area').attr('required', false);
+          $('#edit_note').hide();
+        }
+        else if (res == 1) {
+          $('input[name=usage_status]').each(function () {
+            if ($(this).val() == 1 || $(this).val() == 2 || $(this).val() == 3) {
+              $(this).attr('disabled',false)
+              if ($(this).val() == ues){
+                $(this).click();
+                $('#edit_note_area').val('');
+                $('#edit_note_area').attr('required', false);
+                $('#edit_note').hide();
+                if (ues == 3) {
+                  $('#edit_note').show();
+                  $('#edit_note_area').attr('required', true)
+                }
+              }
+            }else {
+              $(this).attr('disabled',true)
+            }
+          });
+        }
+        else if (res == 2 || res == 3) {
+          $('input[name=usage_status]').each(function () {
+            if ($(this).val() == 3) {
+              $(this).attr('disabled',false)
+              $(this).click();
+            }else {
+              $(this).attr('disabled',true)
+            }
+          });
+          $('#edit_note_area').attr('required', true);
+          $('#edit_note').show();
+        }
+      }
+    });
+
+    $('input[name=reservation_status]').on("change",function () {
+      var res = $(this).val();
+      if (res == 0) {
+        $('input[name=usage_status]').each(function () {
+          if ($(this).val() == res) {
+            $(this).attr('disabled',false)
+            $(this).click();
+          }else {
+            $(this).attr('disabled',true)
+          }
+        });
+        $('#edit_note_area').val('');
+        $('#edit_note_area').attr('required', false);
+        $('#edit_note').hide();
+      }
+      else if (res == 1) {
+        $('input[name=usage_status]').each(function () {
+          if ($(this).val() == 1 || $(this).val() == 2 || $(this).val() == 3) {
+            $(this).attr('disabled',false)
+            if ($(this).val() == 1){
+              $(this).click();
+            }
+          }else {
+            $(this).attr('disabled',true)
+          }
+        });
+        $('#edit_note_area').val('');
+        $('#edit_note_area').attr('required', false);
+        $('#edit_note').hide();
+      }
+      else if (res == 2 || res == 3) {
+        $('input[name=usage_status]').each(function () {
+          if ($(this).val() == 3) {
+            $(this).attr('disabled',false)
+            $(this).click();
+          }else {
+            $(this).attr('disabled',true)
+          }
+        });
+        $('#edit_note_area').attr('required', true);
+        $('#edit_note').show();
+      }
+    });
+    $('input[name=usage_status]').on("change",function () {
+      if ($(this).val() == 3) {
+        $('#edit_note_area').attr('required', true);
+        $('#edit_note').show();
+      }else {
+        $('#edit_note_area').val('');
+        $('#edit_note_area').attr('required', false);
+        $('#edit_note').hide();
+      }
+    });
     // passenger
     $('.handleAddSelectPassenger').click(function () {
       var person_id = $(this).attr('data-id');
@@ -844,7 +943,6 @@ $(function () {
     //ตารางยืนยัน
     $(".handleApproveDetail").click(function() {
       var id = $(this).attr('data-id');
-      //window.location.href = 'approve.php?id='+id;
       $.ajax({
         type: "POST",
         url: "reservation/controller.php",

@@ -1,18 +1,18 @@
 <!-- รายชื่อผู้โดยสาร -->
-<br>
 <?php
 $id = $_GET['id'];
 
-$sql = "
+$sql2 = "
 SELECT * FROM passenger p
 LEFT JOIN reservation r
 ON p.reservation_id = r.reservation_id
 LEFT JOIN department d
 ON p.department_id = d.department_id
 WHERE p.reservation_id = ".$id."
-";
+ORDER BY department_name ASC
+, passenger_name ASC";
 
-$result = $conn->query($sql);
+$res2 = $conn->query($sql2);
 
 ?>
 <div class="panel panel-default">
@@ -35,21 +35,21 @@ $result = $conn->query($sql);
       </thead>
       <tbody>
 <?php
-$result_row = mysqli_num_rows($result);
-if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
+$res2_row = mysqli_num_rows($res2);
+if ($res2_row !== 0) // ถ้าใน Table มีข้อมูล
 {
     $count = 0;
-    while($row = $result->fetch_assoc())
+    while($ro = $res2->fetch_assoc())
     {
       $count++;
       ?>
     <tr>
       <td class="text-center"><?php echo $count; ?></td>
-      <td><?php echo $row['passenger_name']; ?></td>
+      <td><?php echo $ro['passenger_name']; ?></td>
       <td>
       <?php
-       if ($row['department_id'] != 0) {
-        echo $row['department_name'];
+       if ($ro['department_id'] != 0) {
+        echo $ro['department_name'];
       }else {
         echo "-";
       }

@@ -40,7 +40,11 @@
                     <?php
                     $id = $_GET['id'];
                     $sql = "
-                    SELECT * FROM reservation r
+                    SELECT SUBSTRING_INDEX(`real_time_out`,' ',-1) AS timeout,
+                    SUBSTRING_INDEX(`real_time_out`,' ',1) AS dateout,
+                    SUBSTRING_INDEX(`real_time_in`,' ',-1) AS timein,
+                    SUBSTRING_INDEX(`real_time_in`,' ',1) AS datein ,
+                    r.* , p.* , po.* , t.*  FROM reservation r
                     LEFT JOIN personnel p
                     ON r.personnel_id = p.personnel_id
                     LEFT JOIN position po
@@ -54,13 +58,14 @@
                     $row = $result->fetch_assoc();
                     ?>
 
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="reservation/reserve_ma/edit.php" method="post">
                       <div class="panel-body">
 
                         <ul class="nav nav-tabs">
                           <li class="active"><a data-toggle="tab" href="#home">ข้อมูลการจอง</a></li>
                           <li><a data-toggle="tab" href="#cars">ข้อมูลรถยนต์</a></li>
                           <li><a data-toggle="tab" href="#passenger">ข้อมูลผู้โดยสาร</a></li>
+                          <li><a data-toggle="tab" href="#record">บันทึกเวลาและสถานะ</a></li>
                         </ul>
 
                         <div class="tab-content">
@@ -68,16 +73,33 @@
                             <br>
                             <input type="hidden" name="id" value="<?php echo $row['reservation_id']?>">
                             <div class="pull-right text-danger">
-                              (วันที่ทำรายการ : <?php echo DateTimeThai($row['timestamp']); ?> )
+                              (วันที่ทำรายการ : <?php echo DateTimeThai($row['timestamp']); ?>)
                             </div>
+                            <br />
+                            <?php
+                            if ($row['update_status_date'] !== null) {
+                            ?>
+                            <div class="pull-right" style="color:#777777;">
+                              แก้ไขล่าสุด : <?php echo DateTimeThai($row['update_status_date']); ?>
+                            </div>
+                            <?php
+                            }
+                            ?>
                             <?php include 'reservation/reserve_ma/detail.php'; ?>
                           </div>
                           <div id="cars" class="tab-pane fade">
+                            <br>
                             <?php include 'reservation/reserve_ma/cars.php'; ?>
                           </div>
 
                           <div id="passenger" class="tab-pane fade">
+                            <br>
                             <?php include 'reservation/reserve_ma/passenger.php'; ?>
+                          </div>
+
+                          <div id="record" class="tab-pane fade">
+                            <br>
+                            <?php include 'reservation/reserve_ma/record.php'; ?>
                           </div>
                         </div>
 
@@ -85,7 +107,7 @@
 
                       </div>
                       <div class="panel-footer text-right">
-                        <button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                        <a href="reserve_ma.php" class="btn btn-default">ยกเลิก</a>
                         <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
                       </div>
                     </form>

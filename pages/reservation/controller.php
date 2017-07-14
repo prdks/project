@@ -56,6 +56,7 @@ if ($mode == 'getDetail')
 
   $reserv = array(
             'detail' => $row['requirement_detail'],
+            'location' => $row['location'],
             'cars' => $row['car_reg']." / ยี่ห้อ ".$row['car_brand_name']." / รุ่น ".$row['car_kind']." / ".$row['seat'] ." ที่นั่ง",
             'date' => $date,
             'meet' => $row['appointment_place'],
@@ -95,40 +96,9 @@ while($r = $result->fetch_assoc()){
 
 }
 
-$location = array();
-$sql_province = "
-SELECT * FROM location l
-LEFT JOIN reservation r
-ON l.reservation_id = r.reservation_id
-WHERE r.reservation_id = ".$reservation_id."
-GROUP BY province ORDER BY province ASC";
-$result = $conn->query($sql_province);
-while($r = $result->fetch_assoc()){
-
-  $str = "<b>จังหวัด".$r['province']."</b><br />";
-  array_push($location,$str);
-
-  $sql_location ="
-  SELECT * FROM location l
-  LEFT JOIN reservation r
-  ON l.reservation_id = r.reservation_id
-  WHERE r.reservation_id = ".$reservation_id."
-  AND l.province = '".$r['province']."'
-  ORDER BY location_name ASC";
-  $res = $conn->query($sql_location);
-  while($rs = $res->fetch_assoc()){
-
-    $str = $rs['location_name']."<br />";
-    array_push($location,$str);
-
-  }
-
-}
-
   $all = array(
               'reserv_detail' => $reserv ,
               'passenger' => $passenger,
-              'location' => $location ,
               'status' => $row['reservation_status'],
               'note' => $row['note']
             );
@@ -365,27 +335,6 @@ elseif ($mode == 'getEdit')
           );
 
   echo json_encode($reserv);
-}
-elseif ($mode == 'get_location')
-{
-  $id = $_POST['id'];
-
-  $sql = "
-  SELECT * FROM location
-  WHERE location_id = ".$id;
-
-  $result = $conn->query($sql);
-  $row = $result->fetch_assoc();
-
-  $arr = array(
-            'reserve_id' => $row['reservation_id'],
-            'id' => $row['location_id'],
-            'province' => $row['province'],
-            'location_name' => $row['location_name']
-          );
-
-  echo json_encode($arr);
-
 }
 elseif ($mode == 'insertSelectPassenger')
 {

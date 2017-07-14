@@ -3,10 +3,39 @@ body{
   /*font-family: 'Trirong', serif;*/
 
 }
-/*dd {
+.fc-title {
+  white-space: normal;
+}
+.ch-font{
+  padding: 1px;
+  font-family: 'Athiti', sans-serif;
+}
+
+/*สีสถานนะในปฏิทิน*/
+.c-ap{
+  color: #428bca;
+}
+.c-suc{
+  color: #5cb85c;
+}
+.c-cancel{
+  color: #d9534f;
+}
+
+@media (max-width: 480px) {
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    margin-bottom: 10px;
+    clear: both;
+    }
+.input-group {
     display: block;
-    margin-left: 10px;
-}*/
+    }
+    .nav-tabs > li {
+        float:none;
+    }
+
+}
+
 .badge-danger{
   background-color: #d9534f;
 }

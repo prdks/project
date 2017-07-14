@@ -11,9 +11,18 @@ function DateThai($strDate)
     $strHour= date("H",strtotime($strDate));
     $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
     $strMonthThai=$strMonthCut[$strMonth];
-    return " $strDay $strMonthThai $strYear";
+    return "$strDay $strMonthThai $strYear";
   }
-
+function FullDateThai($strDate)
+  {
+      $strYear = date("Y",strtotime($strDate))+543;
+      $strMonth= date("n",strtotime($strDate));
+      $strDay= date("j",strtotime($strDate));
+      $strHour= date("H",strtotime($strDate));
+      $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+      $strMonthThai=$strMonthCut[$strMonth];
+      return "วันที่ $strDay $strMonthThai พ.ศ. $strYear";
+  }
   function DateTimeThai($strDate)
   {
     $strYear = date("Y",strtotime($strDate))+543;
@@ -55,11 +64,15 @@ function DateThai($strDate)
 
 <!-- Moment -->
  <script type="text/javascript" src="../vendor/moment/moment.js"></script>
-<script type="text/javascript" src="../vendor/moment/min/moment-with-locales.js"></script>
+
 
 <!-- Fullcalendar -->
 <link rel='stylesheet' href='../vendor/fullcalendar/fullcalendar.css' />
 <script src='../vendor/fullcalendar/fullcalendar.js'></script>
+<script type="text/javascript" src="../vendor/fullcalendar/locale/th.js"></script>
+
+<!-- QRcode -->
+<script type="text/javascript" src="../vendor/qrcode/qrcode.js"></script>
 
 <!-- datetimepicker -->
 <link rel="stylesheet" href="../vendor/datetimepicker/css/bootstrap-datepicker.css">
@@ -77,6 +90,7 @@ function DateThai($strDate)
 <!-- Custom Fonts -->
 <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet">
 
 
 <!-- Custom Theme JavaScript -->

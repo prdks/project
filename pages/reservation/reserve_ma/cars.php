@@ -2,7 +2,7 @@
 <?php
 $id = $_GET['id'];
 
-$sql = "
+$sql1 = "
 SELECT * FROM cars c
 LEFT JOIN car_brand b
 ON c.car_brand_id = b.car_brand_id
@@ -14,14 +14,14 @@ LEFT JOIN title_name t
 ON p.title_name_id = t.title_name_id
 WHERE r.reservation_id =".$id;
 
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
+$res = $conn->query($sql1);
+$r = $res->fetch_assoc();
 ?>
-<br>
+
 <div class="panel panel-default">
   <div class="panel-heading">รายละเอียดรถยนต์
     <div class="pull-right">
-      <a id="linkEditCars" data-cars="<?php echo $row['car_id']?>"
+      <a id="linkEditCars" data-cars="<?php echo $r['car_id']?>"
       data-reservekeys="<?php echo $_GET['id'];?>" data-toggle="modal" data-target="#editCars_modal">
         <span class="fa fa-edit"></span> เปลี่ยนรถยนต์
       </a>
@@ -41,11 +41,11 @@ $row = $result->fetch_assoc();
       </thead>
       <tbody>
         <tr>
-          <td class="text-center"><?php echo $row['car_reg']; ?></td>
-          <td><?php echo $row['car_brand_name']; ?></td>
-          <td><?php echo $row['car_kind']; ?></td>
-          <td class="text-center"><?php echo $row['seat']; ?></td>
-          <td><?php echo $row['title_name']." ".$row['personnel_name']; ?></td>
+          <td class="text-center"><?php echo $r['car_reg']; ?></td>
+          <td><?php echo $r['car_brand_name']; ?></td>
+          <td><?php echo $r['car_kind']; ?></td>
+          <td class="text-center"><?php echo $r['seat']; ?></td>
+          <td><?php echo $r['title_name']." ".$r['personnel_name']; ?></td>
         </tr>
         <tr>
           <td colspan="5">

@@ -61,11 +61,11 @@
         <!-- หมายเหตุ -->
         <div class="form-group" id="note_approve" hidden>
           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-            <span class="requestfield">*</span> หมายเหตุการไม่อนุมัติ :
+            <span class="requestfield">*</span> หมายเหตุการยกเลิก :
           </label>
           <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
           <textarea  rows="3" type="text" class="form-control" id="note_area" name="note"
-          placeholder="พิมพ์หมายเหตุการไม่อนุมัติ" style="resize:none;"></textarea>
+          placeholder="พิมพ์หมายเหตุการยกเลิก" style="resize:none;"></textarea>
           </div>
         </div>
         <input type="hidden" id="reserve_id" name="reserve_id" value="">

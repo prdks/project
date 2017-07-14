@@ -43,6 +43,7 @@ if($result){
   function redir()
   {
   alert('ข้อมูลไม่ถูกต้อง ไม่สามารถแก้ไขข้อมูลได้ กรุณาทำรายการใหม่');
+  window.location.assign('../../reserve_ma_edit.php?id=".$reserve_id."');
 
   }
   </script>
