@@ -134,7 +134,7 @@ while($row = $result->fetch_assoc()){
         ผู้ติดต่อ :
       </label>
       <div class='col-lg-7 col-md-7 col-sm-7 col-xs-12'>
-        <p>".$row['title_name']." ".$row['personnel_name']."</p>
+        <p>".$row['title_name'].$row['personnel_name']."</p>
       </div>
     </div>
     <!-- เบอร์โทรศัพท์ -->

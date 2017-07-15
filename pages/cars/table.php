@@ -54,7 +54,7 @@ switch ($_SESSION['user_type']) {
           <td><?php echo $r["car_brand_name"]; ?></td>
           <td><?php echo $r["car_kind"]; ?></td>
           <td class="text-center"><?php echo $r["seat"]; ?></td>
-          <td><?php echo $r["title_name"]." ".$r["personnel_name"]; ?></td>
+          <td><?php echo $r["title_name"].$r["personnel_name"]; ?></td>
           <td><?php echo $r["department_name"]; ?></td>
         <?php
             if ($r['status'] === 'จองได้')
@@ -161,7 +161,7 @@ switch ($_SESSION['user_type']) {
           <td><?php echo $r["car_brand_name"]; ?></td>
           <td><?php echo $r["car_kind"]; ?></td>
           <td class="text-center"><?php echo $r["seat"]; ?></td>
-          <td><?php echo $r["title_name"]." ".$r["personnel_name"]; ?></td>
+          <td><?php echo $r["title_name"].$r["personnel_name"]; ?></td>
           <td><?php echo $r["department_name"]; ?></td>
         <?php
             if ($r['status'] === 'จองได้')
@@ -276,7 +276,7 @@ switch ($_SESSION['user_type']) {
           <td><?php echo $r["car_brand_name"]; ?></td>
           <td><?php echo $r["car_kind"]; ?></td>
           <td class="text-center"><?php echo $r["seat"]; ?></td>
-          <td><?php echo $r["title_name"]." ".$r["personnel_name"]; ?></td>
+          <td><?php echo $r["title_name"].$r["personnel_name"]; ?></td>
         <?php
             if ($r['status'] === 'จองได้')
             {
@@ -379,7 +379,7 @@ switch ($_SESSION['user_type']) {
           <td><?php echo $r["car_brand_name"]; ?></td>
           <td><?php echo $r["car_kind"]; ?></td>
           <td class="text-center"><?php echo $r["seat"]; ?></td>
-          <td><?php echo $r["title_name"]." ".$r["personnel_name"]; ?></td>
+          <td><?php echo $r["title_name"].$r["personnel_name"]; ?></td>
         <?php
             if ($r['status'] === 'จองได้')
             {

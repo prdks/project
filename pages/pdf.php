@@ -127,7 +127,7 @@ $row = $result->fetch_assoc();
 		<tr height="10px"></tr>
 		<tr>
 			<td colspan="3"></td>
-			<td colspan="9">ข้าพเจ้า <?php echo $row['title_name']." ".$row['personnel_name']; ?></td>
+			<td colspan="9">ข้าพเจ้า <?php echo $row['title_name'].$row['personnel_name']; ?></td>
 			<td colspan="8">ตำแหน่ง <?php echo $row['position_name']; ?></td>
 		</tr>
 		<tr>
@@ -226,7 +226,7 @@ $row = $result->fetch_assoc();
 			<td colspan="8" align="center">
 				(
 				&nbsp;
-				<?php echo $row['title_name']." ".$row['personnel_name'];?>
+				<?php echo $row['title_name'].$row['personnel_name'];?>
 				&nbsp;
 				)
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -105,7 +105,7 @@ function FullDateThai($strDate)
       $timestamp = DateTimeThai($row['timestamp']); //วันที่ทำรายการ
 
       /*ข้อมูลคนทำรายการ*/
-      $person = $row['title_name']." ".$row['personnel_name']; //ชื่อคนทำรายการ
+      $person = $row['title_name'].$row['personnel_name']; //ชื่อคนทำรายการ
       $tel = $row['phone_number']; //เบอร์โทรศัพท์
 
 
@@ -156,7 +156,7 @@ function FullDateThai($strDate)
           WHERE r.second_approver_id = '".$row['second_approver_id']."'";
           $e = $conn->query($sql_approve);
           $g = $e->fetch_assoc();
-          $person_approve = $g['title_name']." ".$g['personnel_name'];
+          $person_approve = $g['title_name'].$g['personnel_name'];
           $tel_approve = $g['phone_number'];
           $updateStatus = DateThai($row['update_status_date']); //วันที่แก้ไขล่าสุด
 
@@ -173,7 +173,7 @@ function FullDateThai($strDate)
       WHERE c.car_id =".$row['car_id'];
       $res = $conn->query($sql_driver);
       $r = $res->fetch_assoc();
-      $name_driver = $r['title_name']." ".$r['personnel_name'];
+      $name_driver = $r['title_name'].$r['personnel_name'];
       $tel_driver = $r['phone_number'];
 
       $json_data[] = array(

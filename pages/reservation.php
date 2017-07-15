@@ -254,7 +254,7 @@
                                                     <center><button id='BTNInsertPassenger' type='button' class='btn btn-primary btn-xs'
                                                     name='btn[]' value='".$row['personnel_name']."'>เพิ่ม</button></center>
                                                     </td>
-                                                    <td>".$row['title_name']." ".$row['personnel_name']."</td>
+                                                    <td>".$row['title_name'].$row['personnel_name']."</td>
                                                     <td class='text-center'>".$row['department_name']."</td>
                                                     </tr>
                                                     ";

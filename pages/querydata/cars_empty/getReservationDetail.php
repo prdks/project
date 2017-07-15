@@ -115,7 +115,7 @@ echo"</td>
     <!-- ผู้ติดต่อ -->
     <tr>
     <td class='col-lg-2 col-md-2 col-sm-2 col-xs-2 topic'>ผู้ติดต่อ :</td>
-    <td>".$row['title_name']." ".$row['personnel_name']." &nbsp;&nbsp;&nbsp;<b>เบอร์โทรศัพท์</b> ".$row['phone_number']."</td>
+    <td>".$row['title_name'].$row['personnel_name']." &nbsp;&nbsp;&nbsp;<b>เบอร์โทรศัพท์</b> ".$row['phone_number']."</td>
     </tr>
     <!-- empty -->
     <tr>
@@ -145,7 +145,7 @@ echo" &nbsp;&nbsp;&nbsp;<b>บันทึกโดย</b> ";
       WHERE r.first_approver_id = '".$row['first_approver_id']."'";
       $result = $conn->query($sql_province);
       while($r = $result->fetch_assoc()){
-        echo $r['title_name']." ".$r['personnel_name'];
+        echo $r['title_name'].$r['personnel_name'];
       }
     }
 echo" &nbsp;&nbsp;&nbsp;<b>วันที่บันทึกผล</b> ";
@@ -170,7 +170,7 @@ echo"
     WHERE c.car_id = '".$row['car_id']."'";
     $result = $conn->query($sql_province);
     while($r = $result->fetch_assoc()){
-      echo $r['title_name']." ".$r['personnel_name']." &nbsp;&nbsp;&nbsp;<b>เบอร์โทรศัพท์</b> ".$r['phone_number'];
+      echo $r['title_name'].$r['personnel_name']." &nbsp;&nbsp;&nbsp;<b>เบอร์โทรศัพท์</b> ".$r['phone_number'];
     }
 echo"</td>
     </tr>

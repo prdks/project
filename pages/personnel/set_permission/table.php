@@ -63,7 +63,7 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
               ?>
                     <tr>
                     <td class="text-center"><?php echo $count ?></td>
-                    <td><?php echo $r["title_name"]." ".$r["personnel_name"]; ?></td>
+                    <td><?php echo $r["title_name"].$r["personnel_name"]; ?></td>
                     <td><?php echo $r["position_name"]; ?></td>
 
                     <td class="text-center">

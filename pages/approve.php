@@ -152,7 +152,7 @@
                             <br />
                             <dt>ผู้ติดต่อ :</dt>
                             <dd id="show-person">
-                              <?php echo $row['title_name']." ".$row['personnel_name']; ?>
+                              <?php echo $row['title_name'].$row['personnel_name']; ?>
                             </dd>
                             <br />
                             <dt>เบอร์โทรศัพท์ :</dt>

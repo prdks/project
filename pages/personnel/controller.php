@@ -24,7 +24,7 @@ if ($mode == 'getDetail')
 
     $row = $result->fetch_assoc();
     $arr = array(
-              'name' => $row['title_name']." ".$row['personnel_name'],
+              'name' => $row['title_name'].$row['personnel_name'],
               'email' => $row['email'],
               'phone' => $row['phone_number'],
               'department' => $row['department_name'],
@@ -97,7 +97,7 @@ elseif ($mode == 'getDelete')
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc())
         {
-          echo ($i+1).". ".$row['title_name']." ".$row['personnel_name']."<br />";
+          echo ($i+1).". ".$row['title_name'].$row['personnel_name']."<br />";
         }
       }
 

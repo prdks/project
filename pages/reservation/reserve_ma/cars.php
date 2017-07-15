@@ -45,7 +45,7 @@ $r = $res->fetch_assoc();
           <td><?php echo $r['car_brand_name']; ?></td>
           <td><?php echo $r['car_kind']; ?></td>
           <td class="text-center"><?php echo $r['seat']; ?></td>
-          <td><?php echo $r['title_name']." ".$r['personnel_name']; ?></td>
+          <td><?php echo $r['title_name'].$r['personnel_name']; ?></td>
         </tr>
         <?php
         if ($r['picture_1'] != "" || $r['picture_2'] != "" || $r['picture_3'] != "" || $r['picture_3'] != "" ) {

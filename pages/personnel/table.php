@@ -71,7 +71,7 @@ switch ($_SESSION['user_type']) {
         </td>
 
         <td class='text-center'>".$count."</td>
-        <td>".$row['title_name']." ".$row['personnel_name']."</td>
+        <td>".$row['title_name'].$row['personnel_name']."</td>
         <td class='text-center'>".$row['position_name']."</td>
         <td>".$row['department_name']."</td>
         <td class='text-center'>
@@ -169,7 +169,7 @@ switch ($_SESSION['user_type']) {
         </td>
 
         <td class='text-center'>".$count."</td>
-        <td>".$row['title_name']." ".$row['personnel_name']."</td>
+        <td>".$row['title_name'].$row['personnel_name']."</td>
         <td class='text-center'>".$row['position_name']."</td>
         <td>".$row['department_name']."</td>
         <td class='text-center'>
@@ -291,7 +291,7 @@ switch ($_SESSION['user_type']) {
         </td>
 
         <td class='text-center'>".$count."</td>
-        <td>".$row['title_name']." ".$row['personnel_name']."</td>
+        <td>".$row['title_name'].$row['personnel_name']."</td>
         <td class='text-center'>".$row['position_name']."</td>
         <td class='text-center'>
 
@@ -387,7 +387,7 @@ switch ($_SESSION['user_type']) {
         </td>
 
         <td class='text-center'>".$count."</td>
-        <td>".$row['title_name']." ".$row['personnel_name']."</td>
+        <td>".$row['title_name'].$row['personnel_name']."</td>
         <td class='text-center'>".$row['position_name']."</td>
         <td class='text-center'>
 

@@ -60,7 +60,7 @@ if ($mode == 'getDetail')
             'cars' => $row['car_reg']." / ยี่ห้อ ".$row['car_brand_name']." / รุ่น ".$row['car_kind']." / ".$row['seat'] ." ที่นั่ง",
             'date' => $date,
             'meet' => $row['appointment_place'],
-            'person' => $row['title_name']." ".$row['personnel_name'],
+            'person' => $row['title_name'].$row['personnel_name'],
             'phone' => $row['phone_number']
           );
 
@@ -192,7 +192,7 @@ elseif ($mode == 'getCars_For_Select')
       <td class='text-left'>".$row['car_brand_name']."</td>
       <td class='text-left'>".$row['car_kind']."</td>
       <td class='text-center'>".$row['seat']."</td>
-      <td class='text-left'>".$row['title_name']." ".$row['personnel_name']."</td>
+      <td class='text-left'>".$row['title_name'].$row['personnel_name']."</td>
       <td class='text-left'>".$row['department_name']."</td>
       </tr>
       ";
@@ -325,7 +325,7 @@ elseif ($mode == 'getEdit')
 
   $reserv = array(
             'id' => $row['reservation_id'],
-            'user' => $row['title_name'].' '.$row['personnel_name'],
+            'user' => $row['title_name'].$row['personnel_name'],
             'position' => $row['position_name'],
             'detail' => $row['requirement_detail'],
             'fistdate' => $row['date_start'],
@@ -519,7 +519,7 @@ elseif ($mode == 'getCars_For_Edit')
       <td class='text-left'>".$row['car_brand_name']."</td>
       <td class='text-left'>".$row['car_kind']."</td>
       <td class='text-center'>".$row['seat']."</td>
-      <td class='text-left'>".$row['title_name']." ".$row['personnel_name']."</td>
+      <td class='text-left'>".$row['title_name'].$row['personnel_name']."</td>
       </tr>
       ";
     }

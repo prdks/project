@@ -147,7 +147,7 @@
                               {
                                   echo "
                                   <option value='".$row['personnel_name']."'>
-                                  ".$row['title_name']." ".$row['personnel_name']."
+                                  ".$row['title_name'].$row['personnel_name']."
                                   </option>";
                               }
                             }else {
@@ -189,7 +189,7 @@
                       {
                         echo "
                         <option value='".$row['personnel_name']."'>
-                        ".$row['title_name']." ".$row['personnel_name']."
+                        ".$row['title_name'].$row['personnel_name']."
                         </option>";
                       }
                     }
@@ -465,7 +465,7 @@
                           {
                             ?>
                             <option value="<?php echo $r['personnel_name'];?>" selected>
-                            <?php echo $r['title_name']." ".$r['personnel_name']; ?>
+                            <?php echo $r['title_name'].$r['personnel_name']; ?>
                             </option>
                             <?php
                           }
@@ -512,7 +512,7 @@
                   {
                     ?>
                     <option value="<?php echo $r['personnel_name'];?>" selected>
-                    <?php echo $r['title_name']." ".$r['personnel_name']; ?>
+                    <?php echo $r['title_name'].$r['personnel_name']; ?>
                     </option>
                     <?php
                   }

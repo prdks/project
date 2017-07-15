@@ -64,7 +64,7 @@ if (isset($_POST['query_cars_empty'])) {
         <td>".$row['car_brand_name']."</td>
         <td>".$row['car_kind']."</td>
         <td class='text-center'>".$row['seat']."</td>
-        <td>".$row['title_name']." ".$row['personnel_name']."</td>
+        <td>".$row['title_name'].$row['personnel_name']."</td>
         <td>".$row['department_name']."</td>";
 
         if ($row['status'] === 'จองได้')
@@ -182,7 +182,7 @@ if (isset($_POST['query_cars_empty'])) {
         <td>".$row['car_brand_name']."</td>
         <td>".$row['car_kind']."</td>
         <td class='text-center'>".$row['seat']."</td>
-        <td>".$row['title_name']." ".$row['personnel_name']."</td>
+        <td>".$row['title_name'].$row['personnel_name']."</td>
         <td>".$row['department_name']."</td>";
 
         if ($row['status'] === 'จองได้')

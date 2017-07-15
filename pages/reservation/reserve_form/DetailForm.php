@@ -5,7 +5,7 @@
   </label>
   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
     <input  type="text"  class="form-control" name="user_name"
-    value="<?php echo $_SESSION['title_name']." ".$_SESSION['user_name'] ;?>"
+    value="<?php echo $_SESSION['title_name'].$_SESSION['user_name'] ;?>"
     required readonly/>
   </div>
 </div>

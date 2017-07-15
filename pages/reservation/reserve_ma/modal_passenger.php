@@ -70,7 +70,7 @@
                            </button>
                            </center>
                           </td>
-                          <td><?php echo $row["title_name"]." ".$row["personnel_name"]; ?></td>
+                          <td><?php echo $row["title_name"].$row["personnel_name"]; ?></td>
                           <td class="text-center"><?php echo $row["department_name"]; ?></td>
                           </tr>
                           <?php
@@ -236,7 +236,7 @@
                            </button>
                            </center>
                           </td>
-                          <td><?php echo $row["title_name"]." ".$row["personnel_name"]; ?></td>
+                          <td><?php echo $row["title_name"].$row["personnel_name"]; ?></td>
                           <td class="text-center"><?php echo $row["department_name"]; ?></td>
                           </tr>
                           <?php

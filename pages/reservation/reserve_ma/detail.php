@@ -4,7 +4,7 @@
     ชื่อผู้ขออนุมัติ :
   </label>
   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-    <input  type="text"  class="form-control" name="user_name" value="<?php echo $row['title_name'].' '.$row['personnel_name'];?>" required readonly/>
+    <input  type="text"  class="form-control" name="user_name" value="<?php echo $row['title_name'].$row['personnel_name'];?>" required readonly/>
   </div>
 </div>
 <!-- ตำแหน่ง -->

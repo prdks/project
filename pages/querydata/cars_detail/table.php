@@ -52,7 +52,7 @@ if(isset($_POST['handleSearch']))
         <td><?php echo $r["car_brand_name"]; ?></td>
         <td><?php echo $r["car_kind"]; ?></td>
         <td class="text-center"><?php echo $r["seat"]; ?></td>
-        <td><?php echo $r["title_name"]." ".$r["personnel_name"]; ?></td>
+        <td><?php echo $r["title_name"].$r["personnel_name"]; ?></td>
         <td><?php echo $r["department_name"]; ?></td>
       <?php
           if ($r['status'] === 'จองได้')
@@ -149,7 +149,7 @@ else //ถ้าไม่ได้กด search
         <td><?php echo $r["car_brand_name"]; ?></td>
         <td><?php echo $r["car_kind"]; ?></td>
         <td class="text-center"><?php echo $r["seat"]; ?></td>
-        <td><?php echo $r["title_name"]." ".$r["personnel_name"]; ?></td>
+        <td><?php echo $r["title_name"].$r["personnel_name"]; ?></td>
         <td><?php echo $r["department_name"]; ?></td>
       <?php
           if ($r['status'] === 'จองได้')
