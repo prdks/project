@@ -47,13 +47,33 @@ $r = $res->fetch_assoc();
           <td class="text-center"><?php echo $r['seat']; ?></td>
           <td><?php echo $r['title_name']." ".$r['personnel_name']; ?></td>
         </tr>
+        <?php
+        if ($r['picture_1'] != "" || $r['picture_2'] != "" || $r['picture_3'] != "" || $r['picture_3'] != "" ) {
+        ?>
         <tr>
-          <td colspan="5">
-            <center>
-              <img src="testpicture.jpg" class="img-responsive"  width="250" height="250">
-            </center>
-          </td>
+          <td class="parent" colspan="5" align="center">
+           <table><tr>
+            <td class="child">
+              <?php for ($i=0; $i < 4 ; $i++) {
+                  if ($r['picture_'.($i+1)] != "") {
+                    ?>
+                    <td>
+                      <section class="contain">
+                        <img src="viewimg.php?imgindex=<?php echo ($i+1)."&";?>id=<?php echo $r['car_id'];?>">
+                      </section>
+                    </td>
+                    <?php
+                  }
+              } ?>
+            </td>
+           </tr></table>
+        </td>
+
+
         </tr>
+        <?php
+        }
+        ?>
       </tbody>
       </table>
     </div>

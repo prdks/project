@@ -29,6 +29,7 @@ $note = $_POST['note'];
   , date_end = '".$date_end."'
   , reserv_stime = '".$time_start."'
   , reserv_etime = '".$time_end."'
+  , passenger_total = (SELECT COUNT(passenger_id) FROM passenger WHERE reservation_id = '".$id."')
   , real_time_out = '".$real_date_out." ".$real_time_out.":00'
   , real_time_in = '".$real_date_in." ".$real_time_in.":00'
   , kilometer_out = '".$kilometer_out."'

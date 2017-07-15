@@ -8,7 +8,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">เพิ่มข้อมูลรถยนต์</h4>
       </div>
-      <form class="form-horizontal" action="cars/insert.php" method="post">
+      <form class="form-horizontal" action="cars/insert.php" method="post" enctype="multipart/form-data">
       <div class="modal-body">
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#data">ข้อมูลรถยนต์</a></li>
@@ -234,45 +234,18 @@
           <div id="picture" class="tab-pane fade">
             <br>
             <!-- เพิ่มรูป -->
+            <?php for($i = 0 ; $i < 4 ; $i++){?>
             <div class="form-group">
               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                รูปที่ 1 : </label>
+                รูปที่ <?php echo $i+1; ?> : </label>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="file" class="form-control" name="file1">
+                <input type="file" class="form-control" name="filUpload<?php echo $i;?>">
               </div>
             </div>
-            <!-- เพิ่มรูป -->
-            <div class="form-group">
-              <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                รูปที่ 2 : </label>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="file" class="form-control" name="file2">
-              </div>
-            </div>
-            <!-- เพิ่มรูป -->
-            <div class="form-group">
-              <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                รูปที่ 3 : </label>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="file" class="form-control" name="file3">
-              </div>
-            </div>
-            <!-- เพิ่มรูป -->
-            <div class="form-group">
-              <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                รูปที่ 4 : </label>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="file" class="form-control" name="file4">
-              </div>
-            </div>
-
+            <?php } ?>
           </div>
         </div>
-
 
       </div>
       <div class="modal-footer">
