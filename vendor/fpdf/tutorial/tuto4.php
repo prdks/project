@@ -3,8 +3,10 @@ require('../fpdf.php');
 
 class PDF extends FPDF
 {
-protected $col = 0; // Current column
-protected $y0;      // Ordinate of column start
+// Current column
+var $col = 0;
+// Ordinate of column start
+var $y0;
 
 function Header()
 {

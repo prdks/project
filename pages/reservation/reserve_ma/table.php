@@ -91,6 +91,8 @@ echo" </td>
       data-toggle="modal" data-target="#RMA_delete_modal" data-id="<?php echo $row["reservation_id"];?>">
         <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
       </button>
+
+
     </td>
     </tr>
       <?php

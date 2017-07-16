@@ -36,6 +36,29 @@ function FullDateThai($strDate)
     return "$strDay $strMonthThai $strYear, เวลา : $strHour:$strMinute"."น.";
   }
 
+  function FullDateWithOutYears($strDate)
+  {
+            $strYear = date("y",strtotime($strDate))+43;
+            $strMonth= date("n",strtotime($strDate));
+            $strDay= date("j",strtotime($strDate));
+            $strHour= date("H",strtotime($strDate));
+            $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+            $strMonthThai=$strMonthCut[$strMonth];
+            return "วันที่ $strDay $strMonthThai $strYear";
+  }
+  function TimeThai($strDate)
+  {
+          $strYear = date("Y",strtotime($strDate))+543;
+          $strMonth= date("n",strtotime($strDate));
+          $strDay= date("j",strtotime($strDate));
+          $strHour= date("H",strtotime($strDate));
+          $strMinute= date("i",strtotime($strDate));
+          $strSeconds= date("s",strtotime($strDate));
+          $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+          $strMonthThai=$strMonthCut[$strMonth];
+          return "$strHour:$strMinute"." น.";
+  }
+
  ?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,6 +101,10 @@ function FullDateThai($strDate)
 <link rel="stylesheet" href="../vendor/datetimepicker/css/bootstrap-datepicker.css">
 <script src="../vendor/datetimepicker/js/bootstrap-datepicker-custom.js" charset="utf-8"></script>
 <script src="../vendor/datetimepicker/locales/bootstrap-datepicker.th.min.js" charset="UTF-8"></script>
+
+<!-- jsPDF -->
+<script type="text/javascript" src="../vendor/jspdf/jspdf.js"></script>
+<script type="text/javascript" src="../vendor/jspdf/pdfFromHTML.js"></script>
 
 <!-- jqeury-validation -->
 <script src="../vendor/jqeury-validation/dist/jquery.validate.js" charset="utf-8"></script>
