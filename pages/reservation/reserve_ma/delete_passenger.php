@@ -11,6 +11,17 @@ if($result){
   where passenger_id = '".$delete_id."'";
 
   if($conn->query($sql)===true){
+
+    $sql = "SELECT COUNT(passenger_id) as total FROM passenger WHERE reservation_id = '".$reserve_id."'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    $sql = "
+    update reservation
+    set passenger_total = '".$row['total']."'
+    where reservation_id = '".$reserve_id."'";
+    $conn->query($sql);
+    
     echo "
     <!DOCTYPE html>
     <script>

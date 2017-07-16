@@ -341,6 +341,10 @@ elseif ($mode == 'insertSelectPassenger')
   $person_id = $_POST['person_id'];
   $reserve_id = $_POST['reserve_id'];
 
+
+
+
+
   $sql = "insert into passenger (passenger_name,department_id,reservation_id) values
   ((SELECT CONCAT(t.title_name, ' ', p.personnel_name) as passenger_name FROM personnel p
     LEFT JOIN title_name t
@@ -353,23 +357,19 @@ elseif ($mode == 'insertSelectPassenger')
   ,".$reserve_id.")
   ON DUPLICATE KEY UPDATE passenger_id = passenger_id";
 
-  if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
-  else {echo json_encode(array('result' => '0'));}
+  if($conn->query($sql)===true){
+    $sql = "SELECT COUNT(passenger_id) as total FROM passenger WHERE reservation_id = '".$reserve_id."'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
 
-}
-elseif ($mode == 'insertKeysPassenger')
-{
-  $reserve_id = $_POST['reserve_id'];
-  $name = $_POST['title'].' '.$_POST['name'];
-  $dep = $_POST['dep'];
+    $sql = "
+    update reservation
+    set passenger_total = '".$row['total']."'
+    where reservation_id = '".$reserve_id."'";
+    $conn->query($sql);
 
-  $sql = "insert into passenger (passenger_name,department_id,reservation_id) values
-  ('".$name."'
-  ,(SELECT department_id FROM department WHERE department_name = '".$dep."')
-  ,".$reserve_id.")
-  ON DUPLICATE KEY UPDATE passenger_id = passenger_id";
-
-  if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
+    echo json_encode(array('result' => '1'));
+  }
   else {echo json_encode(array('result' => '0'));}
 
 }
@@ -422,23 +422,6 @@ elseif ($mode == 'editSelectPassenger')
   else {echo json_encode(array('result' => '0'));}
 
 }
-elseif ($mode == 'editKeysPassenger')
-{
-  $old = $_POST['old'];
-  $reserve_id = $_POST['reserve_id'];
-  $name = $_POST['title'].' '.$_POST['name'];
-  $dep = $_POST['dep'];
-
-  $sql = "update passenger
-  set passenger_name = '".$name."'
-  ,department_id = (SELECT department_id FROM department WHERE department_name = '".$dep."')
-  ,reservation_id = '".$reserve_id."'
-  where passenger_id = '".$old."'";
-
-  if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
-  else {echo json_encode(array('result' => '0'));}
-
-}
 elseif ($mode == 'getCars_For_Edit')
 {
   $id = $_POST['car_id'];
@@ -448,39 +431,8 @@ elseif ($mode == 'getCars_For_Edit')
   $time_start = $_POST['time_start'];
   $time_end = $_POST['time_end'];
 
-  // $sql = "
-  // SELECT * FROM cars c
-  // LEFT JOIN reservation r
-  // ON r.car_id = c.car_id
-  // LEFT OUTER JOIN car_brand b
-  // ON c.car_brand_id = b.car_brand_id
-  // LEFT OUTER JOIN personnel p
-  // ON c.personnel_id = p.personnel_id
-  // LEFT OUTER JOIN title_name t
-  // ON p.title_name_id = t.title_name_id
-  // LEFT OUTER JOIN department d
-  // ON p.department_id = d.department_id
-  // WHERE c.car_id NOT IN (
-  //    SELECT car_id FROM reservation r
-  //   WHERE (date_start BETWEEN '".$date_start."' AND '".$date_end."')
-  //   OR (date_end BETWEEN '".$date_start."' AND '".$date_end."')
-  //   OR ((reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
-  //   OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."'))
-  //   )
-  //   AND department_name =
-  //   (Select d.department_name from department d
-  //   LEFT JOIN personnel p
-  //   ON p.department_id = d.department_id
-  //   LEFT JOIN cars c
-  //   ON c.personnel_id = p.personnel_id
-  //   WHERE c.car_id = ".$car_id.")
-  //   AND c.status <> 'งดจอง'
-  //   AND c.car_id <> '".$car_id."'
-  // GROUP BY car_reg";
-
-//  FOR TEST
   $sql = "
-  SELECT c.* , b.* , p.* , t.* , d.* FROM cars c
+  SELECT * FROM cars c
   LEFT JOIN reservation r
   ON r.car_id = c.car_id
   LEFT OUTER JOIN car_brand b
@@ -498,8 +450,39 @@ elseif ($mode == 'getCars_For_Edit')
     OR ((reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
     OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."'))
     )
+    AND department_name =
+    (Select d.department_name from department d
+    LEFT JOIN personnel p
+    ON p.department_id = d.department_id
+    LEFT JOIN cars c
+    ON c.personnel_id = p.personnel_id
+    WHERE c.car_id = ".$car_id.")
     AND c.status <> 'งดจอง'
+    AND c.car_id <> '".$car_id."'
   GROUP BY car_reg";
+
+//  FOR TEST
+  // $sql = "
+  // SELECT c.* , b.* , p.* , t.* , d.* FROM cars c
+  // LEFT JOIN reservation r
+  // ON r.car_id = c.car_id
+  // LEFT OUTER JOIN car_brand b
+  // ON c.car_brand_id = b.car_brand_id
+  // LEFT OUTER JOIN personnel p
+  // ON c.personnel_id = p.personnel_id
+  // LEFT OUTER JOIN title_name t
+  // ON p.title_name_id = t.title_name_id
+  // LEFT OUTER JOIN department d
+  // ON p.department_id = d.department_id
+  // WHERE c.car_id NOT IN (
+  //    SELECT car_id FROM reservation r
+  //   WHERE (date_start BETWEEN '".$date_start."' AND '".$date_end."')
+  //   OR (date_end BETWEEN '".$date_start."' AND '".$date_end."')
+  //   OR ((reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
+  //   OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."'))
+  //   )
+  //   AND c.status <> 'งดจอง'
+  // GROUP BY car_reg";
 
 
   $result = $conn->query($sql);

@@ -1,28 +1,47 @@
 <?php
 require '../../_connect.php';
-$location_name = $_POST['location_name'];
-$province = $_POST['province'];
-$reserve_id = $_POST['reserve_id'];
+$reserve_id = $_GET['reserve_id'];
+$name = $_POST['title'].' '.$_POST['name'];
+$dep = $_POST['dep'];
 
-$sql = "select * from location where location_name ='".$location_name."'
-AND province = '".$province."' AND reservation_id = ".$reserve_id." ";
+if ($dep !== "ไม่ระบุ") {
+  $sql = "select * from passenger where passenger_name ='".$name."'
+  AND reservation_id = ".$reserve_id."
+  AND department_id = (select department_id from department where department_name = '".$dep."')";
+}
+else {
+  $sql = "select * from passenger where passenger_name ='".$name."'
+  AND reservation_id = ".$reserve_id."";
+}
+
 $result = $conn->query($sql);
 if($result->num_rows === 0){
 
-  $sql = "insert into location (location_name,province,reservation_id)
-  values ('".$location_name."'
-  ,'".$province."'
-  ,(select reservation_id from reservation where reservation_id = ".$reserve_id."))
-  ON DUPLICATE KEY UPDATE location_id = location_id";
+  $sql = "insert into passenger (passenger_name,department_id,reservation_id) values
+  ('".$name."'
+  ,(SELECT department_id FROM department WHERE department_name = '".$dep."')
+  ,".$reserve_id.")
+  ON DUPLICATE KEY UPDATE passenger_id = passenger_id";
 
   if($conn->query($sql)===true){
+
+    $sql = "SELECT COUNT(passenger_id) as total FROM passenger WHERE reservation_id = '".$reserve_id."'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    $sql = "
+    update reservation
+    set passenger_total = '".$row['total']."'
+    where reservation_id = '".$reserve_id."'";
+    $conn->query($sql);
+
     echo "
     <!DOCTYPE html>
     <script>
     function redir()
     {
     alert('เพิ่มข้อมูลสำเร็จ');
-    window.location.assign('../../edit_location.php?id=".$reserve_id."');
+    window.location.assign('../../edit_passenger.php?id=".$reserve_id."');
     }
     </script>
     <body onload='redir();'></body>
@@ -34,7 +53,7 @@ if($result->num_rows === 0){
     function redir()
     {
     alert('ไม่สามารถเพิ่มข้อมูลได้ กรุณาทำรายการใหม่');
-    window.location.assign('../../edit_location.php?id=".$reserve_id."');
+    window.location.assign('../../edit_passenger.php?id=".$reserve_id."');
     }
     </script>
     <body onload='redir();'></body>
@@ -47,7 +66,7 @@ if($result->num_rows === 0){
   function redir()
   {
   alert('ข้อมูลนี้มีอยู่แล้ว กรุณาทำรายการใหม่');
-  window.location.assign('../../edit_location.php?id=".$reserve_id."');
+  window.location.assign('../../edit_passenger.php?id=".$reserve_id."');
   }
   </script>
   <body onload='redir();'></body>

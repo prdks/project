@@ -92,7 +92,7 @@
                   กำหนดเอง
                 </div>
                 <div class="panel-body">
-                  <form class="form-horizontal">
+                  <form class="form-horizontal" action="reservation/reserve_ma/insert_passenger.php?reserve_id=<?php echo $_GET['id'];?>" method="post">
                     <!-- คำนำหน้าชื่อ -->
                     <div class="form-group">
                       <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
@@ -102,7 +102,7 @@
                         <?php
                         $sql = "select * from title_name ORDER BY title_name ASC";
                         $result = $conn->query($sql);
-                        echo "<select class='form-control' id='select_title_name'>";
+                        echo "<select class='form-control' name='title' required>";
                         while ($row=$result->fetch_assoc()) {
                           echo "<option values='".$row['title_name']."'>
                           ".$row['title_name']."
@@ -118,8 +118,8 @@
                         <span class="requestfield">*</span> ชื่อ-นามสกุล :
                       </label>
                       <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                        <input  type="text"  class="form-control" id="person_name"
-                        placeholder="พิมพ์ชื่อ-นามสกุล" required/>
+                        <input  type="text"  class="form-control" name="name"
+                        placeholder="พิมพ์ชื่อ-นามสกุล"/ required>
                       </div>
                     </div>
                     <!-- หน่วยงาน -->
@@ -131,28 +131,28 @@
                         <?php
                         $sql = "select * from department ORDER BY department_name ASC";
                         $result = $conn->query($sql);
-                        echo "<select class='form-control' id='select_department'>";
+                        echo "<select class='form-control' id='select_department' name='dep'>";
+                        echo "<option values='0' selected>ไม่ระบุ</option>";
                         while ($row=$result->fetch_assoc())
                         {
                           echo "<option values='".$row['department_name']."'>
                           ".$row['department_name']."
                           </option>";
                         }
-                        echo "<option values='0'>อื่นๆ</option>";
                         echo "</select>";
                         ?>
                       </div>
                     </div>
-                  </form>
+
 
                 </div>
 
                 <div class="panel-footer">
                   <div class="row text-right" style="padding-right:15px;">
-                    <button class="btn btn-primary handleAddKeysPassenger" data-reservekeys="<?php echo $_GET['id']?>">เพิ่ม</button>
+                    <button class="btn btn-primary" type="submit">เพิ่ม</button>
                   </div>
                 </div>
-
+                </form>
             </div>
           </div>
 
@@ -258,7 +258,7 @@
                   กำหนดเอง
                 </div>
                 <div class="panel-body">
-                  <form class="form-horizontal">
+                  <form class="form-horizontal" action="reservation/reserve_ma/edit_passenger.php?reserve_id=<?php echo $_GET['id']?>" method="post">
                     <!-- คำนำหน้าชื่อ -->
                     <div class="form-group">
                       <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
@@ -268,7 +268,7 @@
                         <?php
                         $sql = "select * from title_name ORDER BY title_name ASC";
                         $result = $conn->query($sql);
-                        echo "<select class='form-control' id='edit_title_name'>";
+                        echo "<select class='form-control' id='edit_title_name' name='title' required>";
                         while ($row=$result->fetch_assoc()) {
                           echo "<option values='".$row['title_name']."'>
                           ".$row['title_name']."
@@ -284,8 +284,8 @@
                         <span class="requestfield">*</span> ชื่อ-นามสกุล :
                       </label>
                       <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                        <input  type="text"  class="form-control" id="edit_person_name"
-                        placeholder="พิมพ์ชื่อ-นามสกุล" required/>
+                        <input  type="text"  class="form-control" id="edit_person_name" name="name"
+                        placeholder="พิมพ์ชื่อ-นามสกุล"/ required>
                       </div>
                     </div>
                     <!-- หน่วยงาน -->
@@ -297,27 +297,27 @@
                         <?php
                         $sql = "select * from department ORDER BY department_name ASC";
                         $result = $conn->query($sql);
-                        echo "<select class='form-control' id='edit_department'>";
+                        echo "<select class='form-control' id='edit_department' name='dep'>";
+                        echo "<option values='0' selected>ไม่ระบุ</option>";
                         while ($row=$result->fetch_assoc())
                         {
                           echo "<option values='".$row['department_name']."'>
                           ".$row['department_name']."
                           </option>";
                         }
-                        echo "<option values=null>อื่นๆ</option>";
                         echo "</select>";
                         ?>
                       </div>
                     </div>
-                  </form>
-
+                    <input type="hidden" id="edit-data-old" name="old" value="">
                 </div>
 
                 <div class="panel-footer">
                   <div class="row text-right" style="padding-right:15px;">
-                    <button class="btn btn-primary handleEditKeysPassenger" data-old="" data-reservekeys="<?php echo $_GET['id']?>">แก้ไข</button>
+                    <button class="btn btn-primary" type="submit">แก้ไขข้อมูล</button>
                   </div>
                 </div>
+                </form>
 
             </div>
           </div>

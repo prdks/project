@@ -76,7 +76,7 @@ if (isset($_GET['id']))
 	<table width="80%" border="0" align="center" height="100">
 	  <tbody>
 			<tr>
-	    <td width="12%" height="85" align="center"><img src="viewqrcode.php" width="65" height="65"></td>
+	    <td width="12%" height="85" align="center"><img src="viewqrcode.php?id=<?php echo $id;?>" width="65" height="65"></td>
 	    <td width="68%" height="85">
 	      <div align="center"><h3>ใบขออนุมัติใช้รถยนต์<?php echo $row['department_name'];?></h3></div>
 	    </td>
@@ -180,7 +180,8 @@ if (isset($_GET['id']))
 			<td colspan="2">ดังนี้</td>
 			<?php
 			$sql2 = "
-			SELECT p.* FROM passenger p
+			SELECT p.* ,SUBSTRING_INDEX(p.passenger_name,' ',-2) as name
+      , SUBSTRING_INDEX(p.passenger_name,' ',1) as title FROM passenger p
 			LEFT JOIN department d
 			ON p.department_id = d.department_id
 			LEFT JOIN reservation r
@@ -195,7 +196,7 @@ if (isset($_GET['id']))
 						if ($count == 1)
 						{
 							?>
-							<td colspan="15"><?php echo $count.". ".$b['passenger_name']; ?></td>
+							<td colspan="15"><?php echo $count.". ".$b['title'].$b['name']; ?></td>
 						</tr>
 							<?php
 						}
@@ -204,7 +205,7 @@ if (isset($_GET['id']))
 							?>
 							<tr>
 								<td colspan="5"></td>
-								<td colspan="15"><?php echo $count.". ".$b['passenger_name']; ?></td>
+								<td colspan="15"><?php echo $count.". ".$b['title'].$b['name']; ?></td>
 							</tr>
 							<?php
 						}
@@ -274,14 +275,8 @@ if (isset($_GET['id']))
 	<tr>
 		<td width="7%"></td>
 		<td width="57%">เพื่อโปรดพิจารณาอนุมัติรถยนต์หมายเลขทะเบียน</td>
-		<td width="15%" align="right">
-			<input type="checkbox">
-			อนุมัติ
-		</td>
-		<td width="15%" align="right">
-			<input type="checkbox">
-			ไม่อนุมัติ
-		</td>
+		<td width="15%" align="right">&#9723; อนุมัติ</td>
+		<td width="15%" align="right">&#9723; ไม่อนุมัติ</td>
 		<td width="17%"></td>
 	</tr>
 </tbody>

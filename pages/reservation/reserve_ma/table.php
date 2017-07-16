@@ -23,7 +23,7 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
               <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
               <th id="tb_detail_sub-sv">สถานะการจอง</th>
               <th id="tb_detail_sub-sv">สถานะการใช้</th>
-              <th id="tb_tools_ismore">เครื่องมือ</th>
+              <th id="tb_tools_ismore2">เครื่องมือ</th>
           </tr>
       </thead>
       <tbody>
@@ -92,7 +92,9 @@ echo" </td>
         <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
       </button>
 
-
+      <a href="pdf.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-info">
+        <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติการจองใช้"></span>
+      </a>
     </td>
     </tr>
       <?php
@@ -114,17 +116,18 @@ echo" </td>
   <table id="reservationtablelist" class="table table-striped table-bordered table-hover">
       <thead>
           <tr>
-              <th id="tb_detail_sub-th">วันที่ใช้รถยนต์ใช้</th>
-              <th id="tb_detail_sub-th">เวลา</th>
-              <th id="tb_detail_main">จองใช้เพื่อ</th>
-              <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
-              <th id="tb_detail_sub-sv">สถานะการจอง</th>
-              <th id="tb_detail_sub-sv">สถานะการใช้</th>
+            <th id="tb_detail_sub-th">วันที่ใช้รถยนต์</th>
+            <th id="tb_detail_sub-th">เวลา</th>
+            <th id="tb_detail_main">จองใช้เพื่อ</th>
+            <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
+            <th id="tb_detail_sub-sv">สถานะการจอง</th>
+            <th id="tb_detail_sub-sv">สถานะการใช้</th>
+            <th id="tb_tools_ismore2">เครื่องมือ</th>
           </tr>
       </thead>
       <tbody>
     <tr>
-    <td class="text-center" colspan="6">ไม่พบข้อมูล</td>
+    <td class="text-center" colspan="7">ไม่พบข้อมูล</td>
     </tr>
     </tbody>
     </table>

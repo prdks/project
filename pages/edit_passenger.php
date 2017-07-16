@@ -60,9 +60,9 @@
                     <?php
                     if (isset($_GET['id'])) {
                       $id = $_GET['id'];
-
                       $sql = "
-                      SELECT * FROM passenger p
+                      SELECT * ,SUBSTRING_INDEX(p.passenger_name,' ',-2) as name
+                      , SUBSTRING_INDEX(p.passenger_name,' ',1) as title FROM passenger p
                       LEFT JOIN reservation r
                       ON p.reservation_id = r.reservation_id
                       LEFT JOIN department d
@@ -96,7 +96,7 @@
                               ?>
                               <tr>
                                 <td class="text-center"><?php echo $count; ?></td>
-                                <td><?php echo $row['passenger_name'] ?></td>
+                                <td><?php echo $row['title'].$row['name']; ?></td>
                                 <td>
                                   <?php
                                  if ($row['department_id'] != null) {

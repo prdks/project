@@ -185,6 +185,12 @@ th#tb_checkbox, th#tb_sharp , th#tb_option{
   width: 180px;
   vertical-align:middle;
 }
+
+#tb_tools_ismore2{
+  text-align: center;
+  width: 210px;
+  vertical-align:middle;
+}
 .topic{
   background-color: #f9f9f9;
   text-align: right;
