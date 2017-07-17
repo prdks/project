@@ -1,16 +1,30 @@
-<form id="form_login" method="post">
+
 <ul class="nav navbar-top-links navbar-right">
-    <li class="pull-right">
-        <a id="signin-button" onclick="handleSignInClick()" role="button" type="submit">
-          <i class="fa fa-sign-in fa-fw"></i>
-          ลงชื่อเข้าสู่ระบบ
+    <li class="dropdown  pull-right">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          ลงชื่อเข้าสู่ระบบ <i class="fa fa-fw fa-caret-down"></i>
         </a>
-        <input type="hidden" id="hd_email" name="hd_email" value="">
-        <input type="hidden" id="name" name="name" value="">
-        <input type="hidden" id="phone" name="phone" value="">
-        <input type="hidden" id="department" name="department" value="">
-        <input type="hidden" id="pqrcode" name="pqrcode" value="0">
+        <ul class="dropdown-menu dropdown-user">
+            <li>
+              <form id="form_login" method="post">
+              <a id="signin-button" onclick="handleSignInClick()" role="button" type="submit">
+                <i class="fa fa-google fa-fw"></i>ผู้ใช้งานทั่วไป
+              </a>
+              <input type="hidden" id="hd_email" name="hd_email" value="">
+              <input type="hidden" id="name" name="name" value="">
+              <input type="hidden" id="phone" name="phone" value="">
+              <input type="hidden" id="department" name="department" value="">
+              <input type="hidden" id="pqrcode" name="pqrcode" value="null">
+              </form>
+            </li>
+            <li>
+              <a href="admin_login.php" ><i class="fa fa-cog fa-fw"></i>Administrator</a>
+            </li>
+
+        </ul>
+        <!-- /.dropdown-user -->
     </li>
 </ul>
-</form>
+
+
 <!-- /.navbar-top-links -->

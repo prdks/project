@@ -33,7 +33,7 @@ if($result->num_rows === 0){
   ";
 
 }elseif ($result->num_rows > 0) {
-  if ($s == 1) { // ถ้าล้อคอินจากหน้าที่แสกน qrcode
+  if ($s != null) { // ถ้าล้อคอินจากหน้าที่แสกน qrcode
     $sql = "
       SELECT
         personnel_name, email,phone_number, title_name,
@@ -64,7 +64,7 @@ if($result->num_rows === 0){
     <script>
     function redir()
     {
-    window.location.assign('../qrcode.php');
+    window.location.assign('../qrcode.php?id=".$s."');
     }
     </script>
     <body onload='redir();'></body>

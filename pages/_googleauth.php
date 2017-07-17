@@ -18,6 +18,7 @@ function initClient() {
       apiKey: apiKey,
       discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
       clientId: clientId,
+      hosted_domain: 'email.kmutnb.ac.th',
       scope: 'profile'
   }).then(function () {
 
@@ -68,7 +69,6 @@ function makeApiCall() {
             document.getElementById("name").value = fname+' '+lname;
             document.getElementById("phone").value = phone;
             document.getElementById("department").value = department;
-            console.log(document.getElementById("pqrcode"));
             document.getElementById("form_login").submit();
           }else {
             gapi.auth2.getAuthInstance().signOut();

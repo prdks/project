@@ -28,7 +28,7 @@
                     <input type="hidden" id="name" name="name" value="">
                     <input type="hidden" id="phone" name="phone" value="">
                     <input type="hidden" id="department" name="department" value="">
-                    <input type="hidden" id="pqrcode" name="pqrcode" value="1">
+                    <input type="hidden" id="pqrcode" name="pqrcode" value="<?php echo $_GET['id'];?>">
                   </form>
               </span>
               </div>
@@ -43,7 +43,6 @@
                 </center>
                 <?php
               }else {
-                session_destroy();
                 echo "
                 <!DOCTYPE html>
                 <script>

@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
     <div id="wrapper">
       <!-- Navigation -->
       <?php include '_navbar.php'; ?>
@@ -70,6 +69,7 @@
         <!-- /#page-wrapper -->
 
     </div>
+
     <!-- /#wrapper -->
 </body>
 </html>

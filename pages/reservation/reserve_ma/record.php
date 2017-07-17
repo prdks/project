@@ -16,7 +16,7 @@
 <!-- เวลาเข้าจริง -->
 <div class="form-group">
   <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-    บันทึกเวลารถเข้า :
+    บันทึกเวลารถกลับ :
   </label>
   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
     <div class="input-group">

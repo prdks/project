@@ -134,6 +134,23 @@ function FullDateThai($strDate)
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+<script type="text/javascript">
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("topbtn").style.display = "block";
+} else {
+    document.getElementById("topbtn").style.display = "none";
+}
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Chrome, Safari and Opera
+}
+</script>
+
 <style>
 /*------------------ Stye SearchBox ----------------*/
 .stylish-input-group .input-group-addon{
