@@ -432,7 +432,7 @@ elseif ($mode == 'getCars_For_Edit')
   $time_end = $_POST['time_end'];
 
   $sql = "
-  SELECT * FROM cars c
+   SELECT c.* , b.* , p.* , t.* , d.* FROM cars c
   LEFT JOIN reservation r
   ON r.car_id = c.car_id
   LEFT OUTER JOIN car_brand b
@@ -456,9 +456,9 @@ elseif ($mode == 'getCars_For_Edit')
     ON p.department_id = d.department_id
     LEFT JOIN cars c
     ON c.personnel_id = p.personnel_id
-    WHERE c.car_id = ".$car_id.")
+    WHERE c.car_id = ".$id.")
     AND c.status <> 'งดจอง'
-    AND c.car_id <> '".$car_id."'
+    AND c.car_id <> '".$id."'
   GROUP BY car_reg";
 
 //  FOR TEST

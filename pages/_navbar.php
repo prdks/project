@@ -1,4 +1,3 @@
-<button class="btn-xs" onclick="topFunction()" id="topbtn" title="ขึ้นบนสุด"><i class="glyphicon glyphicon-triangle-top"></i></button>
 
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
