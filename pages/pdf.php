@@ -511,7 +511,8 @@ $e = $d->fetch_assoc();
 </table>
 
 <script type="text/javascript">
-	window.print();
+setTimeout(function(){window.print();}, 100);
+setTimeout(function(){window.close();}, 500);
 </script>
 </body>
 </html>
