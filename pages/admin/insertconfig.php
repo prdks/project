@@ -35,7 +35,7 @@ if($conn->query($sql)===true){
     function redir()
     {
     alert('ตั้งค่าเสร็จสิ้น');
-
+    window.location.assign('../index.php');
     }
     </script>
     <body onload='redir();'></body>
@@ -47,6 +47,7 @@ if($conn->query($sql)===true){
     function redir()
     {
     alert('การตั้งค่าผิดพลาด กรุณาทำรายการใหม่);
+    window.location.assign('../page_config.php');
     }
     </script>
     <body onload='redir();'></body>
