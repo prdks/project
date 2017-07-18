@@ -7,7 +7,6 @@
         // googleAuth.file
         include '_googleauth.php';
       ?>
-
 </head>
 
 <body>

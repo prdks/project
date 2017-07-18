@@ -7,7 +7,7 @@ $phone = $_POST['phone_number'];
 $email = $_POST['email'];
 $department = $_POST['department'];
 $position = $_POST['position'];
-$type = $_POST['user_type_basic'];
+$type = $_POST['user_level'];
 
 $sql = "insert into personnel
 (personnel_name,phone_number,email,title_name_id,position_id,department_id,user_type_id)
@@ -16,7 +16,7 @@ values
 ,(select title_name_id from title_name where title_name ='".$title."')
 ,(select position_id from position where position_name = '".$position."')
 ,(select department_id from department where department_name = '".$department."')
-,(select user_type_id from user_type where user_type_name = '".$type."'))
+,(select user_type_id from user_type where user_level = '".$type."'))
 ON DUPLICATE KEY UPDATE personnel_id = personnel_id ";
 
 $result = $conn->query($sql);

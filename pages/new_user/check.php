@@ -4,23 +4,13 @@ require '../_connect.php';
 
 $email = $_POST['hd_email'];
 $name = $_POST['name'];
-$phone = $_POST['phone'];
-$department = $_POST['department'];
 $s = $_POST['pqrcode'];
-
-if(  preg_match( '/^\+\d(\d{1})(\d{2})(\d{3})(\d{4})$/', $phone,  $matches ) )
-{
-    $phone = '0'.$matches[2] . '-' .$matches[3] . '-' . $matches[4];
-
-}
 
 $sql = "select * from personnel where email ='".$email."'";
 $result = $conn->query($sql);
 if($result->num_rows === 0){
   $_SESSION['email'] = $email;
   $_SESSION['user_name'] = $name;
-  $_SESSION['phone_number'] = $phone;
-  $_SESSION['department'] = $department;
   echo "
   <!DOCTYPE html>
   <script>

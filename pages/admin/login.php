@@ -10,6 +10,8 @@ $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 if($result->num_rows == 0)
 {
+  $sql = "ALTER TABLE config AUTO_INCREMENT = 1";
+  $conn->query($sql);
   if ($user !== 'admin' || $pass !== 'admin') //Login เข้าครั้งแรก
   {
     echo "

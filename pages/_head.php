@@ -58,6 +58,11 @@ function FullDateThai($strDate)
           $strMonthThai=$strMonthCut[$strMonth];
           return "$strHour:$strMinute"." น.";
   }
+  $sql = "select name,domain_name from config where id = 1";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  $_SESSION['domain_name'] = $row['domain_name'];
+  $_SESSION['system_name'] = $row['name'];
 
  ?>
 <meta charset="utf-8">
@@ -66,7 +71,12 @@ function FullDateThai($strDate)
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ระบบจองรถยนต์ มจพ.ปราจีนบุรี</title>
+<title>
+  ระบบจองรถยนต์
+  <?php if (isset($_SESSION['system_name'])): ?>
+    <?php echo $_SESSION['system_name']; ?>
+  <?php endif; ?>
+</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

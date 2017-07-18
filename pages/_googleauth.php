@@ -18,7 +18,7 @@ function initClient() {
       apiKey: apiKey,
       discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
       clientId: clientId,
-      hosted_domain: 'email.kmutnb.ac.th',
+      hosted_domain: '<?php echo $_SESSION['domain_name'];?>',
       scope: 'profile'
   }).then(function () {
 
@@ -58,7 +58,7 @@ function makeApiCall() {
           var email = response.result.emailAddresses[0].value;
           var n = email.substr(email.indexOf("@") + 1);
 
-          if(n === 'email.kmutnb.ac.th'){
+          if(n === '<?php echo $_SESSION['domain_name'];?>'){
             var fname = response.result.names[0].givenName;
             var lname = response.result.names[0].familyName;
             var phone = response.result.phoneNumbers[0].canonicalForm;
@@ -67,12 +67,10 @@ function makeApiCall() {
             document.getElementById("form_login").action = "new_user/check.php";
             document.getElementById("hd_email").value = email;
             document.getElementById("name").value = fname+' '+lname;
-            document.getElementById("phone").value = phone;
-            document.getElementById("department").value = department;
             document.getElementById("form_login").submit();
           }else {
             gapi.auth2.getAuthInstance().signOut();
-            window.alert('กรุณาเข้าระบบด้วยอีเมล์ของมหาวิทยาลัย');
+            window.alert('กรุณาเข้าระบบด้วยอีเมล์ของ<?php echo $_SESSION['system_name'];?>');
             window.location.reload();
           }
 

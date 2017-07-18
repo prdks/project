@@ -20,7 +20,7 @@
                   <h3>กรุณาเข้าสู่ระบบ</h3>
                   <form id="form_login" method="post">
                     <center>
-                      <button type="button" class="btn btn-lg btn-block btn-danger" id="signin-button" onclick="handleSignInClick(1)">
+                      <button type="button" class="btn btn-lg btn-block btn-danger" id="signin-button" onclick="handleSignInClick()">
                         <i class="fa fa-google fa-fw"></i>เข้าสู่ระบบ
                       </button>
                     </center>

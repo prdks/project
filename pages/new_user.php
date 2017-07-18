@@ -69,9 +69,7 @@
                   <span class="requestfield">*</span> เบอร์โทรศัพท์ :
                 </label>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                  <input type="tel" name="phone_number" class="form-control"
-                  value="<?php echo $_SESSION['phone_number'] ?>"
-                  maxlength="15" required>
+                  <input type="tel" name="phone_number" class="form-control" maxlength="15" required>
                 </div>
               </div>
               <!-- หน่วยงาน -->
@@ -86,11 +84,7 @@
                   echo "<select name='department' class='form-control' required>";
                   while($row = $result->fetch_array())
                   {
-                    if($row['department_name'] === $_SESSION['department']){
-                      echo "<option value='".$row['department_name']."' selected>".$row['department_name']."</option> ";
-                    }else {
-                      echo "<option value='".$row['department_name']."'>".$row['department_name']."</option> ";
-                    }
+                    echo "<option value='".$row['department_name']."'>".$row['department_name']."</option> ";
 
                   }
                   echo "</select>";
@@ -115,7 +109,7 @@
                   ?>
                 </div>
               </div>
-              <input type="hidden" name="user_type_basic" value="ผู้ใช้งานทั่วไป">
+              <input type="hidden" name="user_level" value="1">
               <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 text-right">
                   <button href="index.php" onclick="deletesession()" type="reset" id="cancel_btn" class="btn btn-default">ยกเลิก</button>
