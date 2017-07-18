@@ -7,7 +7,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php">ระบบจองรถยนต์ มจพ.ปราจีนบุรี</a>
+        <a class="navbar-brand" href="index.php">
+          ระบบจองรถยนต์
+          <?php if (isset($_SESSION['system_name'])): ?>
+            <?php echo $_SESSION['system_name']; ?>
+          <?php endif; ?>
+        </a>
     </div>
     <!-- /.navbar-header -->
     <?php

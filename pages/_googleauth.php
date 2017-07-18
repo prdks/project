@@ -3,7 +3,7 @@ var clientId = '5851659241-7344218r6lr5vn70jjabeq290q9fb3lo.apps.googleuserconte
 var apiKey = 'AIzaSyAfM0jN7_sgFJJiLeA6xiWKGr9U0RPDAFA';
 var scopes = 'https://www.google.com/m8/feeds';
 var email;
-
+var s = 0;
 function handleClientLoad() {
   // Loads the client library and the auth2 library together for efficiency.
   // Loading the auth2 library is optional here since `gapi.client.init` function will load
@@ -36,6 +36,7 @@ function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
 
     makeApiCall();
+
   }
 }
 
@@ -61,10 +62,6 @@ function makeApiCall() {
           if(n === '<?php echo $_SESSION['domain_name'];?>'){
             var fname = response.result.names[0].givenName;
             var lname = response.result.names[0].familyName;
-            var phone = response.result.phoneNumbers[0].canonicalForm;
-            var dpm = response.result.organizations[0].department;
-            var department = dpm.substr(0,dpm.indexOf(" "));
-            document.getElementById("form_login").action = "new_user/check.php";
             document.getElementById("hd_email").value = email;
             document.getElementById("name").value = fname+' '+lname;
             document.getElementById("form_login").submit();
@@ -72,6 +69,7 @@ function makeApiCall() {
             gapi.auth2.getAuthInstance().signOut();
             window.alert('กรุณาเข้าระบบด้วยอีเมล์ของ<?php echo $_SESSION['system_name'];?>');
             window.location.reload();
+
           }
 
         }, function(reason) {
@@ -80,6 +78,7 @@ function makeApiCall() {
 
 
 }
+
 </script>
 <script async defer src="https://apis.google.com/js/api.js"
 onload="this.onload=function(){};handleClientLoad()"
