@@ -44,13 +44,6 @@
                                             </span>
                                         </a>
                                     </li>
-                                    <li role="presentation" class="disabled">
-                                        <a data-toggle="tooltip" title="เพิ่มสถานที่">
-                                            <span class="round-tab">
-                                                <i class="fa fa-map"></i>
-                                            </span>
-                                        </a>
-                                    </li>
 
                                     <li role="presentation" class="disabled">
                                         <a data-toggle="tooltip" title="เพิ่มผู้โดยสาร">
@@ -116,79 +109,6 @@
                                   </div>
                                   <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx STEP 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
                                   <div class="tab-pane" role="tabpanel" id="step3">
-                                    <form id="forminsertlocation" class="form-horizontal">
-
-                                      <div class="row" style="padding:4px;">
-                                        <!-- ใส่ข้อมูลสถานที่ -->
-                                        <div class="col-lg-6">
-                                          <div class="panel panel-default">
-                                            <div class="panel-heading">เพิ่มสถานที่</div>
-                                            <div class="panel-body">
-
-                                              <div class="form-group">
-                                                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                                                  <span class="requestfield">*</span> ชื่อสถานที่ :
-                                                </label>
-                                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                                                  <input type="text" id="location_name" class="form-control"
-                                                  placeholder="พิมพ์ชื่อสถานที่ต้องการไป" />
-                                                </div>
-                                              </div>
-
-                                              <div class="form-group">
-                                                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                                                  <span class="requestfield">*</span> เลือกจังหวัด :
-                                                </label>
-                                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                                                  <select class="form-control" id="province"></select>
-                                                </div>
-                                              </div>
-
-                                            </div>
-                                            <div class="panel-footer">
-                                              <div class="row text-right" style="padding-right:15px;">
-                                                <button class="btn btn-success handleInsertLocation" id="insertList">เพิ่ม</button>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <!-- ตารางสถานที่ -->
-                                        <div class="col-lg-6">
-                                          <div class="panel panel-primary">
-                                            <div class="panel-heading">รายชื่อสถานที่</div>
-
-                                            <div id="EmptyLocation">
-                                              <br />
-                                              <p class="text-center">ไม่มีข้อมูลรายชื่อสถานที่</p>
-                                              <br />
-                                            </div>
-
-                                            <div id="Table_Loaction" class="table-responsive">
-                                                <table id="LocationListTable" class="table table-condensed table-striped table-bordered table-hover">
-                                                  <thead id="Tb_Location">
-                                                    <tr>
-                                                      <th id="tb_option">ลบ</th>
-                                                      <th id="tb_detail_main">ชื่อสถานที่</th>
-                                                      <th id="tb_detail_main">จังหวัด</th>
-                                                    </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                  </tbody>
-                                                </table>
-                                            </div>
-
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <ul class="list-inline pull-right">
-                                          <li><button id="btnInsertLocation" type="button" class="btn btn-default prev-step">ย้อนกลับ</button></li>
-                                          <li><button id="btnInsertLocation" type="button" class="btn btn-primary next-step">ถัดไป</button></li>
-                                      </ul>
-                                    </form>
-                                  </div>
-                                  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx STEP 4 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
-                                  <div class="tab-pane" role="tabpanel" id="step4">
                                     <div class="row">
                                       <!-- ใส่ข้อมูลค้นหาบุคลากร -->
                                       <form class="form-inline col-lg-12">

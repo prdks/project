@@ -473,13 +473,6 @@ $(function () {
             setBtnOnSelectCarsForm();
           }
           break;
-        case 'btnInsertLocation':
-          if (tbody_location.children().length == 0) {
-            alert('กรุณาเพิ่มสถานที่อย่างน้อย 1 สถานที่');
-          }else {
-            setBtnOnInsertLocationForm();
-          }
-          break;
         case 'btnInsertPassenger':
           getReservationData();
           setBtnOnInsertPassengerForm();
@@ -515,8 +508,8 @@ $(function () {
           $active.removeClass('success');
           $active.removeClass('active');
 
-          $('#step4').removeClass('active');
-          $('#step3').addClass('active');
+          $('#step3').removeClass('active');
+          $('#step2').addClass('active');
           $active.prev().removeClass('success');
           $active.prev().addClass('active');
           break;
@@ -526,7 +519,7 @@ $(function () {
           $active.removeClass('active');
 
           $('#complete').removeClass('active');
-          $('#step4').addClass('active');
+          $('#step3').addClass('active');
           $active.prev().removeClass('success');
           $active.prev().addClass('active');
           break;
@@ -920,13 +913,7 @@ $(function () {
           });
           $('#show-passenger').html(passenger_str);
 
-          //location
-          var location_str = "";
-          $.each( data.location, function( index, value )
-          {
-              location_str += value
-          });
-          $('#show-location').html(location_str);
+          $('#show-location').html(data.reserv_detail.location);
 
           $('#show-status').val('0');
           $('#note_area').html(data.note);

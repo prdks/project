@@ -170,7 +170,6 @@ elseif ($mode == 'getCars_For_Select')
     OR ((reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
     OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."'))
     )
-    AND department_name = '".$department."'
     AND c.status <> 'งดจอง'
   GROUP BY car_reg";
 
@@ -206,7 +205,6 @@ elseif ($mode == 'getCars_For_Select')
   {
   $data = $_POST['data'];
   $selecter_cars = $_POST['checked'];
-  $LocationData = $_POST['LocationData'];
 
   $sql="SELECT c.* , b.* , p.* , t.* FROM cars c
   LEFT JOIN reservation r
@@ -229,33 +227,6 @@ elseif ($mode == 'getCars_For_Select')
     $cars = "<p>".$row['car_reg']." / ยี่ห้อ ".$row['car_brand_name']." / รุ่น ".$row['car_kind']." / ".$row['seat']." ที่นั่ง</p>";
   }
 
-
-  $location = array();
-  for ($i=0; $i < sizeof($LocationData); $i++)
-  {
-      if ($i != 0) {
-          if ($LocationData[$i]['Province'] === $LocationData[$i-1]['Province'])
-          {
-              $str = $LocationData[$i]['LocationName']."<br />";
-              array_push($location,$str);
-          }
-          else
-          {
-              $str = "<b>".$LocationData[$i]['Province']."</b><br />";
-              array_push($location,$str);
-              $str = $LocationData[$i]['LocationName']."<br />";
-              array_push($location,$str);
-          }
-      }
-      else
-      {
-          $str = "<b>".$LocationData[$i]['Province']."</b><br />";
-          array_push($location,$str);
-          $str = $LocationData[$i]['LocationName']."<br />";
-          array_push($location,$str);
-      }
-
-  }
 
   $passenger = array();
   if(!isset($_POST['PassengerData'])){
@@ -294,13 +265,14 @@ elseif ($mode == 'getCars_For_Select')
         'user' => $data[0]['value'],
         'position' => $data[1]['value'],
         'detail' => $data[2]['value'],
-        'fistdate' => DateThai($data[3]['value']),
-        'lastdate' => DateThai($data[4]['value']),
-        'time' => "ตั้งแต่เวลา ".$data[5]['value']." น. ถึง ".$data[6]['value']." น.",
+        'fistdate' => DateThai($data[5]['value']),
+        'lastdate' => DateThai($data[7]['value']),
+        'time' => "ตั้งแต่เวลา ".$data[6]['value']." น. ถึง ".$data[8]['value']." น.",
         'cars' => $cars,
-        'location' => $location,
+        'location' => $data[3]['value'],
+        'appointment' => $data[4]['value'],
         'passenger' => $passenger,
-        'department' => $data[7]['value']
+        'department' => $data[9]['value']
       );
 
   echo json_encode($arr);

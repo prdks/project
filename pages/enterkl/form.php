@@ -68,7 +68,7 @@ if (isset($_GET['id']))
                   <!-- ระยะทาง้เข้า -->
                   <div class="form-group">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                      <span class="requestfield">*</span> เลขกิโลเมตรเมื่อเข้า :
+                      <span class="requestfield">*</span> เลขกิโลเมตรเมื่อกลับ :
                     </label>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <input type="number" class="form-control" name="kl_in" min="<?php echo $row['kout'];?>" placeholder="พิมพ์เลขกิโลเมตร" value="" required>

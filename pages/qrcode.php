@@ -18,7 +18,7 @@
               <div class="wrapper-enterkl">
               <span class="enterkl-content">
                   <h3>กรุณาเข้าสู่ระบบ</h3>
-                  <form id="form_login" method="post">
+                  <form id="form_login" action="new_user/check.php" method="post">
                     <center>
                       <button type="button" class="btn btn-lg btn-block btn-danger" id="signin-button" onclick="handleSignInClick()">
                         <i class="fa fa-google fa-fw"></i>เข้าสู่ระบบ
@@ -26,8 +26,6 @@
                     </center>
                     <input type="hidden" id="hd_email" name="hd_email" value="">
                     <input type="hidden" id="name" name="name" value="">
-                    <input type="hidden" id="phone" name="phone" value="">
-                    <input type="hidden" id="department" name="department" value="">
                     <input type="hidden" id="pqrcode" name="pqrcode" value="<?php echo $_GET['id'];?>">
                   </form>
               </span>

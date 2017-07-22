@@ -81,9 +81,9 @@ body #enterkl{
 .input-group {
     display: block;
     }
-    .nav-tabs > li {
+    /*.nav-tabs > li {
         float:none;
-    }
+    }*/
   section.contain img {
       width: 150px;
       height: 150px;
@@ -277,7 +277,7 @@ span.round-tab:hover {
 }
 
 .wizard .nav-tabs > li {
-    width: 20%;
+    width: 25%;
 }
 
 .wizard li:after {
@@ -295,7 +295,7 @@ span.round-tab:hover {
 .wizard li.active:after {
     content: " ";
     position: absolute;
-    left: 46%;
+    left: 47%;
     opacity: 1;
     margin: 0 auto;
     bottom: 0px;

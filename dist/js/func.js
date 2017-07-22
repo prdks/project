@@ -39,22 +39,12 @@ function setBtnOnSelectCarsForm() {
   $active.next().addClass('active');
 }
 
-function setBtnOnInsertLocationForm() {
-  var $active = $('.wizard .nav-tabs li.active');
-  $active.next().removeClass('disabled');
-  $active.removeClass('active');
-  $active.addClass('success');
-  $('#step3').removeClass('active');
-  $('#step4').addClass('active');
-  $active.next().addClass('active');
-}
-
 function setBtnOnInsertPassengerForm() {
   var $active = $('.wizard .nav-tabs li.active');
   $active.next().removeClass('disabled');
   $active.removeClass('active');
   $active.addClass('success');
-  $('#step4').removeClass('active');
+  $('#step3').removeClass('active');
   $('#complete').addClass('active');
   $active.next().addClass('active');
 }
@@ -199,20 +189,6 @@ function getReservationData() {
     checked.push({ 'Car_id' : $(this).val()});
   });
 
-  //เก็บข้อมูลจากตารางสถานที่
-  var LocationTable = document.getElementById("LocationListTable");
-  var rowLength = LocationTable.rows.length;
-  var LocationData = [];
-  for (i = 1; i < rowLength; i++){
-     var LocationCells = LocationTable.rows.item(i).cells;
-     var cellLength = LocationCells.length;
-     for(var j = 1; j < cellLength; j++){
-       if (j==1) var LocationName = LocationCells.item(j).innerHTML;
-       else if (j==2) var ProvinceName = LocationCells.item(j).innerHTML;
-     }
-    LocationData.push({'LocationName' : LocationName ,'Province' : ProvinceName});
-  }
-
   // เก็บข้อมูลจากตารางผู้โดยสาร
   var PassengerTable = document.getElementById("PassengerListTable");
   var rowLength = PassengerTable.rows.length;
@@ -230,7 +206,7 @@ function getReservationData() {
     $.ajax({
       type: "POST",
       url: "reservation/controller.php",
-      data: {data , checked, LocationData,PassengerData, mode: 'getDetail_For_Submit'},
+      data: {data , checked, PassengerData, mode: 'getDetail_For_Submit'},
       dataType: 'json',
       success: function(data){
 
@@ -242,6 +218,8 @@ function getReservationData() {
         $('#show-lastdate').html(data.lastdate);
         $('#show-time').html(data.time);
         $('#show-cars').html(data.cars);
+        $('#show-location').html(data.location);
+        $('#show-appointment').html(data.appointment);
         //passenger
         var passenger_str = "";
         $.each( data.passenger, function( index, value )
@@ -251,12 +229,12 @@ function getReservationData() {
         $('#show-passenger').html(passenger_str);
 
         //location
-        var location_str = "";
-        $.each( data.location, function( index, value )
-        {
-            location_str += value
-        });
-        $('#show-location').html(location_str);
+        // var location_str = "";
+        // $.each( data.location, function( index, value )
+        // {
+        //     location_str += value
+        // });
+        // $('#show-location').html(location_str);
 
       }
     });

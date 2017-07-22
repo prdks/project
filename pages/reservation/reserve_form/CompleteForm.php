@@ -28,6 +28,9 @@
       <br />
       <dt>สถานที่ต้องการไป :</dt>
       <dd id="show-location"></dd>
+      <br>
+      <dt>สถานที่นัดพบ :</dt>
+      <dd id="show-appointment"></dd>
       <br />
       <dt>ผู้โดยสาร :</dt>
       <dd id="show-passenger"></dd>

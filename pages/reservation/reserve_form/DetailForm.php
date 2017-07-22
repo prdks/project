@@ -30,6 +30,38 @@
     placeholder="พิมพ์รายละเอียดความประสงค์ขอใช้รถยนต์" required></textarea>
   </div>
 </div>
+<!-- สถานที่ต้องการไป -->
+<div id="location_field">
+
+  <div class="form-group">
+    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+      <span class="requestfield">*</span> สถานที่ต้องการไป :
+    </label>
+    <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-9">
+      <input type="text" class="form-control" name="location[]" placeholder="พิมพ์ชื่อสถานที่ต้องการไป">
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+      <button class="btn btn-default" type="button" >เพิ่ม</button>
+    </div>
+  </div>
+
+  <!-- <div class="form-group">
+    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label"></label>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-9">
+      <input type="text" class="form-control" name="location[]" placeholder="พิมพ์ชื่อสถานที่ต้องการไป">
+    </div>
+  </div> -->
+
+</div>
+<!-- สถานที่ต้องการไป -->
+<div class="form-group">
+  <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+    <span class="requestfield">*</span> สถานที่นัดพบ :
+  </label>
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+      <input type="text" class="form-control" id="appoinment" name="appoinment" placeholder="พิมพ์ชื่อสถานที่นัดพบเมื่อถึงวันเดินทาง" value="">
+  </div>
+</div>
 <!-- วันแรกที่จองใช้ -->
 <div class="form-group">
   <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
@@ -38,8 +70,10 @@
   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
     <div class="input-group">
       <!-- วันที่เริ่ม  -->
-      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+      <span class="input-group-addon">วันที่</span>
       <input class="form-control" name="date_start" id="date_start" type="date" required>
+      <span class="input-group-addon">เวลา</span>
+      <input class="form-control" name="time_start" id="time_start" type="time" required>
     </div>
   </div>
 </div>
@@ -51,33 +85,9 @@
   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
     <div class="input-group">
       <!-- วันที่สิ้นสุด  -->
-      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+      <span class="input-group-addon">วันที่</span>
       <input class="form-control" name="date_end" id="date_end" type="date" required>
-    </div>
-  </div>
-</div>
-<!-- เวลาที่จองใช้ -->
-<div class="form-group">
-  <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-    <span class="requestfield">*</span> ช่วงเวลาเริ่มต้น :
-  </label>
-  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-    <div class="input-group">
-      <!-- เวลาเริ่มต้น -->
-      <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-      <input class="form-control" name="time_start" id="time_start" type="time" required>
-    </div>
-  </div>
-</div>
-<!-- เวลาที่จองใช้ -->
-<div class="form-group">
-  <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-    <span class="requestfield">*</span> ช่วงเวลาสิ้นสุด :
-  </label>
-  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-    <div class="input-group">
-      <!-- เวลาสิ้นสุด -->
-      <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+      <span class="input-group-addon">เวลา</span>
       <input class="form-control" name="time_end" id="time_end" type="time" required>
     </div>
   </div>
