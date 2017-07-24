@@ -64,7 +64,7 @@ if (isset($_GET['id']))
 
 <head>
 	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
-	<title>ฟอร์มขออนุมัติใช้รถยนต์<?php echo $row['department_name'];?></title>
+	<title>ฟอร์มขออนุมัติใช้รถยนต์<?php echo $_SESSION['system_name'];?></title>
 
 	<style type="text/css">
 	FONT,td { font-family: MS Sans Serif; font-size: 12pt; }
@@ -78,7 +78,7 @@ if (isset($_GET['id']))
 			<tr>
 	    <td width="12%" height="85" align="center"><img src="viewqrcode.php?id=<?php echo $id;?>" width="65" height="65"></td>
 	    <td width="68%" height="85">
-	      <div align="center"><h3>ใบขออนุมัติใช้รถยนต์<?php echo $row['department_name'];?></h3></div>
+	      <div align="center"><h3>ใบขออนุมัติใช้รถยนต์<?php echo $_SESSION['system_name'];?></h3></div>
 	    </td>
 	  	</tr>
 	</tbody>
@@ -104,7 +104,7 @@ if (isset($_GET['id']))
 <tbody>
 	<tr>
     <td width="7%">เรียน</td>
-		<td width="93%">คณะบดี<?php echo $row['department_name'];?></td>
+		<td width="93%">คณบดี<?php echo $_SESSION['system_name'];?></td>
   </tr>
 </tbody>
 </table>
@@ -149,7 +149,7 @@ if (isset($_GET['id']))
 	</tr>
 	<!-- ประโยคต้นคำร้อง -->
 	<tr>
-		<td colspan="20" style="text-align: justify;">ขออนุญาตใช้รถยนต์<?php echo $row['department_name']; ?> พร้อมพนักงานขับรถยนต์
+		<td colspan="20" style="text-align: justify;">ขออนุญาตใช้รถยนต์<?php echo $_SESSION['system_name']; ?> พร้อมพนักงานขับรถยนต์
 			&nbsp;เพื่อเดินทางไปที่ <?php echo $row['location']; ?>
 			&nbsp;สำหรับปฏิบัติราชการ <?php echo $row['requirement_detail']; ?>
 			<?php
@@ -263,7 +263,7 @@ if (isset($_GET['id']))
 <tbody>
 	<tr>
 		<td width="7%">เรียน</td>
-		<td width="20%">คณะบดี</td>
+		<td width="20%">คณบดี</td>
 		<td width="57%" align="right">คำสั่ง</td>
 		<td width="16%"></td>
 	</tr>
