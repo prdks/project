@@ -73,8 +73,12 @@
                     <input name="domain_name" maxlength="200" type="text" class="form-control" placeholder="พิมพ์ชื่อโดเมน เช่น ''agro.kmutnb.ac.th'' เป็นต้น "  required/>
                   </div>
                   <div class="form-group">
-                    <label class="control-label">URL เว็บประเมินการจองและการใช้</label>
-                    <input name="url" maxlength="200" type="text" class="form-control" placeholder="พิมพ์ url ของ เว็บประเมินการจองและการใช้รถยนต์"/>
+                    <label class="control-label">URL เว็บประเมินการจองและการใช้ (Google Forms)</label>
+                    <input name="url" type="text" class="form-control" placeholder="พิมพ์ url ของ เว็บประเมินการจองและการใช้รถยนต์"/>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">URL Google Sheet</label>
+                    <input name="url_sheet" type="text" class="form-control" placeholder="พิมพ์ url ของ Google Sheet ที่เชื่อมกับเว็บประเมิน"/>
                   </div>
                   <div class="pull-right">
                     <button class="btn btn-default PreBtn2 btn-md" type="button">ย้อนกลับ</button>

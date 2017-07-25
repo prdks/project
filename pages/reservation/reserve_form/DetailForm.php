@@ -56,10 +56,10 @@
 <!-- สถานที่ต้องการไป -->
 <div class="form-group">
   <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-    <span class="requestfield">*</span> สถานที่นัดพบ :
+    <span class="requestfield">*</span> สถานที่นัดหมาย :
   </label>
   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-      <input type="text" class="form-control" id="appoinment" name="appoinment" placeholder="พิมพ์ชื่อสถานที่นัดพบเมื่อถึงวันเดินทาง" value="">
+      <input type="text" class="form-control" id="appoinment" name="appoinment" placeholder="พิมพ์ชื่อสถานที่นัดหมายเมื่อถึงวันเดินทาง" value="">
   </div>
 </div>
 <!-- วันแรกที่จองใช้ -->

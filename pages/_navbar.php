@@ -14,6 +14,7 @@
           <?php endif; ?>
         </a>
     </div>
+
     <!-- /.navbar-header -->
     <?php
     if(!isset($_SESSION['loggedin'])){

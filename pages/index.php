@@ -11,6 +11,26 @@
 
 <body>
 
+<?php
+$sql = "SELECT count(id) as c FROM config ";
+$result = $conn->query($sql);
+$row = $result->fetch_array();
+if ($row['c'] == 0)
+{
+  echo "
+  <!DOCTYPE html>
+  <script>
+  function redir()
+  {
+  window.location.assign('admin_login.php');
+  }
+  </script>
+  <body onload='redir();'></body>
+  ";
+}
+else
+{
+?>
     <div id="wrapper">
       <!-- Navigation -->
       <?php include '_navbar.php'; ?>
@@ -318,5 +338,9 @@ $(function () {
   });
 });
 </script>
+<?php
+}
+?>
+
 </body>
 </html>

@@ -83,7 +83,7 @@ function FullDateThai($strDate)
       if ($start !== $end) {$allday = true;}
       else {$allday = false;}
 
-      /*สถานที่นัดพบ*/
+      /*สถานที่นัดหมาย*/
       if ($row['appointment_place'] == null) {$appointment = 'ยังไม่กำหนด';}
       else {$appointment = $row['appointment_place'];}
 
