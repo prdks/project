@@ -467,7 +467,7 @@ $(function () {
           break;
         case 'btnSelectCars':
           if (!$("input[id='selecter_cars']:checked").val()) {
-             alert('กรุณาเลือกรถยนต์');
+             swal('กรุณาเลือกรถยนต์');
           }
           else {
             setBtnOnSelectCarsForm();
@@ -787,12 +787,12 @@ $(function () {
         success: function(data){
           if (data.result == 1) //insert สำเร็จ
           {
-            alert('เพิ่มข้อมูลสำเร็จ');
+            swal('เพิ่มข้อมูลสำเร็จ');
             window.location.assign('edit_passenger.php?id='+reserve_id);
           }
           else if (data.result == 0) //insert ไม่สำเร็จ
           {
-            alert('ไม่สามารถเพิ่มข้อมูลได้ กรุณาทำรายการใหม่');
+            swal('ไม่สามารถเพิ่มข้อมูลได้ กรุณาทำรายการใหม่');
             window.location.assign('edit_passenger.php?id='+reserve_id);
           }
         }
@@ -854,12 +854,12 @@ $(function () {
         success: function(data){
           if (data.result == 1) //edit สำเร็จ
           {
-            alert('แก้ไขข้อมูลสำเร็จ');
+            swal('แก้ไขข้อมูลสำเร็จ');
             window.location.assign('edit_passenger.php?id='+reserve_id);
           }
           else if (data.result == 0) //edit ไม่สำเร็จ
           {
-            alert('ไม่สามารถแก้ไขข้อมูลได้ กรุณาทำรายการใหม่');
+            swal('ไม่สามารถแก้ไขข้อมูลได้ กรุณาทำรายการใหม่');
             window.location.assign('edit_passenger.php?id='+reserve_id);
           }
         }

@@ -168,7 +168,7 @@
 		 *      var data = oTable._('tr:first');
 		 *
 		 *      // Do something useful with the data
-		 *      alert( "First cell is: "+data[0] );
+		 *      swal( "First cell is: "+data[0] );
 		 *    } );
 		 *
 		 *  @example
@@ -180,7 +180,7 @@
 		 *      var data = oTable._('tr', {"search": "applied"});
 		 *
 		 *      // Do something with the data
-		 *      alert( data.length+" rows matched the search" );
+		 *      swal( data.length+" rows matched the search" );
 		 *    } );
 		 */
 		this._ = function ( sSelector, oOpts )
@@ -502,7 +502,7 @@
 		 *
 		 *      oTable.$('td').click( function () {
 		 *        var sData = oTable.fnGetData( this );
-		 *        alert( 'The cell clicked on had the value of '+sData );
+		 *        swal( 'The cell clicked on had the value of '+sData );
 		 *      } );
 		 *    } );
 		 */
@@ -733,7 +733,7 @@
 		 *      var oSettings = oTable.fnSettings();
 		 *
 		 *      // Show an example parameter from the settings
-		 *      alert( oSettings._iDisplayStart );
+		 *      swal( oSettings._iDisplayStart );
 		 *    } );
 		 */
 		this.fnSettings = function()
@@ -843,7 +843,7 @@
 		 *  @example
 		 *    $(document).ready(function() {
 		 *      var oTable = $('#example').dataTable();
-		 *      alert( oTable.fnVersionCheck( '1.9.0' ) );
+		 *      swal( oTable.fnVersionCheck( '1.9.0' ) );
 		 *    } );
 		 */
 		this.fnVersionCheck = _ext.fnVersionCheck;
@@ -9037,7 +9037,7 @@
 	 *  @dtopt API-Static
 	 *
 	 *  @example
-	 *    alert( $.fn.dataTable.versionCheck( '1.9.0' ) );
+	 *    swal( $.fn.dataTable.versionCheck( '1.9.0' ) );
 	 */
 	DataTable.versionCheck = DataTable.fnVersionCheck = function( version )
 	{
@@ -10606,7 +10606,7 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "drawCallback": function( settings ) {
-		 *          alert( 'DataTables has redrawn the table' );
+		 *          swal( 'DataTables has redrawn the table' );
 		 *        }
 		 *      } );
 		 *    } );
@@ -10753,7 +10753,7 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "initComplete": function(settings, json) {
-		 *          alert( 'DataTables has finished its initialisation.' );
+		 *          swal( 'DataTables has finished its initialisation.' );
 		 *        }
 		 *      } );
 		 *    } )
@@ -10969,7 +10969,7 @@
 		 *      $('#example').dataTable( {
 		 *        "stateSave": true,
 		 *        "stateLoaded": function (settings, data) {
-		 *          alert( 'Saved filter was: '+data.oSearch.sSearch );
+		 *          swal( 'Saved filter was: '+data.oSearch.sSearch );
 		 *        }
 		 *      } );
 		 *    } );

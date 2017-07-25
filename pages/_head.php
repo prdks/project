@@ -120,6 +120,10 @@ function FullDateThai($strDate)
 <script src="../vendor/jqeury-validation/dist/jquery.validate.js" charset="utf-8"></script>
 <script src="../vendor/jqeury-validation/dist/localization/messages_th.js" charset="utf-8"></script>
 
+<!-- sweet alert -->
+<script src="../vendor/sweetalert-master/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../vendor/sweetalert-master/dist/sweetalert.css">
+
 <!-- Custom CSS -->
 <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 <link href="../dist/css/app.css" rel="stylesheet">
@@ -136,6 +140,7 @@ function FullDateThai($strDate)
 <script src="../dist/js/func.js"></script>
 <script src="../dist/js/validate.js"></script>
 <script src="../dist/js/personnel.js"></script>
+<script src="../dist/js/ajax.js"></script>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

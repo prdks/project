@@ -3161,7 +3161,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     |          .attr({fill: "#000"})
 	     |          .data("i", i)
 	     |          .click(function () {
-	     |             alert(this.data("i"));
+	     |             swal(this.data("i"));
 	     |          });
 	     | }
 	    \*/

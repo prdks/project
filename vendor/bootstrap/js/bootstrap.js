@@ -144,7 +144,7 @@ if (typeof jQuery === 'undefined') {
       var $this = $(this)
       var data  = $this.data('bs.alert')
 
-      if (!data) $this.data('bs.alert', (data = new Alert(this)))
+      if (!data) $this.data('bs.alert', (data = new swal(this)))
       if (typeof option == 'string') data[option].call($this)
     })
   }

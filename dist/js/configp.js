@@ -45,7 +45,7 @@ $(function() {
       {
         $("input[name='password']").closest(".form-group").addClass("has-error");
         $("input[name='confirm_password']").closest(".form-group").addClass("has-error");
-        alert('รหัสผ่านไม่ตรงกัน');
+        swal('รหัสผ่านไม่ตรงกัน');
         isValid = "";
       }
 

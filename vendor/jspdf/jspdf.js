@@ -424,7 +424,7 @@ var jsPDF = (function(global) {
 					var m = "Error in function " + stack.split("\n")[0].split('<')[0] + ": " + e.message;
 					if(global.console) {
 						global.console.error(m, e);
-						if(global.alert) alert(m);
+						if(global.alert) swal(m);
 					} else {
 						throw new Error(m);
 					}
