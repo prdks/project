@@ -76,7 +76,4 @@ elseif ($mode == 'deleteTitle')
     echo json_encode(array('result' => 'error'));
   }
 }
-elseif ($mode == 'insertPosition') {
-  # code...
-}
 ?>
