@@ -8,7 +8,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">เพิ่มข้อมูลหน่วยงาน</h4>
       </div>
-      <form id="insert_department_form" class="form-horizontal" action="department/insert.php" method="post">
+      <form id="form_insert_department" class="form-horizontal">
       <div class="modal-body">
         <div class="form-group">
           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
@@ -41,7 +41,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">แก้ไขข้อมูลหน่วยงาน</h4>
       </div>
-      <form id="edit_department_form" class="form-horizontal" action="department/edit.php" method="post">
+      <form id="form_edit_department" class="form-horizontal">
       <div class="modal-body">
         <div class="form-group">
           <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
@@ -49,8 +49,8 @@
           </label>
           <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
             <input type="text" class="form-control" id="show_update"
-            name="str" placeholder="พิมพ์ข้อมูลหน่วยงาน" required>
-            <input type="hidden" id="update_id" name="id"/>
+            name="txt_update" placeholder="พิมพ์ข้อมูลหน่วยงาน" required>
+            <input type="hidden" id="update_id" name="update_id"/>
           </div>
         </div>
       </div>
@@ -71,14 +71,14 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <form id="delete_department_form" class="form-horizontal" action="department/delete.php" method="post">
+      <form id="form_delete_department" class="form-horizontal">
         <div class="modal-body">
           <div class="form-group text-center">
               <br />
               <p>คุณต้องการลบข้อมูลนี้ใช่หรือไม่</p>
               <b><p id="show_delete"></p></b>
           </div>
-          <input type="hidden" id="delete_id" name="id" value="">
+          <input type="hidden" id="delete_id" name="delete_id" value="">
         </div>
         <div class="modal-footer">
             <button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
