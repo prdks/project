@@ -31,7 +31,7 @@
   </div>
 </div>
 <!-- สถานที่ต้องการไป -->
-<div id="location_field">
+<div class="location_field">
 
   <div class="form-group">
     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
@@ -41,7 +41,7 @@
       <input type="text" class="form-control" name="location[]" placeholder="พิมพ์ชื่อสถานที่ต้องการไป">
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-      <button class="btn btn-default" type="button" >เพิ่ม</button>
+      <button class="btn btn-primary" type="button" id="addfield_location">เพิ่ม</button>
     </div>
   </div>
 

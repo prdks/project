@@ -280,44 +280,26 @@ $(function () {
   $("button[id$='cancel_btn']").click(function() {
     window.location.href = "index.php"
   });
-  // ถ้าตาราง สถานที่ยังไม่มีข้อมูล
-  var tbody_location = $("#LocationListTable tbody");
-  if (tbody_location.children().length == 0) {
-    $('#Table_Loaction').hide();
-    $('#EmptyLocation').show();
-  }
 
-  // เมื่อกดปุ่มเพิ่มสถานที่
-  $('#insertList').click(function (event) {
-    var LocationName = $('#location_name').val();
-    var province = $('#province').val();
-
-    if (LocationName != '' && LocationName.length != 0) {
-        if ( $.trim(LocationName) == '' ){ //ถ้าใส่แต่ whitespace
-          $('#location_name').val('');
-          $('#location_name').attr('required', true);
-        }else {
-          $('#EmptyLocation').hide();
-          $('#Table_Loaction').show();
-          var table = document.getElementById("LocationListTable").getElementsByTagName("tbody")[0];
-          var rowCount = table.rows.length;
-          var row = table.insertRow(rowCount);
-          var cell1 = row.insertCell(0);
-          var cell2 = row.insertCell(1);
-          var cell3 = row.insertCell(2);
-          cell1.innerHTML = "<center><button type='button' class='btn btn-danger btn-xs' onclick='DeleteLocation(this)' name='btn[]'>ลบ</button></center>";
-          cell2.innerHTML = LocationName;
-          cell3.innerHTML = province;
-          $('#location_name').val('');
-          $('#province')[0].selectedIndex = 0;
-          $('#location_name').focus();
-          $('#location_name').attr('required', false);
-          event.preventDefault();
+  var max_fields      = 10; //maximum input boxes allowed
+    var x = 1; //initlal text box count
+    $('#addfield_location').click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            var str = '<div class="form-group">';
+            str += '<label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label"></label>';
+            str += '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-9">';
+            str += '<input type="text" class="form-control" name="location[]" placeholder="พิมพ์ชื่อสถานที่ต้องการไป (เพิ่มเติม)">';
+            str += '</div><div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><a href="#" class="btn btn-danger remove_field">ลบ</a></div></div></div>';
+            $('.location_field').append(str);
         }
-    }else {
-      $('#location_name').attr('required', true);
-    }
-  });
+    });
+
+    $('.location_field').on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').parent('div').remove(); x--;
+    })
+
 
   // ถ้ากดเลือกวันจองวันแรก
   $('#date_start').click(function() {
@@ -370,7 +352,7 @@ $(function () {
 
   // ถ้าตาราง ผู้โดยสาร่ยังไม่มีข้อมูล
   var tbody_sPersonnel = $("#PassengerListTable tbody");
-  if (tbody_location.children().length == 0) {
+  if (tbody_sPersonnel.children().length == 0) {
     $('#Table_Passenger').hide();
     $('#EmptyPassenger').show();
   }
