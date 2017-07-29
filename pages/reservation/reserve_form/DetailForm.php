@@ -38,19 +38,12 @@
       <span class="requestfield">*</span> สถานที่ต้องการไป :
     </label>
     <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-9">
-      <input type="text" class="form-control" name="location[]" placeholder="พิมพ์ชื่อสถานที่ต้องการไป">
+      <input type="text" class="form-control" name="location[]" placeholder="พิมพ์ชื่อสถานที่ต้องการไป" required>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
       <button class="btn btn-primary" type="button" id="addfield_location">เพิ่ม</button>
     </div>
   </div>
-
-  <!-- <div class="form-group">
-    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label"></label>
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-9">
-      <input type="text" class="form-control" name="location[]" placeholder="พิมพ์ชื่อสถานที่ต้องการไป">
-    </div>
-  </div> -->
 
 </div>
 <!-- สถานที่ต้องการไป -->

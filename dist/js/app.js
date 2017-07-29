@@ -281,7 +281,8 @@ $(function () {
     window.location.href = "index.php"
   });
 
-  var max_fields      = 10; //maximum input boxes allowed
+  // ปุ่มเพิ่มสถานที่
+    var max_fields      = 10; //maximum input boxes allowed
     var x = 1; //initlal text box count
     $('#addfield_location').click(function(e){ //on add input button click
         e.preventDefault();
@@ -298,7 +299,7 @@ $(function () {
 
     $('.location_field').on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').parent('div').remove(); x--;
-    })
+    });
 
 
   // ถ้ากดเลือกวันจองวันแรก
@@ -437,23 +438,91 @@ $(function () {
         }
     });
 
+
     $(".next-step").click(function (e) {
       var id = $(this).attr("id");
       switch (id) {
         case 'btnDetail':
             if ($('#formdetail').valid()) {
-            sendDatatoGetCars();
-            setBtnOnDetailForm();
+              $.ajax({
+                type: "POST",
+                url: "reservation/controller.php",
+                data: {user_department : $('#user_department').val()
+                  ,date_start : $('#date_start').val()
+                  ,date_end : $('#date_end').val()
+                  ,time_start : $('#time_start').val()
+                  ,time_end : $('#time_end').val()
+                  , mode: 'getCars_For_Select'},
+                dataType: 'json',
+                success: function(data){
+                  console.log(data);
+                  if (data[0].id)
+                  {
+                    var trHTML = '';
+                      $.each(data, function (i) {
+                          trHTML += '<tr>';
+                          trHTML += '<td><center>';
+                          trHTML += '<input type="radio" id="selecter_cars" name="selecter_cars" class="selecter_cars" value='+ data[i].id +'/>';
+                          trHTML += '</center></td>';
+                          trHTML += '<td class="text-center">' + data[i].reg + '</td>';
+                          trHTML += '<td>' + data[i].brand + '</td>';
+                          trHTML += '<td>' + data[i].kind + '</td>';
+                          trHTML += '<td class="text-center">' + data[i].seat + '</td>';
+                          trHTML += '<td>' + data[i].driver + '</td>';
+                          trHTML += '<td>' + data[i].department + '</td>';
+                          trHTML += '</tr>';
+                      });
+                  }
+                  else
+                  {
+                    trHTML += '<tr><td colspan="7" class="text-center">ไม่พบข้อมูลรถยนต์ว่าง</td></tr>';
+                    swal({
+                            title: "ไม่พบข้อมูลรถยนต์ว่าง",
+                            text: "ต้องการเปลี่ยนวันและเวลาที่จองใช้ใหม่หรือไม่",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "ใช่, ต้องการเปลี่ยน",
+                            showLoaderOnConfirm: true,
+                            closeOnConfirm: false,
+                            html: true,
+                            cancelButtonText: "ยกเลิกรายการ"
+                          },
+                        function(isConfirm)
+                        {
+                            if (isConfirm)
+                            {
+                                setTimeout(function(){
+                                  var $active = $('.wizard .nav-tabs li.active');
+                                  $active.removeClass('success');
+                                  $active.removeClass('active')
 
+                                  $('#step2').removeClass('active');
+                                  $('#step1').addClass('active');
+                                  $active.prev().removeClass('success');
+                                  $active.prev().addClass('active');
+                                  $("#tbody_cars").empty();
+                                  swal.close();
+                                }, 2000);
+                            }
+                            else
+                            {
+                                window.location.assign('index.php');
+                            }
+                        });
+                  }
+                  $('#tbody_cars').append(trHTML);
+                }
+              });
+            setBtnOnDetailForm();
            }
           break;
         case 'btnSelectCars':
-          if (!$("input[id='selecter_cars']:checked").val()) {
-             swal('กรุณาเลือกรถยนต์');
-          }
-          else {
-            setBtnOnSelectCarsForm();
-          }
+            if (!$("input[id='selecter_cars']:checked").val()) {
+               swal('กรุณาเลือกรถยนต์');
+            }else {
+               setBtnOnSelectCarsForm();
+            }
           break;
         case 'btnInsertPassenger':
           getReservationData();
@@ -474,6 +543,7 @@ $(function () {
           $('#step1').addClass('active');
           $active.prev().removeClass('success');
           $active.prev().addClass('active');
+          $("#tbody_cars").empty();
           break;
         case 'btnInsertLocation':
           var $active = $('.wizard .nav-tabs li.active');

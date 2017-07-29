@@ -30,6 +30,12 @@ $('#editprofileform').validate();
             detail: {
                 required: true
             },
+            location: {
+              required: true
+            },
+            appoinment: {
+              required: true
+            },
             date_start: {
                 required: true
             },
@@ -44,7 +50,9 @@ $('#editprofileform').validate();
             }
         },
 			messages: {
-				detail: "กรุณากรอกรายละเอียดการจอง",
+				detail: "กรุณาระบุรายละเอียดการจอง",
+        location: "กรุณาระบุสถานที่ต้องการไป",
+        appoinment: "กรุณาระบุสถานที่นัดหมาย",
 				date_start: "กรุณาเลือกวันแรกที่ต้องการใช้รถยนต์",
 				date_end: "กรุณาเลือกวันสุดท้ายที่ต้องการใช้รถยนต์",
         time_start: "กรุณาเลือกช่วงเวลาเริ่มต้น",

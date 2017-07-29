@@ -102,7 +102,7 @@ while($r = $result->fetch_assoc()){
               'status' => $row['reservation_status'],
               'note' => $row['note']
             );
-  echo json_encode($all);
+  echo json_encode(array('result' => '1'));
 
 }
 elseif ($mode == 'getDelete')
@@ -170,39 +170,38 @@ elseif ($mode == 'getCars_For_Select')
     OR ((reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
     OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."'))
     )
-    AND c.status <> 'งดจอง'
-  GROUP BY car_reg";
+  AND c.status <> 'งดจอง'
+  ORDER BY car_reg";
 
   $result = $conn->query($sql);
   $result_row = mysqli_num_rows($result);
+  $data = array();
   if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
   {
-    while($row = $result->fetch_assoc())
+    while ($row = $result->fetch_assoc())
     {
-      echo "
-      <tr>
-      <td>
-      <center>
-      <input type='radio' id='selecter_cars' name='selecter_cars'
-      class='selecter_cars' value='".$row['car_id']."'/>
-      </center>
-      </td>
-      <td class='text-center'>".$row['car_reg']."</td>
-      <td class='text-left'>".$row['car_brand_name']."</td>
-      <td class='text-left'>".$row['car_kind']."</td>
-      <td class='text-center'>".$row['seat']."</td>
-      <td class='text-left'>".$row['title_name'].$row['personnel_name']."</td>
-      <td class='text-left'>".$row['department_name']."</td>
-      </tr>
-      ";
+      $all = array(
+                  'id' => $row['car_id'],
+                  'reg' => $row['car_reg'],
+                  'brand' => $row['car_brand_name'],
+                  'kind' => $row['car_kind'],
+                  'seat' => $row['seat'],
+                  'driver' => $row['title_name'].$row['personnel_name'],
+                  'department' => $row['department_name']
+                );
+      array_push($data,$all);
     }
-  }else {
-    echo "<tr><td colspan='7' class='text-center'>ไม่มีข้อมูลรถยนต์ว่าง</td></tr>";
-  }
 
   }
-  elseif ($mode == 'getDetail_For_Submit')
+  else
   {
+    array_push($data,array('id' => false));
+
+  }
+  echo json_encode($data);
+}
+elseif ($mode == 'getDetail_For_Submit')
+{
   $data = $_POST['data'];
   $selecter_cars = $_POST['checked'];
 

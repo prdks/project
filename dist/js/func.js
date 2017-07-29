@@ -104,19 +104,6 @@ function setTimeEnd() {
   end.max = "23:59";
 }
 
-function DeleteLocation(btn) {
-  var table = document.getElementById("LocationListTable").getElementsByTagName("tbody")[0];
-  var rowCount = table.rows.length;
-  var row = btn.parentNode.parentNode.parentNode;
-
-  if (rowCount == 1) {
-    row.parentNode.removeChild(row);
-    $('#Table_Loaction').hide();
-    $('#EmptyLocation').show();
-  }else {
-    row.parentNode.removeChild(row);
-  }
-}
 
 function filtertable() {
   var input, filter, table, tr, td, i;
@@ -240,23 +227,6 @@ function getReservationData() {
       }
     });
 }
-
-function sendDatatoGetCars() {
-  $.ajax({
-    type: "POST",
-    url: "reservation/controller.php",
-    data: {user_department : $('#user_department').val()
-      ,date_start : $('#date_start').val()
-      ,date_end : $('#date_end').val()
-      ,time_start : $('#time_start').val()
-      ,time_end : $('#time_end').val()
-      , mode: 'getCars_For_Select'},
-    success: function(data){
-      $('#tbody_cars').html(data);
-    }
-  });
-}
-
 
 function insertReservation() {
   // ค่าจากการเลือกรถยนต์

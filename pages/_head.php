@@ -139,7 +139,6 @@ function FullDateThai($strDate)
 <script src="../dist/js/app.js"></script>
 <script src="../dist/js/func.js"></script>
 <script src="../dist/js/validate.js"></script>
-<script src="../dist/js/personnel.js"></script>
 <script src="../dist/js/ajax.js"></script>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
