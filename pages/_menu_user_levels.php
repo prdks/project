@@ -42,6 +42,14 @@ switch ($type) {
             </ul>
       </li>
       <li>
+          <a href="#"><i class="fa fa-file-o fa-fw"></i> การออกรายงาน<span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+          <li><a href="#">รายงานการจอง</a></li>
+          <li><a href="#">รายงานการใช้</a></li>
+          <li><a href="#">รายงานสรุปผลการประเมิน</a></li>
+          </ul>
+      </li>
+      <li>
           <a href="#"><i class="fa fa-folder fa-fw"></i> การจัดการข้อมูล<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
           <li><a href="personnel.php">ข้อมูลบุคลากร</a></li>
@@ -138,6 +146,14 @@ switch ($type) {
               ?>
             </a></li>
             </ul>
+      </li>
+      <li>
+          <a href="#"><i class="fa fa-file-o fa-fw"></i> การออกรายงาน<span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+          <li><a href="#">รายงานการจอง</a></li>
+          <li><a href="#">รายงานการใช้</a></li>
+          <li><a href="#">รายงานสรุปผลการประเมิน</a></li>
+          </ul>
       </li>
       <li>
           <a href="#"><i class="fa fa-folder fa-fw"></i> การจัดการข้อมูล<span class="fa arrow"></span></a>

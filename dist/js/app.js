@@ -455,7 +455,6 @@ $(function () {
                   , mode: 'getCars_For_Select'},
                 dataType: 'json',
                 success: function(data){
-                  console.log(data);
                   if (data[0].id)
                   {
                     var trHTML = '';
@@ -519,7 +518,11 @@ $(function () {
           break;
         case 'btnSelectCars':
             if (!$("input[id='selecter_cars']:checked").val()) {
-               swal('กรุณาเลือกรถยนต์');
+               swal({
+                    title: 'กรุณาเลือกรถยนต์',
+                    type: "warning",
+                    confirmButtonText: "ตกลง",
+                  });
             }else {
                setBtnOnSelectCarsForm();
             }

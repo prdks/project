@@ -228,13 +228,14 @@
                                               <!-- หน่วยงาน -->
                                               <div class="form-group">
                                                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                                                  <span class="requestfield">*</span> หน่วยงาน :
+                                                  หน่วยงาน :
                                                 </label>
                                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                                   <?php
                                                   $sql = "select * from department ORDER BY department_name ASC";
                                                   $result = $conn->query($sql);
                                                   echo "<select class='form-control' id='select_department'>";
+                                                  echo "<option values='0' selected>ไม่ระบุ</option>";
                                                   while ($row=$result->fetch_assoc())
                                                   {
                                                     echo "<option values='".$row['department_name']."'>
