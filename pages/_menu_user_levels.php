@@ -46,7 +46,7 @@ switch ($type) {
           <ul class="nav nav-second-level">
           <li><a href="report_booking.php">รายงานการจอง</a></li>
           <li><a href="report_usage.php">รายงานการใช้</a></li>
-          <li><a href="#">รายงานสรุปผลการประเมิน</a></li>
+          <li><a href="result_googlesheet.php">รายงานสรุปผลการประเมิน</a></li>
           </ul>
       </li>
       <li>
@@ -152,7 +152,7 @@ switch ($type) {
           <ul class="nav nav-second-level">
           <li><a href="report_booking.php">รายงานการจอง</a></li>
           <li><a href="report_usage.php">รายงานการใช้</a></li>
-          <li><a href="#">รายงานสรุปผลการประเมิน</a></li>
+          <li><a href="result_googlesheet.php">รายงานสรุปผลการประเมิน</a></li>
           </ul>
       </li>
       <li>
