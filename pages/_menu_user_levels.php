@@ -44,8 +44,8 @@ switch ($type) {
       <li>
           <a href="#"><i class="fa fa-file-o fa-fw"></i> การออกรายงาน<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-          <li><a href="#">รายงานการจอง</a></li>
-          <li><a href="#">รายงานการใช้</a></li>
+          <li><a href="report_booking.php">รายงานการจอง</a></li>
+          <li><a href="report_usage.php">รายงานการใช้</a></li>
           <li><a href="#">รายงานสรุปผลการประเมิน</a></li>
           </ul>
       </li>
@@ -150,8 +150,8 @@ switch ($type) {
       <li>
           <a href="#"><i class="fa fa-file-o fa-fw"></i> การออกรายงาน<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-          <li><a href="#">รายงานการจอง</a></li>
-          <li><a href="#">รายงานการใช้</a></li>
+          <li><a href="report_booking.php">รายงานการจอง</a></li>
+          <li><a href="report_usage.php">รายงานการใช้</a></li>
           <li><a href="#">รายงานสรุปผลการประเมิน</a></li>
           </ul>
       </li>
