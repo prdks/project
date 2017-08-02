@@ -1,3 +1,4 @@
+<input  type="hidden" id="person_username" value="<?php echo $_SESSION['user_name'] ;?>"/>
 <!-- ชิ้อผู้ทำรายการ -->
 <div class="form-group">
   <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">

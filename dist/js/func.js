@@ -165,6 +165,54 @@ function DeletePassenger(btn) {
   }else {
     row.parentNode.removeChild(row);
   }
+  refreshPersonformDB();
+}
+
+function refreshPersonformDB() {
+  $("#tbody_sPersonnel").empty();
+
+  var PassengerTable = document.getElementById("PassengerListTable");
+  var rowLength = PassengerTable.rows.length;
+  var PassengerData = [];
+  for (i = 1; i < rowLength; i++){
+     var PassengerCells = PassengerTable.rows.item(i).cells;
+     var cellLength = PassengerCells.length;
+     for(var j = 1; j < cellLength; j++){
+       if (j==1) var Name = PassengerCells.item(j).innerHTML;
+     }
+    var p_name = Name.substr(Name.indexOf(' ')+1);
+    PassengerData.push({'Name' : p_name });
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "reservation/controller.php",
+    data: {user_name : $('#person_username').val()
+      , passenger_name : PassengerData
+      , mode: 'getPersonnel_For_AddPassenger'},
+    dataType: 'json',
+    success: function(data){
+      // console.log(data);
+      if (data[0].id)
+      {
+        var trHTML = '';
+          $.each(data, function (i) {
+              trHTML += '<tr>';
+              trHTML += '<td><center>';
+              trHTML += '<button type="button" class="btn btn-primary btn-xs" name="btn[]" value="'+ data[i].id +'">เพิ่ม</button>';
+              trHTML += '</center></td>';
+              trHTML += '<td>' + data[i].title +' '+ data[i].name + '</td>';
+              trHTML += '<td>' + data[i].department + '</td>';
+              trHTML += '</tr>';
+          });
+      }
+      else
+      {
+        trHTML += '<tr><td colspan=3>ไม่พบข้อมูลบุคลากร</td></tr>';
+      }
+      $('#tbody_sPersonnel').append(trHTML);
+    }
+  });
 }
 
 function getReservationData() {

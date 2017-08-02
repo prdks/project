@@ -335,18 +335,21 @@ $(function () {
   });
 
   $('#getPersonFromDB').hide();
-  $('#InsetPerson').hide();
+  $('#InsertPerson').hide();
 
+  // เลือกเพิ่มผู้โดยสาร
   $("input[name='select_mode']").click(function(){  // เมื่อคลิก checkbox  ใดๆ
     if($(this).prop("checked")==true){ // ตรวจสอบ property  การ ของ
         var indexObj=$(this).index("input[name='select_mode']"); //
         $("input[name='select_mode']").not(":eq("+indexObj+")").prop( "checked", false ); // ยกเลิกการคลิก รายการอื่น
         if($(this).val() == 1){
+          refreshPersonformDB();
+
           $('#getPersonFromDB').show();
-          $('#InsetPerson').hide();
+          $('#InsertPerson').hide();
         }else if ($(this).val() == 2) {
           $('#getPersonFromDB').hide();
-          $('#InsetPerson').show();
+          $('#InsertPerson').show();
         }
     }
   });
@@ -364,6 +367,13 @@ $(function () {
       e = e || window.event;
       var data = [];
       var target = e.srcElement || e.target;
+
+      // ลบแถวที่คลิก
+      var rowCount = table.rows.length;
+      var row = target.parentNode.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+
+      // ดึงข้อมูลจากแถว
       while (target && target.nodeName !== "TR") {
           target = target.parentNode;
       }
@@ -373,6 +383,7 @@ $(function () {
               data.push(cells[i].innerHTML);
           }
       }
+
       $('#EmptyPassenger').hide();
       $('#Table_Passenger').show();
       var table = document.getElementById("PassengerListTable").getElementsByTagName("tbody")[0];
@@ -384,10 +395,10 @@ $(function () {
         }else if (index == 1) {
           row.insertCell(index).innerHTML = value;
         }else {
-          row.insertCell(index).innerHTML = "<center>"+value+"</center>";
+          row.insertCell(index).innerHTML = value; //department
         }
       });
-      $(this).attr('disabled',true);
+
   });
 
   // เมื่อกดปุ่มเพิ่มชื่อผู้้โดยสารกำหนดเอง
@@ -411,7 +422,7 @@ $(function () {
           var cell3 = row.insertCell(2);
           cell1.innerHTML = "<center><button type='button' class='btn btn-danger btn-xs' onclick='DeletePassenger(this)' name='btn[]'>ลบ</button></center>";
           cell2.innerHTML = title+' '+name;
-          cell3.innerHTML = "<center>"+department+"</center>";
+          cell3.innerHTML = department;
           $('#person_name').val('');
           $('#select_title_name')[0].selectedIndex = 0;
           $('#select_department')[0].selectedIndex = 0;
@@ -423,7 +434,6 @@ $(function () {
       $('#person_name').attr('required', true);
     }
   });
-
   // --------------------------tab---------------------------
   //Initialize tooltips
     $('.nav-tabs > li a[title]').tooltip();

@@ -148,48 +148,13 @@
                                                     <th id="tb_detail_sub-nd">หน่วยงาน</th>
                                                   </tr>
                                                 </thead>
-                                                <tbody id="tbody_sPersonnel">
-                                                <?php
-                                                $sql = "
-                                                SELECT t.*, p.*, po.* , d.* FROM personnel p
-                                                LEFT JOIN title_name t
-                                                ON p.title_name_id = t.title_name_id
-                                                LEFT JOIN position po
-                                                ON p.position_id = po.position_id
-                                                LEFT JOIN department d
-                                                ON p.department_id = d.department_id
-                                                WHERE position_name <> 'คนขับรถยนต์' AND position_name <> 'เจ้าหน้าที่รักษาความปลอดภัย'
-                                                AND personnel_name <> '".$_SESSION['user_name']."'
-                                                ORDER BY department_name ASC
-                                                ";
-                                                $result = $conn->query($sql);
-                                                $result_row = mysqli_num_rows($result);
-                                                if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
-                                                {
-                                                  while($row = $result->fetch_assoc())
-                                                  {
-                                                    echo "
-                                                    <tr>
-                                                    <td>
-                                                    <center><button id='BTNInsertPassenger' type='button' class='btn btn-primary btn-xs'
-                                                    name='btn[]' value='".$row['personnel_name']."'>เพิ่ม</button></center>
-                                                    </td>
-                                                    <td>".$row['title_name'].$row['personnel_name']."</td>
-                                                    <td class='text-center'>".$row['department_name']."</td>
-                                                    </tr>
-                                                    ";
-                                                  }
-                                                }else {
-                                                  echo "<tr><td colspan='4'>ไม่มีข้อมูลบุคลากร</td></tr>";
-                                                }
-                                                ?>
-                                                </tbody>
+                                                <tbody id="tbody_sPersonnel"></tbody>
                                               </table>
                                             </div>
                                         </div>
                                       </div>
 
-                                      <div id="InsetPerson" class="col-lg-12">
+                                      <div id="InsertPerson" class="col-lg-12">
                                         <div class="panel panel-default">
                                           <div class="panel-heading">
                                             เพิ่มรายชื่อกำหนดเอง

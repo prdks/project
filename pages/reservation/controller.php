@@ -200,6 +200,96 @@ elseif ($mode == 'getCars_For_Select')
   }
   echo json_encode($data);
 }
+elseif ($mode == 'getPersonnel_For_AddPassenger')
+{
+  $user = $_POST['user_name'];
+
+
+  if (!isset($_POST['passenger_name']))
+  {
+    $sql = "
+    SELECT t.*, p.*, po.* , d.* FROM personnel p
+    LEFT JOIN title_name t
+    ON p.title_name_id = t.title_name_id
+    LEFT JOIN position po
+    ON p.position_id = po.position_id
+    LEFT JOIN department d
+    ON p.department_id = d.department_id
+    WHERE personnel_name <> '".$user."'
+    ORDER BY department_name ASC";
+  }
+  else
+  {
+    $passenger = $_POST['passenger_name'];
+    $n = sizeof($passenger);
+
+    if ($n == 1)
+    {
+      $sql = "
+      SELECT t.*, p.*, po.* , d.* FROM personnel p
+      LEFT JOIN title_name t
+      ON p.title_name_id = t.title_name_id
+      LEFT JOIN position po
+      ON p.position_id = po.position_id
+      LEFT JOIN department d
+      ON p.department_id = d.department_id
+      WHERE personnel_name <> '".$user."'
+      AND
+      personnel_id NOT IN (
+        SELECT personnel_id FROM personnel
+        WHERE personnel_name LIKE '%".$passenger[0]['Name']."%'
+        )
+      ORDER BY department_name ASC";
+
+    }
+    if ($n > 1)
+    {
+      $sql = "
+      SELECT t.*, p.*, po.* , d.* FROM personnel p
+      LEFT JOIN title_name t
+      ON p.title_name_id = t.title_name_id
+      LEFT JOIN position po
+      ON p.position_id = po.position_id
+      LEFT JOIN department d
+      ON p.department_id = d.department_id
+      WHERE personnel_name <> '".$user."'
+      AND
+      personnel_id NOT IN (
+        SELECT personnel_id FROM personnel
+        WHERE personnel_name LIKE '%".$passenger[0]['Name']."%'";
+        $str = '';
+        for ($i=1; $i < $n; $i++) {
+          $str .= " OR personnel_name LIKE '%".$passenger[$i]['Name']."%'";
+        }
+      $sql .= $str;
+      $sql .= ")ORDER BY department_name ASC";
+    }
+  }
+
+  $result = $conn->query($sql);
+  $result_row = mysqli_num_rows($result);
+  $data = array();
+  if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
+  {
+    while ($row = $result->fetch_assoc())
+    {
+      $all = array(
+                  'id' => $row['personnel_id'],
+                  'title' => $row['title_name'],
+                  'name' => $row['personnel_name'],
+                  'department' => $row['department_name']
+                );
+      array_push($data,$all);
+    }
+
+  }
+  else
+  {
+    array_push($data,array('id' => false));
+
+  }
+  echo json_encode($data);
+}
 elseif ($mode == 'getDetail_For_Submit')
 {
   $data = $_POST['data'];
