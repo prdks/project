@@ -46,7 +46,14 @@ switch ($type) {
           <ul class="nav nav-second-level">
           <li><a href="report_booking.php">รายงานการจอง</a></li>
           <li><a href="report_usage.php">รายงานการใช้</a></li>
+          <?php
+          if ($_SESSION['url_sheet'] != "")
+          {
+          ?>
           <li><a href="result_googlesheet.php">รายงานสรุปผลการประเมิน</a></li>
+          <?php
+          }
+          ?>
           </ul>
       </li>
       <li>
@@ -68,6 +75,12 @@ switch ($type) {
           </ul>
       </li>
       <?php
+      if ($_SESSION['url_googleform'] != "")
+      {
+      ?>
+      <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+      <?php
+      }
     }
     break;
   case 1:
@@ -84,6 +97,12 @@ switch ($type) {
       </ul>
       </li>
       <?php
+      if ($_SESSION['url_googleform'] != "")
+      {
+      ?>
+      <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+      <?php
+      }
     }
     break;
   case 2:
@@ -100,6 +119,12 @@ switch ($type) {
           </ul>
       </li>
       <?php
+      if ($_SESSION['url_googleform'] != "")
+      {
+      ?>
+      <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+      <?php
+      }
     }
     break;
   case 3:
@@ -116,6 +141,12 @@ switch ($type) {
         </ul>
       </li>
       <?php
+      if ($_SESSION['url_googleform'] != "")
+      {
+      ?>
+      <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+      <?php
+      }
     }
     break;
   case 4:
@@ -152,7 +183,14 @@ switch ($type) {
           <ul class="nav nav-second-level">
           <li><a href="report_booking.php">รายงานการจอง</a></li>
           <li><a href="report_usage.php">รายงานการใช้</a></li>
+          <?php
+          if ($_SESSION['url_sheet'] != "")
+          {
+          ?>
           <li><a href="result_googlesheet.php">รายงานสรุปผลการประเมิน</a></li>
+          <?php
+          }
+          ?>
           </ul>
       </li>
       <li>
@@ -164,6 +202,12 @@ switch ($type) {
           </ul>
       </li>
       <?php
+      if ($_SESSION['url_googleform'] != "")
+      {
+      ?>
+      <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+      <?php
+      }
     }
     break;
   default:

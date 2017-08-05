@@ -185,7 +185,7 @@ $(function () {
     },
     displayEventTime:false,
     handleWindowResize: true,
-    minTime: '05:00:00',
+    minTime: '00:00:00',
     maxTime: '24:00:00',
     eventLimit:false,
     eventLimitText: 'ดูรายการทั้งหมด' ,

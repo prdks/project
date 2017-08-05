@@ -58,11 +58,13 @@ function FullDateThai($strDate)
           $strMonthThai=$strMonthCut[$strMonth];
           return "$strHour:$strMinute"." น.";
   }
-  $sql = "select name,domain_name from config where id = 1";
+  $sql = "select name,domain_name,url,url_sheet from config where id = 1";
   $result = $conn->query($sql);
   $row = $result->fetch_assoc();
   $_SESSION['domain_name'] = $row['domain_name'];
   $_SESSION['system_name'] = $row['name'];
+  $_SESSION['url_googleform'] = $row['url'];
+  $_SESSION['url_sheet'] = $row['url_sheet'];
 
  ?>
 <meta charset="utf-8">
