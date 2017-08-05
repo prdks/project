@@ -471,7 +471,7 @@ $(function () {
                       $.each(data, function (i) {
                           trHTML += '<tr>';
                           trHTML += '<td><center>';
-                          trHTML += '<input type="radio" id="selecter_cars" name="selecter_cars" class="selecter_cars" value='+ data[i].id +'/>';
+                          trHTML += '<input type="radio" id="selecter_cars" name="selecter_cars" class="selecter_cars" value='+ data[i].id +'>';
                           trHTML += '</center></td>';
                           trHTML += '<td class="text-center">' + data[i].reg + '</td>';
                           trHTML += '<td>' + data[i].brand + '</td>';
@@ -590,6 +590,72 @@ $(function () {
           break;
       }
     });
+
+    $("#Insert_Reservation_Form").submit(function(e) {
+        e.preventDefault();
+        insertReservation();
+    });
+
+    function insertReservation() {
+      // ค่าในฟอร์มทั้งหมด
+      var data = $('#formdetail').serializeArray();
+      // ค่าจากการเลือกรถยนต์
+      $("input[id='selecter_cars']:checked").each(function ()
+      {
+        data.push({name : 'Car_id' , value : $(this).val() });
+      });
+
+      // เก็บข้อมูลจากตารางผู้โดยสาร
+      var PassengerTable = document.getElementById("PassengerListTable");
+      var rowLength = PassengerTable.rows.length;
+      for (i = 1; i < rowLength; i++){
+         var PassengerCells = PassengerTable.rows.item(i).cells;
+         var cellLength = PassengerCells.length;
+         for(var j = 1; j < cellLength; j++){
+           if (j==1) var Name = PassengerCells.item(j).innerHTML;
+           else if (j==2) var Department = PassengerCells.item(j).innerHTML;
+         }
+        data.push({name : 'passenger_name[]' , value : Name});
+        data.push({name : 'passenger_department[]' , value : Department});
+      }
+
+        data.push({name : 'mode' , value : 'insertReservation'});
+
+        $.ajax({
+          type: "POST",
+          url: "reservation/controller.php",
+          data: data,
+          dataType: 'json',
+          success: function(data){
+            if (data.result == 1) //insert สำเร็จ
+            {
+              swal({
+                    title: "เพิ่มข้อมูลสำเร็จ",
+                    text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                     type: "success",
+                    timer: 2000,
+                    showConfirmButton: false,
+                  },
+                  function(){ window.location.assign('user_list.php'); }
+                );
+            }
+            else if (data.result == 0) //insert ไม่สำเร็จ
+            {
+              swal({
+                    title: "ไม่สามารถเพิ่มข้อมูลได้<br>กรุณาทำรายการใหม่",
+                    text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                     type: "error",
+                    timer: 2000,
+                    html: true,
+                    showConfirmButton: false,
+                  },
+                  function(){ window.location.assign('index.php'); }
+                );
+            }
+          }
+        });
+
+    }
     // -------------Calendar-------------------------
 
     //------------- Set Province BOX ---------------

@@ -258,7 +258,7 @@
                                   </div>
                                   <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx Complete Preview xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
                                   <div class="tab-pane" role="tabpanel" id="complete">
-                                    <form action="reserve_list.php" onsubmit="insertReservation();" method="post">
+                                    <form id="Insert_Reservation_Form">
                                       <?php include 'reservation/reserve_form/completeForm.php'; ?>
                                       <!-- <div id="divCompletePage">
                                       </div> -->
@@ -266,7 +266,7 @@
                                       <br />
                                       <ul class="list-inline pull-right">
                                           <li><button id="btnComplet" type="button" class="btn btn-default prev-step">ย้อนกลับ</button></li>
-                                          <li><button id="completed" type="submit" class="btn btn-success">บันทึกการจอง</button></li>
+                                          <li><button type="submit" class="btn btn-success">บันทึกการจอง</button></li>
                                       </ul>
                                     </form>
                                   </div>

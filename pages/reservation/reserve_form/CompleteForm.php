@@ -14,11 +14,8 @@
       <dt>ความประสงค์ขอใช้รถยนต์ :</dt>
       <dd id="show-detail"></dd>
       <br />
-      <dt>วันแรกที่ต้องการใช้รถยนต์ :</dt>
-      <dd id="show-fistdate"></dd>
-      <br />
-      <dt>วันสุดท้ายที่ต้องการใช้รถยนต์ :</dt>
-      <dd id="show-lastdate"></dd>
+      <dt>วันที่ต้องการใช้รถยนต์ :</dt>
+      <dd id="show-date"></dd>
       <br />
       <dt>ช่วงเวลา :</dt>
       <dd id="show-time"></dd>

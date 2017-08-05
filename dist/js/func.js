@@ -219,30 +219,31 @@ function getReservationData() {
   // ค่าในฟอร์มทั้งหมด
   var data = $('#formdetail').serializeArray();
   // ค่าจากการเลือกรถยนต์
-  var checked = [];
   $("input[id='selecter_cars']:checked").each(function ()
   {
-    checked.push({ 'Car_id' : $(this).val()});
+    data.push({name : 'Car_id' , value : $(this).val() });
   });
 
   // เก็บข้อมูลจากตารางผู้โดยสาร
   var PassengerTable = document.getElementById("PassengerListTable");
   var rowLength = PassengerTable.rows.length;
-  var PassengerData = [];
   for (i = 1; i < rowLength; i++){
      var PassengerCells = PassengerTable.rows.item(i).cells;
      var cellLength = PassengerCells.length;
      for(var j = 1; j < cellLength; j++){
        if (j==1) var Name = PassengerCells.item(j).innerHTML;
-       else if (j==2) var Department = jQuery(PassengerCells.item(j).innerHTML).text();
+       else if (j==2) var Department = PassengerCells.item(j).innerHTML;
      }
-    PassengerData.push({'Name' : Name , 'Department': Department});
+    data.push({name : 'passenger_name[]' , value : Name});
+    data.push({name : 'passenger_department[]' , value : Department});
   }
+
+  data.push({name : 'mode' , value : 'getDetail_For_Submit'});
 
     $.ajax({
       type: "POST",
       url: "reservation/controller.php",
-      data: {data , checked, PassengerData, mode: 'getDetail_For_Submit'},
+      data: data,
       dataType: 'json',
       success: function(data){
 
@@ -250,74 +251,12 @@ function getReservationData() {
         $('#show-position').html(data.position);
         $('#show-department').html(data.department);
         $('#show-detail').html(data.detail);
-        $('#show-fistdate').html(data.fistdate);
-        $('#show-lastdate').html(data.lastdate);
+        $('#show-date').html(data.date);
         $('#show-time').html(data.time);
         $('#show-cars').html(data.cars);
         $('#show-location').html(data.location);
         $('#show-appointment').html(data.appointment);
-        //passenger
-        var passenger_str = "";
-        $.each( data.passenger, function( index, value )
-        {
-            passenger_str += value
-        });
-        $('#show-passenger').html(passenger_str);
-
-        //location
-        // var location_str = "";
-        // $.each( data.location, function( index, value )
-        // {
-        //     location_str += value
-        // });
-        // $('#show-location').html(location_str);
-
+        $('#show-passenger').html(data.passenger);
       }
     });
-}
-
-function insertReservation() {
-  // ค่าจากการเลือกรถยนต์
-  var checked = [];
-  $("input[id='selecter_cars']:checked").each(function ()
-  {
-    checked.push({ 'Car_id' : $(this).val()});
-  });
-
-  //เก็บข้อมูลจากตารางสถานที่
-  var LocationTable = document.getElementById("LocationListTable");
-  var rowLength = LocationTable.rows.length;
-  var LocationData = [];
-  for (i = 1; i < rowLength; i++){
-     var LocationCells = LocationTable.rows.item(i).cells;
-     var cellLength = LocationCells.length;
-     for(var j = 1; j < cellLength; j++){
-       if (j==1) var LocationName = LocationCells.item(j).innerHTML;
-       else if (j==2) var ProvinceName = LocationCells.item(j).innerHTML;
-     }
-    LocationData.push({'LocationName' : LocationName ,'Province' : ProvinceName});
-  }
-
-  // เก็บข้อมูลจากตารางผู้โดยสาร
-  var PassengerTable = document.getElementById("PassengerListTable");
-  var rowLength = PassengerTable.rows.length;
-  var PassengerData = [];
-  for (i = 1; i < rowLength; i++){
-     var PassengerCells = PassengerTable.rows.item(i).cells;
-     var cellLength = PassengerCells.length;
-     for(var j = 1; j < cellLength; j++){
-       if (j==1) var Name = PassengerCells.item(j).innerHTML;
-       else if (j==2) var Department = jQuery(PassengerCells.item(j).innerHTML).text();
-     }
-    PassengerData.push({'Name' : Name , 'Department': Department});
-  }
-
-  $.post("reservation/reserve_form/insert.php"
-  ,{ require_detail : $('#detail').val()
-  , date_start : $('#date_start').val()
-  , date_end : $('#date_end').val()
-  , time_start : $('#time_start').val()
-  , time_end : $('#time_end').val()
-  , checked , LocationData , PassengerData
-  });
 }

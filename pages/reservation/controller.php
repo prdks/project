@@ -292,8 +292,19 @@ elseif ($mode == 'getPersonnel_For_AddPassenger')
 }
 elseif ($mode == 'getDetail_For_Submit')
 {
-  $data = $_POST['data'];
-  $selecter_cars = $_POST['checked'];
+
+  $user_name = $_POST['user_name'];
+  $user_position = $_POST['user_position'];
+  $detail = $_POST['detail'];
+
+  $appointment = $_POST['appoinment'];
+  $date_start = $_POST['date_start'];
+  $date_end = $_POST['date_end'];
+  $time_start = $_POST['time_start'];
+  $time_end = $_POST['time_end'];
+  $user_department = $_POST['user_department'];
+
+  $car_id = $_POST['Car_id'];
 
   $sql="SELECT c.* , b.* , p.* , t.* FROM cars c
   LEFT JOIN reservation r
@@ -306,7 +317,7 @@ elseif ($mode == 'getDetail_For_Submit')
   ON p.title_name_id = t.title_name_id
   LEFT OUTER JOIN department d
   ON p.department_id = d.department_id
-  WHERE c.car_id ='".$selecter_cars[0]['Car_id']."'";
+  WHERE c.car_id ='".$car_id."'";
 
   $result = $conn->query($sql);
   $result_row = mysqli_num_rows($result);
@@ -316,55 +327,146 @@ elseif ($mode == 'getDetail_For_Submit')
     $cars = "<p>".$row['car_reg']." / ยี่ห้อ ".$row['car_brand_name']." / รุ่น ".$row['car_kind']." / ".$row['seat']." ที่นั่ง</p>";
   }
 
+  if ($date_start !== $date_end)
+  {
+    $date = DateThai($date_start)." ถึง ".DateThai($date_end);
+  }
+  else
+  {
+    $date = DateThai($date_start);
+  }
 
-  $passenger = array();
-  if(!isset($_POST['PassengerData'])){
+  $location_name = $_POST['location'];
+  $location = "";
+  for ($i=0; $i < sizeof($location_name); $i++)
+  {
+    $str = $location_name[$i]."<br />";
+    $location .= $str;
+  }
+
+
+  $passenger = "";
+  if(!isset($_POST['passenger_name'])){
     array_push($passenger,"ไม่มีผู้โดยสารเพิ่มเติม");
   }else {
-    $PassengerData = $_POST['PassengerData'];
-    for ($i=0; $i < sizeof($PassengerData); $i++)
+    $passener_name = $_POST['passenger_name'];
+    $passenger_department = $_POST['passenger_department'];
+    // $PassengerData = $_POST['passenger'];
+    for ($i=0; $i < sizeof($passener_name); $i++)
     {
         if ($i != 0) {
 
-            if ($PassengerData[$i]['Department'] === $PassengerData[$i-1]['Department'])
+            if ($passenger_department[$i] === $passenger_department[$i-1])
             {
-                $str = $PassengerData[$i]['Name']."<br />";
-                array_push($passenger,$str);
+                $str = $passener_name[$i]."<br />";
+                $passenger .= $str;
             }
             else
             {
-                $str = "<b>".$PassengerData[$i]['Department']."</b><br />";
-                array_push($passenger,$str);
-                $str = $PassengerData[$i]['Name']."<br />";
-                array_push($passenger,$str);
+                $str = "<b>".$passenger_department[$i]."</b><br />";
+                $passenger .= $str;
+                $str = $passener_name[$i]."<br />";
+                $passenger .= $str;
             }
 
         }
         else
         {
-            $str = "<b>".$PassengerData[$i]['Department']."</b><br />";
-            array_push($passenger,$str);
-            $str = $PassengerData[$i]['Name']."<br />";
-            array_push($passenger,$str);
+            $str = "<b>".$passenger_department[$i]."</b><br />";
+            $passenger .= $str;
+            $str = $passener_name[$i]."<br />";
+            $passenger .= $str;
         }
     }
   }
 
   $arr = array(
-        'user' => $data[0]['value'],
-        'position' => $data[1]['value'],
-        'detail' => $data[2]['value'],
-        'fistdate' => DateThai($data[5]['value']),
-        'lastdate' => DateThai($data[7]['value']),
-        'time' => "ตั้งแต่เวลา ".$data[6]['value']." น. ถึง ".$data[8]['value']." น.",
+        'user' => $user_name,
+        'position' => $user_position,
+        'detail' => $detail,
+        'date' => $date,
+        'time' => "ตั้งแต่เวลา ".$time_start." น. ถึง ".$time_end." น.",
         'cars' => $cars,
-        'location' => $data[3]['value'],
-        'appointment' => $data[4]['value'],
+        'location' => $location,
+        'appointment' => $appointment,
         'passenger' => $passenger,
-        'department' => $data[9]['value']
+        'department' => $user_department
       );
 
   echo json_encode($arr);
+}
+elseif ($mode == 'insertReservation')
+{
+  session_start();
+  date_default_timezone_set("Asia/Bangkok");
+  $reserv_status = '0';
+  $usage_status = '0';
+  $timestamp = date("Y-m-d H:i:s");
+  // -----------------------------------------------
+  $user_name = $_POST['user_name'];
+  $user_position = $_POST['user_position'];
+  $detail = $_POST['detail'];
+  $appointment = $_POST['appoinment'];
+  $date_start = $_POST['date_start'];
+  $date_end = $_POST['date_end'];
+  $time_start = $_POST['time_start'];
+  $time_end = $_POST['time_end'];
+  $user_department = $_POST['user_department'];
+  $car_id = $_POST['Car_id'];
+
+  $location_name = $_POST['location'];
+  $location = "";
+  if (sizeof($location_name) != 1)
+  {
+    for ($i=0; $i < sizeof($location_name); $i++)
+    {
+      if ($i != (sizeof($location_name)-1))
+      {
+        $str = $location_name[$i].",";
+        $location .= $str;
+      }
+      else {
+        $str = $location_name[$i];
+        $location .= $str;
+      }
+    }
+  }
+  else
+  {
+    $str = $location_name[$i];
+    $location .= $str;
+  }
+
+
+  // INSERT RESERVAION detail
+  $sql_reserv = "
+  INSERT INTO reservation (requirement_detail,date_start,date_end,reserv_stime,reserv_etime
+  ,passenger_total,reservation_status,usage_status,timestamp,personnel_id,car_id,location,appointment_place)
+  VALUES('".$detail."','".$date_start."','".$date_end."','".$time_start."','".$time_end."'
+  ,".sizeof($_POST['passenger_name']).",'".$reserv_status."','".$usage_status."','".$timestamp."'
+  ,(SELECT personnel_id FROM personnel WHERE personnel_name ='".$_SESSION['user_name']."')
+  ,'".$car_id."','".$location."','".$appointment."') ON DUPLICATE KEY UPDATE reservation_id = reservation_id";
+
+  if($conn->query($sql_reserv)===true)
+  {
+    $passener_name = $_POST['passenger_name'];
+    $passenger_department = $_POST['passenger_department'];
+    // INSERT PASSENGER
+    for ($i=0; $i < sizeof($passener_name); $i++)
+    {
+      $sql_passenger = "
+      INSERT INTO passenger (passenger_name,department_id,reservation_id)
+      VALUES('".$passener_name[$i]."'
+      ,(SELECT department_id FROM department WHERE department_name = '".$passenger_department[$i]."')
+      ,(SELECT reservation_id FROM reservation WHERE timestamp = '".$timestamp."'))
+      ON DUPLICATE KEY UPDATE passenger_id = passenger_id
+      ";
+      $result = $conn->query($sql_passenger);
+    }
+    echo json_encode(array('result' => '1'));
+  }
+  else {echo json_encode(array('result' => '0'));}
+
 }
 elseif ($mode == 'getEdit')
 {
