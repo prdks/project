@@ -688,11 +688,18 @@ $(function () {
 
           //passenger
           var passenger_str = "";
-          $.each( data.passenger, function( index, value )
+          if (data.passenger != '') {
+            $.each( data.passenger, function( index, value )
+            {
+                passenger_str += value
+            });
+            $('#show-passenger').html(passenger_str);
+          }
+          else
           {
-              passenger_str += value
-          });
-          $('#show-passenger').html(passenger_str);
+            $('#show-passenger').html('ไม่มีผู้โดยสารเพิ่มเติม');
+          }
+          
           $('#show-location').html(data.reserv_detail.location);
 
           }
@@ -1042,11 +1049,18 @@ $(function () {
 
           //passenger
           var passenger_str = "";
-          $.each( data.passenger, function( index, value )
+          if (data.passenger != '') {
+            $.each( data.passenger, function( index, value )
+            {
+                passenger_str += value
+            });
+            $('#show-passenger').html(passenger_str);
+          }
+          else
           {
-              passenger_str += value
-          });
-          $('#show-passenger').html(passenger_str);
+            $('#show-passenger').html('ไม่มีผู้โดยสารเพิ่มเติม');
+          }
+
 
           $('#show-location').html(data.reserv_detail.location);
 

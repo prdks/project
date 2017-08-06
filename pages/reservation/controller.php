@@ -72,37 +72,52 @@ ON p.department_id = d.department_id
 WHERE p.reservation_id = '".$reservation_id."'
 GROUP BY department_name ORDER BY department_name ASC";
 $result = $conn->query($sql_department);
-while($r = $result->fetch_assoc()){
+$result_row = mysqli_num_rows($result);
+if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
+{
+  while($r = $result->fetch_assoc()){
 
-  $str = "<b>".$r['department_name']."</b><br />";
-  array_push($passenger,$str);
-
-  $sql_passenger ="
-  SELECT * FROM passenger p
-  LEFT JOIN department d
-  ON p.department_id = d.department_id
-  LEFT JOIN reservation r
-  ON p.reservation_id = r.reservation_id
-  WHERE p.department_id = '".$r['department_id']."'
-  AND r.reservation_id = ".$reservation_id."
-  ORDER BY passenger_name ASC , department_name ASC";
-  $res = $conn->query($sql_passenger);
-  while($rs = $res->fetch_assoc()){
-
-    $str = $rs['passenger_name']."<br />";
+    $str = "<b>".$r['department_name']."</b><br />";
     array_push($passenger,$str);
 
+    $sql_passenger ="
+    SELECT * FROM passenger p
+    LEFT JOIN department d
+    ON p.department_id = d.department_id
+    LEFT JOIN reservation r
+    ON p.reservation_id = r.reservation_id
+    WHERE p.department_id = '".$r['department_id']."'
+    AND r.reservation_id = ".$reservation_id."
+    ORDER BY passenger_name ASC , department_name ASC";
+    $res = $conn->query($sql_passenger);
+    while($rs = $res->fetch_assoc()){
+
+      $str = $rs['passenger_name']."<br />";
+      array_push($passenger,$str);
+
+    }
+
   }
-
-}
-
   $all = array(
               'reserv_detail' => $reserv ,
               'passenger' => $passenger,
               'status' => $row['reservation_status'],
               'note' => $row['note']
             );
-  echo json_encode(array('result' => '1'));
+}
+else
+{
+  $all = array(
+              'reserv_detail' => $reserv ,
+              'passenger' => '',
+              'status' => $row['reservation_status'],
+              'note' => $row['note']
+            );
+}
+
+
+
+  echo json_encode($all);
 
 }
 elseif ($mode == 'getDelete')
