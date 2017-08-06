@@ -347,7 +347,7 @@ elseif ($mode == 'getDetail_For_Submit')
 
   $passenger = "";
   if(!isset($_POST['passenger_name'])){
-    array_push($passenger,"ไม่มีผู้โดยสารเพิ่มเติม");
+    $passenger = "ไม่มีผู้โดยสารเพิ่มเติม";
   }else {
     $passener_name = $_POST['passenger_name'];
     $passenger_department = $_POST['passenger_department'];
@@ -433,37 +433,61 @@ elseif ($mode == 'insertReservation')
   }
   else
   {
-    $str = $location_name[$i];
+    $str = $location_name[0];
     $location .= $str;
   }
 
+  if (isset($_POST['passenger_name']))
+  {
+    // INSERT RESERVAION detail
+    $sql_reserv = "
+    INSERT INTO reservation (requirement_detail,date_start,date_end,reserv_stime,reserv_etime
+    ,passenger_total,reservation_status,usage_status,timestamp,personnel_id,car_id,location,appointment_place)
+    VALUES('".$detail."','".$date_start."','".$date_end."','".$time_start."','".$time_end."'
+    ,".sizeof($_POST['passenger_name']).",'".$reserv_status."','".$usage_status."','".$timestamp."'
+    ,(SELECT personnel_id FROM personnel WHERE personnel_name ='".$_SESSION['user_name']."')
+    ,'".$car_id."','".$location."','".$appointment."') ON DUPLICATE KEY UPDATE reservation_id = reservation_id";
+  }
+  else
+  {
+    // INSERT RESERVAION detail
+    $sql_reserv = "
+    INSERT INTO reservation (requirement_detail,date_start,date_end,reserv_stime,reserv_etime
+    ,passenger_total,reservation_status,usage_status,timestamp,personnel_id,car_id,location,appointment_place)
+    VALUES('".$detail."','".$date_start."','".$date_end."','".$time_start."','".$time_end."'
+    ,0,'".$reserv_status."','".$usage_status."','".$timestamp."'
+    ,(SELECT personnel_id FROM personnel WHERE personnel_name ='".$_SESSION['user_name']."')
+    ,'".$car_id."','".$location."','".$appointment."') ON DUPLICATE KEY UPDATE reservation_id = reservation_id";
+  }
 
-  // INSERT RESERVAION detail
-  $sql_reserv = "
-  INSERT INTO reservation (requirement_detail,date_start,date_end,reserv_stime,reserv_etime
-  ,passenger_total,reservation_status,usage_status,timestamp,personnel_id,car_id,location,appointment_place)
-  VALUES('".$detail."','".$date_start."','".$date_end."','".$time_start."','".$time_end."'
-  ,".sizeof($_POST['passenger_name']).",'".$reserv_status."','".$usage_status."','".$timestamp."'
-  ,(SELECT personnel_id FROM personnel WHERE personnel_name ='".$_SESSION['user_name']."')
-  ,'".$car_id."','".$location."','".$appointment."') ON DUPLICATE KEY UPDATE reservation_id = reservation_id";
+
 
   if($conn->query($sql_reserv)===true)
   {
-    $passener_name = $_POST['passenger_name'];
-    $passenger_department = $_POST['passenger_department'];
-    // INSERT PASSENGER
-    for ($i=0; $i < sizeof($passener_name); $i++)
+
+    if (isset($_POST['passenger_name']))
     {
-      $sql_passenger = "
-      INSERT INTO passenger (passenger_name,department_id,reservation_id)
-      VALUES('".$passener_name[$i]."'
-      ,(SELECT department_id FROM department WHERE department_name = '".$passenger_department[$i]."')
-      ,(SELECT reservation_id FROM reservation WHERE timestamp = '".$timestamp."'))
-      ON DUPLICATE KEY UPDATE passenger_id = passenger_id
-      ";
-      $result = $conn->query($sql_passenger);
+      $passener_name = $_POST['passenger_name'];
+      $passenger_department = $_POST['passenger_department'];
+        // INSERT PASSENGER
+        for ($i=0; $i < sizeof($passener_name); $i++)
+        {
+          $sql_passenger = "
+          INSERT INTO passenger (passenger_name,department_id,reservation_id)
+          VALUES('".$passener_name[$i]."'
+          ,(SELECT department_id FROM department WHERE department_name = '".$passenger_department[$i]."')
+          ,(SELECT reservation_id FROM reservation WHERE timestamp = '".$timestamp."'))
+          ON DUPLICATE KEY UPDATE passenger_id = passenger_id
+          ";
+          $result = $conn->query($sql_passenger);
+      }
+      echo json_encode(array('result' => '1'));
     }
-    echo json_encode(array('result' => '1'));
+    else
+    {
+      echo json_encode(array('result' => '1'));
+    }
+
   }
   else {echo json_encode(array('result' => '0'));}
 

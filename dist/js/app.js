@@ -471,7 +471,7 @@ $(function () {
                       $.each(data, function (i) {
                           trHTML += '<tr>';
                           trHTML += '<td><center>';
-                          trHTML += '<input type="radio" id="selecter_cars" name="selecter_cars" class="selecter_cars" value='+ data[i].id +'>';
+                          trHTML += '<input type="radio" id="selecter_cars" name="selecter_cars" class="selecter_cars" value="'+ data[i].id +'" data-seat="' + data[i].seat + '">';
                           trHTML += '</center></td>';
                           trHTML += '<td class="text-center">' + data[i].reg + '</td>';
                           trHTML += '<td>' + data[i].brand + '</td>';
@@ -652,8 +652,12 @@ $(function () {
                   function(){ window.location.assign('index.php'); }
                 );
             }
-          }
-        });
+          },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            // Your error handling logic here..
+        }
+      });
 
     }
     // -------------Calendar-------------------------
