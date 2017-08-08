@@ -102,7 +102,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
       </div>
 
       <div class="table-responsive">
-      <table class="table table-striped table-bordered table-hover">
+      <table class="table table-striped table-bordered">
           <thead>
               <tr>
                 <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>

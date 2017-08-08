@@ -81,6 +81,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
     $date_start = $_GET['date_start'];
     $date_end = $_GET['date_end'];
     $department = $_GET['department'];
+
     $sql = "
     SELECT * FROM reservation r
     LEFT JOIN cars c
@@ -89,13 +90,15 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
     ON c.car_brand_id = b.car_brand_id
     LEFT JOIN personnel p
     ON r.personnel_id = p.personnel_id
+    LEFT JOIN department d
+    ON p.department_id = d.department_id
     LEFT JOIN title_name t
     ON p.title_name_id = t.title_name_id
     WHERE date_start >= '".$date_start."'
     AND date_end <= '".$date_end."'
-    AND department_id = '".$department."'
+    AND d.department_id = '".$department."'
     AND reservation_status = 1
-    ORDER BY reservation_id";
+    ORDER BY date_start ASC";
     $result = $conn->query($sql);
     $result_row = mysqli_num_rows($result);
     if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
@@ -127,6 +130,10 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
       <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover">
           <thead>
+            <?php $row = $result->fetch_assoc(); ?>
+              <tr>
+                <th colspan="4"><?php echo $row['department_name']; ?></th>
+              </tr>
               <tr>
                 <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                   <th id="tb_tools_ismore">วันที่ใช้รถยนต์</th>
