@@ -17,7 +17,22 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">ออกรายการงานการจองรถยนต์</h3>
+                    <h3 class="page-header">
+                      ออกรายการงานการจองรถยนต์
+                      <?php
+                      if (isset($_GET['menu']))
+                      {
+                        switch ($_GET['menu']) {
+                          case 'department':
+                            echo "- ตามหน่วยงาน";
+                            break;
+                          case 'reg':
+                            echo "- ตามเลขทะเบียนรถยนต์";
+                            break;
+                        }
+                      }
+                      ?>
+                    </h3>
                 </div>
             </div>
             <?php
@@ -30,7 +45,6 @@
                 <a href="report_booking.php?menu=all"><i class="fa fa-tag fa-fw"></i> รายงานจองใช้รถ</a><br>
                 <a href="report_booking.php?menu=department"><i class="fa fa-tag fa-fw"></i> รายงานจองใช้รถยนต์-ตามหน่วยงาน</a><br>
                 <a href="report_booking.php?menu=reg"><i class="fa fa-tag fa-fw"></i> รายงานจองใช้รถยนต์-ตามเลขทะเบียนรถยนต์</a><br>
-                <a href="report_booking.php?menu=driver"><i class="fa fa-tag fa-fw"></i> รายงานจองใช้รถยนต์-ตามพนักงานขับรถ</a>
               </div>
             </div>
             <?php
@@ -47,10 +61,7 @@
                           include 'querydata/reportbooking/report_booking_department.php';
                     break;
                   case 'reg':
-                          include 'querydata/reportbooking/report_booking_all.php';
-                    break;
-                  case 'driver':
-                          include 'querydata/reportbooking/report_booking_all.php';
+                          include 'querydata/reportbooking/report_booking_reg.php';
                     break;
                 }
             }

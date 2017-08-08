@@ -166,7 +166,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
             </tr>
         </thead>
         <tbody>
-            <tr><td class='text-center' colspan='6'>ไม่พบรายการจองรถยนต์</td></tr>
+            <tr><td class='text-center' colspan='6'>** ไม่พบข้อมูลตามเงื่อนไข **์</td></tr>
         </tbody>
   </table>
 

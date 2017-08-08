@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <li><a href="report_booking.php">เมนูหลักออกรายการงานการจองรถยนต์</a></li>
-  <li class="active">รายงานจองใช้รถยนต์-ตามหน่วยงาน</li>
+  <li class="active">รายงานจองใช้รถยนต์-ตามเลขทะเบียนรถยนต์</li>
 </ul>
 <!-- searchbox -->
 <div class="row">
@@ -13,7 +13,7 @@
           <form action="<?=$_SERVER['PHP_SELF'];?>" class="form-horizontal" method="get">
             <div class="panel-body">
               <!-- วันแรกที่จองใช้ -->
-              <input type="hidden" name="menu" value="department">
+              <input type="hidden" name="menu" value="reg">
               <div class="form-group">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
                   <span class="requestfield">*</span> จากวันที่จอง :
@@ -42,12 +42,12 @@
               <!-- หน่วยงาน -->
               <div class="form-group">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                  <span class="requestfield">*</span> หน่วยงาน :
+                  <span class="requestfield">*</span> ทะเบียนรถยนต์ :
                 </label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                  <select class="form-control" name="department">
+                  <select class="form-control" name="car">
                     <?php
-                    $sql = "SELECT * FROM department ORDER By department_name ASC";
+                    $sql = "SELECT * FROM cars ORDER By car_reg ASC";
                     $result = $conn->query($sql);
                     $result_row = mysqli_num_rows($result);
                     if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
@@ -55,7 +55,7 @@
                       while ($row = $result->fetch_assoc())
                       {
                       ?>
-                      <option value="<?php echo $row['department_id'];?>"><?php echo $row['department_name'];?></option>
+                      <option value="<?php echo $row['car_id'];?>"><?php echo $row['car_reg'];?></option>
                       <?php
                       }
                     }
@@ -80,7 +80,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
   {
     $date_start = $_GET['date_start'];
     $date_end = $_GET['date_end'];
-    $department = $_GET['department'];
+    $carid = $_GET['car'];
 
     $sql = "
     SELECT * FROM reservation r
@@ -96,7 +96,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
     ON p.title_name_id = t.title_name_id
     WHERE date_start >= '".$date_start."'
     AND date_end <= '".$date_end."'
-    AND d.department_id = '".$department."'
+    AND c.car_id = '".$carid."'
     AND reservation_status = 1
     ORDER BY date_start ASC";
     $result = $conn->query($sql);
@@ -123,7 +123,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
         }
         ?>
         <div class="hidden-xs hidden-sm pull-right">
-          <a href="report_booking_department_pdf.php?<?php echo 'start='.$date_start.'&end='.$date_end.'&department='.$department;?>" class="btn btn-xs btn-primary" target="_blank">พิมพ์รายงานการจองรถยนต์</a>
+          <a href="report_booking_reg_pdf.php?<?php echo 'start='.$date_start.'&end='.$date_end.'&car='.$carid;?>" class="btn btn-xs btn-primary" target="_blank">พิมพ์รายงานการจองรถยนต์</a>
         </div>
       </div>
 
@@ -132,13 +132,13 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
           <thead>
             <?php $row = $result->fetch_assoc(); ?>
               <tr>
-                <th colspan="4"><?php echo $row['department_name']; ?></th>
+                <th colspan="4">รถยนต์ทะเบียน : <?php echo $row['car_reg']; ?></th>
               </tr>
               <tr>
-                <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                   <th id="tb_tools_ismore">วันที่ใช้รถยนต์</th>
-                  <th id="tb_detail_main">จองใช้เพื่อ</th>
+                  <th id="tb_detail_sub-nd">จองใช้เพื่อ</th>
                   <th id="tb_detail_main">สถานที่ไป</th>
+                  <th id="tb_detail_sub-nd">หน่วยงาน</th>
               </tr>
           </thead>
           <tbody>
@@ -147,13 +147,13 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
           {
           ?>
           <tr>
-            <td class="text-center"><?php echo $row["car_reg"]; ?></td>
               <td style="padding-left:25px;">
                 <?php echo ShortDateThai($row["date_start"]).' '.date("H:i",strtotime($row["reserv_stime"])).'น.'; ?><br />
                 <?php echo ShortDateThai($row["date_end"]).' '.date("H:i",strtotime($row["reserv_etime"])).'น.'; ?>
               </td>
               <td><?php echo $row["requirement_detail"]; ?></td>
               <td><?php echo $row["location"]; ?></td>
+              <td><?php echo $row["department_name"]; ?></td>
           </tr>
           <?php
           }
@@ -185,10 +185,10 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
     <table class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
-              <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
-                <th id="tb_tools_ismore">วันที่ใช้รถยนต์</th>
-                <th id="tb_detail_main">จองใช้เพื่อ</th>
-                <th id="tb_detail_main">สถานที่ไป</th>
+              <th id="tb_tools_ismore">วันที่ใช้รถยนต์</th>
+              <th id="tb_detail_sub-nd">จองใช้เพื่อ</th>
+              <th id="tb_detail_main">สถานที่ไป</th>
+              <th id="tb_detail_sub-nd">หน่วยงาน</th>
             </tr>
         </thead>
         <tbody>
