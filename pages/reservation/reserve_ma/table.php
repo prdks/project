@@ -92,7 +92,7 @@ echo" </td>
         <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
       </button>
 
-      <a href="pdf.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-info">
+      <a href="excute_form.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-info">
         <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติการจองใช้"></span>
       </a>
     </td>

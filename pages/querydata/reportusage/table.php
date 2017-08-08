@@ -20,7 +20,6 @@ if (isset($_POST['query_report_usage']))
   ORDER BY reservation_id";
   $result = $conn->query($sql);
   $result_row = mysqli_num_rows($result);
-  $result_row = 1;
   if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
   {
     ?>

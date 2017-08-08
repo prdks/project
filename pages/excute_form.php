@@ -63,6 +63,15 @@ if (isset($_GET['id']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+  <style media="screen">
+  table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+  </style>
 	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
 	<title>ฟอร์มขออนุมัติใช้รถยนต์<?php echo $_SESSION['system_name'];?></title>
 
@@ -511,8 +520,8 @@ $e = $d->fetch_assoc();
 </table>
 
 <script type="text/javascript">
-setTimeout(function(){window.print();}, 100);
-setTimeout(function(){window.close();}, 500);
+setTimeout(function(){window.print();}, 1000);
+setTimeout(function(){window.close();}, 1000);
 </script>
 </body>
 </html>
