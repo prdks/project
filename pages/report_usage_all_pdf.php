@@ -43,7 +43,7 @@ LEFT JOIN title_name t
 ON p.title_name_id = t.title_name_id
 WHERE date_start >= '".$date_start."'
 AND date_end <= '".$date_end."'
-AND reservation_status = 1
+AND usage_status = 2
 ORDER BY date_start ASC";
 $result = $conn->query($sql);
 $result_row = mysqli_num_rows($result);
@@ -59,7 +59,7 @@ $result_row = mysqli_num_rows($result);
 	<table width="100%" border="0" align="center" height="50">
 	  <tbody>
 			<tr>
-	    <td width="100%"  align="center"><h3>รายงานการจองรถยนต์</h3></td>
+	    <td width="100%"  align="center"><h3>รายงานการใช้ถยนต์</h3></td>
 	  	</tr>
 	</tbody>
 	</table>
@@ -161,7 +161,7 @@ $result_row = mysqli_num_rows($result);
 <table width="100%" border="0" align="center" cellpadding="0">
 <tbody>
 	<tr>
-		<td width="100%"><b>หมายเหตุ : </b>แสดงเฉพาะรายการที่อนุมัติ</td>
+		<td width="100%"><b>หมายเหตุ : </b>แสดงเฉพาะรายการที่ดำเนินการเสร็จสิ้นแล้วเท่านั้น</td>
 		</tr>
 </tbody>
 </table>

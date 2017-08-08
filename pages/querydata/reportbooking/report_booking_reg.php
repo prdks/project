@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <li><a href="report_booking.php">เมนูหลักออกรายการงานการจองรถยนต์</a></li>
-  <li class="active">รายงานจองใช้รถยนต์-ตามเลขทะเบียนรถยนต์</li>
+  <li class="active">รายงานจองรถยนต์-ตามเลขทะเบียนรถยนต์</li>
 </ul>
 <!-- searchbox -->
 <div class="row">
@@ -123,7 +123,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
         }
         ?>
         <div class="hidden-xs hidden-sm pull-right">
-          <a href="report_booking_reg_pdf.php?<?php echo 'start='.$date_start.'&end='.$date_end.'&car='.$carid;?>" class="btn btn-xs btn-primary" target="_blank">พิมพ์รายงานการจองรถยนต์</a>
+          <a href="report_booking_reg_pdf.php?<?php echo 'start='.$date_start.'&end='.$date_end.'&car='.$carid;?>" class="btn btn-xs btn-primary" target="_blank">พิมพ์รายงาน</a>
         </div>
       </div>
 

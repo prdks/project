@@ -28,6 +28,7 @@ function FullDateThai($strDate)
 //-------------เช็คค่าว่าง --------------------//
 $date_start = $_GET['start'];
 $date_end = $_GET['end'];
+$carid = $_GET['car'];
 
 $sql = "
 SELECT * FROM reservation r
@@ -43,7 +44,8 @@ LEFT JOIN title_name t
 ON p.title_name_id = t.title_name_id
 WHERE date_start >= '".$date_start."'
 AND date_end <= '".$date_end."'
-AND reservation_status = 1
+AND c.car_id = '".$carid."'
+AND usage_status = 2
 ORDER BY date_start ASC";
 $result = $conn->query($sql);
 $result_row = mysqli_num_rows($result);
@@ -59,7 +61,7 @@ $result_row = mysqli_num_rows($result);
 	<table width="100%" border="0" align="center" height="50">
 	  <tbody>
 			<tr>
-	    <td width="100%"  align="center"><h3>รายงานการจองรถยนต์</h3></td>
+	    <td width="100%"  align="center"><h3>รายงานการใช้รถยนต์-ตามทะเบียนรถยนต์</h3></td>
 	  	</tr>
 	</tbody>
 	</table>
@@ -103,13 +105,16 @@ $result_row = mysqli_num_rows($result);
 
 	<!-- ตาราง -->
 	<table width="100%" style="border:1px solid black;border-collapse:collapse;" cellpadding="10" align="center">
+		<?php $row = $result->fetch_assoc(); ?>
 			<thead>
+				<tr>
+					<th align="left" colspan="4" style="border:1px solid black;" width="100%">รถยนต์ทะเบียน : <?php echo $row['car_reg']; ?></th>
+				</tr>
 					<tr height="50">
-						<th style="border:1px solid black;" width="15%">ทะเบียนรถยนต์</th>
 						<th style="border:1px solid black;" width="25%">วันที่ใช้รถยนต์</th>
-						<th style="border:1px solid black;" width="30%">จองใช้เพื่อ</th>
-						<th style="border:1px solid black;" width="30%">สถานที่ไป</th>
-						<th style="border:1px solid black; " width="20%">หน่วยงาน</th>
+						<th style="border:1px solid black;" width="35%">จองใช้เพื่อ</th>
+						<th style="border:1px solid black;" width="25%">สถานที่ไป</th>
+						<th style="border:1px solid black;" width="30%">หน่วยงาน</th>
 					</tr>
 			</thead>
 			<tbody>
@@ -121,20 +126,19 @@ $result_row = mysqli_num_rows($result);
 					{ $count++;
 					?>
 					<tr>
-						<td align="center" style="border:1px solid black;"><?php echo $row["car_reg"]; ?></td>
 						<td style="border:1px solid black;">
 							<?php echo ShortDateThai($row["date_start"]).' '.date("H:i",strtotime($row["reserv_stime"])).'น.'; ?><br />
 							<?php echo ShortDateThai($row["date_end"]).' '.date("H:i",strtotime($row["reserv_etime"])).'น.'; ?>
 						</td>
 						<td style="border:1px solid black; white-space: pre-line;"><?php echo $row["requirement_detail"]; ?></td>
 						<td style="border:1px solid black; white-space: pre-line;"><?php echo $row["location"]; ?></td>
-						<td style="border:1px solid black; white-space: pre-line;" width="5%"><?php echo $row["department_name"]; ?></td>
+						<td style="border:1px solid black; white-space: pre-line;"><?php echo $row["department_name"]; ?></td>
 					</tr>
 					<?php
 					}
 			 ?>
 					 <tr>
-					 	<td colspan="5" align="center"><b>รวมทั้งหมด <?php echo $count; ?> รายการ</b></td>
+					 	<td colspan="4" align="center"><b>รวมทั้งหมด <?php echo $count; ?> รายการ</b></td>
 					 </tr>
 			<?php
 			}
@@ -142,7 +146,7 @@ $result_row = mysqli_num_rows($result);
 			{
 				?>
  					 <tr>
- 					 	<td colspan="5" align="center"><b>** ไม่พบข้อมูลตามเงื่อนไข **</b></td>
+ 					 	<td colspan="4" align="center"><b>** ไม่พบข้อมูลตามเงื่อนไข **</b></td>
  					 </tr>
  			<?php
 			}
@@ -161,7 +165,7 @@ $result_row = mysqli_num_rows($result);
 <table width="100%" border="0" align="center" cellpadding="0">
 <tbody>
 	<tr>
-		<td width="100%"><b>หมายเหตุ : </b>แสดงเฉพาะรายการที่อนุมัติ</td>
+		<td width="100%"><b>หมายเหตุ : </b>แสดงเฉพาะรายการที่ดำเนินการเสร็จสิ้นแล้วเท่านั้น</td>
 		</tr>
 </tbody>
 </table>

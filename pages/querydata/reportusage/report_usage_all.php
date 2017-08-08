@@ -1,13 +1,13 @@
 <ul class="breadcrumb">
-  <li><a href="report_booking.php">เมนูหลักออกรายการงานการจองรถยนต์</a></li>
-  <li class="active">ออกรายงานจองรถ</li>
+  <li><a href="report_usage.php">เมนูหลักออกรายการงานการใช้รถยนต์</a></li>
+  <li class="active">ออกรายงานใช้รถ</li>
 </ul>
 <!-- searchbox -->
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-                เรียกดูรายงานการจองรถยนต์ <i class="fa fa-search fa-fw"></i>
+                เรียกดูรายงานการใช้รถยนต์ <i class="fa fa-search fa-fw"></i>
           </div>
 
           <form action="<?=$_SERVER['PHP_SELF'];?>" class="form-horizontal" method="get">
@@ -16,7 +16,7 @@
               <input type="hidden" name="menu" value="all">
               <div class="form-group">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                  <span class="requestfield">*</span> จากวันที่จอง :
+                  <span class="requestfield">*</span> จากวันที่ใช้ :
                 </label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                   <div class="input-group">
@@ -71,7 +71,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
     ON p.title_name_id = t.title_name_id
     WHERE date_start >= '".$date_start."'
     AND date_end <= '".$date_end."'
-    AND reservation_status = 1
+    AND usage_status = 2
     ORDER BY date_start ASC";
     $result = $conn->query($sql);
     $result_row = mysqli_num_rows($result);
@@ -86,18 +86,18 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
         if ($date_start !== $date_end)
         {
         ?>
-        รายการจองรถยนต์ (<?php echo FullDateThai($date_start).' ถึง '.FullDateThai($date_end); ?>)
+        รายการใช้รถยนต์ (<?php echo FullDateThai($date_start).' ถึง '.FullDateThai($date_end); ?>)
         <?php
         }
         else
         {
         ?>
-        รายการจองรถยนต์ (<?php echo FullDateThai($date_start); ?>)
+        รายการใช้รถยนต์ (<?php echo FullDateThai($date_start); ?>)
         <?php
         }
         ?>
         <div class="hidden-xs hidden-sm pull-right">
-          <a href="report_booking_all_pdf.php?<?php echo 'start='.$date_start.'&end='.$date_end;?>" class="btn btn-xs btn-primary" target="_blank">พิมพ์รายงาน</a>
+          <a href="report_usage_all_pdf.php?<?php echo 'start='.$date_start.'&end='.$date_end;?>" class="btn btn-xs btn-primary" target="_blank">พิมพ์รายงาน</a>
         </div>
       </div>
 
@@ -139,7 +139,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
     </div>
     <div class="row">
       <div class="col-lg-12 text-danger">
-        * หมายเหตุ : แสดงเฉพาะรายการที่อนุมัติแล้วเท่านั้น
+        * หมายเหตุ : แสดงเฉพาะรายการที่ดำเนินการเสร็จสิ้นแล้วเท่านั้น
       </div>
     </div>
       <?php

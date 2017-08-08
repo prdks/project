@@ -42,9 +42,9 @@
             <div class="panel panel-default">
               <div class="panel-heading">เมนูออกรายงานการจองรถยนต์</div>
               <div class="panel-body">
-                <a href="report_booking.php?menu=all"><i class="fa fa-tag fa-fw"></i> รายงานจองใช้รถ</a><br>
-                <a href="report_booking.php?menu=department"><i class="fa fa-tag fa-fw"></i> รายงานจองใช้รถยนต์-ตามหน่วยงาน</a><br>
-                <a href="report_booking.php?menu=reg"><i class="fa fa-tag fa-fw"></i> รายงานจองใช้รถยนต์-ตามเลขทะเบียนรถยนต์</a><br>
+                <a href="report_booking.php?menu=all"><i class="fa fa-tag fa-fw"></i> รายงานจองรถ</a><br>
+                <a href="report_booking.php?menu=department"><i class="fa fa-tag fa-fw"></i> รายงานจองรถยนต์-ตามหน่วยงาน</a><br>
+                <a href="report_booking.php?menu=reg"><i class="fa fa-tag fa-fw"></i> รายงานจองรถยนต์-ตามเลขทะเบียนรถยนต์</a><br>
               </div>
             </div>
             <?php
