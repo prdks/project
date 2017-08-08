@@ -108,6 +108,7 @@ $result_row = mysqli_num_rows($result);
 						<th style="border:1px solid black;" width="15%">ทะเบียนรถยนต์</th>
 						<th style="border:1px solid black;" width="25%">วันที่ใช้รถยนต์</th>
 						<th style="border:1px solid black;" width="30%">จองใช้เพื่อ</th>
+						<th style="border:1px solid black;" width="30%">สถานที่ไป</th>
 						<th style="border:1px solid black; " width="20%">หน่วยงาน</th>
 					</tr>
 			</thead>
@@ -126,6 +127,7 @@ $result_row = mysqli_num_rows($result);
 							<?php echo ShortDateThai($row["date_end"]).' '.date("H:i",strtotime($row["reserv_etime"])).'น.'; ?>
 						</td>
 						<td style="border:1px solid black; white-space: pre-line;"><?php echo $row["requirement_detail"]; ?></td>
+						<td style="border:1px solid black; white-space: pre-line;"><?php echo $row["location"]; ?></td>
 						<td style="border:1px solid black; white-space: pre-line;" width="5%"><?php echo $row["department_name"]; ?></td>
 					</tr>
 					<?php

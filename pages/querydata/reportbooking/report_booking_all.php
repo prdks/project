@@ -108,7 +108,8 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
                 <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                   <th id="tb_tools_ismore">วันที่ใช้รถยนต์</th>
                   <th id="tb_detail_main">จองใช้เพื่อ</th>
-                  <th id="tb_detail_sub-nd">หน่วยงาน</th>
+                  <th id="tb_detail_main">สถานที่ไป</th>
+                  <th id="tb_detail_main">หน่วยงาน</th>
               </tr>
           </thead>
           <tbody>
@@ -123,6 +124,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
   							<?php echo ShortDateThai($row["date_end"]).' '.date("H:i",strtotime($row["reserv_etime"])).'น.'; ?>
               </td>
               <td><?php echo $row["requirement_detail"]; ?></td>
+              <td><?php echo $row["location"]; ?></td>
               <td><?php echo $row['department_name'] ?></td>
           </tr>
           <?php
