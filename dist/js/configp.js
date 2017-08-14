@@ -30,7 +30,7 @@ $(function() {
       var curStep = $(this).closest(".setup-content"),
           curStepBtn = curStep.attr("id"),
           nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-          curInputs = curStep.find("input[type='text'],input[type='password'],input[type='url']"),
+          curInputs = curStep.find("input[type='text'],input[name='password'],input[name='confirm_password'],input[type='url']"),
           isValid = true;
 
       $(".form-group").removeClass("has-error");
@@ -48,6 +48,16 @@ $(function() {
         swal('รหัสผ่านไม่ตรงกัน');
         isValid = "";
       }
+      if ($("input[name='new_password']").val() !== "") {
+        if ($("input[name='confirm_new_password']").val() !== $("input[name='new_password']").val())
+        {
+          $("input[name='new_password']").closest(".form-group").addClass("has-error");
+          $("input[name='confirm_new_password']").closest(".form-group").addClass("has-error");
+          swal('รหัสผ่านไม่ตรงกัน');
+          isValid = "";
+        }
+      }
+
 
       if (isValid)
           nextStepWizard.removeAttr('disabled').trigger('click');
