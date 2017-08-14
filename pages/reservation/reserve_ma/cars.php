@@ -59,7 +59,7 @@ $r = $res->fetch_assoc();
                     ?>
                     <td>
                       <section class="contain">
-                        <img src="viewimg.php?imgindex=<?php echo ($i+1)."&";?>id=<?php echo $r['car_id'];?>">
+                        <img src="viewimg.php?mode=car&imgindex=<?php echo ($i+1)."&";?>id=<?php echo $r['car_id'];?>">
                       </section>
                     </td>
                     <?php

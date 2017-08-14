@@ -8,7 +8,8 @@
           <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="index.php">
-        ระบบจองรถยนต์
+        <img src="viewimg.php?mode=logo" class="pull-left" width="30" height="30" style="padding-top:-15px; margin-top:-5px; margin-right:10px;">
+         ระบบจองรถยนต์
         <?php if (isset($_SESSION['system_name'])): ?>
           <?php echo $_SESSION['system_name']; ?>
         <?php endif; ?>

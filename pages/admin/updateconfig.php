@@ -6,7 +6,6 @@ $password = $_POST['confirm_password'];
 $faculty_name = $_POST['name'];
 $domain_name = $_POST['domain_name'];
 $url = $_POST['url'];
-$url_sheet = $_POST['url_sheet'];
 
 if($_FILES["logo"]["name"] != "")
 {
@@ -17,19 +16,7 @@ if($_FILES["logo"]["name"] != "")
   $FileData = addslashes($ReadBinary);
 }
 
-if ($url !== "" && $url_sheet !== "") //มีรูป มีurl
-{
-  $sql = "INSERT INTO config (username,password,name,domain_name,logo,url,url_sheet)
-  values ('".$username."','".$password."','".$faculty_name."','".$domain_name."','".$FileData."','".$url."','".$url_sheet."')
-  ON DUPLICATE KEY UPDATE id = id";
-}
-elseif ($url === "" && $url_sheet !== "")
-{
-  $sql = "INSERT INTO config (username,password,name,domain_name,logo,url_sheet)
-  values ('".$username."','".$password."','".$faculty_name."','".$domain_name."','".$FileData."','".$url_sheet."')
-  ON DUPLICATE KEY UPDATE id = id";
-}
-elseif ($url !== "" && $url_sheet === "")
+if ($url !== "")
 {
   $sql = "INSERT INTO config (username,password,name,domain_name,logo,url)
   values ('".$username."','".$password."','".$faculty_name."','".$domain_name."','".$FileData."','".$url."')
@@ -49,7 +36,7 @@ if($conn->query($sql)===true){
     function redir()
     {
     alert('ตั้งค่าเสร็จสิ้น');
-    window.location.assign('../index.php');
+    window.location.assign('../signup_app.php');
     }
     </script>
     <body onload='redir();'></body>
