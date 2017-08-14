@@ -14,7 +14,7 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
 {
   ?>
   <div class="table-responsive">
-  <table id="reservation_tablelist" class="table table-striped table-bordered table-hover">
+  <table id="reservation_ma_tablelist" class="table table-striped table-bordered table-hover">
       <thead>
           <tr>
               <th id="tb_detail_sub-th">วันที่ใช้รถยนต์</th>

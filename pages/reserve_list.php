@@ -35,7 +35,7 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
                   <div class="input-group">
-                    <input name="search_box" type="text" class="form-control" placeholder="พิมพ์เพื่อค้นหา">
+                    <input id="listsearch" name="search_box" onkeyup="filterlist()" type="text" class="form-control" placeholder="พิมพ์เพื่อค้นหา">
                     <div class="input-group-btn">
                       <button class="btn btn-default handleSearch" name="handleSearch" type="submit">
                         <i class="glyphicon glyphicon-search"></i>

@@ -186,40 +186,27 @@ table, th, td {
 		?>
 		<tr>
 			<td colspan="3">มีคนนั่ง <?php echo $row['passenger_total']; ?> คน</td>
-			<td colspan="2">ดังนี้</td>
-			<?php
-			$sql2 = "
-			SELECT p.* ,SUBSTRING_INDEX(p.passenger_name,' ',-2) as name
-      , SUBSTRING_INDEX(p.passenger_name,' ',1) as title FROM passenger p
-			LEFT JOIN department d
-			ON p.department_id = d.department_id
-			LEFT JOIN reservation r
-			ON p.reservation_id = r.reservation_id
-			WHERE p.reservation_id = '".$row['reservation_id']."'
-			ORDER BY p.passenger_name ASC";
-			$a = $conn->query($sql2);
-			$count = 0;
-			?>
-			<?php while ($b = $a->fetch_assoc()) {
-					$count++;
-						if ($count == 1)
-						{
-							?>
-							<td colspan="15"><?php echo $count.". ".$b['title'].$b['name']; ?></td>
-						</tr>
-							<?php
-						}
-						else
-						{
-							?>
-							<tr>
-								<td colspan="5"></td>
-								<td colspan="15"><?php echo $count.". ".$b['title'].$b['name']; ?></td>
-							</tr>
-							<?php
-						}
-			}
-		?>
+			<td colspan="17">ดังนี้&nbsp;&nbsp;
+        <?php
+  			$sql2 = "
+  			SELECT p.* ,SUBSTRING_INDEX(p.passenger_name,' ',-2) as name
+        , SUBSTRING_INDEX(p.passenger_name,' ',1) as title FROM passenger p
+  			LEFT JOIN department d
+  			ON p.department_id = d.department_id
+  			LEFT JOIN reservation r
+  			ON p.reservation_id = r.reservation_id
+  			WHERE p.reservation_id = '".$row['reservation_id']."'
+  			ORDER BY p.passenger_name ASC";
+  			$a = $conn->query($sql2);
+  			$count = 0;
+  			?>
+  			<?php while ($b = $a->fetch_assoc()) {
+  					$count++;
+  						echo $count.") ".$b['title'].$b['name']." ";
+  			}
+  		?>
+      </td>
+
 		<?php
 	}
 	?>

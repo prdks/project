@@ -4,6 +4,10 @@ body{
 
 }
 
+a.disabled {
+    pointer-events: none;
+}
+
 .badge1 {
 		position:relative;
 	}

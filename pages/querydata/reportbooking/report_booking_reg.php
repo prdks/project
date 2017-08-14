@@ -100,6 +100,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
     AND reservation_status = 1
     ORDER BY date_start ASC";
     $result = $conn->query($sql);
+    $result2 = $result;
     $result_row = mysqli_num_rows($result);
     if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
     {
@@ -130,9 +131,16 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
       <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover">
           <thead>
-            <?php $row = $result->fetch_assoc(); ?>
+            <?php
+            $Countable = 0;
+            while ($row = $result->fetch_assoc())
+            {
+              $Countable++;
+              if ($Countable == 1)
+              {
+              ?>
               <tr>
-                <th colspan="4">รถยนต์ทะเบียน : <?php echo $row['car_reg']; ?></th>
+                <th colspan="4">รถยนต์ทะเบียน : <?php echo $row["car_reg"]; ?></th>
               </tr>
               <tr>
                   <th id="tb_tools_ismore">วันที่ใช้รถยนต์</th>
@@ -140,12 +148,11 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
                   <th id="tb_detail_main">สถานที่ไป</th>
                   <th id="tb_detail_sub-nd">หน่วยงาน</th>
               </tr>
-          </thead>
-          <tbody>
-          <?php
-          while ($row = $result->fetch_assoc())
-          {
-          ?>
+              </thead>
+              <tbody>
+              <?php
+              }
+            ?>
           <tr>
               <td style="padding-left:25px;">
                 <?php echo ShortDateThai($row["date_start"]).' '.date("H:i",strtotime($row["reserv_stime"])).'น.'; ?><br />

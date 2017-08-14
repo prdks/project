@@ -699,7 +699,7 @@ $(function () {
           {
             $('#show-passenger').html('ไม่มีผู้โดยสารเพิ่มเติม');
           }
-          
+
           $('#show-location').html(data.reserv_detail.location);
 
           }
@@ -792,6 +792,22 @@ $(function () {
       });
 
     });
+    $('input[name=kilometer_total]').change(function () {
+      var val = $(this).val();
+      if (val > 0) {
+        $('input[name=reservation_status]').each(function () {
+          if ($(this).val() == 1 ) {
+            $(this).click();
+          }
+        });
+        $('input[name=usage_status]').each(function () {
+          if ($(this).val() == 2 ) {
+            $(this).click();
+          }
+        });
+      }
+    });
+
     $('input[name=kilometer_out]').change(function () {
       $('input[name=kilometer_in]').prop('min', $(this).val());
       $('input[name=kilometer_in]').val($(this).val());

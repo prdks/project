@@ -130,21 +130,30 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
       <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover">
           <thead>
-            <?php $row = $result->fetch_assoc(); ?>
-              <tr>
-                <th colspan="4"><?php echo $row['department_name']; ?></th>
-              </tr>
-              <tr>
-                <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
-                  <th id="tb_tools_ismore">วันที่ใช้รถยนต์</th>
-                  <th id="tb_detail_main">จองใช้เพื่อ</th>
-                  <th id="tb_detail_main">สถานที่ไป</th>
-              </tr>
-          </thead>
-          <tbody>
-          <?php
-          while ($row = $result->fetch_assoc())
-          {
+            <?php
+
+            $count = 0;
+            while ($row = $result->fetch_assoc())
+            {
+              $count++;
+              if ($count == 1)
+              {
+                ?>
+                  <tr>
+                    <th colspan="4"><?php echo $row['department_name']; ?></th>
+                  </tr>
+                  <tr>
+                    <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
+                      <th id="tb_tools_ismore">วันที่ใช้รถยนต์</th>
+                      <th id="tb_detail_main">จองใช้เพื่อ</th>
+                      <th id="tb_detail_main">สถานที่ไป</th>
+                  </tr>
+              </thead>
+              <tbody>
+              <?php
+              }
+
+
           ?>
           <tr>
             <td class="text-center"><?php echo $row["car_reg"]; ?></td>

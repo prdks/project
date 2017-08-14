@@ -105,26 +105,32 @@ $result_row = mysqli_num_rows($result);
 
 	<!-- ตาราง -->
 	<table width="100%" style="border:1px solid black;border-collapse:collapse;" cellpadding="10" align="center">
-		<?php $row = $result->fetch_assoc(); ?>
-			<thead>
-				<tr>
-					<th align="left" colspan="4" style="border:1px solid black;" width="100%">รถยนต์ทะเบียน : <?php echo $row['car_reg']; ?></th>
-				</tr>
-					<tr height="50">
-						<th style="border:1px solid black;" width="25%">วันที่ใช้รถยนต์</th>
-						<th style="border:1px solid black;" width="35%">จองใช้เพื่อ</th>
-						<th style="border:1px solid black;" width="25%">สถานที่ไป</th>
-						<th style="border:1px solid black;" width="30%">หน่วยงาน</th>
-					</tr>
-			</thead>
-			<tbody>
-			<?php
-	    if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
-	    {
-					$cout = 0;
-					while ($row = $result->fetch_assoc())
-					{ $count++;
+		<?php
+		if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
+		{
+				$cout = 0;
+				while ($row = $result->fetch_assoc())
+				{ $count++;
+					if ($count == 1)
+					{
 					?>
+					<thead>
+						<tr>
+							<th align="left" colspan="4" style="border:1px solid black;" width="100%">รถยนต์ทะเบียน : <?php echo $row['car_reg']; ?></th>
+						</tr>
+							<tr height="50">
+								<th style="border:1px solid black;" width="25%">วันที่ใช้รถยนต์</th>
+								<th style="border:1px solid black;" width="35%">จองใช้เพื่อ</th>
+								<th style="border:1px solid black;" width="25%">สถานที่ไป</th>
+								<th style="border:1px solid black;" width="30%">หน่วยงาน</th>
+							</tr>
+					</thead>
+					<tbody>
+					<?php
+					}
+				?>
+
+
 					<tr>
 						<td style="border:1px solid black;">
 							<?php echo ShortDateThai($row["date_start"]).' '.date("H:i",strtotime($row["reserv_stime"])).'น.'; ?><br />
