@@ -11,7 +11,7 @@
   <div class="container">
     <div class="row">
       <div id="setloginpage" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-        <form action="admin/signup.php" method="post" class="form-horizontal">
+        <form id="adminsignup_form" action="admin/signup.php" method="post" class="form-horizontal">
           <div class="panel panel-primary">
             <div class="panel-heading">ลงทะเบียน Admin ภายในระบบ</div>
             <div class="panel-body">

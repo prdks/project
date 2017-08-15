@@ -20,7 +20,7 @@
     {
     ?>
     <div id="setloginpage" class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
-      <form action="admin/insertconfig.php" method="post" class="form-horizontal" enctype="multipart/form-data">
+      <form id="admininsert_form" class="form-horizontal" enctype="multipart/form-data">
         <div class="panel panel-primary">
           <div class="panel-heading">Config Application</div>
           <div class="panel-body">
@@ -121,7 +121,7 @@
     $row = $result->fetch_array();
   ?>
   <div id="setloginpage" class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
-        <form action="admin/updateconfig.php" method="post" class="form-horizontal" enctype="multipart/form-data">
+        <form id="adminedit_form" action="admin/updateconfig.php" method="post" class="form-horizontal" enctype="multipart/form-data">
           <div class="panel panel-primary">
             <div class="panel-heading">Config Application</div>
             <div class="panel-body">
@@ -150,15 +150,15 @@
                     <div class="hidden-lg hidden-md"><br /></div>
                     <div class="form-group">
                       <label class="control-label"> ชื่อผู้ใช้งาน (Username)</label>
-                      <input name="username" type="text" class="form-control" placeholder="พิมพ์ชื่อผู้ใช้งาน" value="<?php echo $row['username']?>" required />
+                      <input name="username" type="text" class="form-control" placeholder="พิมพ์ชื่อผู้ใช้งาน" value="<?php echo $row['username']?>" />
                     </div>
                     <div class="form-group">
                       <label class="control-label">รหัสผ่านใหม่ (Password)</label>
-                      <input name="new_password" type="password" class="form-control" pattern=".{6,12}" title="พิมพ์รหัสผ่าน 6 ถึง 12 ตัวอักษร" placeholder="พิมพ์รหัสผ่าน 6 ถึง 12 ตัวอักษร" required/>
+                      <input name="new_password" type="password" class="form-control" pattern=".{6,12}" title="พิมพ์รหัสผ่าน 6 ถึง 12 ตัวอักษร" placeholder="พิมพ์รหัสผ่าน 6 ถึง 12 ตัวอักษร" />
                     </div>
                     <div class="form-group">
                       <label class="control-label">ยืนยันรหัสผ่าน (Confirm Password)</label>
-                      <input name="confirm_new_password" type="password" pattern=".{6,12}" class="form-control" title="พิมพ์รหัสผ่าน 6 ถึง 12 ตัวอักษร" placeholder="พิมพ์รหัสผ่านใหม่อีกครั้ง" required/>
+                      <input name="confirm_new_password" type="password" pattern=".{6,12}" class="form-control" title="พิมพ์รหัสผ่าน 6 ถึง 12 ตัวอักษร" placeholder="พิมพ์รหัสผ่านใหม่อีกครั้ง" />
                     </div>
 
                     <div class="pull-right">
@@ -174,11 +174,11 @@
                     <div class="hidden-lg hidden-md"><br /></div>
                     <div class="form-group">
                       <label class="control-label"> ชื่อของคณะ/สำนักงาน</label>
-                      <input name="name" maxlength="200" type="text" class="form-control" placeholder="พิมพ์ชื่อคณะ เช่น ''คณะอุตสาหกรรมการเกษตร'' เป็นต้น " value="<?php echo $row['name']?>" required/>
+                      <input name="name" maxlength="200" type="text" class="form-control" placeholder="พิมพ์ชื่อคณะ เช่น ''คณะอุตสาหกรรมการเกษตร'' เป็นต้น " value="<?php echo $row['name']?>" />
                     </div>
                     <div class="form-group">
                       <label class="control-label"> Email Domain Name</label>
-                      <input name="domain_name" maxlength="200" type="text" class="form-control" placeholder="พิมพ์ชื่อโดเมน เช่น ''agro.kmutnb.ac.th'' เป็นต้น " value="<?php echo $row['domain_name']?>" required/>
+                      <input name="domain_name" maxlength="200" type="text" class="form-control" placeholder="พิมพ์ชื่อโดเมน เช่น ''agro.kmutnb.ac.th'' เป็นต้น " value="<?php echo $row['domain_name']?>" />
                     </div>
                     <div class="form-group">
                       <label class="control-label">URL เว็บประเมินการจองและการใช้ (Google Forms)</label>
@@ -204,7 +204,7 @@
                     </div>
                     <div class="form-group">
                       <label class="control-label"> รูป Logo</label>
-                      <input type="file" class="form-control" accept="image/png, image/jpeg, image/gif" name="logo" required/>
+                      <input type="file" class="form-control" accept="image/png, image/jpeg, image/gif" name="logo" />
                       <br>
                     </div>
                     <div class="pull-right">
