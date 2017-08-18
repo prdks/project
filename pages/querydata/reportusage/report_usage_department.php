@@ -130,7 +130,15 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
       <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover">
           <thead>
-            <?php $row = $result->fetch_assoc(); ?>
+            <?php
+
+            $count = 0;
+            while ($row = $result->fetch_assoc())
+            {
+              $count++;
+              if ($count == 1)
+              {
+                ?>
               <tr>
                 <th colspan="4"><?php echo $row['department_name']; ?></th>
               </tr>
@@ -143,8 +151,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
           </thead>
           <tbody>
           <?php
-          while ($row = $result->fetch_assoc())
-          {
+          }
           ?>
           <tr>
             <td class="text-center"><?php echo $row["car_reg"]; ?></td>

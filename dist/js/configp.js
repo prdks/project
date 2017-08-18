@@ -49,6 +49,22 @@ $(function() {
         swal('รหัสผ่านไม่ตรงกัน');
         isValid = "";
       }
+      if ($("input[name='old_password']").val() !== "") {
+        if ($("input[name='new_password']").val() === "" && $("input[name='confirm_new_password']").val() === "")
+        {
+          $("input[name='new_password']").closest(".form-group").addClass("has-error");
+          $("input[name='confirm_new_password']").closest(".form-group").addClass("has-error");
+          swal('กรุณาป้อนรหัสผ่านใหม่');
+          isValid = "";
+        }
+        if ($("input[name='confirm_new_password']").val() !== $("input[name='new_password']").val())
+        {
+          $("input[name='new_password']").closest(".form-group").addClass("has-error");
+          $("input[name='confirm_new_password']").closest(".form-group").addClass("has-error");
+          swal('รหัสผ่านไม่ตรงกัน');
+          isValid = "";
+        }
+      }
       if ($("input[name='new_password']").val() !== "") {
         if ($("input[name='confirm_new_password']").val() !== $("input[name='new_password']").val())
         {
@@ -64,13 +80,11 @@ $(function() {
         isValid = "";
       }
 
-
       if (isValid)
           nextStepWizard.removeAttr('disabled').trigger('click');
   });
 
   $('div.setup-panel div a.btn-primary').trigger('click');
-
   // ------------------------------------------------------------------
 
   $("#adminlogin_form").submit(function(e) {
@@ -98,11 +112,11 @@ $(function() {
         data: data,
         dataType: 'json',
         success: function(data){
-          if (data.result == 1) //สำเร็จ
+          if (data.result == 1) //login by user & pass form database
           {
-            window.location.assign('page_config.php');
+            window.location.assign('page_config.php?callback='+data.id);
           }
-          else if (data.result == 2) //ไม่สำเร็จ
+          else if (data.result == 2) //login by config_user&pass
           {
             window.location.assign('page_config.php');
           }

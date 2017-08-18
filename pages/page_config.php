@@ -16,7 +16,7 @@
   <div class="row">
 
     <?php
-    if (!isset($_SESSION['config_id']))
+    if (!isset($_GET['callback']))
     {
     ?>
     <div id="setloginpage" class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
@@ -116,7 +116,7 @@
   }
   else
   {
-    $sql = "select * from config where id = '".$_SESSION['config_id']."'";
+    $sql = "select * from config where id = '".$_GET['callback']."'";
     $result = $conn->query($sql);
     $row = $result->fetch_array();
   ?>
@@ -153,7 +153,11 @@
                       <input name="username" type="text" class="form-control" placeholder="พิมพ์ชื่อผู้ใช้งาน" value="<?php echo $row['username']?>" />
                     </div>
                     <div class="form-group">
-                      <label class="control-label">รหัสผ่านใหม่ (Password)</label>
+                      <label class="control-label">รหัสผ่านเดิม (Old-Password)</label>
+                      <input name="old_password" type="password" class="form-control" pattern=".{6,12}" title="พิมพ์รหัสผ่าน 6 ถึง 12 ตัวอักษร" placeholder="พิมพ์รหัสผ่าน 6 ถึง 12 ตัวอักษร" />
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">รหัสผ่านใหม่ (New-Password)</label>
                       <input name="new_password" type="password" class="form-control" pattern=".{6,12}" title="พิมพ์รหัสผ่าน 6 ถึง 12 ตัวอักษร" placeholder="พิมพ์รหัสผ่าน 6 ถึง 12 ตัวอักษร" />
                     </div>
                     <div class="form-group">
@@ -195,6 +199,10 @@
                 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
                   <div class="col-md-12">
                     <br />
+                    <?php
+                    if (isset($row['logo']))
+                    {
+                    ?>
                     <div class="form-group">
                       <center>
                         <section class="contain">
@@ -202,6 +210,9 @@
                         </section>
                       </center>
                     </div>
+                    <?php
+                    }
+                    ?>
                     <div class="form-group">
                       <label class="control-label"> รูป Logo</label>
                       <input type="file" class="form-control" accept="image/png, image/jpeg, image/gif" name="logo" />

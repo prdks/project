@@ -17,18 +17,21 @@ if ($mode == 'login')
     $sql = "select * from config where id = 1";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
-    if ($row['username'] === $user && $row['password'] === $pass)
+    if ($row['username'] === $user)
     {
-      $_SESSION['config_id'] = $row['id'];
-      echo json_encode(array('result' => '1'));
+      if (password_verify($pass, $row['password']))
+      {
+        echo json_encode(array('result' => '1' , 'id' => $row['id']));
+      }
+      else
+      {
+        echo json_encode(array('result' => 'error'));
+      }
     }
     else
     {
       echo json_encode(array('result' => 'error'));
     }
-
-
-
   }
   elseif ($row['id'] == 0)
   {
@@ -40,7 +43,7 @@ if ($mode == 'login')
     }
     else
     {
-      echo json_encode(array('result' => '2'));
+      echo json_encode(array('result' => '2' , 'id' => ''));
     }
 
   }
@@ -65,13 +68,13 @@ elseif ($mode == 'insertdata')
   if ($url !== "")
   {
     $sql = "INSERT INTO config (username,password,name,domain_name,logo,url)
-    values ('".$username."','".$password."','".$faculty_name."','".$domain_name."','".$FileData."','".$url."')
+    values ('".$username."','".password_hash($password, PASSWORD_DEFAULT)."','".$faculty_name."','".$domain_name."','".$FileData."','".$url."')
     ON DUPLICATE KEY UPDATE id = id";
   }
   else
   {
     $sql = "INSERT INTO config (username,password,name,domain_name,logo)
-    values ('".$username."','".$password."','".$faculty_name."','".$domain_name."','".$FileData."')
+    values ('".$username."','".password_hash($password, PASSWORD_DEFAULT)."','".$faculty_name."','".$domain_name."','".$FileData."')
     ON DUPLICATE KEY UPDATE id = id";
   }
 

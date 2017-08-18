@@ -105,7 +105,15 @@ $result_row = mysqli_num_rows($result);
 
 	<!-- ตาราง -->
 	<table width="100%" style="border:1px solid black;border-collapse:collapse;" cellpadding="10" align="center">
-		<?php $row = $result->fetch_assoc(); ?>
+		<?php
+		if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
+		{
+				$cout = 0;
+				while ($row = $result->fetch_assoc())
+				{ $count++;
+					if ($count == 1)
+					{
+					?>
 			<thead>
 				<tr>
 					<th align="left" colspan="4" style="border:1px solid black;" width="100%"><?php echo $row['department_name']; ?></th>
@@ -119,11 +127,7 @@ $result_row = mysqli_num_rows($result);
 			</thead>
 			<tbody>
 			<?php
-	    if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
-	    {
-					$cout = 0;
-					while ($row = $result->fetch_assoc())
-					{ $count++;
+				}
 					?>
 					<tr>
 						<td align="center" style="border:1px solid black;"><?php echo $row["car_reg"]; ?></td>
