@@ -134,16 +134,32 @@
             </div>
             <div class="panel-body">
                 <div class="tab-content">
+                  <!-- First -->
                     <div class="tab-pane active" id="home_edit">
                       <center>
                         <br><br><br>
                         <h3>กรุณาเลือกเมนูการแก้ไขที่ต้องการในแท็บด้านขวา</h3>
                         <br><br><br>
+                        <?php
+                        $sql = "SELECT count(personnel_id) as Result FROM personnel p
+                        LEFT OUTER JOIN user_type u
+                        ON u.user_type_id = p.user_type_id
+                        WHERE u.user_level = 0";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+
+                        if($row['Result'] > 0) $status = 1;
+                        else $status = 0;
+                        ?>
+                        <div class="pull-left">
+                          <a id="delete_data_btn" class="btn btn-danger btn-md" data-status="<?php echo $status;?>" type="button"><i class="fa fa-trash-o fa-fw"></i>ลบการตั้งค่าระบบ</a>
+                        </div>
                         <div class="pull-right">
                           <a class="btn btn-default btn-md" href="admin_login.php" type="button">ออกจากระบบ</a>
                         </div>
                       </center>
                     </div>
+                    <!-- Edit User Pass -->
                     <div class="tab-pane fade" id="edit_userpass">
                       <form id="edit_pass_form" class="form-horizontal">
                         <legend>การแก้ไขรหัสผ่าน <i class="fa fa-key"></i></legend>
@@ -173,6 +189,7 @@
                         </div>
                       </form>
                     </div>
+                    <!-- Edit Data -->
                     <div class="tab-pane fade" id="edit_info">
                       <form id="edit_data_form" class="form-horizontal">
                         <legend>การแก้ไขข้อมูลคณะ <i class="fa fa-file-o"></i></legend>
@@ -197,6 +214,7 @@
                         </div>
                       </form>
                     </div>
+                    <!-- Edit Logo -->
                     <div class="tab-pane fade" id="edit_logo">
                       <form id="edit_logo_form" class="form-horizontal">
                         <legend>การแก้ไขรูปโลโก้คณะ <i class="fa fa-image"></i></legend>

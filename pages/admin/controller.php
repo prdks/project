@@ -79,7 +79,21 @@ elseif ($mode == 'insertdata')
   }
 
   if($conn->query($sql)===true){
-    echo json_encode(array('result' => '1'));
+    $sql = "SELECT count(personnel_id) as Result FROM personnel p
+    LEFT OUTER JOIN user_type u
+    ON u.user_type_id = p.user_type_id
+    WHERE u.user_level = 0";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    if($row['Result'] > 0)
+    {
+      echo json_encode(array('result' => '2')); //ถ้าไม่มีแอดมิน
+    }
+    else
+    {
+      echo json_encode(array('result' => '1')); //ถ้ามีแอดมิน
+    }
+    
   }else {
     echo json_encode(array('result' => '0'));
   }
@@ -169,6 +183,17 @@ elseif ($mode == 'updateLogo')
   logo = '".$FileData."'
   WHERE id = '".$id."'";
 
+  if($conn->query($sql)===true){
+    echo json_encode(array('result' => '1'));
+  }else {
+    echo json_encode(array('result' => '0'));
+  }
+}
+elseif ($mode == 'DeleteData')
+{
+  $id = $_POST['id'];
+
+  $sql = "DELETE FROM config WHERE id = '".$id."'";
   if($conn->query($sql)===true){
     echo json_encode(array('result' => '1'));
   }else {

@@ -291,6 +291,70 @@ $(function() {
       }
     });
   }
+  // --------------------- Delete Data ------------------------------
+  $("#delete_data_btn").click(function () {
+    var status = $(this).attr('data-status');
+    if (status == 1) 
+    {
+      swal({
+        title: "<b><h3>ต้องการลบข้อมูลการตั้งค่าระบบใช่หรือไม่</h3></b>",
+        text: "<span class='text-danger'>หมายเหตุ : การลบข้อมูลการตั้งค่าระบบ<br>ข้อมูลอื่นๆภายในระบบจะยังคงอยู่</span>",
+        type: "warning",
+        showCancelButton: true,
+        cancelButtonText: 'ยกเลิก',
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "ยืนยันลบข้อมูล",
+        closeOnConfirm: false,
+        html: true
+      },
+      function(){
+        var id = $(".callback_v").val();
+        $.ajax({
+          type: "POST",
+          url: "admin/controller.php",
+          data: {id: id , mode: 'DeleteData'},
+          dataType: 'json',
+          success: function(data){
+            if (data.result == 1)
+              {
+                swal({
+                    title: "ลบข้อมูลการตั้งค่าสำเร็จ",
+                    text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                    type: "success",
+                    timer: 2000,
+                    showConfirmButton: false,
+                  },
+                  function(){ window.location.assign('_logout.php');}
+                );
+              }
+              else if (data.result == 0)
+              {
+                swal({
+                    title: "ไม่สามารถลบข้อมูลได้ กรุณาทำรายการใหม",
+                    text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                    type: "error",
+                    timer: 2000,
+                    showConfirmButton: false,
+                    html: true,
+                  });
+              }
+          }
+        });
+      });
+    }
+    else
+    {
+      swal({
+        title: "<b><h3>ไม่สามารถลบข้อมูลการตั้งค่าระบบได้</h3></b>",
+        text: "<span class='text-danger'>หมายเหตุ : เนื่องจากไม่พบข้อมูลผู้ดูแลระบบ</span>",
+        type: "error",
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "ตกลง",
+        closeOnConfirm: true,
+        html: true
+      });
+    }
+  });
 
   // ---------------------------------------------------------------
 
@@ -380,6 +444,18 @@ $(function() {
               function(){ window.location.assign('page_config.php'); }
             );
         }
+        else if (data.result == 2) //สำเร็จแต่มีแอดมิน
+          {
+            swal({
+                title: "ตั้งค่าเสร็จสิ้น",
+                text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                type: "success",
+                timer: 2000,
+                showConfirmButton: false,
+              },
+              function(){ window.location.assign('index.php'); }
+            );
+          }
       }
     });
   }
