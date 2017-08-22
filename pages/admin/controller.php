@@ -84,6 +84,55 @@ elseif ($mode == 'insertdata')
     echo json_encode(array('result' => '0'));
   }
 }
+elseif ($mode == 'getData')
+{
+  $id = $_POST['id'];
+
+  $sql = "SELECT * FROM config WHERE id = ".$id;
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+
+  $data = array('id' => $id
+              , 'username' => $row['username']
+              , 'password' => $row['password']
+              , 'name' => $row['name']
+              , 'domain' => $row['domain_name']
+              , 'url' => $row['url']
+            );
+
+  echo json_encode($data);
+}
+elseif ($mode == 'updateUserPass')
+{
+  $id = $_POST['id'];
+  $username = $_POST['username'];
+  $old_password = $_POST['old_password'];
+  $new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+  $confirm = $_POST['confirm_new_password'];
+
+  $sql = "SELECT password FROM config WHERE id = '".$id."'";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+
+  if(password_verify($old_password, $row['password'])) //ถ้ารหัสเก่าถูก
+  {
+    $sql = "UPDATE config SET
+     username = '".$username."'
+    ,password = '".$new_password."'
+    WHERE id = '".$id."'";
+
+    if($conn->query($sql)===true){
+      echo json_encode(array('result' => '1')); //แก้ไขได้
+    }else {
+      echo json_encode(array('result' => '0')); // แก้ไขไม่ได้
+    }
+  }
+  else
+  {
+      echo json_encode(array('result' => 'error')); // รหัสเก่าผิด
+  }
+
+}
 elseif ($mode == 'editdata')
 {
   $username = $_POST['username'];
@@ -99,10 +148,6 @@ elseif ($mode == 'editdata')
     $ReadBinary = fread($fp,filesize($_FILES["logo"]["tmp_name"]));
     fclose($fp);
     $FileData = addslashes($ReadBinary);
-  }
-  else
-  {
-    # code...
   }
 
   if ($url !== "")

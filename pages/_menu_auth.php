@@ -8,23 +8,26 @@
     $result = $conn->query($sql);
     $row = $result->fetch_array();
     $num_approve = $row['reservecout'];
-    ?>
-    <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
-      <a href="reserve_approve.php">
-        <?php
+    
         switch ($_SESSION['user_type']) {
           case 0:
           {
             if ($num_approve > 0)
             {
               ?>
+              <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+              <a href="reserve_approve.php">
               <i class="fa fa-bell fa-fw"></i><span class="badge1" data-badge="<?php echo $num_approve?>"></span>
               <?php
             }
             else
             {
               ?>
+              <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+              <a href="reserve_approve.php">
               <i class="fa fa-bell"></i>
+              </a>
+              </li>
               <?php
             }
           }
@@ -34,13 +37,21 @@
             if ($num_approve > 0)
             {
               ?>
+              <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+               <a href="reserve_approve.php">
               <i class="fa fa-bell fa-fw"></i><span class="badge1" data-badge="<?php echo $num_approve?>"></span>
+              </a>
+              </li>
               <?php
             }
             else
             {
               ?>
+              <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+               <a href="reserve_approve.php">
               <i class="fa fa-bell"></i>
+              </a>
+              </li>
               <?php
             }
           }
@@ -48,8 +59,7 @@
 
         }
         ?>
-      </a>
-    </li>
+      
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
           <?php echo $_SESSION['user_name']; ?> <i class="fa fa-fw fa-caret-down"></i>

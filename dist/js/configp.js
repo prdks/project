@@ -46,39 +46,17 @@ $(function() {
       {
         $("input[name='password']").closest(".form-group").addClass("has-error");
         $("input[name='confirm_password']").closest(".form-group").addClass("has-error");
-        swal('รหัสผ่านไม่ตรงกัน');
+        swal({
+          title: "รหัสผ่านไม่ตรงกัน",
+          text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+           type: "error",
+          timer: 2000,
+          html: true,
+          showConfirmButton: false,
+        });
         isValid = "";
       }
-      if ($("input[name='old_password']").val() !== "") {
-        if ($("input[name='new_password']").val() === "" && $("input[name='confirm_new_password']").val() === "")
-        {
-          $("input[name='new_password']").closest(".form-group").addClass("has-error");
-          $("input[name='confirm_new_password']").closest(".form-group").addClass("has-error");
-          swal('กรุณาป้อนรหัสผ่านใหม่');
-          isValid = "";
-        }
-        if ($("input[name='confirm_new_password']").val() !== $("input[name='new_password']").val())
-        {
-          $("input[name='new_password']").closest(".form-group").addClass("has-error");
-          $("input[name='confirm_new_password']").closest(".form-group").addClass("has-error");
-          swal('รหัสผ่านไม่ตรงกัน');
-          isValid = "";
-        }
-      }
-      if ($("input[name='new_password']").val() !== "") {
-        if ($("input[name='confirm_new_password']").val() !== $("input[name='new_password']").val())
-        {
-          $("input[name='new_password']").closest(".form-group").addClass("has-error");
-          $("input[name='confirm_new_password']").closest(".form-group").addClass("has-error");
-          swal('รหัสผ่านไม่ตรงกัน');
-          isValid = "";
-        }
-      }
-      if ($("input[name='confirm_new_password']").val() !== "" && $("input[name='new_password']").val() === "") {
-        $("input[name='new_password']").closest(".form-group").addClass("has-error");
-        swal('กรุณาป้อนรหัสผ่านใหม่');
-        isValid = "";
-      }
+      
 
       if (isValid)
           nextStepWizard.removeAttr('disabled').trigger('click');
@@ -86,6 +64,194 @@ $(function() {
 
   $('div.setup-panel div a.btn-primary').trigger('click');
   // ------------------------------------------------------------------
+  $(".back_home").click(function () {
+    $("#hometab").click();
+  });
+  // --------------------- Edit User Pass ------------------------------
+  $("#link_editUserpass").click(function () {
+    var id = $(".callback_v").val();
+    $.ajax({
+      type: "POST",
+      url: "admin/controller.php",
+      data: {id, mode:'getData'},
+      dataType: 'json',
+      success: function(data){
+        $('input[name=username]').val(data.username);
+        // clear input password
+        $('input[name=old_password]').val('');
+        $('input[name=new_password]').val('');
+        $('input[name=confirm_new_password]').val('');
+
+      }
+    });
+
+  });
+
+  $("#edit_pass_form").submit(function(e) {
+    e.preventDefault();
+
+    var username = $('input[name=username]');
+    var new_p = $('input[name=new_password]');
+    var confirm_p = $('input[name=confirm_new_password]');
+
+    if($.trim(username.val()).length != 0)
+    {
+      if(confirm_p.val() !== new_p.val())
+        {
+          swal({
+            title: "รหัสผ่านใหม่ไม่ตรงกัน",
+            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+             type: "error",
+            timer: 2000,
+            html: true,
+            showConfirmButton: false,
+          });
+          confirm_p.focus();
+        }
+        else
+        {
+          updateUserPass();
+        }
+    }
+    else
+    {
+      swal({
+        title: "กรุณาป้อนชื่อผู้ใช้งาน",
+        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+         type: "error",
+        timer: 2000,
+        html: true,
+        showConfirmButton: false,
+      });
+      username.focus();
+    }
+    
+  });
+
+  function updateUserPass() 
+  {
+    var id = $(".callback_v").val();
+    var data = $('#edit_pass_form').serializeArray();
+    data.push({name : 'id' , value : id});
+    data.push({name : 'mode' , value : 'updateUserPass'});
+    $.ajax({
+      type: "POST",
+      url: "admin/controller.php",
+      data: data,
+      dataType: 'json',
+      success: function(data){
+        if (data.result == 1)
+        {
+          swal({
+              title: "แก้ไขรหัสผ่านสำเร็จ",
+              text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+              type: "success",
+              timer: 2000,
+              showConfirmButton: false,
+            },
+            function(){ window.location.assign('page_config.php?callback='+id);}
+          );
+        }
+        else if (data.result == 0)
+        {
+          swal({
+              title: "แก้ไขรหัสผ่านผิดพลาด กรุณาทำรายการใหม",
+              text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+              type: "error",
+              timer: 2000,
+              showConfirmButton: false,
+              html: true,
+            });
+          $("#link_editUserpass").click();
+        }
+        else if (data.result === 'error')
+        {
+          swal({
+                title: "รหัสผ่านเดิมไม่ถูกต้อง กรุณาทำรายการใหม่",
+                text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                type: "error",
+                timer: 2000,
+                html: true,
+                showConfirmButton: false,
+              });
+          $("#link_editUserpass").click();
+        }
+      }
+    }); 
+  }
+  // --------------------- Edit Data ------------------------------
+  $("#link_editInfo").click(function () {
+    var id = $(".callback_v").val();
+    $.ajax({
+      type: "POST",
+      url: "admin/controller.php",
+      data: {id, mode:'getData'},
+      dataType: 'json',
+      success: function(data){
+        $('input[name=name').val(data.name);
+        $('input[name=domain_name]').val(data.domain);
+        $('input[name=url]').val(data.url);
+      }
+    });
+  });
+
+  $("#edit_data_form").submit(function(e) {
+    e.preventDefault();
+
+  });
+
+  function updateData() 
+  {
+    var id = $(".callback_v").val();
+    var data = $('#edit_data_form').serializeArray();
+    data.push({name : 'id' , value : id});
+    data.push({name : 'mode' , value : 'updateData'});
+    $.ajax({
+      type: "POST",
+      url: "admin/controller.php",
+      data: data,
+      dataType: 'json',
+      success: function(data){
+        if (data.result == 1)
+        {
+          swal({
+              title: "แก้ไขข้อมูลคณะสำเร็จ",
+              text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+              type: "success",
+              timer: 2000,
+              showConfirmButton: false,
+            },
+            function(){ window.location.assign('page_config.php?callback='+id);}
+          );
+        }
+        else if (data.result == 0)
+        {
+          swal({
+              title: "แก้ไขข้อมูลคณะผิดพลาด กรุณาทำรายการใหม",
+              text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+              type: "error",
+              timer: 2000,
+              showConfirmButton: false,
+              html: true,
+            });
+          $("#link_editInfo").click();
+        }
+        else if (data.result === 'error')
+        {
+          swal({
+                title: "รหัสผ่านเดิมไม่ถูกต้อง กรุณาทำรายการใหม่",
+                text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                type: "error",
+                timer: 2000,
+                html: true,
+                showConfirmButton: false,
+              });
+          $("#link_editInfo").click();
+        }
+      }
+    }); 
+  }
+  // ---------------------------------------------------------------
 
   $("#adminlogin_form").submit(function(e) {
       e.preventDefault();

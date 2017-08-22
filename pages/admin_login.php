@@ -15,7 +15,24 @@
       <div id="setloginpage" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
         <form id="adminlogin_form" class="form-horizontal">
           <div class="panel panel-primary">
-            <div class="panel-heading">เข้าสู่ระบบ Config Application</div>
+            <div class="panel-heading">
+              เข้าสู่การตั้งค่าระบบ
+              <?php
+              $sql = "select count(id) as id from config";
+              $result = $conn->query($sql);
+              $row = $result->fetch_assoc();
+              if ($row['id'] != 0)
+              {
+              ?>
+              <span class="pull-right">
+                <a class="btn btn-xs btn-primary" href="_logout.php" data-toggle="tooltip" data-placement="top" data-original-title="กลับหน้าหลัก">
+                  <i class="fa fa-times"></i>
+                </a>
+              </span>
+              <?php
+              }
+              ?>
+            </div>
             <div class="panel-body">
 
               <div class="form-group">
