@@ -152,4 +152,27 @@ elseif ($mode == 'updateData')
     echo json_encode(array('result' => '0'));
   }
 }
+elseif ($mode == 'updateLogo')
+{
+  $id = $_POST['id'];
+
+  if($_FILES["logo"]["name"] != "")
+  {
+    //*** Read file BINARY ***'
+    $fp = fopen($_FILES["logo"]["tmp_name"],"r");
+    $ReadBinary = fread($fp,filesize($_FILES["logo"]["tmp_name"]));
+    fclose($fp);
+    $FileData = addslashes($ReadBinary);
+  }
+
+  $sql = "UPDATE config SET
+  logo = '".$FileData."'
+  WHERE id = '".$id."'";
+
+  if($conn->query($sql)===true){
+    echo json_encode(array('result' => '1'));
+  }else {
+    echo json_encode(array('result' => '0'));
+  }
+}
 ?>

@@ -239,6 +239,59 @@ $(function() {
       }
     }); 
   }
+  // --------------------- Edit Logo ------------------------------
+  $("#link_editLogo").click(function(){
+    $('input[name=logo]').val('');
+  });
+
+  $("#edit_logo_form").submit(function(e) {
+    e.preventDefault();
+    updateLogo();
+  });
+
+  function updateLogo() 
+  {
+    var id = $(".callback_v").val();
+    var form = $('#edit_logo_form')[0];
+    var formData = new FormData(form);
+    formData.append('id', id);
+    formData.append('mode', 'updateLogo');
+    $.ajax({
+      type: "POST",
+      url: "admin/controller.php",
+      data: formData,
+      dataType: 'json',
+      contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+      processData: false, // NEEDED, DON'T OMIT THIS
+      success: function(data){
+        if (data.result == 1)
+          {
+            swal({
+                title: "แก้ไขรูปโลโก้คณะสำเร็จ",
+                text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                type: "success",
+                timer: 2000,
+                showConfirmButton: false,
+              },
+              function(){ window.location.assign('page_config.php?callback='+id);}
+            );
+          }
+          else if (data.result == 0)
+          {
+            swal({
+                title: "แก้ไขรูปโลโก้คณะผิดพลาด กรุณาทำรายการใหม",
+                text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                type: "error",
+                timer: 2000,
+                showConfirmButton: false,
+                html: true,
+              });
+            $("#link_editLogo").click();
+          }
+      }
+    });
+  }
+
   // ---------------------------------------------------------------
 
   $("#adminlogin_form").submit(function(e) {
@@ -249,11 +302,6 @@ $(function() {
   $("#admininsert_form").submit(function(e) {
       e.preventDefault();
       insertdata();
-  });
-
-  $("#adminedit_form").submit(function(e) {
-      e.preventDefault();
-      editdata();
   });
 
   // --------------------------function------------------------
@@ -317,51 +365,6 @@ $(function() {
                 showConfirmButton: false,
               },
               function(){ window.location.assign('signup_app.php'); }
-            );
-        }
-        else if (data.result == 0) //ไม่สำเร็จ
-        {
-          swal({
-                title: "การตั้งค่าผิดพลาด กรุณาทำรายการใหม",
-                text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                 type: "error",
-                timer: 2000,
-                showConfirmButton: false,
-                html: true,
-              },
-              function(){ window.location.assign('page_config.php'); }
-            );
-        }
-      }
-    });
-  }
-
-  function editdata() {
-    // var data = $('#admininsert_form').serializeArray();
-    var form = $('#adminedit_form')[0];
-    var formData = new FormData(form);
-        // Attach file
-        formData.append('mode', 'editdata');
-    // data.push({name : 'mode' , value : 'insertdata'});
-    $.ajax({
-      type: "POST",
-      url: "admin/controller.php",
-      data: formData,
-      dataType: 'json',
-      contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-      processData: false, // NEEDED, DON'T OMIT THIS
-      success: function(data){
-        // console.log(data);
-        if (data.result == 1) //สำเร็จ
-        {
-          swal({
-                title: "แก้ไขตั้งค่าเสร็จสิ้น",
-                text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                 type: "success",
-                timer: 2000,
-                showConfirmButton: false,
-              },
-              function(){ window.location.assign('admin_login.php'); }
             );
         }
         else if (data.result == 0) //ไม่สำเร็จ

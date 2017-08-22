@@ -127,7 +127,7 @@
                       <ul class="dropdown-menu" role="menu">
                           <li><a id="link_editUserpass" href="#edit_userpass" data-toggle="tab">แก้ไขรหัสผ่าน</a></li>
                           <li><a id="link_editInfo" href="#edit_info" data-toggle="tab">แก้ไขข้อมูลคณะ</a></li>
-                          <li><a href="#edit_logo" data-toggle="tab">แก้ไขรูปโลโก้คณะ</a></li>
+                          <li><a id="link_editLogo" href="#edit_logo" data-toggle="tab">แก้ไขรูปโลโก้คณะ</a></li>
                       </ul>
                   </li>
                 </ul>
@@ -209,10 +209,11 @@
                                 <section class="contain">
                                   <img src="viewimg.php?mode=logo">
                                 </section>
+                                <h4>รูปภาพโลโก้ปัจจุบัน</h4>
                               </center>
                             </div>
                             <div class="form-group">
-                              <label class="control-label"> รูป Logo</label>
+                              <label class="control-label"><span class="requestfield">*</span> รูป Logo</label>
                               <input type="file" class="form-control" accept="image/png, image/jpeg, image/gif" name="logo" required/>
                               <br>
                             </div>
