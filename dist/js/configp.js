@@ -197,7 +197,7 @@ $(function() {
 
   $("#edit_data_form").submit(function(e) {
     e.preventDefault();
-
+    updateData();
   });
 
   function updateData() 
@@ -234,18 +234,6 @@ $(function() {
               showConfirmButton: false,
               html: true,
             });
-          $("#link_editInfo").click();
-        }
-        else if (data.result === 'error')
-        {
-          swal({
-                title: "รหัสผ่านเดิมไม่ถูกต้อง กรุณาทำรายการใหม่",
-                text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                type: "error",
-                timer: 2000,
-                html: true,
-                showConfirmButton: false,
-              });
           $("#link_editInfo").click();
         }
       }

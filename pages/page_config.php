@@ -218,7 +218,7 @@
                             </div>
                           <div class="pull-right">
                             <a class="back_home btn btn-default btn-md"type="button">ยกเลิก</a>
-                            <button class="btn btn-primary btn-md" type="button">บันทึกข้อมูล</button>
+                            <button class="btn btn-primary btn-md" type="submit">บันทึกข้อมูล</button>
                           </div>
                         </div>
                       </form>
