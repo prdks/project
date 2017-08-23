@@ -112,16 +112,6 @@ $(function () {
 
   });
 
-  // send data to Delete
-  $('#delete-btn').on('click',function() {
-    var checked = []
-    $("input[name='checked_id[]']:checked").each(function ()
-    {
-      checked.push(parseInt($(this).val()));
-    });
-    $.post("personnel/delete.php" ,{checked_id: checked});
-  });
-
   // ******* Permission ************
   $('.handlePermission').click(function () {
     var id = $(this).attr('data-id');

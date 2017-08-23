@@ -9,7 +9,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">เพิ่มข้อมูลบุคลากร</h4>
       </div>
-      <form class="form-horizontal" action="personnel/insert.php" method="post">
+      <form id="insert_personnel_form" class="form-horizontal">
       <div class="modal-body">
           <!-- คำนำหน้าชื่อ -->
           <div class="form-group">
@@ -161,7 +161,7 @@
   <div class="modal-dialog">
 
     <!-- Modal content-->
-    <form class="form-horizontal" action="personnel/edit.php" method="post">
+    <form id="edit_personnel_form" class="form-horizontal">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -282,7 +282,7 @@
 <div id="Delete_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-sm">
     <!-- Modal content-->
-    <form id="delete_form" action="personnel/delete.php" method="post">
+    <form id="delete_personnel_form">
     <div class="modal-content">
         <div class="modal-body">
         <div class="form-group">

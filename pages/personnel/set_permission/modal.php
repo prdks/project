@@ -8,7 +8,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">ข้อมูลบุคลากร</h4>
       </div>
-      <form class="form-horizontal" action="personnel/set_permission/edit.php" method="post">
+      <form id="set_permission_form" class="form-horizontal">
       <div class="modal-body">
         <dl class="dl-horizontal">
           <dt>ชื่อ-นามสกุล :</dt>

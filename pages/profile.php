@@ -22,7 +22,7 @@
               </div>
             </div>
             <!-- /.row -->
-            <form id="editprofileform" class="form-horizontal" action="user/update_profile.php" method="post">
+            <form id="editprofileform" class="form-horizontal">
               <!-- คำนำหน้าชื่อ -->
               <div class="row" style="margin-left:10px;">
                 <div class="form-group">
@@ -31,20 +31,30 @@
                   <?php
                   $sql = "select * from title_name Order by title_name_id ASC";
                   $result = $conn->query($sql);
-                  echo "<select name='title_name' class='form-control' style='width:100px;' required>";
-                  while($row = $result->fetch_array())
+                  if($result->num_rows > 0)
                   {
-                    if($row['title_name'] === $_SESSION['title_name'])
+                    echo "<select name='title_name' class='form-control' style='width:100px;' required>";
+                    while($row = $result->fetch_array())
                     {
-                      echo "<option value='".$row['title_name']."' selected>".$row['title_name']."</option> ";
+                      if($row['title_name'] === $_SESSION['title_name'])
+                      {
+                        echo "<option value='".$row['title_name']."' selected>".$row['title_name']."</option> ";
+                      }
+                      else
+                      {
+                        echo "<option value='".$row['title_name']."'>".$row['title_name']."</option> ";
+                      }
+  
                     }
-                    else
-                    {
-                      echo "<option value='".$row['title_name']."'>".$row['title_name']."</option> ";
-                    }
-
+                    echo "</select>";
                   }
-                  echo "</select>";
+                  else
+                  {
+                    echo "<select name='title_name' class='form-control' style='width:100px;' required disabled>";
+                    echo "<option>ไม่พบข้อมูล</option> ";
+                    echo "</select>";
+                  }
+                 
                   ?>
                   </div>
                 </div>
@@ -88,20 +98,30 @@
                   <?php
                   $sql = "select * from department Order by department_id ASC";
                   $result = $conn->query($sql);
-                  echo "<select name='department' class='form-control' style='width:200px;' required>";
-                  while($row = $result->fetch_array())
+                  if($result->num_rows > 0)
                   {
-                    if($row['department_name'] === $_SESSION['department'])
+                    echo "<select name='department' class='form-control' style='width:200px;' required>";
+                    while($row = $result->fetch_array())
                     {
-                      echo "<option value='".$row['department_name']."' selected>".$row['department_name']."</option> ";
+                      if($row['department_name'] === $_SESSION['department'])
+                      {
+                        echo "<option value='".$row['department_name']."' selected>".$row['department_name']."</option> ";
+                      }
+                      else
+                      {
+                        echo "<option value='".$row['department_name']."'>".$row['department_name']."</option> ";
+                      }
+  
                     }
-                    else
-                    {
-                      echo "<option value='".$row['department_name']."'>".$row['department_name']."</option> ";
-                    }
-
+                    echo "</select>";
                   }
-                  echo "</select>";
+                  else
+                  {
+                    echo "<select name='department' class='form-control' style='width:200px;' required disabled>";
+                    echo "<option>ไม่พบข้อมูล</option> ";
+                    echo "</select>";
+                  }
+                  
                   ?>
                   </div>
                 </div>
@@ -114,20 +134,29 @@
                   <?php
                   $sql = "select * from position  Order by position_id ASC";
                   $result = $conn->query($sql);
-                  echo "<select name='position' class='form-control' style='width:200px;' required>";
-                  while($row = $result->fetch_array())
+                  if($result->num_rows > 0)
                   {
-                    if($row['position_name'] === $_SESSION['position'])
+                    echo "<select name='position' class='form-control' style='width:200px;' required>";
+                    while($row = $result->fetch_array())
                     {
-                      echo "<option value='".$row['position_name']."' selected>".$row['position_name']."</option> ";
+                      if($row['position_name'] === $_SESSION['position'])
+                      {
+                        echo "<option value='".$row['position_name']."' selected>".$row['position_name']."</option> ";
+                      }
+                      else
+                      {
+                        echo "<option value='".$row['position_name']."'>".$row['position_name']."</option> ";
+                      }
+  
                     }
-                    else
-                    {
-                      echo "<option value='".$row['position_name']."'>".$row['position_name']."</option> ";
-                    }
-
+                    echo "</select>";
                   }
-                  echo "</select>";
+                  else
+                  {
+                    echo "<select name='position' class='form-control' style='width:200px;' required disabled>";
+                    echo "<option>ไม่พบข้อมูล</option> ";
+                    echo "</select>";
+                  }
                   ?>
                   </div>
                 </div>
