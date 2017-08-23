@@ -15,17 +15,19 @@
             if ($num_approve > 0)
             {
               ?>
-              <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
-              <a href="reserve_approve.php">
-              <i class="fa fa-bell fa-fw"></i><span class="badge1" data-badge="<?php echo $num_approve?>"></span>
+              <li class="dropdown">
+              <a href="reserve_approve.php" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+              &nbsp;&nbsp;&nbsp;<i class="fa fa-bell fa-fw"></i><span class="badge1" data-badge="<?php echo $num_approve?>"></span>&nbsp;&nbsp;&nbsp;
+              </a>
+              </li>
               <?php
             }
             else
             {
               ?>
-              <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
-              <a href="reserve_approve.php">
-              <i class="fa fa-bell"></i>
+              <li class="dropdown">
+              <a href="reserve_approve.php" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+              &nbsp;&nbsp;&nbsp;<i class="fa fa-bell"></i><span></span>&nbsp;&nbsp;&nbsp;
               </a>
               </li>
               <?php
@@ -37,9 +39,9 @@
             if ($num_approve > 0)
             {
               ?>
-              <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
-               <a href="reserve_approve.php">
-              <i class="fa fa-bell fa-fw"></i><span class="badge1" data-badge="<?php echo $num_approve?>"></span>
+              <li class="dropdown">
+               <a href="reserve_approve.php" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+               &nbsp;&nbsp;&nbsp;<i class="fa fa-bell fa-fw"></i><span class="badge1" data-badge="<?php echo $num_approve?>"></span>&nbsp;&nbsp;&nbsp;
               </a>
               </li>
               <?php
@@ -47,10 +49,10 @@
             else
             {
               ?>
-              <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
-               <a href="reserve_approve.php">
-              <i class="fa fa-bell"></i>
-              </a>
+              <li class="dropdown">
+               <a href="reserve_approve.php" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+               &nbsp;&nbsp;&nbsp;<i class="fa fa-bell"></i><span></span>&nbsp;&nbsp;&nbsp;
+               </a>
               </li>
               <?php
             }

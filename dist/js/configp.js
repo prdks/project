@@ -356,19 +356,13 @@ $(function() {
     }
   });
 
-  // ---------------------------------------------------------------
+  // -------------------------  Login -----------------------------
 
   $("#adminlogin_form").submit(function(e) {
       e.preventDefault();
       login();
   });
 
-  $("#admininsert_form").submit(function(e) {
-      e.preventDefault();
-      insertdata();
-  });
-
-  // --------------------------function------------------------
   function login() {
     var data = $('#adminlogin_form').serializeArray();
         data.push({name : 'mode' , value : 'login'});
@@ -402,6 +396,14 @@ $(function() {
         }
       });
   }
+
+  // -------------------------- Insert Config------------------------
+  
+  $("#admininsert_form").submit(function(e) {
+      e.preventDefault();
+      insertdata();
+  });
+
 
   function insertdata() {
     // var data = $('#admininsert_form').serializeArray();
@@ -459,4 +461,40 @@ $(function() {
       }
     });
   }
+// --------------------- Insert Admin Data -------------------
+$("#adminsignup_form").submit(function(e) {
+  e.preventDefault();
+  InsertAdmin();
+});
+
+function InsertAdmin() {
+  var data = $('#adminsignup_form').serializeArray();
+  data.push({name : 'mode' , value : 'InsertAdmin'});
+  $.ajax({
+    type: "POST",
+    url: "admin/controller.php",
+    data: data,
+    dataType: 'json',
+    success: function(data){
+      if (data.result == 1)
+      {
+        window.location.assign('index.php');
+      }
+      else if (data.result === 'error')
+      {
+        swal({
+              title: "ผิดพลาด กรุณาทำรายการใหม่",
+              text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+              type: "error",
+              timer: 2000,
+              html: true,
+              showConfirmButton: false,
+            },
+            function(){ window.location.assign('signup_app.php'); }
+          );
+      }
+    }
+  });
+}
+
 });

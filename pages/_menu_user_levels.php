@@ -70,14 +70,14 @@ switch ($type) {
       if ($_SESSION['url_googleform'] != "")
       {
       ?>
-      <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+      <li class="text-center last_menu"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
       <?php
       }
       else
       {
         ?>
-        <li class="text-center" >
-          <a class="disabled" href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
+        <li class="text-center last_menu" >
+          <a class="disabled" href="#" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
           </a>
         </li>
         <?php
@@ -101,7 +101,7 @@ switch ($type) {
       if ($_SESSION['url_googleform'] != "")
       {
       ?>
-      <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+      <li class="text-center last_menu"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
       <?php
       }
     }
@@ -123,14 +123,14 @@ switch ($type) {
       if ($_SESSION['url_googleform'] != "")
       {
       ?>
-      <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+      <li class="text-center last_menu"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
       <?php
       }
       else
       {
         ?>
-        <li class="text-center" >
-          <a class="disabled" href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
+        <li class="text-center last_menu" >
+          <a class="disabled" href="#" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
           </a>
         </li>
         <?php
@@ -154,14 +154,14 @@ switch ($type) {
       if ($_SESSION['url_googleform'] != "")
       {
       ?>
-      <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+      <li class="text-center last_menu"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
       <?php
       }
       else
       {
         ?>
-        <li class="text-center" >
-          <a class="disabled" href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
+        <li class="text-center last_menu" >
+          <a class="disabled" href="#" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
           </a>
         </li>
         <?php
@@ -216,14 +216,14 @@ switch ($type) {
       if ($_SESSION['url_googleform'] != "")
       {
       ?>
-      <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+      <li class="text-center last_menu"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
       <?php
       }
       else
       {
         ?>
-        <li class="text-center" >
-          <a class="disabled" href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
+        <li class="text-center last_menu" >
+          <a class="disabled" href="#" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
           </a>
         </li>
         <?php
@@ -278,14 +278,14 @@ switch ($type) {
         if ($_SESSION['url_googleform'] != "")
         {
         ?>
-        <li class="text-center"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+        <li class="text-center last_menu"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
         <?php
         }
         else
         {
           ?>
-          <li class="text-center" >
-            <a class="disabled" href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
+          <li class="text-center last_menu" >
+            <a class="disabled" href="#" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
             </a>
           </li>
           <?php
