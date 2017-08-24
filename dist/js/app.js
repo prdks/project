@@ -178,7 +178,14 @@ $(function () {
           $('#status_note').show();
           $('#show-note').html(data.note);
         }
-
+        
+        var str_pic = '<div class="table-responsive"><table><tr><td class="child">';
+        if(data.pic1 != 0){str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=1&id='+id+'"></section></td>';}
+        if(data.pic2 != 0){str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=2&id='+id+'"></section></td>';}
+        if(data.pic3 != 0){str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=3&id='+id+'"></section></td>';}
+        if(data.pic4 != 0){str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=4&id='+id+'"></section></td>';}
+        str_pic += '</td></tr><table></div>';
+        $('#show-picture').html(str_pic);
       }
     });
 
@@ -212,6 +219,14 @@ $(function () {
           $('#display-note').val(data.note);
         }
         $('#display-id').val(data.id);
+
+        var str_pic = '<div class="table-responsive"><table><tr><td class="child">';
+        if(data.pic1 != 0){str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=1&id='+id+'"></section></td>';}
+        if(data.pic2 != 0){str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=2&id='+id+'"></section></td>';}
+        if(data.pic3 != 0){str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=3&id='+id+'"></section></td>';}
+        if(data.pic4 != 0){str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=4&id='+id+'"></section></td>';}
+        str_pic += '</td></tr><table></div>';
+        $('#show-picture_edit').html(str_pic);
       }
     });
 

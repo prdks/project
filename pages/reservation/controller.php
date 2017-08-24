@@ -224,6 +224,8 @@ elseif ($mode == 'getPersonnel_For_AddPassenger')
   {
     $sql = "
     SELECT t.*, p.*, po.* , d.* FROM personnel p
+    LEFT OUTER JOIN user_type us
+    ON p.user_type_id = us.user_type_id
     LEFT JOIN title_name t
     ON p.title_name_id = t.title_name_id
     LEFT JOIN position po
@@ -231,6 +233,7 @@ elseif ($mode == 'getPersonnel_For_AddPassenger')
     LEFT JOIN department d
     ON p.department_id = d.department_id
     WHERE personnel_name <> '".$user."'
+    AND us.user_level <> 2
     ORDER BY department_name ASC";
   }
   else

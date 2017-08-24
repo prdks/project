@@ -228,7 +228,7 @@ table, th, td {
 		<td width="100%" align="right">
 			ลงชื่อ
 			&nbsp;&nbsp;
-			<?php echo $row['personnel_name']; ?>
+			.......................................
 			&nbsp;&nbsp;
 			ผู้ขออนุมัติ
 		</td>
@@ -239,7 +239,7 @@ table, th, td {
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tbody>
 	<tr>
-		<td width="80%" align="right">
+		<td width="40%" align="right">
 			(<?php echo $row['title_name'].$row['personnel_name'];?>)
 		</td>
 		<td width="6%"></td>
