@@ -48,9 +48,18 @@
               <center>
                 <input class="btn btn-md btn-block btn-success" type="submit" value="เข้าสู่ระบบ">
               </center>
-
-
             </div>
+            <?php
+            if ($row['id'] == 0)
+            {
+            ?>
+            <!-- รายละเอียดข้อมูลรหัส -->
+            <span class="pull-left text-danger">
+              <h5>หมายเหตุ : กรุณาเข้าสู่ระบบด้วยชื่อและรหัสผู้ใช้งานที่อยู่ในคู่มือการใช้งาน</h5>
+            </span>
+            <?php
+            }
+            ?>
           </div>
         </form>
       </div>
