@@ -71,7 +71,7 @@
                   <div class="hidden-lg hidden-md"><br /></div>
                   <div class="form-group">
                     <label class="control-label"><span class="requestfield">*</span> ชื่อของคณะ/สำนักงาน</label>
-                    <input name="name" maxlength="200" type="text" class="form-control" placeholder="พิมพ์ชื่อคณะ เช่น ''คณะอุตสาหกรรมการเกษตร'' เป็นต้น "  required/>
+                    <input name="name" maxlength="200" type="text" class="form-control" placeholder="พิมพ์ชื่อคณะ เช่น ''คณะอุตสาหกรรมเกษตร'' เป็นต้น "  required/>
                   </div>
                   <div class="form-group">
                     <label class="control-label"><span class="requestfield">*</span> Email Domain Name</label>
@@ -197,7 +197,7 @@
                         <input class="callback_v" type="hidden" value="<?php echo $_GET['callback'];?>">
                           <div class="form-group">
                             <label class="control-label"><span class="requestfield">*</span> ชื่อของคณะ/สำนักงาน</label>
-                            <input name="name" maxlength="200" type="text" class="form-control" placeholder="พิมพ์ชื่อคณะ เช่น ''คณะอุตสาหกรรมการเกษตร'' เป็นต้น " required/>
+                            <input name="name" maxlength="200" type="text" class="form-control" placeholder="พิมพ์ชื่อคณะ เช่น ''คณะอุตสาหกรรมเกษตร'' เป็นต้น " required/>
                           </div>
                           <div class="form-group">
                             <label class="control-label"><span class="requestfield">*</span> Email Domain Name</label>

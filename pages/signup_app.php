@@ -60,7 +60,8 @@
       function makeApiCall() {
         // Make an API call to the People API, and print the user's given name.
         gapi.client.people.people.get({
-                resourceName: 'people/me'
+              'resourceName': 'people/me',
+              'requestMask.includeField': 'person.names,person.emailAddresses'
               }).then(function(response) {
                 var email = response.result.emailAddresses[0].value;
                 var n = email.substr(email.indexOf("@") + 1);
