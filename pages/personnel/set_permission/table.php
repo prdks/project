@@ -1,10 +1,4 @@
 <?php
-$department_id = $_GET['id'];
-
-// $sql = "
-// SELECT t.* from user_type t
-// order by user_level ASC ";
-
 $sql = "
 SELECT t.* from user_type t
 LEFT OUTER JOIN personnel p
@@ -36,21 +30,43 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
               </thead>
               <tbody>
     <?php
-    $sql2 = "
-    SELECT
-       psn.* , t.* , p.* , d.* , type.*
-      FROM personnel psn
-      LEFT OUTER JOIN title_name t
-        ON psn.title_name_id = t.title_name_id
-      LEFT OUTER JOIN  position p
-        ON psn.position_id = p.position_id
-      LEFT OUTER JOIN  department  d
-        ON psn.department_id = d.department_id
-      LEFT OUTER JOIN  user_type type
-        ON psn.user_type_id = type.user_type_id
-    WHERE type.user_type_id = ".$row['user_type_id']."
-    AND d.department_id = ".$department_id."
-    ORDER BY psn.personnel_name ASC";
+    if(isset($_GET['id']))
+    {
+      $sql2 = "
+      SELECT
+         psn.* , t.* , p.* , d.* , type.*
+        FROM personnel psn
+        LEFT OUTER JOIN title_name t
+          ON psn.title_name_id = t.title_name_id
+        LEFT OUTER JOIN  position p
+          ON psn.position_id = p.position_id
+        LEFT OUTER JOIN  department  d
+          ON psn.department_id = d.department_id
+        LEFT OUTER JOIN  user_type type
+          ON psn.user_type_id = type.user_type_id
+      WHERE type.user_type_id = ".$row['user_type_id']."
+      AND d.department_id = '".$_GET['id']."'
+      ORDER BY psn.personnel_name ASC";
+    }
+    else
+    {
+      $sql2 = "
+      SELECT
+         psn.* , t.* , p.* , d.* , type.*
+        FROM personnel psn
+        LEFT OUTER JOIN title_name t
+          ON psn.title_name_id = t.title_name_id
+        LEFT OUTER JOIN  position p
+          ON psn.position_id = p.position_id
+        LEFT OUTER JOIN  department  d
+          ON psn.department_id = d.department_id
+        LEFT OUTER JOIN  user_type type
+          ON psn.user_type_id = type.user_type_id
+      WHERE type.user_type_id = ".$row['user_type_id']."
+      AND d.department_name = '".$_SESSION['department']."'
+      ORDER BY psn.personnel_name ASC";
+    }
+    
 
     $res = $conn->query($sql2);
     $result_row2 = mysqli_num_rows($res);
