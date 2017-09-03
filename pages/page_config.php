@@ -4,8 +4,6 @@
 <head>
       <?php
         include '_head.php';
-        // googleAuth.file
-        include '_googleauth.php';
       ?>
 <link href="../dist/css/configp.css" rel="stylesheet">
 <script src="../dist/js/configp.js"></script>

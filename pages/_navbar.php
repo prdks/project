@@ -44,6 +44,8 @@
             <?php
             if(!isset($_SESSION['loggedin']))
             {
+              // googleAuth.file
+              include '_googleauth.php';
              ?>
              <li><a href='index.php'><i class='fa fa-calendar fa-fw'></i> ปฏิทินการจองใช้รถยนต์</a></li>
              <?php

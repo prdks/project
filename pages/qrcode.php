@@ -4,8 +4,6 @@
 <head>
       <?php
         include '_head.php';
-        // googleAuth.file
-        include '_googleauth.php';
       ?>
 
 </head>
@@ -14,6 +12,8 @@
 
             <?php
             if(!isset($_SESSION['loggedin'])){
+              // googleAuth.file
+              include '_googleauth.php';
               ?>
               <div class="wrapper-enterkl">
               <span class="enterkl-content">
