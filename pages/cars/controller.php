@@ -120,7 +120,8 @@ elseif ($mode == 'insertCars')
   $driver = $_POST['driver'];
   $status = $_POST['status'];
   $note = $_POST['note'];
-  
+  $picture_name = '';
+  $picture_data = '';
   for($i = 0 ; $i < 4 ; $i++){
     if($_FILES["filUpload".$i]["name"] != "")
     {
@@ -128,7 +129,9 @@ elseif ($mode == 'insertCars')
       $fp = fopen($_FILES["filUpload".$i]["tmp_name"],"r");
       $ReadBinary = fread($fp,filesize($_FILES["filUpload".$i]["tmp_name"]));
       fclose($fp);
+      $picture_name .= ',picture_'.($i+1);
       $FileData[$i] = addslashes($ReadBinary);
+      $picture_data .= $FileData[$i];
     }
   }
   
@@ -138,8 +141,7 @@ elseif ($mode == 'insertCars')
   
     $sql = "
     INSERT INTO cars
-    (car_reg , car_brand_id , car_kind , car_detail , seat , status ,note , personnel_id
-    ,picture_1,picture_2,picture_3,picture_4)
+    (car_reg , car_brand_id , car_kind , car_detail , seat , status ,note , personnel_id".$picture_name.")
     VALUES
     ('".$reg."'
     ,(Select car_brand_id from car_brand where car_brand_name = '".$brand."')
@@ -148,17 +150,8 @@ elseif ($mode == 'insertCars')
     ,".$seat."
     ,'".$status."'
     ,'".$note."'
-    ,(select personnel_id from personnel where personnel_name = '".$driver."')";
-  
-    for($i = 0 ; $i < 4 ; $i++){
-      if($FileData[$i] != ""){
-        $sql .= ", '".$FileData[$i]."'";
-      }else {
-        $sql .= ", null ";
-      }
-    }
-  
-    $sql .= ") ON DUPLICATE KEY UPDATE car_id = car_id";
+    ,(select personnel_id from personnel where personnel_name = '".$driver."')
+    ,'".$picture_data."') ON DUPLICATE KEY UPDATE car_id = car_id";
   
     if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
     else {echo json_encode(array('result' => '0'));}
@@ -179,7 +172,7 @@ elseif ($mode == 'editCars')
   $driver = $_POST['driver'];
   $status = $_POST['status'];
   $note = $_POST['note'];
-  
+  $picture_data = '';
   for($i = 0 ; $i < 4 ; $i++){
     if($_FILES["filUpload".$i]["name"] != "")
     {
@@ -188,6 +181,7 @@ elseif ($mode == 'editCars')
       $ReadBinary = fread($fp,filesize($_FILES["filUpload".$i]["tmp_name"]));
       fclose($fp);
       $FileData[$i] = addslashes($ReadBinary);
+      $picture_data .= ",picture_".($i+1)." = '".$FileData[$i]."'";
     }
   }
 
@@ -202,17 +196,8 @@ elseif ($mode == 'editCars')
     , seat = ".$seat."
     , status = '".$status."'
     , note = '".$note."'
-    , personnel_id = (SELECT personnel_id FROM personnel WHERE personnel_name = '".$driver."')";
-
-    for($i = 0 ; $i < 4 ; $i++){
-      if($FileData[$i] != ""){
-        $sql .= ",picture_".($i+1)." = '".$FileData[$i]."'";
-      }else {
-        $sql .= ",picture_".($i+1)." = NULL ";
-      }
-    }
-
-    $sql .= "where car_id = '".$id."'";
+    , personnel_id = (SELECT personnel_id FROM personnel WHERE personnel_name = '".$driver."')
+    ".$picture_data." where car_id = '".$id."'";
   
   
     if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}

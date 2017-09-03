@@ -243,7 +243,7 @@
             <?php for($i = 0 ; $i < 4 ; $i++){?>
             <div class="form-group">
               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-              <span class="requestfield">*</span> รูปที่ <?php echo $i+1; ?> : </label>
+              รูปที่ <?php echo $i+1; ?> : </label>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="file" class="form-control" name="filUpload<?php echo $i;?>">
@@ -582,23 +582,15 @@
 
         <div id="picture_edit" class="tab-pane fade">
           <br>
-          <div class="form-group">
-            <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-              รูปภาพปัจจุบัน : </label>
-            </label>
-            <div class="col-md-8 col-sm-8 col-xs-12">
-              <div id="show-picture_edit"></div>
-            </div>
-          </div>
-          <br>
           <!-- เพิ่มรูป -->
           <?php for($i = 0 ; $i < 4 ; $i++){?>
           <div class="form-group">
             <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-            <span class="requestfield">*</span> รูปที่ <?php echo $i+1; ?> : </label>
+            รูปที่ <?php echo $i+1; ?> :</label>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="file" class="form-control" name="filUpload<?php echo $i;?>">
+              <div id="show-picture_edit_<?php echo $i+1; ?>"></div>
+              <div id="show-button_edit_<?php echo $i+1; ?>"></div>
             </div>
           </div>
           <?php } ?>
