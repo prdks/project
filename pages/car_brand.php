@@ -4,9 +4,8 @@
 <head>
       <?php
         include '_head.php';
-        // googleAuth.file
-        include '_googleauth.php';
       ?>
+      <script src="../dist/js/car_brand.js"></script>
 </head>
 
 <body>

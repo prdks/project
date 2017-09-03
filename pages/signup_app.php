@@ -7,8 +7,9 @@
       ?>
 
       <script type="text/javascript">
-      var clientId = '5851659241-7344218r6lr5vn70jjabeq290q9fb3lo.apps.googleusercontent.com';
-      var apiKey = 'AIzaSyAfM0jN7_sgFJJiLeA6xiWKGr9U0RPDAFA';
+
+      var clientId = '<?php echo $_SESSION['clientId'];?>';
+      var apiKey = '<?php echo $_SESSION['apiKey'];?>';
       var scopes = 'https://www.google.com/m8/feeds';
       var email;
 

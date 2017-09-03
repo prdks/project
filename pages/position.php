@@ -4,9 +4,8 @@
 <head>
       <?php
         include '_head.php';
-        // googleAuth.file
-        include '_googleauth.php';
       ?>
+      <script src="../dist/js/position.js"></script>
 </head>
 
 <body>

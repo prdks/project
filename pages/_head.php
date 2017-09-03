@@ -70,12 +70,6 @@ function FullDateThai($strDate)
           $strMonthThai=$strMonthCut[$strMonth];
           return "$strHour:$strMinute"." น.";
   }
-  $sql = "select * from config where id = 1";
-  $result = $conn->query($sql);
-  $row = $result->fetch_assoc();
-  $_SESSION['domain_name'] = $row['domain_name'];
-  $_SESSION['system_name'] = $row['name'];
-  $_SESSION['url_googleform'] = $row['url'];
 
  ?>
 <meta charset="utf-8">
@@ -120,11 +114,6 @@ function FullDateThai($strDate)
 <!-- QRcode -->
 <script type="text/javascript" src="../vendor/qrcode/qrcode.js"></script>
 
-<!-- datetimepicker -->
-<link rel="stylesheet" href="../vendor/datetimepicker/css/bootstrap-datepicker.css">
-<script src="../vendor/datetimepicker/js/bootstrap-datepicker-custom.js" charset="utf-8"></script>
-<script src="../vendor/datetimepicker/locales/bootstrap-datepicker.th.min.js" charset="UTF-8"></script>
-
 <!-- jsPDF -->
 <script type="text/javascript" src="../vendor/jspdf/jspdf.js"></script>
 <script type="text/javascript" src="../vendor/jspdf/pdfFromHTML.js"></script>
@@ -144,7 +133,6 @@ function FullDateThai($strDate)
 <!-- Custom Fonts -->
 <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet">
 
 
 <!-- Custom Theme JavaScript -->
@@ -152,7 +140,6 @@ function FullDateThai($strDate)
 <script src="../dist/js/app.js"></script>
 <script src="../dist/js/func.js"></script>
 <script src="../dist/js/validate.js"></script>
-<script src="../dist/js/ajax.js"></script>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

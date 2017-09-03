@@ -1,6 +1,8 @@
 <script type="text/javascript">
-var clientId = '311898119234-9ak2l5llohjqsaqvkfhtibhu3dp4f8s7.apps.googleusercontent.com';
-var apiKey = 'AIzaSyDATtdNtA9Rj105rKzJ8kZQAMum9kmv4nU';
+// var clientId = '311898119234-9ak2l5llohjqsaqvkfhtibhu3dp4f8s7.apps.googleusercontent.com';
+// var apiKey = 'AIzaSyDATtdNtA9Rj105rKzJ8kZQAMum9kmv4nU';
+var clientId = '<?php echo $_SESSION['clientId'];?>';
+var apiKey = '<?php echo $_SESSION['apiKey'];?>';
 var email;
 var s = 0;
 

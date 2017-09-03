@@ -1,6 +1,6 @@
 <?php
-require_once '../_connect.php';
 session_start();
+require_once '../_connect.php';
 $mode = $_POST['mode'];
 
 if($mode == "updateProfile")
