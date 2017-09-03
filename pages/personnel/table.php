@@ -61,33 +61,65 @@ switch ($_SESSION['user_type']) {
 
       while($row = $result->fetch_assoc()){
         $count += 1;
-        echo "
-        <tr>
-        <td>
-        <center>
-        <input type='checkbox' id='checked_id[]' name='checked_id[]'
-        class='checkbox'value='".$row['personnel_id']."'/>
-        </center>
-        </td>
-
-        <td class='text-center'>".$count."</td>
-        <td>".$row['title_name'].$row['personnel_name']."</td>
-        <td class='text-center'>".$row['position_name']."</td>
-        <td>".$row['department_name']."</td>
-        <td class='text-center'>
-
-        <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
-        data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
-          <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
-        </button>
-
-        <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
-        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
-            <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
-        </button>
-
-        </td>
-        </tr>";
+        if($_SESSION['user_name'] == $row['personnel_name'])
+        {
+          echo "
+          <tr>
+          <td>
+          <center>
+          <input type='checkbox' disabled/>
+          </center>
+          </td>
+  
+          <td class='text-center'>".$count."</td>
+          <td>".$row['title_name'].$row['personnel_name']." <b><h7 class='text-info'>(ผู้ใช้งาน)</h7></b></td>
+          <td class='text-center'>".$row['position_name']."</td>
+          <td>".$row['department_name']."</td>
+          <td class='text-center'>
+  
+          <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+          data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
+          </button>
+  
+          <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+          data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."' disabled>
+              <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='กรุณาแก้ไขที่หน้าข้อมูลส่วนตัว' ></span>
+          </button>
+  
+          </td>
+          </tr>";
+        }
+        else
+        {
+          echo "
+          <tr>
+          <td>
+          <center>
+          <input type='checkbox' id='checked_id[]' name='checked_id[]'
+          class='checkbox'value='".$row['personnel_id']."'/>
+          </center>
+          </td>
+  
+          <td class='text-center'>".$count."</td>
+          <td>".$row['title_name'].$row['personnel_name']."</td>
+          <td class='text-center'>".$row['position_name']."</td>
+          <td>".$row['department_name']."</td>
+          <td class='text-center'>
+  
+          <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+          data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
+          </button>
+  
+          <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+          data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
+              <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
+          </button>
+  
+          </td>
+          </tr>";
+        }
 
       }
         echo "
@@ -159,34 +191,65 @@ switch ($_SESSION['user_type']) {
 
       while($row = $result->fetch_assoc()){
         $count += 1;
-        echo "
-        <tr>
-        <td>
-        <center>
-        <input type='checkbox' id='checked_id[]' name='checked_id[]'
-        class='checkbox'value='".$row['personnel_id']."'/>
-        </center>
-        </td>
-
-        <td class='text-center'>".$count."</td>
-        <td>".$row['title_name'].$row['personnel_name']."</td>
-        <td class='text-center'>".$row['position_name']."</td>
-        <td>".$row['department_name']."</td>
-        <td class='text-center'>
-
-
-        <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
-        data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
-          <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
-        </button>
-
-        <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
-        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
-            <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
-        </button>
-
-        </td>
-        </tr>";
+        if($_SESSION['user_name'] == $row['personnel_name'])
+        {
+          echo "
+          <tr>
+          <td>
+          <center>
+          <input type='checkbox' disabled/>
+          </center>
+          </td>
+  
+          <td class='text-center'>".$count."</td>
+          <td>".$row['title_name'].$row['personnel_name']." <b><h7 class='text-info'>(ผู้ใช้งาน)</h7></b></td>
+          <td class='text-center'>".$row['position_name']."</td>
+          <td>".$row['department_name']."</td>
+          <td class='text-center'>
+  
+          <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+          data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
+          </button>
+  
+          <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+          data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."' disabled>
+              <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='กรุณาแก้ไขที่หน้าข้อมูลส่วนตัว' ></span>
+          </button>
+  
+          </td>
+          </tr>";
+        }
+        else
+        {
+          echo "
+          <tr>
+          <td>
+          <center>
+          <input type='checkbox' id='checked_id[]' name='checked_id[]'
+          class='checkbox'value='".$row['personnel_id']."'/>
+          </center>
+          </td>
+  
+          <td class='text-center'>".$count."</td>
+          <td>".$row['title_name'].$row['personnel_name']."</td>
+          <td class='text-center'>".$row['position_name']."</td>
+          <td>".$row['department_name']."</td>
+          <td class='text-center'>
+  
+          <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+          data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
+          </button>
+  
+          <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+          data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
+              <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
+          </button>
+  
+          </td>
+          </tr>";
+        }
 
       }
         echo "
@@ -281,32 +344,63 @@ switch ($_SESSION['user_type']) {
 
       while($row = $result->fetch_assoc()){
         $count += 1;
-        echo "
-        <tr>
-        <td>
-        <center>
-        <input type='checkbox' id='checked_id[]' name='checked_id[]'
-        class='checkbox'value='".$row['personnel_id']."'/>
-        </center>
-        </td>
-
-        <td class='text-center'>".$count."</td>
-        <td>".$row['title_name'].$row['personnel_name']."</td>
-        <td class='text-center'>".$row['position_name']."</td>
-        <td class='text-center'>
-
-        <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
-        data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
-          <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
-        </button>
-
-        <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
-        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
-            <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
-        </button>
-
-        </td>
-        </tr>";
+        if($_SESSION['user_name'] == $row['personnel_name'])
+        {
+          echo "
+          <tr>
+          <td>
+          <center>
+          <input type='checkbox' disabled/>
+          </center>
+          </td>
+  
+          <td class='text-center'>".$count."</td>
+          <td>".$row['title_name'].$row['personnel_name']." <b><h7 class='text-info'>(ผู้ใช้งาน)</h7></b></td>
+          <td class='text-center'>".$row['position_name']."</td>
+          <td class='text-center'>
+  
+          <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+          data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
+          </button>
+  
+          <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+          data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."' disabled>
+              <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='กรุณาแก้ไขที่หน้าข้อมูลส่วนตัว' ></span>
+          </button>
+  
+          </td>
+          </tr>";
+        }
+        else
+        {
+          echo "
+          <tr>
+          <td>
+          <center>
+          <input type='checkbox' id='checked_id[]' name='checked_id[]'
+          class='checkbox'value='".$row['personnel_id']."'/>
+          </center>
+          </td>
+  
+          <td class='text-center'>".$count."</td>
+          <td>".$row['title_name'].$row['personnel_name']."</td>
+          <td class='text-center'>".$row['position_name']."</td>
+          <td class='text-center'>
+  
+          <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+          data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
+          </button>
+  
+          <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+          data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
+              <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
+          </button>
+  
+          </td>
+          </tr>";
+        }
 
       }
         echo "
@@ -377,33 +471,63 @@ switch ($_SESSION['user_type']) {
 
       while($row = $result->fetch_assoc()){
         $count += 1;
-        echo "
-        <tr>
-        <td>
-        <center>
-        <input type='checkbox' id='checked_id[]' name='checked_id[]'
-        class='checkbox'value='".$row['personnel_id']."'/>
-        </center>
-        </td>
-
-        <td class='text-center'>".$count."</td>
-        <td>".$row['title_name'].$row['personnel_name']."</td>
-        <td class='text-center'>".$row['position_name']."</td>
-        <td class='text-center'>
-
-
-        <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
-        data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
-          <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
-        </button>
-
-        <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
-        data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
-            <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
-        </button>
-
-        </td>
-        </tr>";
+        if($_SESSION['user_name'] == $row['personnel_name'])
+        {
+          echo "
+          <tr>
+          <td>
+          <center>
+          <input type='checkbox' disabled/>
+          </center>
+          </td>
+  
+          <td class='text-center'>".$count."</td>
+          <td>".$row['title_name'].$row['personnel_name']." <b><h7 class='text-info'>(ผู้ใช้งาน)</h7></b></td>
+          <td class='text-center'>".$row['position_name']."</td>
+          <td class='text-center'>
+  
+          <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+          data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
+          </button>
+  
+          <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+          data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."' disabled>
+              <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='กรุณาแก้ไขที่หน้าข้อมูลส่วนตัว' ></span>
+          </button>
+  
+          </td>
+          </tr>";
+        }
+        else
+        {
+          echo "
+          <tr>
+          <td>
+          <center>
+          <input type='checkbox' id='checked_id[]' name='checked_id[]'
+          class='checkbox'value='".$row['personnel_id']."'/>
+          </center>
+          </td>
+  
+          <td class='text-center'>".$count."</td>
+          <td>".$row['title_name'].$row['personnel_name']."</td>
+          <td class='text-center'>".$row['position_name']."</td>
+          <td class='text-center'>
+  
+          <button type='submit' class='btn btn-primary handlePersonDetail' role='button'
+          data-toggle='modal' data-target='#Detail_modal' data-id='".$row['personnel_id']."'>
+            <span class='fa fa-user' data-toggle='tooltip' data-placement='top' title='ดูข้อมูล' ></span>
+          </button>
+  
+          <button type='submit' class='btn btn-warning handlePersonEdit' role='button'
+          data-toggle='modal' data-target='#Edit_modal' data-id='".$row['personnel_id']."'>
+              <span class='fa fa-edit' data-toggle='tooltip' data-placement='top' title='แก้ไขข้อมูล' ></span>
+          </button>
+  
+          </td>
+          </tr>";
+        }
 
       }
         echo "
