@@ -11,6 +11,19 @@ $(document).ready(function() {
             $('#display-note-area').hide();
         }
     });
+    getProvince();
+
+    function getProvince() {
+        $.getJSON("_province.json", function(result){
+          var province_group = result.th.changwats;
+          sorting(province_group, 'name');
+              $.each(province_group, function(i, field){
+                $('#province').append($('<option>').text(field.name).attr('value', field.name));
+                $('#display-province').append($('<option>').text(field.name).attr('value', field.name));
+              });
+        });
+      }
+      
     //  เมื่อกดปุ่มดูลายระเอียด จะส่งค่าไปที่ box
     $('.handleCarDetail').click(function() {
         var id = $(this).attr('data-id');
@@ -41,13 +54,16 @@ $(document).ready(function() {
                     $('#show-note').html(data.note);
                 }
 
+                var state_pic = 0;
                 var str_pic = '<div class="table-responsive"><table><tr><td class="child">';
-                if (data.pic1 != 0) { str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=1&id=' + id + '"></section></td>'; }
-                if (data.pic2 != 0) { str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=2&id=' + id + '"></section></td>'; }
-                if (data.pic3 != 0) { str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=3&id=' + id + '"></section></td>'; }
-                if (data.pic4 != 0) { str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=4&id=' + id + '"></section></td>'; }
+                if (data.pic1 != 0) {state_pic++; str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=1&id=' + id + '"></section></td>'; }
+                if (data.pic2 != 0) {state_pic++; str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=2&id=' + id + '"></section></td>'; }
+                if (data.pic3 != 0) {state_pic++; str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=3&id=' + id + '"></section></td>'; }
+                if (data.pic4 != 0) {state_pic++; str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=4&id=' + id + '"></section></td>'; }
                 str_pic += '</td></tr><table></div>';
-                $('#show-picture').html(str_pic);
+                if(state_pic > 0){$('#show-picture').html(str_pic);}
+                else{$('#dt-show-picture').hide(); alert(state_pic)}
+                
             }
         });
 
@@ -82,15 +98,85 @@ $(document).ready(function() {
                 var str_pic = '';
                 //--------------------- Pic 1 --------------------
                 if (data.pic1 != 0) {
+                    
                     str_pic = '<section class="contain"><img src="viewimg.php?mode=car&imgindex=1&id=' + id + '"></section>';
                     str_pic += '<br>';                    
                     $('#show-picture_edit_1').html(str_pic);
-                    str_pic = '<button class="btn btn-sm btn-primary" type="button">แก้ไข</button> ';
-                    str_pic += '<button class="btn btn-sm btn-danger" type="button" data-id='+id+'>ลบ</button>';
-                    str_pic += '<input type="file" class="form-control hidden" name="filUpload0">';
+                    str_pic = '<a class="btn btn-primary edit_picture1" data-picnum="1">เปลี่ยนรูปภาพ</a> ';
+                    str_pic += '<a class="btn btn-danger delete_picture1" data-id='+id+'>ลบ</a>';
+                    str_pic += '<br><input type="file" class="form-control hidden" name="filUpload0">';
                     $('#show-button_edit_1').html(str_pic);
+
+                    $('.edit_picture1').click(function(){
+                        var btn_txt = $(this).text();
+                        if(btn_txt === 'เปลี่ยนรูปภาพ'){ $(this).html('ยกเลิก'); }
+                        else{ $(this).html('เปลี่ยนรูปภาพ'); $('input[name=filUpload0]').val('') }
+
+                        $('input[name=filUpload0]').toggleClass('hidden')
+                    });
+
+                    $('.delete_picture1').click(function(){
+                        var id = $(this).attr('data-id');
+                        var pic_num = 1;
+                        swal({
+                            title: "ต้องการลบรูปที่ "+ pic_num +" หรือไม่",
+                            type: "warning",
+                            showCancelButton: true,
+                            cancelButtonText: "ยกเลิก",
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "ลบรูปภาพ",
+                            closeOnConfirm: false
+                          },
+                          function(){
+                            $.ajax({
+                                type: "POST",
+                                url: "cars/controller.php",
+                                data: {id, pic_num, mode: 'deletePicture'},
+                                dataType: 'json',
+                                success: function(data){
+                                  if (data.result == 1) //สำเร็จ
+                                  {
+                                    swal({
+                                          title: "ลบสำเร็จ",
+                                           type: "success",
+                                          confirmButtonText: "ตกลง",
+                                          showConfirmButton: true,
+                                        },
+                                        function()
+                                        {
+                                            str_pic = '<input type="file" class="form-control" name="filUpload'+(pic_num-1)+'">';
+                                            $('#show-picture_edit_'+pic_num).html('');
+                                            $('#show-button_edit_'+pic_num).html(str_pic);
+                                        }
+                                      );
+                                  }
+                                  else if (data.result == 0) //ไม่สำเร็จ
+                                  {
+                                    swal({
+                                          title: "ไม่สามารถลบข้อมูลได้<br>กรุณาทำรายการใหม่",
+                                           type: "error",
+                                           confirmButtonText: "ตกลง",
+                                           showConfirmButton: true,
+                                          html: true,
+                                        });
+                                  }
+                                  else if (data.result === 'error')
+                                  {
+                                    swal({
+                                          title: "ไม่สามารถลบข้อมูลได้<br>เนื่องจากมีการใช้งานอยู่",
+                                           type: "error",
+                                           confirmButtonText: "ตกลง",
+                                           showConfirmButton: true,
+                                          html: true,
+                                        });
+                                  }
+                                }
+                              });
+                          });
+                    });
+
                 } else {
-                    str_pic = '<input type="file" class="form-control" name="filUpload0">';
+                    str_pic = '<input id="file-upload" data-number="1" class="form-control" type="file" name="filUpload0"/>';
                     $('#show-picture_edit_1').html('');
                     $('#show-button_edit_1').html(str_pic);
                 }
@@ -99,10 +185,79 @@ $(document).ready(function() {
                     str_pic = '<section class="contain"><img src="viewimg.php?mode=car&imgindex=2&id=' + id + '"></section>';
                     str_pic += '<br>';
                     $('#show-picture_edit_2').html(str_pic);
-                    str_pic = '<button class="btn btn-sm btn-primary" type="button">แก้ไข</button> ';
-                    str_pic += '<button class="btn btn-sm btn-danger" type="button" data-id='+id+'>ลบ</button>';
-                    str_pic += '<input type="file" class="form-control hidden" name="filUpload1">';
+                    str_pic = '<a class="btn btn-primary edit_picture2" data-picnum="2">เปลี่ยนรูปภาพ</a> ';
+                    str_pic += '<a class="btn btn-danger delete_picture2" data-id='+id+'>ลบ</a>';
+                    str_pic += '<br><input type="file" class="form-control hidden" name="filUpload1">';
                     $('#show-button_edit_2').html(str_pic);
+
+                    $('.edit_picture2').click(function(){
+                        var btn_txt = $(this).text();
+                        if(btn_txt === 'เปลี่ยนรูปภาพ'){ $(this).html('ยกเลิก'); }
+                        else{ $(this).html('เปลี่ยนรูปภาพ'); $('input[name=filUpload1]').val('') }
+
+                        $('input[name=filUpload1]').toggleClass('hidden')
+                    });
+
+                    $('.delete_picture2').click(function(){
+                        var id = $(this).attr('data-id');
+                        var pic_num = 2;
+                        swal({
+                            title: "ต้องการลบรูปที่ "+ pic_num +" หรือไม่",
+                            type: "warning",
+                            showCancelButton: true,
+                            cancelButtonText: "ยกเลิก",
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "ลบรูปภาพ",
+                            closeOnConfirm: false
+                          },
+                          function(){
+                            $.ajax({
+                                type: "POST",
+                                url: "cars/controller.php",
+                                data: {id, pic_num, mode: 'deletePicture'},
+                                dataType: 'json',
+                                success: function(data){
+                                  if (data.result == 1) //สำเร็จ
+                                  {
+                                    swal({
+                                          title: "ลบสำเร็จ",
+                                           type: "success",
+                                          confirmButtonText: "ตกลง",
+                                          showConfirmButton: true,
+                                        },
+                                        function()
+                                        {
+                                            str_pic = '<input type="file" class="form-control" name="filUpload'+(pic_num-1)+'">';
+                                            $('#show-picture_edit_'+pic_num).html('');
+                                            $('#show-button_edit_'+pic_num).html(str_pic);
+                                        }
+                                      );
+                                  }
+                                  else if (data.result == 0) //ไม่สำเร็จ
+                                  {
+                                    swal({
+                                          title: "ไม่สามารถลบข้อมูลได้<br>กรุณาทำรายการใหม่",
+                                           type: "error",
+                                           confirmButtonText: "ตกลง",
+                                           showConfirmButton: true,
+                                          html: true,
+                                        });
+                                  }
+                                  else if (data.result === 'error')
+                                  {
+                                    swal({
+                                          title: "ไม่สามารถลบข้อมูลได้<br>เนื่องจากมีการใช้งานอยู่",
+                                           type: "error",
+                                           confirmButtonText: "ตกลง",
+                                           showConfirmButton: true,
+                                          html: true,
+                                        });
+                                  }
+                                }
+                              });
+                          });
+                    });
+
                 } else {
                     str_pic = '<input type="file" class="form-control" name="filUpload1">';
                     $('#show-picture_edit_2').html('');
@@ -113,10 +268,80 @@ $(document).ready(function() {
                     str_pic = '<section class="contain"><img src="viewimg.php?mode=car&imgindex=3&id=' + id + '"></section>';
                     str_pic += '<br>';
                     $('#show-picture_edit_3').html(str_pic);
-                    str_pic = '<button class="btn btn-sm btn-primary" type="button">แก้ไข</button> ';
-                    str_pic += '<button class="btn btn-sm btn-danger" type="button" data-id='+id+'>ลบ</button>';
-                    str_pic += '<input type="file" class="form-control hidden" name="filUpload2">';
+                    str_pic = '<a class="btn btn-primary edit_picture3" data-picnum="3">เปลี่ยนรูปภาพ</a> ';
+                    str_pic += '<a class="btn btn-danger delete_picture3" data-id='+id+'>ลบ</a>';
+                    str_pic += '<br><input type="file" class="form-control hidden" name="filUpload2">';
                     $('#show-button_edit_3').html(str_pic);
+
+                    $('.edit_picture3').click(function(){
+                        var btn_txt = $(this).text();
+                        if(btn_txt === 'เปลี่ยนรูปภาพ'){ $(this).html('ยกเลิก'); }
+                        else{ $(this).html('เปลี่ยนรูปภาพ'); $('input[name=filUpload2]').val('') }
+
+                        $('input[name=filUpload2]').toggleClass('hidden')
+                    });
+
+                    $('.delete_picture3').click(function(){
+                        var id = $(this).attr('data-id');
+                        var pic_num = 3;
+                        swal({
+                            title: "ต้องการลบรูปที่ "+ pic_num +" หรือไม่",
+                            type: "warning",
+                            showCancelButton: true,
+                            cancelButtonText: "ยกเลิก",
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "ลบรูปภาพ",
+                            closeOnConfirm: false
+                          },
+                          function(){
+                            $.ajax({
+                                type: "POST",
+                                url: "cars/controller.php",
+                                data: {id, pic_num, mode: 'deletePicture'},
+                                dataType: 'json',
+                                success: function(data){
+                                  if (data.result == 1) //สำเร็จ
+                                  {
+                                    swal({
+                                          title: "ลบสำเร็จ",
+                                           type: "success",
+                                          confirmButtonText: "ตกลง",
+                                          showConfirmButton: true,
+                                        },
+                                        function()
+                                        {
+                                            str_pic = '<input type="file" class="form-control" name="filUpload'+(pic_num-1)+'">';
+                                            $('#show-picture_edit_'+pic_num).html('');
+                                            $('#show-button_edit_'+pic_num).html(str_pic);
+                                        }
+                                      );
+                                  }
+                                  else if (data.result == 0) //ไม่สำเร็จ
+                                  {
+                                    swal({
+                                          title: "ไม่สามารถลบข้อมูลได้<br>กรุณาทำรายการใหม่",
+                                           type: "error",
+                                           confirmButtonText: "ตกลง",
+                                           showConfirmButton: true,
+                                          html: true,
+                                        });
+                                  }
+                                  else if (data.result === 'error')
+                                  {
+                                    swal({
+                                          title: "ไม่สามารถลบข้อมูลได้<br>เนื่องจากมีการใช้งานอยู่",
+                                           type: "error",
+                                           confirmButtonText: "ตกลง",
+                                           showConfirmButton: true,
+                                          html: true,
+                                        });
+                                  }
+                                }
+                              });
+                          });
+                    });
+
+
                 } else {
                     str_pic = '<input type="file" class="form-control" name="filUpload2">';
                     $('#show-picture_edit_3').html('');
@@ -127,10 +352,79 @@ $(document).ready(function() {
                     str_pic = '<section class="contain"><img src="viewimg.php?mode=car&imgindex=4&id=' + id + '"></section>';
                     str_pic += '<br>';
                     $('#show-picture_edit_4').html(str_pic);
-                    str_pic = '<button class="btn btn-sm btn-primary" type="button">แก้ไข</button> ';
-                    str_pic += '<button class="btn btn-sm btn-danger" type="button" data-id='+id+'>ลบ</button>';
-                    str_pic += '<input type="file" class="form-control hidden" name="filUpload3">';
+                    str_pic = '<a class="btn btn-primary edit_picture4" data-picnum="4">เปลี่ยนรูปภาพ</a> ';
+                    str_pic += '<a class="btn btn-danger delete_picture4" data-id='+id+'>ลบ</a>';
+                    str_pic += '<br><input type="file" class="form-control hidden" name="filUpload3">'
                     $('#show-button_edit_4').html(str_pic);
+
+                    $('.edit_picture4').click(function(){
+                        var btn_txt = $(this).text();
+                        if(btn_txt === 'เปลี่ยนรูปภาพ'){ $(this).html('ยกเลิก'); }
+                        else{ $(this).html('เปลี่ยนรูปภาพ'); $('input[name=filUpload3]').val('') }
+
+                        $('input[name=filUpload3]').toggleClass('hidden')
+                    });
+
+                    $('.delete_picture4').click(function(){
+                        var id = $(this).attr('data-id');
+                        var pic_num = 4;
+                        swal({
+                            title: "ต้องการลบรูปที่ "+ pic_num +" หรือไม่",
+                            type: "warning",
+                            showCancelButton: true,
+                            cancelButtonText: "ยกเลิก",
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "ลบรูปภาพ",
+                            closeOnConfirm: false
+                          },
+                          function(){
+                            $.ajax({
+                                type: "POST",
+                                url: "cars/controller.php",
+                                data: {id, pic_num, mode: 'deletePicture'},
+                                dataType: 'json',
+                                success: function(data){
+                                  if (data.result == 1) //สำเร็จ
+                                  {
+                                    swal({
+                                          title: "ลบสำเร็จ",
+                                           type: "success",
+                                          confirmButtonText: "ตกลง",
+                                          showConfirmButton: true,
+                                        },
+                                        function()
+                                        {
+                                            str_pic = '<input type="file" class="form-control" name="filUpload'+(pic_num-1)+'">';
+                                            $('#show-picture_edit_'+pic_num).html('');
+                                            $('#show-button_edit_'+pic_num).html(str_pic);
+                                        }
+                                      );
+                                  }
+                                  else if (data.result == 0) //ไม่สำเร็จ
+                                  {
+                                    swal({
+                                          title: "ไม่สามารถลบข้อมูลได้<br>กรุณาทำรายการใหม่",
+                                           type: "error",
+                                           confirmButtonText: "ตกลง",
+                                           showConfirmButton: true,
+                                          html: true,
+                                        });
+                                  }
+                                  else if (data.result === 'error')
+                                  {
+                                    swal({
+                                          title: "ไม่สามารถลบข้อมูลได้<br>เนื่องจากมีการใช้งานอยู่",
+                                           type: "error",
+                                           confirmButtonText: "ตกลง",
+                                           showConfirmButton: true,
+                                          html: true,
+                                        });
+                                  }
+                                }
+                              });
+                          });
+                    });
+
                 } else {
                     str_pic = '<input type="file" class="form-control" name="filUpload3">';
                     $('#show-picture_edit_4').html('');

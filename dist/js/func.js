@@ -8,18 +8,6 @@ function sorting(json_object, key_to_sort_by) {
   json_object.sort(sortByKey);
 }
 
-
-function getProvince() {
-  $.getJSON("_province.json", function(result){
-    var province_group = result.th.changwats;
-    sorting(province_group, 'name');
-        $.each(province_group, function(i, field){
-          $('#province').append($('<option>').text(field.name).attr('value', field.name));
-          $('#display-province').append($('<option>').text(field.name).attr('value', field.name));
-        });
-  });
-}
-
 function setBtnOnDetailForm() {
   var $active = $('.wizard .nav-tabs li.active');
   $active.next().removeClass('disabled');

@@ -226,4 +226,24 @@ elseif ($mode == 'deleteCars')
     echo json_encode(array('result' => 'error'));
   }
 }
+elseif ($mode == 'deletePicture') 
+{
+  $id = $_POST['id'];
+  $num = $_POST['pic_num'];
+  
+  $sql = "select * from cars where car_id ='".$id."'";
+  $result = $conn->query($sql);
+  if($result){
+    $sql = "update cars
+    set picture_".$num." = NULL
+    WHERE car_id = ".$id;
+  
+    if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
+    else {echo json_encode(array('result' => '0'));}
+  }
+  else
+  {
+    echo json_encode(array('result' => 'error'));
+  }
+}
 ?>
