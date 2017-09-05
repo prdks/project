@@ -74,7 +74,7 @@ $(document).ready(function() {
                 if (data.pic4 != 0) {state_pic++; str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=4&id=' + id + '"></section></td>'; }
                 str_pic += '</td></tr><table></div>';
                 if(state_pic > 0){$('#show-picture').html(str_pic);}
-                else{$('#dt-show-picture').hide(); alert(state_pic)}
+                else{$('#dt-show-picture').hide();}
                 
             }
         });
