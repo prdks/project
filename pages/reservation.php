@@ -137,13 +137,7 @@
                                               <input type="text" class="form-control input-sm" id="search_input" onkeyup="filtertable()" placeholder="พิมพ์เพื่อค้นหา">
                                             </div>
                                           </div>
-
-                                          <div id="EmptyPersonnel">
-                                            <br />
-                                            <p class="text-center">ไม่มีข้อมูลผู้โดยสารที่เลือก</p>
-                                            <br />
-                                          </div>
-
+                                          
                                             <div id="Table_sPersonnel" class="table-responsive tspersonnel">
                                               <table id="TablePersonnelList" class="table table-condensed table-bordered table-hover">
                                                 <thead id="Tb_sPersonnel">

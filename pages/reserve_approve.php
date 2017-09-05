@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-      <?php
+        <?php
         include '_head.php';
-      ?>
+        ?>
+      <script src="../dist/js/approve.js"></script>
 </head>
 
 <body>
