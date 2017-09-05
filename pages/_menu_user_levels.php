@@ -66,6 +66,7 @@ switch ($type) {
             <li><a href="car_brand.php">ข้อมูลยี่ห้อรถยนต์</a></li>
           </ul>
       </li>
+      <li><a href="uploadfile.php"><i class="fa fa-upload fa-fw"></i> การนำเข้าข้อมูลรายชื่อ</a></li>
       <?php
       if ($_SESSION['url_googleform'] != "")
       {

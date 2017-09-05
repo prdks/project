@@ -81,7 +81,7 @@
             <!-- จำนวนที่นั่ง -->
             <div class="form-group">
               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                <span class="requestfield">*</span> จำนวนที่นั่ง : </label>
+                <span class="requestfield">*</span> จำนวนที่นั่ง :
               </label>
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                 <input class="form-control" type="number"
@@ -91,7 +91,7 @@
             <!-- คนขับรถยนต์ -->
             <div class="form-group">
               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                <span class="requestfield">*</span> เลือกคนขับ : </label>
+                <span class="requestfield">*</span> เลือกคนขับ :
               </label>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <?php
@@ -227,7 +227,7 @@
             <!-- ถ้้าสถานะงดจอง -->
             <div class="form-group" id="note">
               <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-                <span class="requestfield">*</span> หมายเหตุ : </label>
+                <span class="requestfield">*</span> หมายเหตุ :
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <textarea  rows="3" type="text" class="form-control" id="note_area" name="note"

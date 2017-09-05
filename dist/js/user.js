@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    $("button[id$='cancel_btn']").click(function() {
+        window.location.href = "index.php"
+    });
 
     $("#editprofileform").submit(function(e) {
         e.preventDefault();

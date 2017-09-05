@@ -107,7 +107,7 @@
               ?>
             </div>
           </div>
-          <input type="hidden" name="user_type_basic" value="ผู้ใช้งานทั่วไป">
+          <input type="hidden" name="user_type_basic" value="1">
       </div>
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>

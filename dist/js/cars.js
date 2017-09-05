@@ -24,6 +24,18 @@ $(document).ready(function() {
         });
       }
       
+      $('#note').hide();
+      $('#status').change(function(){
+          var s = $(this).val();
+          if( s == 'งดจอง') {
+              $('#note_area').prop('required',true);
+              $('#note').show();
+          } else {
+              $('#note_area').prop('required',false);
+              $('#note').hide();
+          }
+      });
+      
     //  เมื่อกดปุ่มดูลายระเอียด จะส่งค่าไปที่ box
     $('.handleCarDetail').click(function() {
         var id = $(this).attr('data-id');

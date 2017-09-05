@@ -5,6 +5,7 @@
       <?php
         include '_head.php';
       ?>
+      <script src="../dist/js/reservation.js"></script>
 </head>
 
 <body>
@@ -137,7 +138,13 @@
                                             </div>
                                           </div>
 
-                                            <div id="Table_sPersonnel" class="table-responsive">
+                                          <div id="EmptyPersonnel">
+                                            <br />
+                                            <p class="text-center">ไม่มีข้อมูลผู้โดยสารที่เลือก</p>
+                                            <br />
+                                          </div>
+
+                                            <div id="Table_sPersonnel" class="table-responsive tspersonnel">
                                               <table id="TablePersonnelList" class="table table-condensed table-bordered table-hover">
                                                 <thead id="Tb_sPersonnel">
                                                   <tr>
@@ -231,7 +238,7 @@
                                               <br />
                                             </div>
 
-                                            <div id="Table_Passenger" class="table-responsive">
+                                            <div id="Table_Passenger" class="table-responsive tspassenger">
                                                 <table id="PassengerListTable" class="table table-condensed table-striped table-bordered table-hover">
                                                   <thead id="Tb_Passenger">
                                                     <tr>

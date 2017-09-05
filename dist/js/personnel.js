@@ -1,4 +1,108 @@
 $(document).ready(function() {
+    // ----------------------- personnel ----------------------------
+  //  เมื่อกดปุ่มดูลายระเอียด จะส่งค่าไปที่ box
+  $('.handlePersonDetail').click(function() {
+    var id = $(this).attr('data-id');
+
+    $.ajax({
+      type: "POST",
+      url: "personnel/controller.php",
+      data: {id: id, mode: 'getDetail'},
+      dataType: 'json',
+      success: function(data){
+        $('#show-name').html(data.name);
+        $('#show-email').html(data.email);
+        $('#show-phone').html(data.phone);
+        $('#show-department').html(data.department);
+        $('#show-position').html(data.position);
+      }
+    });
+
+  });
+
+  //  เมื่อกดปุ่มแก้ไข จะส่งค่าไปที่ box
+  $('.handlePersonEdit').click(function() {
+    var id = $(this).attr('data-id');
+
+    $.ajax({
+      type: "POST",
+      url: "personnel/controller.php",
+      data: {id: id, mode: 'getEdit'},
+      dataType: 'json',
+      success: function(data){
+        $('#display-title').val(data.title);
+        $('#display-name').val(data.name);
+        $('#display-email').val(data.email);
+        $('#display-phone').val(data.phone);
+        $('#display-department').val(data.department);
+        $('#display-position').val(data.position);
+        $('#display-id').val(data.id);
+      }
+    });
+
+  });
+
+  // Send data to modal_delete
+  $('#btn_delet_modal').click(function() {
+    var checked = []
+    $("input[name='checked_id[]']:checked").each(function ()
+    {
+      checked.push(parseInt($(this).val()));
+    });
+    $.post("personnel/controller.php" ,
+      {checked_id: checked , mode: 'getDelete'} ,
+      function(data) {
+        $('#respone').html(data);
+      }
+    );
+
+  });
+
+  // ******* Permission ************
+  $('.handlePermission').click(function () {
+    var id = $(this).attr('data-id');
+
+    $.ajax({
+      type: "POST",
+      url: "personnel/controller.php",
+      data: {id: id, mode: 'getDetail'},
+      dataType: 'json',
+      success: function(data){
+        $('#show-name').html(data.name);
+        $('#show-email').html(data.email);
+        $('#show-phone').html(data.phone);
+        $('#show-department').html(data.department);
+        $('#show-position').html(data.position);
+        $('#show-usertype').val(data.type);
+        $('#show-id').val(id);
+      }
+    });
+
+  });
+  
+  // คลิกเลือกทั้งหมด
+  $('#select_all').on('click',function(){
+    if(this.checked){
+        $('.checkbox').each(function(){
+            this.checked = true;
+        });
+    }else{
+         $('.checkbox').each(function(){
+            this.checked = false;
+        });
+    }
+  });
+
+  // ถ้าเช็คเลือกทั้งหมด แต่เอาออกอันหนึ่ง ช่องเลือกทั้งหมดจะไม่ถูกเช็ค
+  $('.checkbox').on('click',function(){
+      if($('.checkbox:checked').length == $('.checkbox').length){
+          $('#select_all').prop('checked',true);
+      }else{
+          $('#select_all').prop('checked',false);
+      }
+  });
+
+
     $("#insert_personnel_form").submit(function(e) {
         e.preventDefault();
         InsertPersonnel();
@@ -18,6 +122,7 @@ $(document).ready(function() {
         e.preventDefault();
         setPermission();
     });
+
     // --------------- Function --------------------
     function InsertPersonnel() {
         var data = $('#insert_personnel_form').serializeArray();
@@ -190,4 +295,5 @@ $(document).ready(function() {
             }
         });
     }
+
 });

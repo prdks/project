@@ -140,7 +140,7 @@ elseif ($mode == 'InsertPersonnel')
     ,(select title_name_id from title_name where title_name = '".$title."')
     ,(select position_id from position where position_name = '".$position."')
     ,(select department_id from department where department_name = '".$department."')
-    ,(select user_type_id from user_type where user_type_name = '".$user_type."'))
+    ,(select user_type_id from user_type where user_level = '".$user_type."'))
     ON DUPLICATE KEY UPDATE personnel_id = personnel_id";
   
     if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
@@ -216,5 +216,64 @@ elseif ($mode == 'setPermission')
   {
     echo json_encode(array('result' => 'error'));
   }
+}
+elseif ($mode == 'uploadFilePersonnel') 
+{
+
+  $objCSV = fopen($_FILES["fileCSV"]["name"], "r");
+
+  while (($objArr = fgetcsv($objCSV, 1000, ",")) !== FALSE)
+  {
+    $title = $objArr[0];
+    $name = $objArr[1]." ".$objArr[2];
+    $email = $objArr[3];
+    $phone = $objArr[4];
+    $department = $objArr[5];
+    $position = $objArr[6];
+    $user_type = 1;
+    $success = 0;
+    $fail = 0;
+    $dup = 0;
+    $FailArr = array(); // Insert ไม่ได้
+    $DuplArr = array(); // ซ้ำ
+    // -------------------------------------------------------------------
+    $sql = "select * from personnel where personnel_name ='".$name."'";
+    $result = $conn->query($sql);
+    if($result->num_rows === 0)
+    {
+    
+      $sql = "insert into personnel
+      (personnel_name,email,phone_number,title_name_id,position_id,department_id,user_type_id)
+      values
+      ('".$name."','".$email."','".$phone."'
+      ,(select title_name_id from title_name where title_name = '".$title."')
+      ,(select position_id from position where position_name = '".$position."')
+      ,(select department_id from department where department_name = '".$department."')
+      ,(select user_type_id from user_type where user_level = ".$user_type."))
+      ON DUPLICATE KEY UPDATE personnel_id = personnel_id";
+    
+      if($conn->query($sql)===true){
+        $success++;
+      }
+      else {
+        $fail++;
+        $str = $fail.". ชื่อ: ".$name.", หน่วยงาน: ".$department.", ตำแหน่ง: ".$position;
+        array_push($FailArr,$str);
+      }
+    }
+    else
+    {
+      $dup++;
+      $str = $fail.". ชื่อ: ".$name.", หน่วยงาน: ".$department.", ตำแหน่ง: ".$position;
+      array_push($DuplArr,$str);
+    }
+    // -------------------------------------------------------------------
+  }
+
+  fclose($objCSV);
+
+  $str = 'เพิ่มสำเร็จ:'.$success.' | ไม่สำเร็จ: '.$fail.' | ข้อมูลซ้ำ: '.$dup;
+  echo json_encode(array('result' => $str));
+  
 }
 ?>

@@ -2,7 +2,7 @@ body {
     font-family: 'Kanit', sans-serif;
 }
 
-
+ 
 section.contain img {
     width: 250px;
     height: 250px;
@@ -212,6 +212,9 @@ th#tb_option {
     width: 210px;
     vertical-align: middle;
 }
+
+.tspersonnel {height:250px;}
+.tspassenger {height:250px;}
 
 .topic {
     background-color: #f9f9f9;
