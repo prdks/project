@@ -180,11 +180,22 @@ elseif ($mode == 'getCars_For_Select')
   ON p.department_id = d.department_id
   WHERE c.car_id NOT IN (
      SELECT car_id FROM reservation r
-    WHERE ((date_start BETWEEN '".$date_start."' AND '".$date_end."')
-    OR (date_end BETWEEN '".$date_start."' AND '".$date_end."'))
-    AND ((reserv_stime <= '".strtotime ($time_start)."' AND reserv_etime >= '".strtotime ($time_start)."') OR
-    (reserv_stime <= '".strtotime ($time_end)."' AND reserv_etime >= '".strtotime ($time_end)."') OR
-    (reserv_stime >= '".strtotime ($time_start)."' AND reserv_etime <= '".strtotime ($time_end)."'))
+    WHERE 
+      ((date_start BETWEEN '".$date_start."' AND '".$date_end."')
+      OR 
+      (date_end BETWEEN '".$date_start."' AND '".$date_end."')
+      OR 
+       ('".$date_start."' BETWEEN date_start  AND date_end)
+      OR 
+       ('".$date_end."' BETWEEN  date_start  AND date_end ))
+      AND 
+      ((reserv_stime BETWEEN '".$time_start."' AND '".$time_end."')
+      OR 
+      (reserv_etime BETWEEN '".$time_start."' AND '".$time_end."')
+      OR 
+       ('".$time_start."' BETWEEN reserv_stime  AND reserv_etime)
+      OR 
+       ('".$time_end."' BETWEEN  reserv_stime  AND reserv_etime ))
     )
   AND c.status <> 'งดจอง'
   ORDER BY car_reg";
@@ -373,29 +384,29 @@ elseif ($mode == 'getDetail_For_Submit')
     // $PassengerData = $_POST['passenger'];
     for ($i=0; $i < sizeof($passener_name); $i++)
     {
-        if ($i != 0) {
+        // if ($i != 0) {
 
-            if ($passenger_department[$i] === $passenger_department[$i-1])
-            {
-                $str = $passener_name[$i]."<br />";
-                $passenger .= $str;
-            }
-            else
-            {
-                $str = "<b>".$passenger_department[$i]."</b><br />";
-                $passenger .= $str;
-                $str = $passener_name[$i]."<br />";
-                $passenger .= $str;
-            }
+        //     if ($passenger_department[$i] === $passenger_department[$i-1])
+        //     {
+        //         $str = $passener_name[$i]."<br />";
+        //         $passenger .= $str;
+        //     }
+        //     else
+        //     {
+        //         $str = "<b>".$passenger_department[$i]."</b><br />";
+        //         $passenger .= $str;
+        //         $str = $passener_name[$i]."<br />";
+        //         $passenger .= $str;
+        //     }
 
-        }
-        else
-        {
-            $str = "<b>".$passenger_department[$i]."</b><br />";
-            $passenger .= $str;
-            $str = $passener_name[$i]."<br />";
-            $passenger .= $str;
-        }
+        // }
+        // else
+        // {
+        //     $str = "<b>".$passenger_department[$i]."</b><br />";
+        //     $passenger .= $str;
+        //     $str = $passener_name[$i]."<br />";
+        //     $passenger .= $str;
+        // }
     }
   }
 
