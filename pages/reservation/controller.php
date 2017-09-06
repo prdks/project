@@ -180,10 +180,11 @@ elseif ($mode == 'getCars_For_Select')
   ON p.department_id = d.department_id
   WHERE c.car_id NOT IN (
      SELECT car_id FROM reservation r
-    WHERE (date_start BETWEEN '".$date_start."' AND '".$date_end."')
-    OR (date_end BETWEEN '".$date_start."' AND '".$date_end."')
-    OR ((reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
-    OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."'))
+    WHERE ((date_start BETWEEN '".$date_start."' AND '".$date_end."')
+    OR (date_end BETWEEN '".$date_start."' AND '".$date_end."'))
+    AND ((reserv_stime <= '".strtotime ($time_start)."' AND reserv_etime >= '".strtotime ($time_start)."') OR
+    (reserv_stime <= '".strtotime ($time_end)."' AND reserv_etime >= '".strtotime ($time_end)."') OR
+    (reserv_stime >= '".strtotime ($time_start)."' AND reserv_etime <= '".strtotime ($time_end)."'))
     )
   AND c.status <> 'งดจอง'
   ORDER BY car_reg";
@@ -358,7 +359,7 @@ elseif ($mode == 'getDetail_For_Submit')
   $location = "";
   for ($i=0; $i < sizeof($location_name); $i++)
   {
-    $str = $location_name[$i]."<br />";
+    $str = ($i+1).". ".$location_name[$i]."<br />";
     $location .= $str;
   }
 

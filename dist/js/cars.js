@@ -73,8 +73,8 @@ $(document).ready(function() {
                 if (data.pic3 != 0) {state_pic++; str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=3&id=' + id + '"></section></td>'; }
                 if (data.pic4 != 0) {state_pic++; str_pic += '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=4&id=' + id + '"></section></td>'; }
                 str_pic += '</td></tr><table></div>';
-                if(state_pic > 0){$('#show-picture').html(str_pic);}
-                else{$('#dt-show-picture').hide();}
+                if(state_pic > 0){$('#dt-show-picture').show(); $('#show-picture').html(str_pic);}
+                else{$('#dt-show-picture').hide(); $('#show-picture').html('');}
                 
             }
         });
@@ -508,7 +508,7 @@ $(document).ready(function() {
                 } else if (data.result == 0) //ไม่สำเร็จ
                 {
                     swal({
-                            title: "ไม่สามารถเพิ่มข้อมูลได้<br>กรุณาทำรายการใหม่",
+                            title: "ไม่สามารถเพิ่มข้อมูลได้<br>กรุณาทำรายการใหม่1",
                             text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
                             type: "error",
                             timer: 2000,
@@ -519,7 +519,7 @@ $(document).ready(function() {
                     );
                 } else if (data.result === 'error') {
                     swal({
-                            title: "ข้อมูลนี้มีอยู่แล้ว<br>กรุณาทำรายการใหม่",
+                            title: "ข้อมูลนี้มีอยู่แล้ว<br>กรุณาทำรายการใหม่2",
                             text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
                             type: "error",
                             timer: 2000,

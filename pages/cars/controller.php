@@ -131,7 +131,7 @@ elseif ($mode == 'insertCars')
       fclose($fp);
       $picture_name .= ',picture_'.($i+1);
       $FileData[$i] = addslashes($ReadBinary);
-      $picture_data .= $FileData[$i];
+      $picture_data .= ",".$FileData[$i];
     }
   }
   
@@ -141,7 +141,11 @@ elseif ($mode == 'insertCars')
   
     $sql = "
     INSERT INTO cars
-    (car_reg , car_brand_id , car_kind , car_detail , seat , status ,note , personnel_id".$picture_name.")
+    (car_reg , car_brand_id , car_kind , car_detail , seat , status ,note , personnel_id";
+    
+    if($picture_name != ''){ $sql .= $picture_name;}
+
+    $sql .= ")
     VALUES
     ('".$reg."'
     ,(Select car_brand_id from car_brand where car_brand_name = '".$brand."')
@@ -150,8 +154,11 @@ elseif ($mode == 'insertCars')
     ,".$seat."
     ,'".$status."'
     ,'".$note."'
-    ,(select personnel_id from personnel where personnel_name = '".$driver."')
-    ,'".$picture_data."') ON DUPLICATE KEY UPDATE car_id = car_id";
+    ,(select personnel_id from personnel where personnel_name = '".$driver."')";
+
+    if($picture_name != ''){ $sql .= "'".$picture_data."'";}
+    
+    $sql .= ") ON DUPLICATE KEY UPDATE car_id = car_id";
   
     if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
     else {echo json_encode(array('result' => '0'));}
