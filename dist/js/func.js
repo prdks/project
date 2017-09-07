@@ -284,6 +284,7 @@ function getReservationData() {
         $('#show-location').html(data.location);
         $('#show-appointment').html(data.appointment);
         $('#show-passenger').html(data.passenger);
+        console.log(data.passenger);
       }
     });
 }

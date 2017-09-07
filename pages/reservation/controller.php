@@ -368,46 +368,74 @@ elseif ($mode == 'getDetail_For_Submit')
 
   $location_name = $_POST['location'];
   $location = "";
-  for ($i=0; $i < sizeof($location_name); $i++)
+  $countlocation = sizeof($location_name);
+  for ($i=0; $i < $countlocation ; $i++)
   {
-    $str = ($i+1).". ".$location_name[$i]."<br />";
-    $location .= $str;
+    if($countlocation == 1)
+    {
+      $str = $location_name[$i];
+      $location .= $str;
+    }
+    else
+    {
+      $str = ($i+1).". ".$location_name[$i]."<br />";
+      $location .= $str;
+    }
+    
   }
 
 
-  $passenger = "";
-  if(!isset($_POST['passenger_name'])){
-    $passenger = "ไม่มีผู้โดยสารเพิ่มเติม";
-  }else {
+  $allPassenger = "";
+  if(!isset($_POST['passenger_name']))
+  {
+    $allPassenger = "ไม่มีผู้โดยสารเพิ่มเติม";
+  }
+  else 
+  {
     $passener_name = $_POST['passenger_name'];
     $passenger_department = $_POST['passenger_department'];
-    // $PassengerData = $_POST['passenger'];
-    for ($i=0; $i < sizeof($passener_name); $i++)
+
+    $coutPassenger = sizeof($passener_name);
+    $allPassenger = array();
+    $arrDepartment = array();
+    $arrName = array();
+    $onePassenger = array();
+    $passenger = "";
+
+    for ($i=0; $i < $coutPassenger ; $i++)
     {
-        // if ($i != 0) {
-
-        //     if ($passenger_department[$i] === $passenger_department[$i-1])
-        //     {
-        //         $str = $passener_name[$i]."<br />";
-        //         $passenger .= $str;
-        //     }
-        //     else
-        //     {
-        //         $str = "<b>".$passenger_department[$i]."</b><br />";
-        //         $passenger .= $str;
-        //         $str = $passener_name[$i]."<br />";
-        //         $passenger .= $str;
-        //     }
-
-        // }
-        // else
-        // {
-        //     $str = "<b>".$passenger_department[$i]."</b><br />";
-        //     $passenger .= $str;
-        //     $str = $passener_name[$i]."<br />";
-        //     $passenger .= $str;
-        // }
+      $arrDepartment[$i] = "<b>".$passenger_department[$i]."</b><br>";
+      $arrName[$i] = $passener_name[$i]."<br />";
     }
+
+    $coutInDepartment = array_count_values(array_values($arrDepartment));
+    $nameDepartment = array_values(array_unique($arrDepartment));
+
+    sort($nameDepartment);
+
+    $count = 0;
+
+    for ($a=0; $a < sizeof($nameDepartment); $a++) 
+    { 
+      $name = $nameDepartment[$a];
+      $n = $coutInDepartment[$name];
+      array_push($allPassenger, $name);
+
+      $person = array();
+      for ($b=0; $b < $n ; $b++) 
+      { 
+        array_push($person, $arrName[$count]);
+        $count++;
+      }
+      sort($person);
+
+      for ($c=0; $c < sizeof($person); $c++) 
+      { 
+        array_push($allPassenger, $person[$c]);
+      }
+
+    }
+
   }
 
   $arr = array(
@@ -419,7 +447,7 @@ elseif ($mode == 'getDetail_For_Submit')
         'cars' => $cars,
         'location' => $location,
         'appointment' => $appointment,
-        'passenger' => $passenger,
+        'passenger' => $allPassenger,
         'department' => $user_department
       );
 
