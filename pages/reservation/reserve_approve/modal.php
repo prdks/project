@@ -69,21 +69,9 @@
         
         $result3 = $conn->query($sqlNo3);
         $No3 = $result3->fetch_assoc();
-        
-        if($No1['Result'] != 0 || $No2['Result'] != 0 )
-        {
-          ?>
-          <div class="col-lg-8">   
-          <?php
-        }
-        else
-        {
-          ?>
-          <div class="col-lg-12">   
-          <?php
-        }
+
         ?>   
-          
+          <div class="col-lg-8">   
               <div class="panel panel-primary">
                   <div class="panel-heading">
                     <h3 class="panel-title">อนุมัติการจอง</h3>
@@ -131,10 +119,6 @@
 
           </div>
 
-          <?php
-          if($No1['Result'] != 0 || $No2['Result'] != 0 )
-          {
-            ?>
             <div class="col-lg-4 container-fluid">
               <div class="panel panel-primary">
                   <div class="panel-heading">
@@ -145,6 +129,7 @@
                     $count = $No1['Result'] + $No2['Result'];
                     if($count == 2){ $num1 = 1; $num2 = 2; $num3 = 3; }
                     elseif ($count == 1) {$num1 = 1; $num2 = 0; $num3 = 2;}
+                    else{$num1 = 0; $num2 = 0; $num3 = 1;}
 
                     if($No1['Result'] != 0)
                     {
@@ -212,10 +197,6 @@
                   </div>
               </div>
             </div> 
-            <?php
-          }
-          ?>
-          
           
           
           
