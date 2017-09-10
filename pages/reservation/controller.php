@@ -508,22 +508,22 @@ elseif ($mode == 'insertReservation')
     // INSERT RESERVAION detail
     $sql_reserv = "
     INSERT INTO reservation (requirement_detail,date_start,date_end,reserv_stime,reserv_etime
-    ,passenger_total,reservation_status,usage_status,timestamp,personnel_id,car_id,location,appointment_place)
+    ,passenger_total,reservation_status,usage_status,timestamp,personnel_id,car_id,location,appointment_place,fist_approve_status)
     VALUES('".$detail."','".$date_start."','".$date_end."','".$time_start."','".$time_end."'
     ,".sizeof($_POST['passenger_name']).",'".$reserv_status."','".$usage_status."','".$timestamp."'
     ,(SELECT personnel_id FROM personnel WHERE personnel_name ='".$_SESSION['user_name']."')
-    ,'".$car_id."','".$location."','".$appointment."') ON DUPLICATE KEY UPDATE reservation_id = reservation_id";
+    ,'".$car_id."','".$location."','".$appointment."',0) ON DUPLICATE KEY UPDATE reservation_id = reservation_id";
   }
   else
   {
     // INSERT RESERVAION detail
     $sql_reserv = "
     INSERT INTO reservation (requirement_detail,date_start,date_end,reserv_stime,reserv_etime
-    ,passenger_total,reservation_status,usage_status,timestamp,personnel_id,car_id,location,appointment_place)
+    ,passenger_total,reservation_status,usage_status,timestamp,personnel_id,car_id,location,appointment_place,fist_approve_status)
     VALUES('".$detail."','".$date_start."','".$date_end."','".$time_start."','".$time_end."'
     ,0,'".$reserv_status."','".$usage_status."','".$timestamp."'
     ,(SELECT personnel_id FROM personnel WHERE personnel_name ='".$_SESSION['user_name']."')
-    ,'".$car_id."','".$location."','".$appointment."') ON DUPLICATE KEY UPDATE reservation_id = reservation_id";
+    ,'".$car_id."','".$location."','".$appointment."',0) ON DUPLICATE KEY UPDATE reservation_id = reservation_id";
   }
 
 

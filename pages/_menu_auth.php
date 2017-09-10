@@ -63,7 +63,7 @@
               $sql = "
               SELECT COUNT(reservation_id) as reservecout
               FROM reservation
-              WHERE fist_approve_status = null
+              WHERE fist_approve_status = 0
               ";
               $result = $conn->query($sql);
               $row = $result->fetch_array();
@@ -96,7 +96,7 @@
                 $sql = "
                 SELECT COUNT(reservation_id) as reservecout
                 FROM reservation
-                WHERE fist_approve_status = null
+                WHERE fist_approve_status = 0
                 ";
                 $result = $conn->query($sql);
                 $row = $result->fetch_array();

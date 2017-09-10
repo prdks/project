@@ -142,7 +142,7 @@ $(document).ready(function() {
                 if (data.result == 1) //สำเร็จ
                 {
                     swal({
-                            title: "แก้ไขข้อมูลสำเร็จ",
+                            title: "อนุมัติเสร็จสิ้น",
                             text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
                             type: "success",
                             timer: 2000,
@@ -153,7 +153,7 @@ $(document).ready(function() {
                 } else if (data.result == 0) //ไม่สำเร็จ
                 {
                     swal({
-                            title: "ไม่สามารถแก้ไขข้อมูลได้<br>เนื่องจากข้อมูลซ้ำ",
+                            title: "ไม่สามารถอนุมัติได้",
                             text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
                             type: "error",
                             timer: 2000,
@@ -164,7 +164,7 @@ $(document).ready(function() {
                     );
                 } else if (data.result === 'error') {
                     swal({
-                            title: "ไม่สามารถแก้ไขข้อมูลได้<br>กรุณาทำรายการใหม",
+                            title: "ไม่สามารถอนุมัติได้<br>กรุณาทำรายการใหม",
                             text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
                             type: "error",
                             timer: 2000,

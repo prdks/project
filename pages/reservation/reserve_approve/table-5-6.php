@@ -1,6 +1,7 @@
 <?php
 if(isset($_POST['handleSearch']))
 {
+  $word = $_POST['search_box'];
     $sql = "
     SELECT * FROM reservation r
     LEFT JOIN cars c
@@ -11,8 +12,8 @@ if(isset($_POST['handleSearch']))
     ON p.title_name_id = t.title_name_id
     LEFT JOIN department d
     ON p.department_id = d.department_id
-    WHERE fist_approve_status = null
-    AND d.department_name = ".$_SESSION['department']."
+    WHERE fist_approve_status = 0
+    AND d.department_name = '".$_SESSION['department']."'
     AND (
         r.requirement_detail like '%".$word."%'
         OR
@@ -182,8 +183,8 @@ else
     ON p.title_name_id = t.title_name_id
     LEFT JOIN department d
     ON p.department_id = d.department_id
-    WHERE fist_approve_status = null
-    AND d.department_name = ".$_SESSION['department']."
+    WHERE r.fist_approve_status = 0
+    AND d.department_name = '".$_SESSION['department']."'
     ORDER BY reservation_id ASC 
     ,date_start ASC 
     ,reserv_stime ASC";
