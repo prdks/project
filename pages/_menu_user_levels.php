@@ -250,6 +250,15 @@ switch ($type) {
 
               <li><a href="reserve_approve.php">รายการรออนุมัติการจอง
                 <?php
+                $sql = "
+                SELECT COUNT(reservation_id) as reservecout
+                FROM reservation
+                WHERE fist_approve_status = null
+                ";
+                $result = $conn->query($sql);
+                $row = $result->fetch_array();
+                $num_approve = $row['reservecout'];
+
                 if ($num_approve != 0)
                 {
                   ?>
@@ -260,20 +269,60 @@ switch ($type) {
               </a></li>
               </ul>
         </li>
+        <?php
+        if ($_SESSION['url_googleform'] != "")
+        {
+        ?>
+        <li class="text-center last_menu"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
+        <?php
+        }
+        else
+        {
+          ?>
+          <li class="text-center last_menu" >
+            <a class="disabled" href="#" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
+            </a>
+          </li>
+          <?php
+        }
+      }
+      break;
+      case 6:
+      {
+        ?>
+        <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
+        <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์</a></li>
         <li>
-            <a href="#"><i class="fa fa-file-o fa-fw"></i> การออกรายงาน<span class="fa arrow"></span></a>
+            <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-            <li><a href="report_booking.php">รายงานการจอง</a></li>
-            <li><a href="report_usage.php">รายงานการใช้</a></li>
+            <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
+            <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
+            <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
             </ul>
         </li>
         <li>
-            <a href="#"><i class="fa fa-folder fa-fw"></i> การจัดการข้อมูล<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-              <li><a href="personnel.php">ข้อมูลบุคลากร</a></li>
-              <li><a href="cars.php">ข้อมูลรถยนต์</a></li>
-              <li><a href="reserve_ma.php">ข้อมูลการจองและการใช้รถยนต์</a></li>
-            </ul>
+              <a href="#"><i class="fa fa-star fa-fw"></i> ประจำวัน<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level">
+
+              <li><a href="reserve_approve.php">รายการรออนุมัติการจอง
+                <?php
+                $sql = "
+                SELECT COUNT(reservation_id) as reservecout
+                FROM reservation
+                WHERE fist_approve_status = null
+                ";
+                $result = $conn->query($sql);
+                $row = $result->fetch_array();
+                $num_approve = $row['reservecout'];
+                if ($num_approve != 0)
+                {
+                  ?>
+                <span class="badge badge-danger pull-right"><?php echo $num_approve; ?></span>
+                <?php
+                }
+                ?>
+              </a></li>
+              </ul>
         </li>
         <?php
         if ($_SESSION['url_googleform'] != "")

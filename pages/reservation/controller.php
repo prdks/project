@@ -1,4 +1,6 @@
 <?php
+session_start();
+date_default_timezone_set("Asia/Bangkok");
 require_once '../_connect.php';
 $mode = $_POST['mode'];
 // -------------------------------------------------------------
@@ -61,7 +63,11 @@ if ($mode == 'getDetail')
             'date' => $date,
             'meet' => $row['appointment_place'],
             'person' => $row['title_name'].$row['personnel_name'],
-            'phone' => $row['phone_number']
+            'phone' => $row['phone_number'],
+            'first_app' => $row['first_approver_id'],
+            'first_status' => $row['fist_approve_status'],
+            'first_note' => $row['fist_approve_note'],
+            'second_app' => $row['second_approver_id']
           );
 
 $passenger = array();
@@ -198,6 +204,7 @@ elseif ($mode == 'getCars_For_Select')
        ('".$time_end."' BETWEEN  reserv_stime  AND reserv_etime ))
     )
   AND c.status <> 'งดจอง'
+  GROUP BY car_reg
   ORDER BY car_reg";
 
   $result = $conn->query($sql);
@@ -690,10 +697,22 @@ elseif ($mode == 'getCars_For_Edit')
   ON p.department_id = d.department_id
   WHERE c.car_id NOT IN (
      SELECT car_id FROM reservation r
-    WHERE (date_start BETWEEN '".$date_start."' AND '".$date_end."')
-    OR (date_end BETWEEN '".$date_start."' AND '".$date_end."')
-    OR ((reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
-    OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."'))
+    WHERE 
+    ((date_start BETWEEN '".$date_start."' AND '".$date_end."')
+    OR 
+    (date_end BETWEEN '".$date_start."' AND '".$date_end."')
+    OR 
+     ('".$date_start."' BETWEEN date_start  AND date_end)
+    OR 
+     ('".$date_end."' BETWEEN  date_start  AND date_end ))
+    AND 
+    ((reserv_stime BETWEEN '".$time_start."' AND '".$time_end."')
+    OR 
+    (reserv_etime BETWEEN '".$time_start."' AND '".$time_end."')
+    OR 
+     ('".$time_start."' BETWEEN reserv_stime  AND reserv_etime)
+    OR 
+     ('".$time_end."' BETWEEN  reserv_stime  AND reserv_etime ))
     )
     AND department_name =
     (Select d.department_name from department d
@@ -705,29 +724,6 @@ elseif ($mode == 'getCars_For_Edit')
     AND c.status <> 'งดจอง'
     AND c.car_id <> '".$id."'
   GROUP BY car_reg";
-
-//  FOR TEST
-  // $sql = "
-  // SELECT c.* , b.* , p.* , t.* , d.* FROM cars c
-  // LEFT JOIN reservation r
-  // ON r.car_id = c.car_id
-  // LEFT OUTER JOIN car_brand b
-  // ON c.car_brand_id = b.car_brand_id
-  // LEFT OUTER JOIN personnel p
-  // ON c.personnel_id = p.personnel_id
-  // LEFT OUTER JOIN title_name t
-  // ON p.title_name_id = t.title_name_id
-  // LEFT OUTER JOIN department d
-  // ON p.department_id = d.department_id
-  // WHERE c.car_id NOT IN (
-  //    SELECT car_id FROM reservation r
-  //   WHERE (date_start BETWEEN '".$date_start."' AND '".$date_end."')
-  //   OR (date_end BETWEEN '".$date_start."' AND '".$date_end."')
-  //   OR ((reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
-  //   OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."'))
-  //   )
-  //   AND c.status <> 'งดจอง'
-  // GROUP BY car_reg";
 
 
   $result = $conn->query($sql);
@@ -755,5 +751,75 @@ elseif ($mode == 'getCars_For_Edit')
     echo "<tr><td colspan='6' class='text-center'>ไม่มีข้อมูลรถยนต์ว่าง</td></tr>";
   }
 
+  }
+  elseif ($mode == 'approve_reservation') 
+  {
+    $id = $_POST["reserve_id"];
+    $status = $_POST["status"];
+    $useStatus;
+      if ($status == 0) { $useStatus = 0; $note = '';}
+      elseif ($status == 1 ) { $useStatus = 1; $note = '';}
+      elseif ($status == 2 || $status == 3) { $useStatus = 3; $note = $_POST['reason'].",".$_POST['note'];}
+      else { $useStatus = 2; $note = $_POST['reason'].",".$_POST['note'];}
+    $timestamp = date("Y-m-d H:i:s");
+
+    $sql = "select * from reservation where reservation_id ='".$id."'";
+    $result = $conn->query($sql);
+    if($result){
+
+      $person = "SELECT p.personnel_id as id , u.user_level as num_approve FROM personnel p
+      LEFT JOIN user_type u
+      ON p.user_type_id = u.user_type_id
+      WHERE p.personnel_name = '".$_SESSION['user_name']."'";
+      $result = $conn->query($person);
+      $person = $result->fetch_assoc();
+
+      if($person['num_approve'] == 4) //เจ้าหน้าที่
+      {
+        $sql = "update reservation
+        set reservation_status = ".$status."
+        , usage_status = ".$useStatus."
+        , note = '".$note."'
+        , second_approver_id = '".$person['id']."'
+        ,update_status_date = '".$timestamp."'
+        WHERE reservation_id = '".$id."'";
+      }
+      elseif ($person['num_approve'] == 5) 
+      {
+        $sql = "update reservation
+        set fist_approve_status = ".$status."
+        ,fist_approve_note = '".$note."'
+        , first_approver_id = '".$person['id']."'
+        ,fist_approve_date = '".$timestamp."'
+        WHERE reservation_id = '".$id."'";
+      }
+      elseif ($person['num_approve'] == 6) 
+      {
+        $sql = "update reservation
+        set fist_approve_status = ".$status."
+        ,fist_approve_note = '".$note."'
+        , first_approver_id = '".$person['id']."'
+        ,fist_approve_date = '".$timestamp."'
+        WHERE reservation_id = '".$id."'";
+      }
+      else
+      {
+        $sql = "update reservation
+        set reservation_status = ".$status."
+        , usage_status = ".$useStatus."
+        , note = '".$note."'
+        , second_approver_id = '".$person['id']."'
+        ,update_status_date = '".$timestamp."'
+        WHERE reservation_id = '".$id."'";
+      }
+      
+      $result = $conn->query($sql);
+      if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
+      else {echo json_encode(array('result' => '0'));}
+    }
+    else
+    {
+      echo json_encode(array('result' => 'error'));
+    }
   }
 ?>

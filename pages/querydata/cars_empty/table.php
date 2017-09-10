@@ -22,13 +22,25 @@ if (isset($_POST['query_cars_empty'])) {
     ON p.department_id = d.department_id
     WHERE c.car_id NOT IN (
        SELECT car_id FROM reservation r
-      WHERE (date_start BETWEEN '".$date_start."' AND '".$date_end."')
-      OR (date_end BETWEEN '".$date_start."' AND '".$date_end."')
-      OR (reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
-      OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
+      WHERE 
+        ((date_start BETWEEN '".$date_start."' AND '".$date_end."')
+        OR 
+        (date_end BETWEEN '".$date_start."' AND '".$date_end."')
+        OR 
+         ('".$date_start."' BETWEEN date_start  AND date_end)
+        OR 
+         ('".$date_end."' BETWEEN  date_start  AND date_end ))
+        AND 
+        ((reserv_stime BETWEEN '".$time_start."' AND '".$time_end."')
+        OR 
+        (reserv_etime BETWEEN '".$time_start."' AND '".$time_end."')
+        OR 
+         ('".$time_start."' BETWEEN reserv_stime  AND reserv_etime)
+        OR 
+         ('".$time_end."' BETWEEN  reserv_stime  AND reserv_etime ))
       )
-    GROUP BY car_reg
-    ORDER BY department_name asc";
+    AND c.status <> 'งดจอง'
+    ORDER BY car_reg";
 
     $result = $conn->query($sql);
     $result_row = mysqli_num_rows($result);
@@ -139,10 +151,22 @@ if (isset($_POST['query_cars_empty'])) {
     ON p.department_id = d.department_id
     WHERE c.car_id NOT IN (
        SELECT car_id FROM reservation r
-      WHERE (date_start BETWEEN '".$date_start."' AND '".$date_end."')
-      OR (date_end BETWEEN '".$date_start."' AND '".$date_end."')
-      OR (reserv_stime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
-      OR (reserv_etime BETWEEN '".strtotime ($time_start)."' AND '".strtotime ($time_end)."')
+      WHERE 
+      ((date_start BETWEEN '".$date_start."' AND '".$date_end."')
+      OR 
+      (date_end BETWEEN '".$date_start."' AND '".$date_end."')
+      OR 
+       ('".$date_start."' BETWEEN date_start  AND date_end)
+      OR 
+       ('".$date_end."' BETWEEN  date_start  AND date_end ))
+      AND 
+      ((reserv_stime BETWEEN '".$time_start."' AND '".$time_end."')
+      OR 
+      (reserv_etime BETWEEN '".$time_start."' AND '".$time_end."')
+      OR 
+       ('".$time_start."' BETWEEN reserv_stime  AND reserv_etime)
+      OR 
+       ('".$time_end."' BETWEEN  reserv_stime  AND reserv_etime ))
       )
     AND department_name = '".$_SESSION['department']."'
     GROUP BY car_reg

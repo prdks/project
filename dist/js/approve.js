@@ -31,6 +31,39 @@ $(document).ready(function() {
                     $('#show-passenger').html('ไม่มีผู้โดยสารเพิ่มเติม');
                 }
 
+                // who approve status
+                if (data.reserv_detail.first_app != null) {
+                    if (data.reserv_detail.first_status == 1) {
+                        $('#show-ap-1').addClass('label-success');
+                        $('#show-ap-1').html('อนุมัติ');
+                        $('#show-ap-2').addClass('label-success');
+                        $('#show-ap-2').html('อนุมัติ');
+                    } else if (data.reserv_detail.first_status == 2) {
+                        $('#show-ap-1').addClass('label-danger');
+                        $('#show-ap-1').html('ไม่อนุมัติ');
+                        $('#show-ap-2').addClass('label-danger');
+                        $('#show-ap-2').html('ไม่อนุมัติ');
+                    }
+                } else {
+                    $('#show-ap-1').addClass('label-info');
+                    $('#show-ap-1').html('รออนุมัติ');
+                    $('#show-ap-2').addClass('label-info');
+                    $('#show-ap-2').html('รออนุมัติ');
+                }
+
+                if (data.reserv_detail.second_app != null) {
+                    if (data.reserv_detail.second_status == 1) {
+                        $('#show-ap-3').addClass('label-success');
+                        $('#show-ap-3').html('อนุมัติ');
+                    } else if (data.reserv_detail.second_status == 2) {
+                        $('#show-ap-3').addClass('label-danger');
+                        $('#show-ap-3').html('ไม่อนุมัติ');
+                    }
+                } else {
+                    $('#show-ap-3').addClass('label-info');
+                    $('#show-ap-3').html('รออนุมัติ');
+                }
+
 
                 $('#show-location').html(data.reserv_detail.location);
 
@@ -50,20 +83,25 @@ $(document).ready(function() {
 
         if (result == 1) {
             $('#note_approve').hide()
-            $('#note_area').attr('required', false)
+            $('#note_more_approve').hide()
+            $('#reason').attr('required', false)
             $('#show-status').val(result)
             $(this).addClass('btn-success')
         } else if (result == 2) {
             $('#note_area').val('')
+            $('#reason').val('')
             $('#note_approve').show()
+            $('#note_more_approve').show()
             $('#show-status').val(result)
-            $('#note_area').attr('required', true)
+            $('#reason').attr('required', true)
             $(this).addClass('btn-danger')
         } else if (result == 3) {
             $('#note_area').val('')
+            $('#reason').val('')
             $('#note_approve').show()
+            $('#note_more_approve').show()
             $('#show-status').val(result)
-            $('#note_area').attr('required', true)
+            $('#reason').attr('required', true)
             $(this).addClass('btn-warning')
         }
         $('button[name=approve_btn]').each(function() {
@@ -78,5 +116,62 @@ $(document).ready(function() {
             $(this).attr('class', 'btn btn-sm btn-default')
         });
         $('#note_approve').hide()
-    })
+        $('#note_more_approve').hide()
+    });
+
+    $("#approve_form").submit(function(e) {
+        e.preventDefault();
+        approve();
+    });
+
+    function approve() {
+        var data = $('#approve_form').serializeArray();
+        data.push({ name: 'mode', value: 'approve_reservation' });
+        $.ajax({
+          type: "POST",
+          url: "reservation/controller.php",
+          data: data,
+          dataType: 'json',
+          success: function(data){
+            if (data.result == 1) //สำเร็จ
+            {
+              swal({
+                    title: "แก้ไขข้อมูลสำเร็จ",
+                    text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                     type: "success",
+                    timer: 2000,
+                    showConfirmButton: false,
+                  },
+                  function(){ window.location.assign('reserve_approve.php'); }
+                );
+            }
+            else if (data.result == 0) //ไม่สำเร็จ
+            {
+              swal({
+                    title: "ไม่สามารถแก้ไขข้อมูลได้<br>เนื่องจากข้อมูลซ้ำ",
+                    text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                     type: "error",
+                    timer: 2000,
+                    html: true,
+                    showConfirmButton: false,
+                  },
+                  function(){ window.location.assign('reserve_approve.php'); }
+                );
+            }
+            else if (data.result === 'error')
+            {
+              swal({
+                    title: "ไม่สามารถแก้ไขข้อมูลได้<br>กรุณาทำรายการใหม",
+                    text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                     type: "error",
+                    timer: 2000,
+                    showConfirmButton: false,
+                    html: true,
+                  },
+                  function(){ window.location.assign('reserve_approve.php'); }
+                );
+            }
+          }
+        });
+      }
 });

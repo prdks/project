@@ -58,7 +58,71 @@
             }
           }
             break;
+            case 5:
+            {
+              $sql = "
+              SELECT COUNT(reservation_id) as reservecout
+              FROM reservation
+              WHERE fist_approve_status = null
+              ";
+              $result = $conn->query($sql);
+              $row = $result->fetch_array();
+              $num_approve = $row['reservecout'];
 
+              if ($num_approve > 0)
+              {
+                ?>
+                <li class="dropdown">
+                 <a href="reserve_approve.php" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+                 &nbsp;&nbsp;&nbsp;<i class="fa fa-bell fa-fw"></i><span class="badge1" data-badge="<?php echo $num_approve?>"></span>&nbsp;&nbsp;&nbsp;
+                </a>
+                </li>
+                <?php
+              }
+              else
+              {
+                ?>
+                <li class="dropdown">
+                 <a href="reserve_approve.php" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+                 &nbsp;&nbsp;&nbsp;<i class="fa fa-bell"></i><span></span>&nbsp;&nbsp;&nbsp;
+                 </a>
+                </li>
+                <?php
+              }
+            }
+              break;
+              case 6:
+              {
+                $sql = "
+                SELECT COUNT(reservation_id) as reservecout
+                FROM reservation
+                WHERE fist_approve_status = null
+                ";
+                $result = $conn->query($sql);
+                $row = $result->fetch_array();
+                $num_approve = $row['reservecout'];
+                if ($num_approve > 0)
+                {
+                  ?>
+                  <li class="dropdown">
+                   <a href="reserve_approve.php" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+                   &nbsp;&nbsp;&nbsp;<i class="fa fa-bell fa-fw"></i><span class="badge1" data-badge="<?php echo $num_approve?>"></span>&nbsp;&nbsp;&nbsp;
+                  </a>
+                  </li>
+                  <?php
+                }
+                else
+                {
+                  ?>
+                  <li class="dropdown">
+                   <a href="reserve_approve.php" data-toggle="tooltip" data-placement="bottom" title="รายการรออนุมัติ">
+                   &nbsp;&nbsp;&nbsp;<i class="fa fa-bell"></i><span></span>&nbsp;&nbsp;&nbsp;
+                   </a>
+                  </li>
+                  <?php
+                }
+              }
+                break;
         }
         ?>
       
