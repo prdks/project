@@ -55,7 +55,7 @@ if ($mode == 'getDetail')
   }else {
     $date = DateThai($row['date_start'])." ถึง ".DateThai($row['date_end'])." ( วันที่ทำรายการ : ".DateTimeThai($row['timestamp'])."น. )";
   }
-
+  
   $reserv = array(
             'detail' => $row['requirement_detail'],
             'location' => $row['location'],
@@ -66,7 +66,8 @@ if ($mode == 'getDetail')
             'phone' => $row['phone_number'],
             'first_app' => $row['first_approver_id'],
             'first_status' => $row['fist_approve_status'],
-            'first_note' => $row['fist_approve_note'],
+            'first_reason' => substr($row['fist_approve_note'], 0, strpos($row['fist_approve_note'], ',')),
+            'first_note' => substr($row['fist_approve_note'], (strpos($row['fist_approve_note'], ',')+1), strlen($row['fist_approve_note'])),
             'second_app' => $row['second_approver_id']
           );
 

@@ -163,7 +163,8 @@
                       ?>
                       <div>
                         <b><?php echo $num1.". ".$person['title_name'].$person['personnel_name']?></b>
-                        <br><b>สถานะ : </b><span id="show-ap-1" class="label"></span>
+                        <br><b>สถานะ : </b><span id="show-ap-1"></span>
+                        <span id="reason-1"></span>
                       </div>
                       <br>
                       <?php
@@ -185,7 +186,7 @@
                       ?>
                       <div>
                         <b><?php echo $num2.". ".$person['title_name'].$person['personnel_name']?> (สำรอง)</b>
-                        <br><b>สถานะ : </b><span id="show-ap-2" class="label"></span>
+                        <br><b>สถานะ : </b><span id="show-ap-2"></span>
                       </div>
                       <br>
                       <?php
@@ -205,8 +206,9 @@
                         ?>
                         <div>
                           <b><?php echo $num3.". ".$person['title_name'].$person['personnel_name']?></b>
-                          <br><b>สถานะ : </b><span id="show-ap-3" class="label"></span>
+                          <br><b>สถานะ : </b><span id="show-ap-3"></span>
                         </div>
+                        <br>
                   </div>
               </div>
             </div> 
