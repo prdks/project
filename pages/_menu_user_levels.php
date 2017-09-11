@@ -16,15 +16,16 @@ switch ($type) {
     {
       ?>
       <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
-      <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์</a></li>
       <li>
-          <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level">
-          <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
-          <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
-          <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
-          </ul>
+        <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+        <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
+        <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
+        <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
+        </ul>
       </li>
+      <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์ผ่านเว็บ</a></li>
+      <li><a href="form_empty.php" target="_blank"><i class="fa fa-print fa-fw"></i> พิมพ์ใบขออนุมัติใช้รถยนต์</a></li>
       <li>
             <a href="#"><i class="fa fa-star fa-fw"></i> ประจำวัน<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
@@ -89,7 +90,6 @@ switch ($type) {
     {
       ?>
       <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
-      <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์</a></li>
       <li>
       <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
       <ul class="nav nav-second-level">
@@ -97,7 +97,9 @@ switch ($type) {
       <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
       <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
       </ul>
-      </li>
+    </li>
+    <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์ผ่านเว็บ</a></li>
+    <li><a href="form_empty.php" target="_blank"><i class="fa fa-print fa-fw"></i> พิมพ์ใบขออนุมัติใช้รถยนต์</a></li>
       <?php
       if ($_SESSION['url_googleform'] != "")
       {
@@ -111,15 +113,16 @@ switch ($type) {
     {
       ?>
       <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
-      <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์</a></li>
       <li>
-          <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level">
-            <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
-            <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
-            <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
-          </ul>
-      </li>
+      <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
+      <ul class="nav nav-second-level">
+      <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
+      <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
+      <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
+      </ul>
+    </li>
+    <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์ผ่านเว็บ</a></li>
+    <li><a href="form_empty.php" target="_blank"><i class="fa fa-print fa-fw"></i> พิมพ์ใบขออนุมัติใช้รถยนต์</a></li>
       <?php
       if ($_SESSION['url_googleform'] != "")
       {
@@ -142,15 +145,16 @@ switch ($type) {
     {
       ?>
       <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
-      <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์</a></li>
       <li>
-        <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-          <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
-          <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
-          <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
-        </ul>
-      </li>
+      <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
+      <ul class="nav nav-second-level">
+      <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
+      <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
+      <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
+      </ul>
+    </li>
+    <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์ผ่านเว็บ</a></li>
+    <li><a href="form_empty.php" target="_blank"><i class="fa fa-print fa-fw"></i> พิมพ์ใบขออนุมัติใช้รถยนต์</a></li>
       <?php
       if ($_SESSION['url_googleform'] != "")
       {
@@ -173,15 +177,16 @@ switch ($type) {
     {
       ?>
       <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
-      <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์</a></li>
       <li>
-          <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level">
-          <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
-          <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
-          <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
-          </ul>
-      </li>
+      <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
+      <ul class="nav nav-second-level">
+      <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
+      <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
+      <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
+      </ul>
+    </li>
+    <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์ผ่านเว็บ</a></li>
+    <li><a href="form_empty.php" target="_blank"><i class="fa fa-print fa-fw"></i> พิมพ์ใบขออนุมัติใช้รถยนต์</a></li>
       <li>
             <a href="#"><i class="fa fa-star fa-fw"></i> ประจำวัน<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
@@ -235,15 +240,16 @@ switch ($type) {
       {
         ?>
         <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
-        <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์</a></li>
         <li>
-            <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-            <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
-            <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
-            <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
-            </ul>
-        </li>
+        <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+        <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
+        <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
+        <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
+        </ul>
+      </li>
+      <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์ผ่านเว็บ</a></li>
+      <li><a href="form_empty.php" target="_blank"><i class="fa fa-print fa-fw"></i> พิมพ์ใบขออนุมัติใช้รถยนต์</a></li>
         <li>
               <a href="#"><i class="fa fa-star fa-fw"></i> ประจำวัน<span class="fa arrow"></span></a>
               <ul class="nav nav-second-level">
@@ -291,15 +297,16 @@ switch ($type) {
       {
         ?>
         <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
-        <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์</a></li>
         <li>
-            <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-            <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
-            <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
-            <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
-            </ul>
-        </li>
+        <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+        <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
+        <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
+        <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
+        </ul>
+      </li>
+      <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์ผ่านเว็บ</a></li>
+      <li><a href="form_empty.php" target="_blank"><i class="fa fa-print fa-fw"></i> พิมพ์ใบขออนุมัติใช้รถยนต์</a></li>
         <li>
               <a href="#"><i class="fa fa-star fa-fw"></i> ประจำวัน<span class="fa arrow"></span></a>
               <ul class="nav nav-second-level">

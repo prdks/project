@@ -63,15 +63,6 @@ if (isset($_GET['id']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <style media="screen">
-  table {
-  border-collapse: collapse;
-}
-
-table, th, td {
-  border: 1px solid black;
-}
-  </style>
 	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
 	<title>ฟอร์มขออนุมัติใช้รถยนต์<?php echo $_SESSION['system_name'];?></title>
 
@@ -152,8 +143,8 @@ table, th, td {
 	</tr>
 	<!-- ขื่อ นามสกุลคนทำเรื่อง -->
 	<tr>
-		<td colspan="3"></td>
-		<td colspan="9">ข้าพเจ้า <?php echo $row['title_name'].$row['personnel_name']; ?></td>
+		<td colspan="2"></td>
+		<td colspan="10">ข้าพเจ้า <?php echo $row['title_name'].$row['personnel_name']; ?></td>
 		<td colspan="8">ตำแหน่ง <?php echo $row['position_name']; ?></td>
 	</tr>
 	<!-- ประโยคต้นคำร้อง -->
@@ -185,29 +176,70 @@ table, th, td {
 	{
 		?>
 		<tr>
-			<td colspan="3">มีคนนั่ง <?php echo $row['passenger_total']; ?> คน</td>
-			<td colspan="17">ดังนี้&nbsp;&nbsp;
-        <?php
-  			$sql2 = "
-  			SELECT p.* ,SUBSTRING_INDEX(p.passenger_name,' ',-2) as name
-        , SUBSTRING_INDEX(p.passenger_name,' ',1) as title FROM passenger p
-  			LEFT JOIN department d
-  			ON p.department_id = d.department_id
-  			LEFT JOIN reservation r
-  			ON p.reservation_id = r.reservation_id
-  			WHERE p.reservation_id = '".$row['reservation_id']."'
-  			ORDER BY p.passenger_name ASC";
-  			$a = $conn->query($sql2);
-  			$count = 0;
-  			?>
-  			<?php while ($b = $a->fetch_assoc()) {
-  					$count++;
-  						echo $count.") ".$b['title'].$b['name']." ";
-  			}
-  		?>
-      </td>
-
-		<?php
+			<td colspan="4" style="vertical-align: text-top;">มีคนนั่ง <?php echo $row['passenger_total']; ?> คน ดังนี้&nbsp;&nbsp;</td>
+			<?php
+			if($row['passenger_total'] <= 6){
+				?>
+				<td colspan="16" style="vertical-align: text-top;">
+				<?php
+				$sql2 = "
+				SELECT p.* ,SUBSTRING_INDEX(p.passenger_name,' ',-2) as name
+		 		 , SUBSTRING_INDEX(p.passenger_name,' ',1) as title FROM passenger p
+				LEFT JOIN department d
+				ON p.department_id = d.department_id
+				LEFT JOIN reservation r
+				ON p.reservation_id = r.reservation_id
+				WHERE p.reservation_id = '".$row['reservation_id']."'
+				ORDER BY p.passenger_name ASC";
+				$a = $conn->query($sql2);
+				$count = 0;
+				?>
+				<?php while ($b = $a->fetch_assoc()) 
+					{
+						$count++;
+						echo $count.") ".$b['title'].$b['name']." <br>";
+					}
+			?>
+			</td>
+		  <?php
+			}
+			else if ($row['passenger_total'] > 6) {
+				?>
+				<td colspan="8" style="vertical-align: text-top;">
+				<?php
+				$sql2 = "
+				SELECT p.* ,SUBSTRING_INDEX(p.passenger_name,' ',-2) as name
+		 		 , SUBSTRING_INDEX(p.passenger_name,' ',1) as title FROM passenger p
+				LEFT JOIN department d
+				ON p.department_id = d.department_id
+				LEFT JOIN reservation r
+				ON p.reservation_id = r.reservation_id
+				WHERE p.reservation_id = '".$row['reservation_id']."'
+				ORDER BY p.passenger_name ASC";
+				$a = $conn->query($sql2);
+				$count = 0;
+				?>
+				<?php while ($b = $a->fetch_assoc()) 
+					{
+						$count++;
+						if($count <= 6 ){
+							echo $count.") ".$b['title'].$b['name']." <br>";
+							if($count == 6){ echo "</td>";}
+						}
+						if($count == 7)
+						{
+						?>
+						<td colspan="8" style="vertical-align: text-top;">
+						<?php
+						}
+						if($count > 6 ){echo $count.") ".$b['title'].$b['name']." <br>";}
+					}
+				?>
+				</td>
+				<?php
+			}
+			
+        
 	}
 	?>
 
@@ -236,13 +268,21 @@ table, th, td {
 </tbody>
 </table>
 
+<table width="100%" border="0" align="center" cellpadding="0">
+<tbody>
+	<tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+</tbody>
+</table>
+
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tbody>
 	<tr>
 		<td width="40%" align="right">
-			(<?php echo $row['title_name'].$row['personnel_name'];?>)
+			(..........................................)&nbsp;
 		</td>
-		<td width="6%"></td>
+		<td width="4%"></td>
 	</tr>
 </tbody>
 </table>
@@ -271,8 +311,36 @@ table, th, td {
 	<tr>
 		<td width="7%"></td>
 		<td width="57%">เพื่อโปรดพิจารณาอนุมัติรถยนต์หมายเลขทะเบียน</td>
-		<td width="15%" align="right">&#9723; อนุมัติ</td>
-		<td width="15%" align="right">&#9723; ไม่อนุมัติ</td>
+		<td width="15%" align="right">
+			<?php 
+			if($row['reservation_status'] == 1)
+			{
+				?>
+				&#9745; อนุมัติ
+				<?php
+			}
+			else{
+				?>
+				&#9723; อนุมัติ
+				<?php
+			}
+			?>
+		</td>
+		<td width="15%" align="right">
+		<?php 
+			if($row['reservation_status'] == 2 || $row['reservation_status'] == 3 )
+			{
+				?>
+				&#9745; ไม่อนุมัติ
+				<?php
+			}
+			else{
+				?>
+				&#9723; ไม่อนุมัติ
+				<?php
+			}
+			?>
+		</td>
 		<td width="17%"></td>
 	</tr>
 </tbody>
@@ -287,15 +355,55 @@ table, th, td {
 </tbody>
 </table>
 
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
-<tbody>
-	<tr>
-		<td width="70%"></td>
-		<td width="24%" align="right">.......................................</td>
-		<td width="16%"></td>
-	</tr>
-</tbody>
-</table>
+<?php 
+if($row['reservation_status'] == 2 || $row['reservation_status'] == 3 )
+{
+	
+	?>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td width="70%"></td>
+			<td width="24%" align="center">
+			<?php echo substr($row['reserve_note'], 0, strpos($row['reserve_note'], ','));?>
+			</td>
+			<td width="16%"></td>
+		</tr>
+	</tbody>
+	</table>
+
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td width="70%"></td>
+			<td width="24%" align="right">
+			.......................................
+			</td>
+			<td width="16%"></td>
+		</tr>
+	</tbody>
+	</table>
+	<?php
+}
+else
+{
+	?>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td width="70%"></td>
+			<td width="24%" align="right">
+			.......................................
+			</td>
+			<td width="16%"></td>
+		</tr>
+	</tbody>
+	</table>
+	<?php
+}
+?>
+
+
 
 <table width="100%" border="0" align="center" cellpadding="0">
 <tbody>

@@ -96,6 +96,6 @@
   </label>
   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
       <textarea  rows="3" type="text" class="form-control" id="edit_note_area" name="note"
-      placeholder="พิมพ์หมายเหตุการยกเลิก" style="resize:none;"><?php echo $row['note']; ?></textarea>
+      placeholder="พิมพ์หมายเหตุการยกเลิก" style="resize:none;"><?php echo $row['reserve_note']; ?></textarea>
   </div>
 </div>

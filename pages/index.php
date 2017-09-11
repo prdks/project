@@ -64,103 +64,7 @@ else
                   </div>
                  </div>
                </div>
-               <!-- ตารางงาน -->
-               <!-- <div class="row">
-                 <div class="col-lg-12">
-                   <div class="panel panel-default">
-                    <div class="panel-heading">
-                      รายการจองรถยนต์วันนี้
-                      <span class="hidden-xs hidden-sm">(<?php echo FullDateThai(date("Y-m-d")); ?>)</span>
-                      <span class="hidden-lg hidden-md">(<?php echo DateThai(date("Y-m-d")); ?>)</span>
-                    </div>
-                    <?php
-                    $sql = "
-                    SELECT * FROM reservation r
-                    LEFT JOIN cars c
-                    ON r.car_id = c.car_id
-                    LEFT JOIN personnel p
-                    ON r.personnel_id = p.personnel_id
-                    LEFT JOIN title_name t
-                    ON p.title_name_id = t.title_name_id
-                    WHERE date_start = '".date("Y-m-d")."'
-                    OR date_end >= '".date("Y-m-d")."'
-                    ORDER BY reserv_stime ASC";
-                    $result = $conn->query($sql);
-                    $result_row = mysqli_num_rows($result);
-                    if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
-                    {
-                      ?>
-                      <div class="table-responsive">
-                      <table id="reservation_tablelist" class="table table-striped table-bordered table-hover">
-                          <thead>
-                              <tr>
-                                  <th id="tb_detail_sub-th">เวลา</th>
-                                  <th id="tb_detail_main">จองใช้เพื่อ</th>
-                                  <th id="tb_detail_sub-sv">สถานะการจอง</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                      <?php
 
-                      while($row = $result->fetch_assoc())
-                      {
-                        ?>
-                        <tr id="<?php echo $row["reservation_id"];?>">
-                          <td class="text-center"><?php echo date("H:i",strtotime($row["reserv_stime"]))." - ".date("H:i",strtotime($row["reserv_etime"]))."น."; ?></td>
-                          <td><?php echo $row["requirement_detail"]; ?></td>
-                          <td class="text-center">
-                        <?php
-                          if ($row['reservation_status'] == 0) {
-                            ?>
-                            <span class="label label-md label-primary">รออนุมัติ</span>
-                            <?php
-                          }elseif ($row['reservation_status'] == 1) {
-                            ?>
-                            <span class="label label-md label-success">จองสำเร็จ</span>
-                            <?php
-                          }elseif ($row['reservation_status'] == 2) {
-                            ?>
-                            <span class="label label-md label-danger">จองไม่สำเร็จ</span>
-                            <?php
-                          }elseif ($row['reservation_status'] == 3) {
-                            ?>
-                            <span class="label label-md label-danger">ยกเลิกการจอง</span>
-                            <?php
-                          }
-                          ?>
-                        </td>
-                        </tr>
-                          <?php
-                      }
-                        ?>
-                      </tbody>
-                      </table>
-                      </div>
-                        <?php
-                    }else {
-                      ?>
-                      <div class="table-responsive">
-                      <table id="reservationtablelist" class="table table-striped table-bordered table-hover">
-                          <thead>
-                              <tr>
-                                  <th id="tb_detail_sub-th">เวลา</th>
-                                  <th id="tb_detail_main">จองใช้เพื่อ</th>
-                                  <th id="tb_detail_sub-sv">สถานะการจอง</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                        <tr>
-                        <td class="text-center" colspan="3">ไม่พบข้อมูล</td>
-                        </tr>
-                        </tbody>
-                        </table>
-                        </div>
-                      <?php
-                    }
-                    ?>
-                    </div>
-                 </div>
-               </div> -->
           <br />
         </div>
         <!-- /#page-wrapper -->
@@ -227,7 +131,6 @@ $(function () {
     eventLimit:true,
     locale: 'th',
     eventClick: function(calEvent, jsEvent, view) {
-
       var passenger_str = "";
       $.each( calEvent.passenger, function( index, value ){passenger_str += value});
 
@@ -291,6 +194,11 @@ $(function () {
              <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ผลการจอง :</td>\
              <td>'+calEvent.rstatus+'&nbsp;&nbsp;&nbsp;<b>บันทึกโดย</b> '+calEvent.person_approve+'&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> '+calEvent.tel_approve+'</td>\
              </tr>\
+             <!-- เหตุผล -->\
+             <tr>\
+             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">หมายเหตุ :</td>\
+             <td>'+calEvent.reserve_note+'</td>\
+             </tr>\
              <!-- วันที่แก้ไขสถานะล่าสุด -->\
              <tr>\
              <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">วันที่บันทึกผล :</td>\
@@ -309,7 +217,6 @@ $(function () {
         </div>\
        </div>\
       </div>';
-
 
       var modal = $(modal).appendTo('body');
       modal.find('form').on('submit', function(ev){

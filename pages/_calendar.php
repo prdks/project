@@ -100,8 +100,8 @@ function FullDateThai($strDate)
       elseif ($row['usage_status'] == 3) {$ustatus = 'ยกเลิก'; $colorRStatus = '#d9534f';}
 
       /*่หมายเหตุการยกเลิก*/
-      if ($row['note'] == null) {$note = '-';}
-      else {$note = $row['note'];}
+      if ($row['reserve_note'] !== '') {$note = str_replace(",",", ",$row['reserve_note']);}
+      else {$note = '-';}
       $timestamp = DateTimeThai($row['timestamp']); //วันที่ทำรายการ
 
       /*ข้อมูลคนทำรายการ*/
@@ -202,6 +202,7 @@ function FullDateThai($strDate)
               'rstatus' => $rstatus,
               'person_approve' => $person_approve,
               'tel_approve' => $tel_approve,
+              'reserve_note' => $note,
               'updateStatus' => $updateStatus,
               'name_driver' => $name_driver,
               'tel_driver' => $tel_driver,

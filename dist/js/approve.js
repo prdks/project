@@ -8,7 +8,7 @@ $(document).ready(function() {
             data: { id: id, mode: 'getDetail' },
             dataType: 'json',
             success: function(data) {
-                console.log(data)
+
                 $('#show-detail').html(data.reserv_detail.detail);
                 $('#show-cars').html(data.reserv_detail.cars);
                 $('#show-date').html(data.reserv_detail.date);
