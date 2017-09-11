@@ -8,32 +8,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">รายละเอียดการจองรถยนต์</h4>
       </div>
-      <div class="modal-body">
-        <dl class="dl-horizontal">
-          <dt>จองใช้เพื่อ :</dt>
-          <dd id="show-detail"></dd>
-          <br />
-          <dt>รถยนต์ที่จอง :</dt>
-          <dd id="show-cars"></dd>
-          <br />
-          <dt>วันที่ใช้รถยนต์ :</dt>
-          <dd id="show-date"></dd>
-          <br />
-          <dt>รายชื่อผู้โดยสาร :</dt>
-          <dd id="show-passenger"></dd>
-          <br />
-          <dt>สถานที่จะไป :</dt>
-          <dd id="show-location"></dd>
-          <br />
-          <dt>จุดนัดพบ :</dt>
-          <dd id="show-meet"></dd>
-          <br />
-          <dt>ผู้ติดต่อ :</dt>
-          <dd id="show-person"></dd>
-          <br />
-          <dt>เบอร์โทรศัพท์ :</dt>
-          <dd id="show-phone"></dd>
-        </dl>
+      <div  id="body_modal_detail" class="modal-body">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>

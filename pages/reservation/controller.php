@@ -825,6 +825,19 @@ elseif ($mode == 'getCars_For_Edit')
   }
   elseif($mode == 'getTableDetail')
   {
+    function TimeThai($strDate)
+    {
+      $strYear = date("Y",strtotime($strDate))+543;
+      $strMonth= date("n",strtotime($strDate));
+      $strDay= date("j",strtotime($strDate));
+      $strHour= date("H",strtotime($strDate));
+      $strMinute= date("i",strtotime($strDate));
+      $strSeconds= date("s",strtotime($strDate));
+      $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+      $strMonthThai=$strMonthCut[$strMonth];
+      return "$strHour:$strMinute"."น.";
+    }
+
     $sql = "
     SELECT * FROM reservation r
     LEFT JOIN cars c
@@ -952,92 +965,77 @@ elseif ($mode == 'getCars_For_Edit')
       $tel_driver = $r['phone_number'];
 
     ?>
-    <div class="modal fade">
-        <div class="modal-dialog modal-lg">
-         <div class="modal-content">
-         <div class="modal-header">
-           <button type="button" class="close" data-dismiss="modal">&times;</button>
-           <h4 class="modal-title"><i class="fa fa-book"></i> รายละเอียดการจองรถยนต์</h4>
-         </div>
-         <div class="modal-body">
-           <table class="table table-bordered">
-             <!-- จองใช้เพื่อ -->
-             <tr>
-             <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 topic">จองใช้เพื่อ :</td>
-             <td><?php echo $detail;?></td>
-             </tr>
-             <!-- รถยนต์ที่จอง -->
-             <tr>
-             <td class="field-label col-xs-3 topic">รถยนต์ที่จอง :</td>
-             <td><?php echo $car_reg; ?>/ ยี่ห้อ <?php echo $car_brand; ?> / รุ่น <?php echo $car_kind; ?> / <?php echo $seat; ?> ที่นั่ง </td>
-             </tr>
-             <!-- วันที่ใช้รถยนต์ -->
-             <tr>
-             <td class="field-label col-xs-3 topic">วันที่ใช้รถยนต์ :</td>
-             <td><?php echo $reservation_date; ?></td>
-             </tr>
-             <!-- รายชื่อผู้โดยสาร -->
-             <tr>
-             <td class="field-label col-xs-3 topic">รายชื่อผู้โดยสาร :</td>
-             <td><dl><?php 
-             foreach ($passenger as $key => $value) 
-             {
-               echo  $passenger['value'];
-             }
-             ?></dl></td>
-             </tr>
-             <!-- สถานที่จะไป -->
-             <tr>
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">สถานที่จะไป :</td>
-             <td><?php echo str_replace(",",", ",$location); ?></td>
-             </tr>
-             <!-- ให้รถไปรับที่ -->
-             <tr>
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ให้รถไปรับที่ :</td>
-             <td><?php echo $appointment; ?></td>
-             </tr>
-             <!-- ผู้ติดต่อ -->
-             <tr>
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ผู้ติดต่อ :</td>
-             <td><?php echo $person; ?>&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> <?php echo $tel; ?></td>
-             </tr>
-             <!-- วันที่ทำรายการ -->
-             <tr>
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">วันที่ทำรายการ :</td>
-             <td><?php echo $timestamp; ?></td>
-             </tr>
-             <!-- empty -->
-             <tr>
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic" colspan="2"></td>
-             </tr>
-             <!-- ผลการจอง -->
-             <tr>
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ผลการจอง :</td>
-             <td><?php echo $rstatus; ?>&nbsp;&nbsp;&nbsp;<b>บันทึกโดย</b> <?php echo $person_approve; ?>&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> <?php echo $tel_approve; ?></td>
-             </tr>
-             <!-- เหตุผล -->
-             <tr>
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ผลการจอง :</td>
-             <td><?php echo $note; ?></td>
-             </tr>
-             <!-- วันที่แก้ไขสถานะล่าสุด -->
-             <tr>
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">วันที่บันทึกผล :</td>
-             <td><?php echo $updateStatus; ?></td>
-             </tr>
-             <!-- พนักงานขับรถยนต์ -->
-             <tr>
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">พนักงานขับรถ :</td>
-             <td><?php echo $name_driver; ?>&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> <?php echo $tel_driver; ?></td>
-             </tr>
-           </table>
-         </div>
-         <div class="modal-footer">
-          <button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> ปิด</button>
-         </div>
-        </div>
-       </div>
-      </div>
+    <table class="table table-bordered">
+    <!-- จองใช้เพื่อ -->
+    <tr>
+    <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 topic">จองใช้เพื่อ :</td>
+    <td><?php echo $detail;?></td>
+    </tr>
+    <!-- รถยนต์ที่จอง -->
+    <tr>
+    <td class="field-label col-xs-3 topic">รถยนต์ที่จอง :</td>
+    <td><?php echo $car_reg; ?>/ ยี่ห้อ <?php echo $car_brand; ?> / รุ่น <?php echo $car_kind; ?> / <?php echo $seat; ?> ที่นั่ง </td>
+    </tr>
+    <!-- วันที่ใช้รถยนต์ -->
+    <tr>
+    <td class="field-label col-xs-3 topic">วันที่ใช้รถยนต์ :</td>
+    <td><?php echo $reservation_date; ?></td>
+    </tr>
+    <!-- รายชื่อผู้โดยสาร -->
+    <tr>
+    <td class="field-label col-xs-3 topic">รายชื่อผู้โดยสาร :</td>
+    <td><dl><?php 
+    foreach ($passenger as $key => $value) 
+    {
+      echo  $value;
+    }
+    ?></dl></td>
+    </tr>
+    <!-- สถานที่จะไป -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">สถานที่จะไป :</td>
+    <td><?php echo str_replace(",",", ",$location); ?></td>
+    </tr>
+    <!-- ให้รถไปรับที่ -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ให้รถไปรับที่ :</td>
+    <td><?php echo $appointment; ?></td>
+    </tr>
+    <!-- ผู้ติดต่อ -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ผู้ติดต่อ :</td>
+    <td><?php echo $person; ?>&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> <?php echo $tel; ?></td>
+    </tr>
+    <!-- วันที่ทำรายการ -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">วันที่ทำรายการ :</td>
+    <td><?php echo $timestamp; ?></td>
+    </tr>
+    <!-- empty -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic" colspan="2"></td>
+    </tr>
+    <!-- ผลการจอง -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ผลการจอง :</td>
+    <td><?php echo $rstatus; ?>&nbsp;&nbsp;&nbsp;<b>บันทึกโดย</b> <?php echo $person_approve; ?>&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> <?php echo $tel_approve; ?></td>
+    </tr>
+    <!-- เหตุผล -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ผลการจอง :</td>
+    <td><?php echo $note; ?></td>
+    </tr>
+    <!-- วันที่แก้ไขสถานะล่าสุด -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">วันที่บันทึกผล :</td>
+    <td><?php echo $updateStatus; ?></td>
+    </tr>
+    <!-- พนักงานขับรถยนต์ -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">พนักงานขับรถ :</td>
+    <td><?php echo $name_driver; ?>&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> <?php echo $tel_driver; ?></td>
+    </tr>
+  </table>
     <?php
     }
   }
