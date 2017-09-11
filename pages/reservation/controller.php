@@ -1055,4 +1055,74 @@ elseif ($mode == 'getCars_For_Edit')
       echo json_encode(array('result' => 'error'));
     }
   }
+  elseif ($mode == 'editReservation') 
+  {
+    $id = $_POST['id'];
+    
+    $detail = $_POST['detail'];
+    $location = $_POST['location'];
+    $date_start = $_POST['date_start'];
+    $date_end = $_POST['date_end'];
+    $time_start = $_POST['time_start'];
+    $time_end = $_POST['time_end'];
+    $real_date_out = $_POST['real_date_out'];
+    $real_time_out = $_POST['real_time_out'];
+    $real_date_in = $_POST['real_date_in'];
+    $real_time_in = $_POST['real_time_in'];
+    $kilometer_out = $_POST['kilometer_out'];
+    $kilometer_in = $_POST['kilometer_in'];
+    $kilometer_total = $_POST['kilometer_total'];
+    $reservation_status = $_POST['reservation_status'];
+    $usage_status = $_POST['usage_status'];
+    $note = $_POST['note'];
+    
+    if($reservation_status == 0)
+    {
+      $sql = "update reservation
+      set requirement_detail = '".$detail."'
+      , location = '".$location."'
+      , date_start = '".$date_start."'
+      , date_end = '".$date_end."'
+      , reserv_stime = '".$time_start."'
+      , reserv_etime = '".$time_end."'
+      , passenger_total = (SELECT COUNT(passenger_id) FROM passenger WHERE reservation_id = '".$id."')
+      , real_time_out = '0000-00-00 00:00:00'
+      , real_time_in = '0000-00-00 00:00:00'
+      , kilometer_out = '0'
+      , kilometer_in = '0'
+      , kilometer_total = '0'
+      , reservation_status = '".$reservation_status."'
+      , usage_status = '".$usage_status."'
+      , reserve_note = '".$note."'
+      , second_approver_id = NULL
+      , update_status_date = '".date("Y-m-d H:i:s")."'
+      where reservation_id = '".$id."'";
+    }
+    else 
+    {
+      $sql = "update reservation
+      set requirement_detail = '".$detail."'
+      , location = '".$location."'
+      , date_start = '".$date_start."'
+      , date_end = '".$date_end."'
+      , reserv_stime = '".$time_start."'
+      , reserv_etime = '".$time_end."'
+      , passenger_total = (SELECT COUNT(passenger_id) FROM passenger WHERE reservation_id = '".$id."')
+      , real_time_out = '".$real_date_out." ".$real_time_out.":00'
+      , real_time_in = '".$real_date_in." ".$real_time_in.":00'
+      , kilometer_out = '".$kilometer_out."'
+      , kilometer_in = '".$kilometer_in."'
+      , kilometer_total = '".$kilometer_total."'
+      , reservation_status = '".$reservation_status."'
+      , usage_status = '".$usage_status."'
+      , reserve_note = '".$note."'
+      , second_approver_id = (SELECT personnel_id FROM personnel WHERE personnel_name = '".$_SESSION['user_name']."')
+      , update_status_date = '".date("Y-m-d H:i:s")."'
+      where reservation_id = '".$id."'";
+    }
+      
+      if($conn->query($sql)===true){echo json_encode(array('result' => '1', 'id' => $id));}
+      else {echo json_encode(array('result' => 'error', 'id' => $id));}
+
+  }
 ?>

@@ -164,7 +164,7 @@ $(document).ready(function() {
                     );
                 } else if (data.result === 'error') {
                     swal({
-                            title: "ไม่สามารถอนุมัติได้<br>กรุณาทำรายการใหม",
+                            title: "ไม่สามารถอนุมัติได้<br>กรุณาทำรายการใหม่",
                             text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
                             type: "error",
                             timer: 2000,

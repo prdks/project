@@ -57,7 +57,7 @@
                     $row = $result->fetch_assoc();
                     ?>
 
-                    <form class="form-horizontal" action="reservation/reserve_ma/edit.php" method="post">
+                    <form id="RMA_edit_form" class="form-horizontal">
                       <div class="panel-body">
 
                         <ul class="nav nav-tabs">

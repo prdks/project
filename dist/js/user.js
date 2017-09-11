@@ -30,7 +30,7 @@ $(document).ready(function() {
                     );
                 } else if (data.result === 'error') {
                     swal({
-                            title: "ไม่สามารถแก้ไขข้อมูลได้<br>กรุณาทำรายการใหม",
+                            title: "ไม่สามารถแก้ไขข้อมูลได้<br>กรุณาทำรายการใหม่",
                             text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
                             type: "error",
                             timer: 2000,
