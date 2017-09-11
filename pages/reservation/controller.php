@@ -737,7 +737,7 @@ elseif ($mode == 'getCars_For_Edit')
       <tr>
       <td>
       <center>
-      <a href='reservation/reserve_ma/edit_cars.php?id=".$reserve_id."&carid=".$row['car_id']."' class='btn btn-primary btn-xs handleChangeCars' role='button'>เลือก</a>
+      <button data-id=".$reserve_id." data-carid=".$row['car_id']." class='btn btn-primary btn-xs handleChangeCars' type='button'>เลือก</button>
       </center>
       </td>
       <td class='text-center'>".$row['car_reg']."</td>
@@ -1121,8 +1121,28 @@ elseif ($mode == 'getCars_For_Edit')
       where reservation_id = '".$id."'";
     }
       
-      if($conn->query($sql)===true){echo json_encode(array('result' => '1', 'id' => $id));}
-      else {echo json_encode(array('result' => 'error', 'id' => $id));}
+      if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
+      else {echo json_encode(array('result' => 'error'));}
 
+  }
+  elseif ($mode == 'editCarInRMA') 
+  {
+    $reserve_id = $_POST['id'];
+    $id = $_POST["carid"];
+    
+    $sql = "select * from cars where car_id ='".$id."'";
+    $result = $conn->query($sql);
+    if($result){
+      $sql = "update reservation
+      set car_id = '".$id."'
+      where reservation_id = '".$reserve_id."'";
+    
+      if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
+      else {echo json_encode(array('result' => '0'));}
+    }
+    else
+    {
+      echo json_encode(array('result' => 'error'));
+    }
   }
 ?>

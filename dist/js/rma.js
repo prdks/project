@@ -341,6 +341,57 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $('#tbody_cars_edit').html(data);
+                $('.handleChangeCars').click(function () {
+                    var res_id = $(this).attr('data-id');
+                    var car_id = $(this).attr('data-carid');
+                    $.ajax({
+                        type: "POST",
+                        url: "reservation/controller.php",
+                        data: {id: res_id , carid: car_id , mode : 'editCarInRMA'},
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.result == 1) //สำเร็จ
+                                {
+                                  swal({
+                                        title: "เปลี่ยนรถยนต์สำเร็จ",
+                                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                                         type: "success",
+                                        timer: 2000,
+                                        showConfirmButton: false,
+                                      },
+                                      function(){ window.location.assign('reserve_ma_edit.php?id='+res_id); }
+                                    );
+                                }
+                                else if (data.result == 0) //ไม่สำเร็จ
+                                {
+                                  swal({
+                                        title: "ไม่สามารถเปลี่ยนรถยนต์ได้<br>กรุณาทำรายการใหม่",
+                                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                                         type: "error",
+                                        timer: 2000,
+                                        html: true,
+                                        showConfirmButton: false,
+                                      },
+                                      function(){ window.location.assign('reserve_ma_edit.php?id='+res_id); }
+                                    );
+                                }
+                                else if (data.result === 'error')
+                                {
+                                  swal({
+                                        title: "ไม่สามารถเปลี่ยนรถยนต์ได้<br>กรุณาทำรายการใหม่",
+                                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                                         type: "error",
+                                        timer: 2000,
+                                        showConfirmButton: false,
+                                        html: true,
+                                      },
+                                      function(){ window.location.assign('reserve_ma_edit.php?id='+res_id); }
+                                    );
+                                }
+                        },
+                        error: function(data) { console.log(data)}
+                    });
+                });
             }
         });
     });
@@ -440,5 +491,6 @@ $(document).ready(function() {
             error: function(data) { console.log(data)}
         });
     }
+
 
 });
