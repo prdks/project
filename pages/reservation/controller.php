@@ -1039,4 +1039,20 @@ elseif ($mode == 'getCars_For_Edit')
     <?php
     }
   }
+  elseif ($mode == 'deleteReservation') 
+  {
+    $delete_id = $_POST['id'];
+    
+    $sql = "select * from reservation where reservation_id ='".$delete_id."'";
+    $result = $conn->query($sql);
+    if($result){
+      $sql = "delete from reservation
+      where reservation_id = '".$delete_id."'";
+    
+      if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
+      else {echo json_encode(array('result' => '0'));}
+    }else{
+      echo json_encode(array('result' => 'error'));
+    }
+  }
 ?>

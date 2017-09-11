@@ -28,7 +28,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">ลบข้อมูลการจองรถยนต์</h4>
       </div>
-      <form class="form-horizontal" action="reservation/reserve_ma/delete.php" method="post">
+      <form id="RMA_delete_form" class="form-horizontal">
       <div class="modal-body">
 
         <div class="form-group">
