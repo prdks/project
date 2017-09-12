@@ -36,14 +36,10 @@ $(document).ready(function() {
                     if (data.reserv_detail.first_status == 1) {
                         $('#show-ap-1').attr('class', 'label label-success');
                         $('#show-ap-1').html('อนุมัติ');
-                        $('#show-ap-2').attr('class', 'label label-success');
-                        $('#show-ap-2').html('อนุมัติ');
                         $('#reason-1').html('');
                     } else if (data.reserv_detail.first_status == 2) {
                         $('#show-ap-1').attr('class', 'label label-danger');
                         $('#show-ap-1').html('ไม่อนุมัติ');
-                        $('#show-ap-2').attr('class', 'label label-danger');
-                        $('#show-ap-2').html('ไม่อนุมัติ');
                         if (data.reserv_detail.first_reason != "") {
                             $('#reason-1').html('<br><b>เหตุผล : </b>' + data.reserv_detail.first_reason)
                             if (data.reserv_detail.first_note != "") {
@@ -54,8 +50,6 @@ $(document).ready(function() {
                 } else {
                     $('#show-ap-1').attr('class', 'label label-info');
                     $('#show-ap-1').html('รออนุมัติ');
-                    $('#show-ap-2').attr('class', 'label label-info');
-                    $('#show-ap-2').html('รออนุมัติ');
                     $('#reason-1').html('');
                 }
 

@@ -186,20 +186,68 @@ $(document).ready(function() {
         }
     });
 
+
     $('input[name=reservation_status]').on("change", function() {
         var res = $(this).val();
         if (res == 0) {
-            $('input[name=usage_status]').each(function() {
-                if ($(this).val() == res) {
-                    $(this).attr('disabled', false)
-                    $(this).click();
-                } else {
-                    $(this).attr('disabled', true)
-                }
-            });
-            $('#edit_note_area').val('');
-            $('#edit_note_area').attr('required', false);
-            $('#edit_note').hide();
+            if ($('input[name=kilometer_out]').val() != 0 || $('input[name=kilometer_in]').val() != 0 || $('#dp-tout').val() !== '' || $('#dp-kout').val() !== '' || $('#dp-tin').val() !== '' ||
+                $('#dp-kin').val() !== '') {
+                swal({
+                        title: "<h3>หากเปลี่ยนสถานะเป็นรอยืนยัน<br>ข้อมูลการบันทึกต่างๆจะถูกรีเซ็ต</h3>",
+                        type: "warning",
+                        html: true,
+                        showCancelButton: true,
+                        cancelButtonText: "ยกเลิก",
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "ตกลง",
+                        timer: 2000
+                    },
+                    function(Respone) {
+                        if (Respone) {
+                            $('input[name=usage_status]').each(function() {
+                                if ($(this).val() == res) {
+                                    $(this).attr('disabled', false)
+                                    $(this).click();
+                                } else {
+                                    $(this).attr('disabled', true)
+                                }
+                            });
+                            $('#edit_note_area').val('');
+                            $('#edit_note_area').attr('required', false);
+                            $('#edit_note').hide();
+
+                            $('#dp-tout').val('');
+                            $('#dp-kout').val('');
+                            $('#dp-tin').val('');
+                            $('#dp-kin').val('');
+                            $('input[name=kilometer_out]').val(0);
+                            $('input[name=kilometer_in]').val(0);
+                            $('input[name=kilometer_total]').val(0);
+                        } else {
+                            $('input[name=reservation_status]').each(function() {
+                                if ($(this).val() == $('#hstatus').attr('data-rstatus')) {
+                                    $(this).click();
+                                }
+                            });
+                            $('input[name=usage_status]').each(function() {
+                                if ($(this).val() == $('#hstatus').attr('data-ustatus')) {
+                                    $(this).click();
+                                }
+                            });
+                        }
+                    });
+
+            } else {
+                $('input[name=usage_status]').each(function() {
+                    if ($(this).val() == res) {
+                        $(this).attr('disabled', false)
+                        $(this).click();
+                    } else {
+                        $(this).attr('disabled', true)
+                    }
+                });
+            }
+
         } else if (res == 1) {
             $('input[name=usage_status]').each(function() {
                 if ($(this).val() == 1 || $(this).val() == 2 || $(this).val() == 3) {
@@ -227,6 +275,7 @@ $(document).ready(function() {
             $('#edit_note').show();
         }
     });
+
     $('input[name=usage_status]').on("change", function() {
         if ($(this).val() == 3) {
             $('#edit_note_area').attr('required', true);
@@ -326,6 +375,8 @@ $(document).ready(function() {
         });
     });
 
+
+
     $('#linkEditCars').click(function() {
         $.ajax({
             type: "POST",
@@ -341,55 +392,52 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $('#tbody_cars_edit').html(data);
-                $('.handleChangeCars').click(function () {
+                $('.handleChangeCars').click(function() {
                     var res_id = $(this).attr('data-id');
                     var car_id = $(this).attr('data-carid');
                     $.ajax({
                         type: "POST",
                         url: "reservation/controller.php",
-                        data: {id: res_id , carid: car_id , mode : 'editCarInRMA'},
+                        data: { id: res_id, carid: car_id, mode: 'editCarInRMA' },
                         dataType: 'json',
                         success: function(data) {
                             if (data.result == 1) //สำเร็จ
-                                {
-                                  swal({
+                            {
+                                swal({
                                         title: "เปลี่ยนรถยนต์สำเร็จ",
                                         text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                                         type: "success",
-                                        timer: 2000,
+                                        type: "success",
+                                        timer: 1000,
                                         showConfirmButton: false,
-                                      },
-                                      function(){ window.location.assign('reserve_ma_edit.php?id='+res_id); }
-                                    );
-                                }
-                                else if (data.result == 0) //ไม่สำเร็จ
-                                {
-                                  swal({
+                                    },
+                                    function() { window.location.assign('reserve_ma_edit.php?id=' + res_id); }
+                                );
+                            } else if (data.result == 0) //ไม่สำเร็จ
+                            {
+                                swal({
                                         title: "ไม่สามารถเปลี่ยนรถยนต์ได้<br>กรุณาทำรายการใหม่",
                                         text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                                         type: "error",
+                                        type: "error",
                                         timer: 2000,
                                         html: true,
                                         showConfirmButton: false,
-                                      },
-                                      function(){ window.location.assign('reserve_ma_edit.php?id='+res_id); }
-                                    );
-                                }
-                                else if (data.result === 'error')
-                                {
-                                  swal({
+                                    },
+                                    function() { window.location.assign('reserve_ma_edit.php?id=' + res_id); }
+                                );
+                            } else if (data.result === 'error') {
+                                swal({
                                         title: "ไม่สามารถเปลี่ยนรถยนต์ได้<br>กรุณาทำรายการใหม่",
                                         text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                                         type: "error",
+                                        type: "error",
                                         timer: 2000,
                                         showConfirmButton: false,
                                         html: true,
-                                      },
-                                      function(){ window.location.assign('reserve_ma_edit.php?id='+res_id); }
-                                    );
-                                }
+                                    },
+                                    function() { window.location.assign('reserve_ma_edit.php?id=' + res_id); }
+                                );
+                            }
                         },
-                        error: function(data) { console.log(data)}
+                        error: function(data) { console.log(data) }
                     });
                 });
             }
@@ -465,32 +513,98 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(data) {
                 if (data.result == 1) //สำเร็จ
-                    {
-                      swal({
-                            title: "แก้ไขข้อมูลสำเร็จ",
-                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                             type: "success",
-                            timer: 2000,
-                            showConfirmButton: false,
-                          }
-                        );
-                    }
-                    else if (data.result === 'error')
-                    {
-                      swal({
-                            title: "ไม่สามารถแก้ไขข้อมูลได้<br>กรุณาทำรายการใหม่",
-                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                             type: "error",
-                            timer: 2000,
-                            showConfirmButton: false,
-                            html: true,
-                          }
-                        );
-                    }
+                {
+                    swal({
+                        title: "แก้ไขข้อมูลสำเร็จ",
+                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                        type: "success",
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                } else if (data.result === 'error') {
+                    swal({
+                        title: "ไม่สามารถแก้ไขข้อมูลได้<br>กรุณาทำรายการใหม่",
+                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                        type: "error",
+                        timer: 2000,
+                        showConfirmButton: false,
+                        html: true,
+                    });
+                }
             },
-            error: function(data) { console.log(data)}
+            error: function(data) { console.log(data) }
         });
     }
 
+    $('#delete_other_approve').click(function(){
+        var id = $(this).attr('data-id');
+        swal({
+            title: "<h3><b>ต้องการลบข้อมูลการอนุมัติหรือไม่</b></h3>",
+            type: "warning",
+            showCancelButton: true,
+            html: true,
+            cancelButtonText: "ยกเลิก",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "ลบข้อมูล",
+            closeOnConfirm: false
+          },
+          function(){
+            $.ajax({
+                type: "POST",
+                url: "reservation/controller.php",
+                data: {id:  id, mode: 'deleteOtherApprove'},
+                dataType: 'json',
+                success: function(data){
+                  if (data.result == 1) //สำเร็จ
+                  {
+                    swal({
+                          title: "ลบสำเร็จ",
+                           type: "success",
+                           timer: 2000,
+                          confirmButtonText: "ตกลง",
+                          showConfirmButton: false,
+                        },
+                        function()
+                        {
+                            window.location.assign('reserve_ma_edit.php?id=' + id);
+                        }
+                      );
+                  }
+                  else if (data.result == 0) //ไม่สำเร็จ
+                  {
+                    swal({
+                          title: "ไม่สามารถลบข้อมูลได้<br>กรุณาทำรายการใหม่",
+                           type: "error",
+                           timer: 2000,
+                           confirmButtonText: "ตกลง",
+                           showConfirmButton: false,
+                          html: true,
+                        });
+                  }
+                }
+              });
+          });
+    });
 
+    // ปุ่มเพิ่มสถานที่
+    var max_fields = 10; //maximum input boxes allowed
+    var x = 1; //initlal text box count
+    $('#addfield_location').click(function(e) { //on add input button click
+        e.preventDefault();
+        if (x < max_fields) { //max input box allowed
+            x++; //text box increment
+            var str = '<div class="form-group">';
+            str += '<label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label"></label>';
+            str += '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-9">';
+            str += '<input type="text" class="form-control" name="location[]" placeholder="พิมพ์ชื่อสถานที่ต้องการไป (เพิ่มเติม)">';
+            str += '</div><div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><a href="#" class="btn btn-danger remove_field">ลบ</a></div></div></div>';
+            $('.location_field').append(str);
+        }
+    });
+
+    $('.location_field').on("click", ".remove_field", function(e) { //user click on remove text
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove();
+        x--;
+    });
 });

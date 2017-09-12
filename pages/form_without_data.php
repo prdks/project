@@ -149,11 +149,14 @@ if (isset($_GET['id']))
 	</tr>
 	<!-- ประโยคต้นคำร้อง -->
 	<tr>
-		<td colspan="20" style="text-align: justify;">ขออนุญาตใช้รถยนต์<?php echo $_SESSION['system_name']; ?> พร้อมพนักงานขับรถยนต์
+		<td colspan="20" style="text-align: justify;"><section>ขออนุญาตใช้รถยนต์<?php echo $_SESSION['system_name']; ?> พร้อมพนักงานขับรถยนต์
 			&nbsp;เพื่อเดินทางไปที่ <?php 
 			$location = $row['location']; 
-			$numlocation = substr_count($location,",");
-			echo str_replace(",",", ",$location);
+			$arrLocation = explode(",", $location);
+			foreach ($arrLocation as $key => $value) 
+			{
+			  echo ($key+1).".".$value."  ";
+			}
 			?>
 			&nbsp;สำหรับปฏิบัติราชการ <?php echo $row['requirement_detail']; ?>
 			<?php
@@ -172,6 +175,7 @@ if (isset($_GET['id']))
 				<?php
 			}
 			?>
+			</section>
 		</td>
 	</tr>
 	<!-- รายชื่อคนไป -->

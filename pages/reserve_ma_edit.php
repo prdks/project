@@ -60,7 +60,7 @@
                     <form id="RMA_edit_form" class="form-horizontal">
                       <div class="panel-body">
 
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs" id="rma-tab">
                           <li class="active"><a data-toggle="tab" href="#home">ข้อมูลการจอง</a></li>
                           <li><a data-toggle="tab" href="#cars">ข้อมูลรถยนต์</a></li>
                           <li><a data-toggle="tab" href="#passenger">ข้อมูลผู้โดยสาร</a></li>

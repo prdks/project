@@ -145,40 +145,45 @@ $(function () {
          </div>\
          <div class="modal-body">\
            <table class="table table-bordered">\
-             <!-- จองใช้เพื่อ -->\
+              <!-- ผู้ติดต่อ -->\
              <tr>\
-             <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 topic">จองใช้เพื่อ :</td>\
-             <td>'+calEvent.detail+'</td>\
-             </tr>\
-             <!-- รถยนต์ที่จอง -->\
-             <tr>\
-             <td class="field-label col-xs-3 topic">รถยนต์ที่จอง :</td>\
-             <td> '+calEvent.car_reg+'/ ยี่ห้อ '+calEvent.car_brand+' / รุ่น '+calEvent.car_kind+' / '+calEvent.seat+' ที่นั่ง </td>\
+             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ผู้ติดต่อ :</td>\
+             <td>'+calEvent.person+'&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> '+calEvent.tel+'</td>\
              </tr>\
              <!-- วันที่ใช้รถยนต์ -->\
              <tr>\
              <td class="field-label col-xs-3 topic">วันที่ใช้รถยนต์ :</td>\
              <td>'+calEvent.reservation_date+'</td>\
              </tr>\
-             <!-- รายชื่อผู้โดยสาร -->\
+             <!-- จองใช้เพื่อ -->\
              <tr>\
-             <td class="field-label col-xs-3 topic">รายชื่อผู้โดยสาร :</td>\
-             <td><dl>'+passenger_str+'</dl></td>\
+             <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 topic">จองใช้เพื่อ :</td>\
+             <td class="detail_colum_indetail">'+calEvent.detail+'</td>\
              </tr>\
              <!-- สถานที่จะไป -->\
              <tr>\
              <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">สถานที่จะไป :</td>\
              <td>'+calEvent.location+'</td>\
              </tr>\
+             <!-- รายชื่อผู้โดยสาร -->\
+             <tr>\
+             <td class="field-label col-xs-3 topic">รายชื่อผู้โดยสาร :</td>\
+             <td><dl>'+passenger_str+'</dl></td>\
+             </tr>\
              <!-- ให้รถไปรับที่ -->\
              <tr>\
              <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ให้รถไปรับที่ :</td>\
              <td>'+calEvent.appointment+'</td>\
              </tr>\
-             <!-- ผู้ติดต่อ -->\
+             <!-- รถยนต์ที่จอง -->\
              <tr>\
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ผู้ติดต่อ :</td>\
-             <td>'+calEvent.person+'&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> '+calEvent.tel+'</td>\
+             <td class="field-label col-xs-3 topic">รถยนต์ที่จอง :</td>\
+             <td> '+calEvent.car_reg+'/ ยี่ห้อ '+calEvent.car_brand+' / รุ่น '+calEvent.car_kind+' / '+calEvent.seat+' ที่นั่ง </td>\
+             </tr>\
+             <!-- พนักงานขับรถยนต์ -->\
+             <tr>\
+             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">พนักงานขับรถ :</td>\
+             <td>'+calEvent.name_driver+'&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> '+calEvent.tel_driver+'</td>\
              </tr>\
              <!-- วันที่ทำรายการ -->\
              <tr>\
@@ -203,11 +208,6 @@ $(function () {
              <tr>\
              <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">วันที่บันทึกผล :</td>\
              <td>'+calEvent.updateStatus+'</td>\
-             </tr>\
-             <!-- พนักงานขับรถยนต์ -->\
-             <tr>\
-             <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">พนักงานขับรถ :</td>\
-             <td>'+calEvent.name_driver+'&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> '+calEvent.tel_driver+'</td>\
              </tr>\
            </table>\
          </div>\

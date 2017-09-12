@@ -64,6 +64,89 @@
     </div>
   </div>
 </div>
+
+
+<div class="form-group">
+  <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+  การอนุมัติจากบุคคลอื่น :
+  </label>
+  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+    
+    <p><?php
+                    // ลำดับ 1 (เจ้าหน้าที่ดูแลรถยนต์)
+                    $sqlNo1 = "SELECT COUNT(personnel_id) as Result FROM personnel p
+                    LEFT JOIN user_type u
+                    ON p.user_type_id = u.user_type_id
+                    WHERE u.user_level = 5";
+
+                    $result1 = $conn->query($sqlNo1);
+                    $No1 = $result1->fetch_assoc();
+
+                    if($No1['Result'] != 0)
+                    {
+                      $sql = "SELECT p.* ,  t.*  FROM personnel p
+                      LEFT JOIN department d
+                      ON p.department_id = d.department_id
+                      LEFT JOIN title_name t
+                      ON p.title_name_id = t.title_name_id
+                      LEFT JOIN user_type u
+                      ON p.user_type_id = u.user_type_id
+                      WHERE d.department_name = '".$_SESSION['department']."'
+                      AND u.user_level = 5";
+
+                      $result = $conn->query($sql);
+                      $person = $result->fetch_assoc();
+                      ?>
+                      <div>
+                        <?php echo "1. ".$person['title_name'].$person['personnel_name']?>
+                        <br>สถานะ :
+                        <?php
+                        if ($row["fist_approve_status"] == 0) 
+                        {
+                          ?>
+                          <b class="text-primary">รออนุมัติ</b>
+                          <?php
+                        }
+                        elseif ($row["fist_approve_status"] == 1) 
+                        {
+                          ?>
+                          <b class="text-success">อนุมัติ</b>
+                          <?php
+                        }
+                        elseif ($row["fist_approve_status"] == 2) 
+                        {
+                          ?>
+                          <b class="text-danger">ไม่อนุมัติ</b>
+                          <br>
+                          เหตุผล : <?php echo substr($row['fist_approve_note'], 0, strpos($row['fist_approve_note'], ','));?>
+                          <?php
+                          $frnote = substr($row['fist_approve_note'], (strpos($row['fist_approve_note'], ',')+1), strlen($row['fist_approve_note']));
+                          if(strlen($frnote) != 0)
+                          {
+                            ?>
+                            <br>เพิ่มเติม : <?php echo $frnote;?>
+                            <?php
+                          }
+                        }
+
+                        if($row["fist_approve_status"] != 0)
+                        {
+                          ?>
+                          <br>
+                          <button id="delete_other_approve" type="button" class="btn btn-xs btn-danger" data-id="<?php echo $row['reservation_id'];?>" ><span class="fa fa-trash fa-fw"></span>ลบการอนุมัตินี้</button>
+                          <?php
+                        }
+                        
+                    }
+                        ?>
+              </p>
+              
+              
+             </div>
+    
+  </div>
+</div>
+
 <!-- สถานะจอง -->
 <input type="hidden" id="hstatus" data-ustatus="<?php echo $row['usage_status'];?>" data-rstatus="<?php echo $row['reservation_status'];?>">
 <div class="form-group">

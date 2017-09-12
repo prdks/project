@@ -26,16 +26,50 @@
     placeholder="พิมพ์รายละเอียดความประสงค์ขอใช้รถยนต์" required><?php echo $row['requirement_detail'];?></textarea>
   </div>
 </div>
+
+<?php
+$all_location = $row['location'];
+$arrLocation = explode(",", $all_location);
+?>
 <!-- สถานที่ต้องการไป -->
-<div class="form-group">
-  <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-    <span class="requestfield">*</span> สถานที่ต้องการไป :
-  </label>
-  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-      <textarea  rows="5" type="text" class="form-control" name="location"
-      placeholder="พิมพ์ชื่อสถานที่ต้องการไป" required><?php echo $row['location'];?></textarea>
-  </div>
+<div class="location_field">
+<?php
+foreach ($arrLocation as $key => $value) 
+{
+  if($key == 0)
+  {
+    ?>
+    <div class="form-group">
+      <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+        <span class="requestfield">*</span> สถานที่ต้องการไป :
+      </label>
+      <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-9">
+        <input type="text" class="form-control" name="location[]" placeholder="พิมพ์ชื่อสถานที่ต้องการไป" value="<?php echo $value;?>" required>
+      </div>
+      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+        <button class="btn btn-primary" type="button" id="addfield_location">เพิ่ม</button>
+      </div>
+    </div>
+    <?php
+  }
+  else 
+  {
+    ?>
+    <div class="form-group">
+      <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label"></label>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-9">
+      <input type="text" class="form-control" name="location[]" value="<?php echo $value;?>" placeholder="พิมพ์ชื่อสถานที่ต้องการไป (เพิ่มเติม)">
+      </div>
+      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+        <a href="#" class="btn btn-danger remove_field">ลบ</a>
+      </div>
+    </div>
+    <?php
+  }
+}
+?>
 </div>
+
 <!-- วันแรกที่จองใช้ -->
 <div class="form-group">
   <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">

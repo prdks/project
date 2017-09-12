@@ -49,12 +49,6 @@
         ON p.user_type_id = u.user_type_id
         WHERE u.user_level = 5";
 
-        // ลำดับ 2
-        $sqlNo2 = "SELECT COUNT(personnel_id) as Result FROM personnel p
-        LEFT JOIN user_type u
-        ON p.user_type_id = u.user_type_id
-        WHERE u.user_level = 6";
-
         // ลำดับ 3
         $sqlNo3 = "SELECT COUNT(personnel_id) as Result FROM personnel p
         LEFT JOIN user_type u
@@ -64,8 +58,6 @@
         $result1 = $conn->query($sqlNo1);
         $No1 = $result1->fetch_assoc();
 
-        $result2 = $conn->query($sqlNo2);
-        $No2 = $result2->fetch_assoc();
         
         $result3 = $conn->query($sqlNo3);
         $No3 = $result3->fetch_assoc();
@@ -126,10 +118,9 @@
                   </div>
                   <div class="panel-body">
                     <?php
-                    $count = $No1['Result'] + $No2['Result'];
-                    if($count == 2){ $num1 = 1; $num2 = 2; $num3 = 3; }
-                    elseif ($count == 1) {$num1 = 1; $num2 = 0; $num3 = 2;}
-                    else{$num1 = 0; $num2 = 0; $num3 = 1;}
+                    if($No1['Result'] != 0 && $No3['Result'] != 0){ $num1 = 1; $num3 = 2; }
+                    elseif ($No1['Result'] == 0 && $No3['Result'] != 0) {$num1 = 0; $num3 = 1;}
+                    elseif ($No1['Result'] != 0 && $No3['Result'] == 0) {$num1 = 1; $num3 = 0;}
 
                     if($No1['Result'] != 0)
                     {
@@ -154,29 +145,9 @@
                       <br>
                       <?php
                     }
-                    if($No2['Result'] != 0)
+                    if($No3['Result'] != 0)
                     {
                       $sql = "SELECT p.* ,  t.*  FROM personnel p
-                      LEFT JOIN department d
-                      ON p.department_id = d.department_id
-                      LEFT JOIN title_name t
-                      ON p.title_name_id = t.title_name_id
-                      LEFT JOIN user_type u
-                      ON p.user_type_id = u.user_type_id
-                      WHERE d.department_name = '".$_SESSION['department']."'
-                      AND u.user_level = 6";
-
-                      $result = $conn->query($sql);
-                      $person = $result->fetch_assoc();
-                      ?>
-                      <div>
-                        <b><?php echo $num2.". ".$person['title_name'].$person['personnel_name']?> (สำรอง)</b>
-                        <br><b>สถานะ : </b><span id="show-ap-2"></span>
-                      </div>
-                      <br>
-                      <?php
-                    }
-                        $sql = "SELECT p.* ,  t.*  FROM personnel p
                         LEFT JOIN department d
                         ON p.department_id = d.department_id
                         LEFT JOIN title_name t
@@ -194,6 +165,9 @@
                           <br><b>สถานะ : </b><span id="show-ap-3"></span>
                         </div>
                         <br>
+                      <?php
+                    }
+                        ?>
                   </div>
               </div>
             </div> 

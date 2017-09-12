@@ -16,7 +16,7 @@ switch ($_SESSION['user_type']) {
                     <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                     <th id="tb_detail_sub-sv">สถานะการจอง</th>
                     <th id="tb_detail_sub-sv">สถานะการใช้</th>
-                    <th id="tb_tools_ismore2">เครื่องมือ</th>
+                    <th id="tb_tools_ismore">เครื่องมือ</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,7 +82,7 @@ switch ($_SESSION['user_type']) {
                   ?>
                 </td>
                 <td class="text-center"><?php echo date("H:i",strtotime($row["reserv_stime"]))." - ".date("H:i",strtotime($row["reserv_etime"]))."น.";?></td>
-                <td><?php echo $row["requirement_detail"]; ?></td>
+                <td class="detail_colum"><?php echo $row["requirement_detail"]; ?></td>
                 <td class="text-center"><?php echo $row["car_reg"]; ?></td>
                 <td class="text-center">
               <?php
@@ -141,22 +141,22 @@ switch ($_SESSION['user_type']) {
                 ?>
                 </td>
                 <td class="text-center">
-                <button type="submit" class="btn btn-primary handleRMADetail" role="button"
+                <button type="submit" class="btn btn-primary btn-sm handleRMADetail" role="button"
                 data-toggle="modal" data-target="#RMA_detail_modal" data-id="<?php echo $row["reservation_id"];?>">
                   <span class="fa fa-search" data-toggle="tooltip" data-placement="top" title="ดูข้อมูล"></span>
                 </button>
           
-                <a class="btn btn-warning" href="reserve_ma_edit.php?id=<?php echo $row["reservation_id"];?>">
+                <a class="btn btn-warning btn-sm" href="reserve_ma_edit.php?id=<?php echo $row["reservation_id"];?>">
                   <span class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></span>
                 </a>
           
-                <button class="btn btn-danger handleRMADelete" role="button"
+                <button class="btn btn-danger btn-sm handleRMADelete" role="button"
                 data-toggle="modal" data-target="#RMA_delete_modal" data-id="<?php echo $row["reservation_id"];?>">
                   <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
                 </button>
           
-                <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-info">
-                  <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติการจองใช้"></span>
+                <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+                  <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
                 </a>
               </td>
               </tr>
@@ -194,7 +194,7 @@ switch ($_SESSION['user_type']) {
                     <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                     <th id="tb_detail_sub-sv">สถานะการจอง</th>
                     <th id="tb_detail_sub-sv">สถานะการใช้</th>
-                    <th id="tb_tools_ismore2">เครื่องมือ</th>
+                    <th id="tb_tools_ismore">เครื่องมือ</th>
                 </tr>
             </thead>
             <tbody>
@@ -243,7 +243,7 @@ switch ($_SESSION['user_type']) {
                   ?>
                 </td>
                 <td class="text-center"><?php echo date("H:i",strtotime($row["reserv_stime"]))." - ".date("H:i",strtotime($row["reserv_etime"]))."น.";?></td>
-                <td><?php echo $row["requirement_detail"]; ?></td>
+                <td class="detail_colum"><?php echo $row["requirement_detail"]; ?></td>
                 <td class="text-center"><?php echo $row["car_reg"]; ?></td>
                 <td class="text-center">
               <?php
@@ -302,22 +302,22 @@ switch ($_SESSION['user_type']) {
                 ?>
                 </td>
                 <td class="text-center">
-                <button type="submit" class="btn btn-primary handleRMADetail" role="button"
+                <button type="submit" class="btn btn-primary btn-sm handleRMADetail" role="button"
                 data-toggle="modal" data-target="#RMA_detail_modal" data-id="<?php echo $row["reservation_id"];?>">
                   <span class="fa fa-search" data-toggle="tooltip" data-placement="top" title="ดูข้อมูล"></span>
                 </button>
           
-                <a class="btn btn-warning" href="reserve_ma_edit.php?id=<?php echo $row["reservation_id"];?>">
+                <a class="btn btn-warning btn-sm" href="reserve_ma_edit.php?id=<?php echo $row["reservation_id"];?>">
                   <span class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></span>
                 </a>
           
-                <button class="btn btn-danger handleRMADelete" role="button"
+                <button class="btn btn-danger btn-sm handleRMADelete" role="button"
                 data-toggle="modal" data-target="#RMA_delete_modal" data-id="<?php echo $row["reservation_id"];?>">
                   <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
                 </button>
           
-                <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-info">
-                  <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติการจองใช้"></span>
+                <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+                  <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
                 </a>
               </td>
               </tr>
@@ -402,7 +402,7 @@ switch ($_SESSION['user_type']) {
                     <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                     <th id="tb_detail_sub-sv">สถานะการจอง</th>
                     <th id="tb_detail_sub-sv">สถานะการใช้</th>
-                    <th id="tb_tools_ismore2">เครื่องมือ</th>
+                    <th id="tb_tools_ismore">เครื่องมือ</th>
                 </tr>
             </thead>
             <tbody>
@@ -426,7 +426,7 @@ switch ($_SESSION['user_type']) {
               ?>
             </td>
             <td class="text-center"><?php echo date("H:i",strtotime($row["reserv_stime"]))." - ".date("H:i",strtotime($row["reserv_etime"]))."น.";?></td>
-            <td><?php echo $row["requirement_detail"]; ?></td>
+            <td class="detail_colum"><?php echo $row["requirement_detail"]; ?></td>
             <td class="text-center"><?php echo $row["car_reg"]; ?></td>
             <td class="text-center">
           <?php
@@ -485,22 +485,22 @@ switch ($_SESSION['user_type']) {
             ?>
             </td>
             <td class="text-center">
-            <button type="submit" class="btn btn-primary handleRMADetail" role="button"
+            <button type="submit" class="btn btn-primary btn-sm handleRMADetail" role="button"
             data-toggle="modal" data-target="#RMA_detail_modal" data-id="<?php echo $row["reservation_id"];?>">
               <span class="fa fa-search" data-toggle="tooltip" data-placement="top" title="ดูข้อมูล"></span>
             </button>
       
-            <a class="btn btn-warning" href="reserve_ma_edit.php?id=<?php echo $row["reservation_id"];?>">
+            <a class="btn btn-warning btn-sm" href="reserve_ma_edit.php?id=<?php echo $row["reservation_id"];?>">
               <span class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></span>
             </a>
       
-            <button class="btn btn-danger handleRMADelete" role="button"
+            <button class="btn btn-danger btn-sm handleRMADelete" role="button"
             data-toggle="modal" data-target="#RMA_delete_modal" data-id="<?php echo $row["reservation_id"];?>">
               <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
             </button>
       
-            <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-info">
-              <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติการจองใช้"></span>
+            <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+              <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
             </a>
           </td>
           </tr>
@@ -544,7 +544,7 @@ switch ($_SESSION['user_type']) {
                   <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                   <th id="tb_detail_sub-sv">สถานะการจอง</th>
                   <th id="tb_detail_sub-sv">สถานะการใช้</th>
-                  <th id="tb_tools_ismore2">เครื่องมือ</th>
+                  <th id="tb_tools_ismore">เครื่องมือ</th>
               </tr>
           </thead>
           <tbody>
@@ -568,7 +568,7 @@ switch ($_SESSION['user_type']) {
             ?>
           </td>
           <td class="text-center"><?php echo date("H:i",strtotime($row["reserv_stime"]))." - ".date("H:i",strtotime($row["reserv_etime"]))."น.";?></td>
-          <td><?php echo $row["requirement_detail"]; ?></td>
+          <td class="detail_colum"><?php echo $row["requirement_detail"]; ?></td>
           <td class="text-center"><?php echo $row["car_reg"]; ?></td>
           <td class="text-center">
         <?php
@@ -627,22 +627,22 @@ switch ($_SESSION['user_type']) {
           ?>
           </td>
           <td class="text-center">
-          <button type="submit" class="btn btn-primary handleRMADetail" role="button"
+          <button type="submit" class="btn btn-primary btn-sm handleRMADetail" role="button"
           data-toggle="modal" data-target="#RMA_detail_modal" data-id="<?php echo $row["reservation_id"];?>">
             <span class="fa fa-search" data-toggle="tooltip" data-placement="top" title="ดูข้อมูล"></span>
           </button>
     
-          <a class="btn btn-warning" href="reserve_ma_edit.php?id=<?php echo $row["reservation_id"];?>">
+          <a class="btn btn-warning btn-sm" href="reserve_ma_edit.php?id=<?php echo $row["reservation_id"];?>">
             <span class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></span>
           </a>
     
-          <button class="btn btn-danger handleRMADelete" role="button"
+          <button class="btn btn-danger btn-sm handleRMADelete" role="button"
           data-toggle="modal" data-target="#RMA_delete_modal" data-id="<?php echo $row["reservation_id"];?>">
             <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
           </button>
     
-          <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-info">
-            <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติการจองใช้"></span>
+          <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+            <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
           </a>
         </td>
         </tr>

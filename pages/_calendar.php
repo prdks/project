@@ -68,8 +68,13 @@ function FullDateThai($strDate)
       $id = $row['reservation_id']; //ไอดีการจอง
       $title = TimeThai($row['reserv_stime'])."(".$row['car_brand_name']." ".$row['seat']." ที่นั่ง) - ".$row['requirement_detail']; //title
       $detail = $row['requirement_detail']; //รายละเอียดการจอง
-      $location = $row['location']; //สถานที่
-
+      $arrLocation = explode(",", $row['location']); //สถานที่
+      $location = "";
+      foreach ($arrLocation as $key => $value) 
+      {
+        $location .= ($key+1).". ".$value."<br>";
+      }
+      
       /*การจัดการวันที่จอง*/
       $start = $row['date_start']; //วันแรกที่จองใช้รถ
       $end = $row['date_end']; //วันสุดท้ายที่จองใช้รถ
@@ -100,8 +105,8 @@ function FullDateThai($strDate)
       elseif ($row['usage_status'] == 3) {$ustatus = 'ยกเลิก'; $colorRStatus = '#d9534f';}
 
       /*่หมายเหตุการยกเลิก*/
-      if ($row['reserve_note'] !== '') {$note = str_replace(",",", ",$row['reserve_note']);}
-      else {$note = '-';}
+      if ($row['reserve_note'] != '' || $row['reserve_note'] != NULL) {$note = str_replace(","," ",$row['reserve_note']);}
+      elseif($row['reserve_note'] == '' || $row['reserve_note'] == NULL) {$note = "-";}
       $timestamp = DateTimeThai($row['timestamp']); //วันที่ทำรายการ
 
       /*ข้อมูลคนทำรายการ*/
@@ -116,32 +121,81 @@ function FullDateThai($strDate)
       $seat = $row['seat']; //จำนวนที่นั่ง
 
       /*ผู้โดยสาร*/
-      $passenger = array();
-      $sql_department = "
-      SELECT d.* FROM department d
-      LEFT JOIN passenger p
-      ON p.department_id = d.department_id
-      WHERE p.reservation_id = '".$row['reservation_id']."'
-      GROUP BY department_name ORDER BY department_name ASC";
-      $a = $conn->query($sql_department);
-      while($b = $a->fetch_assoc()){
-        $str = "<dt><b>".$b['department_name']."</b></dt>";
-        array_push($passenger,$str);
+      $passener_name = array();
+      $passenger_department = array();
 
-        $sql_passenger ="
-        SELECT * FROM passenger p
-        LEFT JOIN department d
-        ON p.department_id = d.department_id
-        LEFT JOIN reservation r
-        ON p.reservation_id = r.reservation_id
-        WHERE p.department_id = '".$b['department_id']."'
-        AND r.reservation_id = ".$row['reservation_id']."
-        ORDER BY passenger_name ASC , department_name ASC";
-        $c = $conn->query($sql_passenger);
-        while($d = $c->fetch_assoc()){
-          $str = "<dd>".$d['passenger_name']."</dd>";
-          array_push($passenger,$str);
+      $sql_passenger ="
+      SELECT passenger_name , department_id as department FROM passenger
+      WHERE reservation_id = ".$row['reservation_id'];
+      $c = $conn->query($sql_passenger);
+      while($d = $c->fetch_assoc()){
+        array_push($passener_name,$d['passenger_name']);
+        array_push($passenger_department,$d['department']);
+      }
+
+      $allPassenger = "";
+      if(!isset($passener_name))
+      {
+        $allPassenger = "ไม่มีผู้โดยสารเพิ่มเติม";
+      }
+      else 
+      {
+
+        $coutPassenger = sizeof($passener_name);
+        $allPassenger = array();
+        $arrDepartment = array();
+        $arrName = array();
+        $onePassenger = array();
+        $passenger = "";
+    
+        for ($i=0; $i < $coutPassenger ; $i++)
+        {
+          if($passenger_department[$i] !== NULL)
+          {
+            $sql_department = "
+            SELECT department_name FROM department
+            WHERE department_id = ".$passenger_department[$i];
+            $a = $conn->query($sql_department);
+            $b = $a->fetch_assoc();
+
+            $arrDepartment[$i] = "<b>".$b['department_name']."</b><br>";
+            $arrName[$i] = $passener_name[$i]."<br />";
+          }
+          else {
+            $arrDepartment[$i] = "<b>ไม่ระบุหน่วยงาน</b><br>";
+            $arrName[$i] = $passener_name[$i]."<br />";
+          }
+          
         }
+    
+        $coutInDepartment = array_count_values(array_values($arrDepartment));
+        $nameDepartment = array_values(array_unique($arrDepartment));
+    
+        sort($nameDepartment);
+    
+        $count = 0;
+    
+        for ($a=0; $a < sizeof($nameDepartment); $a++) 
+        { 
+          $name = $nameDepartment[$a];
+          $n = $coutInDepartment[$name];
+          array_push($allPassenger, $name);
+    
+          $passenger = array();
+          for ($b=0; $b < $n ; $b++) 
+          { 
+            array_push($passenger, $arrName[$count]);
+            $count++;
+          }
+          sort($passenger);
+    
+          for ($c=0; $c < sizeof($passenger); $c++) 
+          { 
+            array_push($allPassenger, $passenger[$c]);
+          }
+    
+        }
+    
       }
 
       /*คนอนุมัติคนสุดท้าย(จนท.ดูแลรถยนต์)*/
@@ -194,7 +248,7 @@ function FullDateThai($strDate)
               'time_start' => $timestart,
               'time_end' => $timeend,
               'timestamp' => $timestamp,
-              'passenger' => $passenger,
+              'passenger' => $allPassenger,
               'location' => $location,
               'appointment' => $appointment,
               'person' => $person,

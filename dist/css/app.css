@@ -78,6 +78,15 @@ body #enterkl {
 .c-cancel {
     color: #d9534f;
 }
+@media (max-width: 320px) {
+    .detail_colum {
+        word-break: break-all;
+    }
+
+    td {
+        word-break: break-all;
+    }
+}
 
 @media (max-width: 480px) {
     .input-group-addon,
@@ -107,6 +116,14 @@ body #enterkl {
     #setloginpage {
         margin-top: 5%;
     }
+
+    .detail_colum {
+        word-break: break-all;
+    }
+
+    .detail_colum_indetail {
+        word-break: break-all;
+    }
 }
 
 @media (max-width: 720px) {
@@ -125,6 +142,15 @@ body #enterkl {
     #setloginpage {
         margin-top: 5%;
     }
+
+    .detail_colum {
+        word-break: break-all;
+    }
+
+    .detail_colum_indetail {
+        word-break: break-all;
+    }
+
 }
 
 .badge-danger {
@@ -154,6 +180,17 @@ thead#Tb_sPersonnel {
 
 thead#Tb_Passenger {
     background-color: #ffffff;
+}
+
+.detail_colum {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.detail_colum_indetail {
+    word-break: break-all;
 }
 
 th#tb_checkbox,

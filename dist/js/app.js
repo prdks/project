@@ -7,6 +7,11 @@ $(function () {
     $(this).find("option").prop('selectedIndex', 0).end();
   });
   $('input[name=phone_number]').mask("999-999-9999");
+
+  $('.table-responsive').on('show.bs.dropdown', function () {
+    $('.table-responsive').css( "overflow", "inherit" );
+});
+
 // -------------------------------------------------------------
   //  เมื่อกดปุ่มแก้ไข จะส่งค่าไปที่ box
   $('.handleEdit').click(function() {
