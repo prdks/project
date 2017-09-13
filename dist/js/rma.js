@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
     // ---------------คลิกดูรายละเอียดในตาราง-------------
     //ตารางจัดการ
     $('.handleRMADetail').click(function() {
@@ -310,29 +311,137 @@ $(document).ready(function() {
             $('#edit_note').hide();
         }
     });
+    
     // passenger
-    $('.handleAddSelectPassenger').click(function() {
-        var person_id = $(this).attr('data-id');
-        var reserve_id = $(this).attr('data-reservekeys');
+    $('#insert_passenger_rma').click(function () {
+        var id = $(this).attr('data-id');
         $.ajax({
             type: "POST",
             url: "reservation/controller.php",
-            data: { person_id: person_id, reserve_id: reserve_id, mode: 'insertSelectPassenger' },
-            dataType: 'json',
+            data: { id: id, mode: 'query_add_passnger' },
             success: function(data) {
-                if (data.result == 1) //insert สำเร็จ
-                {
-                    swal('เพิ่มข้อมูลสำเร็จ');
-                    window.location.assign('edit_passenger.php?id=' + reserve_id);
-                } else if (data.result == 0) //insert ไม่สำเร็จ
-                {
-                    swal('ไม่สามารถเพิ่มข้อมูลได้ กรุณาทำรายการใหม่');
-                    window.location.assign('edit_passenger.php?id=' + reserve_id);
-                }
+                $('#add_passenger_tbody').html(data);
+                insert_passenger();
             }
         });
     });
 
+    $("#search_passenger_add_rma").submit(function(e) {
+        e.preventDefault();
+        var id = $('#search_input2').attr('data-id');
+        var word = $('#search_input2').val();
+        $.ajax({
+            type: "POST",
+            url: "reservation/controller.php",
+            data: { id:id, word:word, mode: 'search_query_add_passnger' },
+            success: function(data) {
+                $('#add_passenger_tbody').html(data);
+                $('#search_input2').val('');
+                insert_passenger();
+            }
+        });
+    });
+
+    
+    $("#add_passenger_rma_form").submit(function(e) {
+        e.preventDefault();
+        insert_key_passenger();
+    });
+
+    function insert_passenger() 
+    {
+        $('.handleAddSelectPassenger').click(function() {
+            var person_id = $(this).attr('data-id');
+            var reserve_id = $(this).attr('data-reservekeys');
+            $.ajax({
+                type: "POST",
+                url: "reservation/controller.php",
+                data: { person_id: person_id, reserve_id: reserve_id, mode: 'insertSelectPassenger' },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.result == 1) //insert สำเร็จ
+                    {
+                        swal({
+                            title: "เพิ่มข้อมูลสำเร็จ",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                             type: "success",
+                            timer: 2000,
+                            showConfirmButton: false,
+                          },
+                          function(){ window.location.assign('edit_passenger.php?id=' + reserve_id); }
+                        );
+                        
+                    } else if (data.result == 0) //insert ไม่สำเร็จ
+                    {
+                        swal({
+                            title: "ข้อมูลนี้มีอยู่แล้ว<br>กรุณาทำรายการใหม่",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                             type: "error",
+                            timer: 2000,
+                            html: true,
+                            showConfirmButton: false,
+                          },
+                          function(){ window.location.assign('edit_passenger.php?id=' + reserve_id); }
+                        );
+                        
+                    }
+                }
+            });
+        });
+         
+    }
+    function insert_key_passenger() 
+    {
+        var data = $('#add_passenger_rma_form').serializeArray();
+        data.push({ name: 'mode', value: 'insertKeyPassenger' });
+        $.ajax({
+            type: "POST",
+            url: "reservation/controller.php",
+            data: data,
+            dataType: 'json',
+            success: function(data) {
+                if (data.result == 1) //insert สำเร็จ
+                {
+                    swal({
+                        title: "เพิ่มข้อมูลสำเร็จ",
+                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                         type: "success",
+                        timer: 2000,
+                        showConfirmButton: false,
+                      },
+                      function(){ window.location.assign('edit_passenger.php?id=' + data.id); }
+                    );
+                    
+                } else if (data.result == 0) //insert ไม่สำเร็จ
+                {
+                    swal({
+                        title: "ไม่สามารถเพิ่มข้อมูลได้<br>กรุณาทำรายการใหม่",
+                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                         type: "error",
+                        timer: 2000,
+                        html: true,
+                        showConfirmButton: false,
+                      },
+                      function(){ window.location.assign('edit_passenger.php?id=' +  data.id); }
+                    );
+                    
+                }
+                else if (data.result === 'error')
+                {
+                  swal({
+                        title: "ข้อมูลนี้มีอยู่แล้ว<br>กรุณาทำรายการใหม่",
+                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                         type: "error",
+                        timer: 2000,
+                        html: true,
+                        showConfirmButton: false,
+                      },
+                      function(){ window.location.assign('edit_passenger.php?id=' +  data.id); }
+                    );
+                }
+            }
+        });
+    }
 
 
     //  เมื่อกดปุ่มลบ จะส่งค่าไปที่ box

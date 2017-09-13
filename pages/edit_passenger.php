@@ -30,20 +30,21 @@
                 </ul>
               </div>
             </div>
-            <div class="row" style="margin-bottom:10px;">
-              <div class="col-lg-6 col-xs-4">
-                <a class='btn btn-success' role='button' data-toggle="modal" data-target="#insert_pasenger_modal">
-                  เพิ่มข้อมูล
-                </a>
-              </div>
-            </div>
 
             <div class="row">
                 <div class="col-lg-12">
                   <div class="panel panel-primary">
-                    <div class="panel-heading">
-                      ข้อมูลผู้โดยสาร
-                    </div>
+                  <div class="panel-heading clearfix">
+                      <div class="pull-left" style="margin-left: -5px;">
+                        <a class='btn btn-sm btn-success' id="insert_passenger_rma" role='button' data-toggle="modal" data-target="#insert_pasenger_modal" data-id="<?php echo $_GET['id'];?>">
+                        <i class="fa fa-plus" data-toggle='tooltip' data-placement='top' title='เพิ่มข้อมูล'></i>
+                        </a>
+                      </div>
+                      
+                      <h3 class="panel-title pull-left" style="padding-top: 7.5px;">
+                      &nbsp; ข้อมูลผู้โดยสาร
+                      </h3>
+                  </div>
                     <?php
                     if (isset($_GET['id'])) {
                       $id = $_GET['id'];

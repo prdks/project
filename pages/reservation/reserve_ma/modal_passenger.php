@@ -20,11 +20,28 @@
             <div id="fromsystem" class="tab-pane fade in active">
               <br>
               <div class="panel panel-default">
-                <div class="panel-heading">รายชื่อบุคลากร
+                <!-- <div class="panel-heading">รายชื่อบุคลากร
                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
                     <input type="text" class="form-control input-sm" id="search_input2" onkeyup="filtertable2()" placeholder="พิมพ์เพื่อค้นหา">
-                  </div>
-                </div>
+                  </div> -->
+
+                  <div class="panel-heading clearfix">
+                            
+                            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">
+                            &nbsp; รายชื่อบุคลากร
+                            </h3>
+                            
+                            <form id="search_passenger_add_rma">
+                            <div class="btn-group pull-right">
+                              ค้นหาข้อมูล :
+                              <input id="search_input2" data-id="<?php echo $_GET['id'];?>" placeholder="พิมพ์เพื่อค้นหา" type="text" placeholder="พิมพ์ข้อความ" class="custom_input">
+                              <button class="btn pull-right btn-default" type="submit" style="height: 30px;">
+                                <i class="fa fa-search"></i>
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                <!-- </div> -->
 
                 <div class="table-responsive tspassenger">
                   <table id="PersonnelTableSelect" class="table table-condensed table-bordered table-hover">
@@ -35,52 +52,7 @@
                         <th id="tb_detail_sub-nd">หน่วยงาน</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <?php
-                      $sql = "
-                      SELECT * FROM personnel p
-                      LEFT OUTER JOIN user_type us
-                      ON p.user_type_id = us.user_type_id
-                      LEFT JOIN title_name t
-                      ON p.title_name_id = t.title_name_id
-                      LEFT JOIN position po
-                      ON p.position_id = po.position_id
-                      LEFT JOIN department d
-                      ON p.department_id = d.department_id
-                      WHERE personnel_name NOT IN
-                      (SELECT SUBSTRING_INDEX(passenger_name,' ',-2)
-                      FROM passenger WHERE reservation_id = ".$_GET['id'].")
-                      AND personnel_id NOT IN
-                      (SELECT personnel_id FROM reservation WHERE reservation_id = ".$_GET['id'].")
-                      AND us.user_level <> 2
-                      ORDER BY department_name ASC
-                      ";
-
-                      $result = $conn->query($sql);
-                      $result_row = mysqli_num_rows($result);
-                      if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
-                      {
-                        while($row = $result->fetch_assoc())
-                        {
-                          ?>
-                          <tr>
-                          <td>
-                            <center>
-                              <button type="button" class="btn btn-primary btn-xs handleAddSelectPassenger"
-                             data-id="<?php echo $row["personnel_id"];?>" data-reservekeys="<?php echo $_GET['id']?>">
-                             เลือก
-                           </button>
-                           </center>
-                          </td>
-                          <td><?php echo $row["title_name"].$row["personnel_name"]; ?></td>
-                          <td><?php echo $row["department_name"]; ?></td>
-                          </tr>
-                          <?php
-                        }
-                      }else {
-                        echo "<tr><td colspan='4' class='text-center'>ไม่มีข้อมูลบุคลากร</td></tr>";
-                      }
-                      ?>
+                      <tbody id="add_passenger_tbody">
                       </tbody>
                     </table>
                 </div>
@@ -94,7 +66,8 @@
                   กำหนดเอง
                 </div>
                 <div class="panel-body">
-                  <form class="form-horizontal" action="reservation/reserve_ma/insert_passenger.php?reserve_id=<?php echo $_GET['id'];?>" method="post">
+                  <form id="add_passenger_rma_form" class="form-horizontal">
+                    <input type="hidden" name="resid" value="<?php echo $_GET['id'];?>">
                     <!-- คำนำหน้าชื่อ -->
                     <div class="form-group">
                       <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
