@@ -31,7 +31,7 @@ switch ($_SESSION['user_type']) {
       <table id="myTable" class="table table-striped table-bordered table-hover">
           <thead id="Table_Default">
               <tr>
-              <th id="tb_sharp">#</th>
+              <th id="tb_sharp">ลำดับ</th>
               <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
               <th id="tb_detail_sub-six">ยี่ห้อรถยนต์</th>
               <th id="tb_detail_sub-six">รุ่นรถยนต์</th>
@@ -98,7 +98,7 @@ switch ($_SESSION['user_type']) {
         <table id="myTable" class="table table-striped table-bordered table-hover">
             <thead id="Table_Default">
                 <tr>
-                <th id="tb_sharp">#</th>
+                <th id="tb_sharp">ลำดับ</th>
                 <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                 <th id="tb_detail_sub-six">ยี่ห้อรถยนต์</th>
                 <th id="tb_detail_sub-six">รุ่นรถยนต์</th>
@@ -138,7 +138,7 @@ switch ($_SESSION['user_type']) {
       <table id="myTable" class="table table-striped table-bordered table-hover">
           <thead id="Table_Default">
               <tr>
-              <th id="tb_sharp">#</th>
+              <th id="tb_sharp">ลำดับ</th>
               <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
               <th id="tb_detail_sub-six">ยี่ห้อรถยนต์</th>
               <th id="tb_detail_sub-six">รุ่นรถยนต์</th>
@@ -205,7 +205,7 @@ switch ($_SESSION['user_type']) {
         <table id="myTable" class="table table-striped table-bordered table-hover">
             <thead id="Table_Default">
                 <tr>
-                <th id="tb_sharp">#</th>
+                <th id="tb_sharp">ลำดับ</th>
                 <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                 <th id="tb_detail_sub-six">ยี่ห้อรถยนต์</th>
                 <th id="tb_detail_sub-six">รุ่นรถยนต์</th>
@@ -255,7 +255,7 @@ switch ($_SESSION['user_type']) {
       <table id="myTable" class="table table-striped table-bordered table-hover">
           <thead id="Table_Default">
               <tr>
-              <th id="tb_sharp">#</th>
+              <th id="tb_sharp">ลำดับ</th>
               <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
               <th id="tb_detail_sub-six">ยี่ห้อรถยนต์</th>
               <th id="tb_detail_sub-six">รุ่นรถยนต์</th>
@@ -319,7 +319,7 @@ switch ($_SESSION['user_type']) {
         <table id="myTable" class="table table-striped table-bordered table-hover">
             <thead id="Table_Default">
                 <tr>
-                <th id="tb_sharp">#</th>
+                <th id="tb_sharp">ลำดับ</th>
                 <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                 <th id="tb_detail_sub-six">ยี่ห้อรถยนต์</th>
                 <th id="tb_detail_sub-six">รุ่นรถยนต์</th>
@@ -358,7 +358,7 @@ switch ($_SESSION['user_type']) {
       <table id="myTable" class="table table-striped table-bordered table-hover">
           <thead id="Table_Default">
               <tr>
-              <th id="tb_sharp">#</th>
+              <th id="tb_sharp">ลำดับ</th>
               <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
               <th id="tb_detail_sub-six">ยี่ห้อรถยนต์</th>
               <th id="tb_detail_sub-six">รุ่นรถยนต์</th>
@@ -422,7 +422,7 @@ switch ($_SESSION['user_type']) {
         <table id="myTable" class="table table-striped table-bordered table-hover">
             <thead id="Table_Default">
                 <tr>
-                <th id="tb_sharp">#</th>
+                <th id="tb_sharp">ลำดับ</th>
                 <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                 <th id="tb_detail_sub-six">ยี่ห้อรถยนต์</th>
                 <th id="tb_detail_sub-six">รุ่นรถยนต์</th>
