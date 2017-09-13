@@ -71,7 +71,7 @@
   การอนุมัติจากบุคคลอื่น :
   </label>
   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-    
+
     <p><?php
                     // ลำดับ 1 (เจ้าหน้าที่ดูแลรถยนต์)
                     $sqlNo1 = "SELECT COUNT(personnel_id) as Result FROM personnel p
@@ -173,12 +173,24 @@
   </div>
 </div>
 <!-- หมายเหตุไม่อนุมัติ -->
-<div class="form-group" id="edit_note">
+<?php
+$note = explode(",",$row['reserve_note']);
+?>
+<div class="form-group" id="edit_reason">
   <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
-    <span class="requestfield">*</span> หมายเหตุการยกเลิก :
+    <span class="requestfield">*</span> เหตุผล :
   </label>
   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-      <textarea  rows="3" type="text" class="form-control" id="edit_note_area" name="note"
-      placeholder="พิมพ์หมายเหตุการยกเลิก" style="resize:none;"><?php echo $row['reserve_note']; ?></textarea>
+    <input type="text" id="edit_reason_area" name="note[]" class="form-control" placeholder="พิมพ์เหตุผลการยกเลิก" value="<?php echo $note[0]; ?>" required>
+  </div>
+</div>
+<!-- เหตุผลเพิ่มเติม -->
+<div class="form-group" id="edit_note">
+  <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+    หมายเหตุเพิ่มเติม :
+  </label>
+  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+      <textarea  rows="3" type="text" class="form-control" id="edit_note_area" name="note[]"
+      placeholder="พิมพ์หมายเหตุเพิ่มเติม" style="resize:none;"><?php echo $note[1]; ?></textarea>
   </div>
 </div>

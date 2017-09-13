@@ -150,6 +150,9 @@ $(document).ready(function() {
                         $(this).attr('disabled', true)
                     }
                 });
+                $('#edit_reason_area').val('');
+                $('#edit_reason_area').attr('required', false);
+                $('#edit_reason').hide();
                 $('#edit_note_area').val('');
                 $('#edit_note_area').attr('required', false);
                 $('#edit_note').hide();
@@ -159,10 +162,15 @@ $(document).ready(function() {
                         $(this).attr('disabled', false)
                         if ($(this).val() == ues) {
                             $(this).click();
+                            $('#edit_reason_area').val('');
+                            $('#edit_reason_area').attr('required', false);
+                            $('#edit_reason').hide();
                             $('#edit_note_area').val('');
                             $('#edit_note_area').attr('required', false);
                             $('#edit_note').hide();
                             if (ues == 3) {
+                                $('#edit_reason').show();
+                                $('#edit_reason_area').attr('required', true);
                                 $('#edit_note').show();
                                 $('#edit_note_area').attr('required', true)
                             }
@@ -180,6 +188,8 @@ $(document).ready(function() {
                         $(this).attr('disabled', true)
                     }
                 });
+                $('#edit_reason').show();
+                $('#edit_reason_area').attr('required', true);
                 $('#edit_note_area').attr('required', true);
                 $('#edit_note').show();
             }
@@ -212,6 +222,9 @@ $(document).ready(function() {
                                     $(this).attr('disabled', true)
                                 }
                             });
+                            $('#edit_reason_area').val('');
+                            $('#edit_reason_area').attr('required', false);
+                            $('#edit_reason').hide();
                             $('#edit_note_area').val('');
                             $('#edit_note_area').attr('required', false);
                             $('#edit_note').hide();
@@ -259,6 +272,9 @@ $(document).ready(function() {
                     $(this).attr('disabled', true)
                 }
             });
+            $('#edit_reason_area').val('');
+            $('#edit_reason_area').attr('required', false);
+            $('#edit_reason').hide();
             $('#edit_note_area').val('');
             $('#edit_note_area').attr('required', false);
             $('#edit_note').hide();
@@ -271,6 +287,8 @@ $(document).ready(function() {
                     $(this).attr('disabled', true)
                 }
             });
+            $('#edit_reason').show();
+            $('#edit_reason_area').attr('required', true);
             $('#edit_note_area').attr('required', true);
             $('#edit_note').show();
         }
@@ -278,9 +296,14 @@ $(document).ready(function() {
 
     $('input[name=usage_status]').on("change", function() {
         if ($(this).val() == 3) {
+            $('#edit_reason').show();
+            $('#edit_reason_area').attr('required', true);
             $('#edit_note_area').attr('required', true);
             $('#edit_note').show();
         } else {
+            $('#edit_reason_area').val('');
+            $('#edit_reason_area').attr('required', false);
+            $('#edit_reason').hide();
             $('#edit_note_area').val('');
             $('#edit_note_area').attr('required', false);
             $('#edit_note').hide();
