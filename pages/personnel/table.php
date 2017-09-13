@@ -49,7 +49,7 @@ switch ($_SESSION['user_type']) {
                   <input type='checkbox' id='select_all' name='select_all' class='checkbox'/>
                   </center>
                   </th>
-                  <th id='tb_sharp'>#</th>
+                  <th id='tb_sharp'>ลำดับ</th>
                   <th id='tb_detail_sub-nd'>ชื่อบุคลากร</th>
                   <th id='tb_detail_sub-th'>ตำแหน่ง</th>
                   <th id='tb_detail_main'>หน่วยงาน</th>
@@ -132,7 +132,7 @@ switch ($_SESSION['user_type']) {
             <thead id='Table_Default'>
                 <tr>
                 <th id='tb_checkbox'>เลือก</th>
-                <th id='tb_sharp'>#</th>
+                <th id='tb_sharp'>ลำดับ</th>
                 <th id='tb_detail_sub-nd'>ชื่อบุคลากร</th>
                 <th id='tb_detail_sub-th'>ตำแหน่ง</th>
                 <th id='tb_detail_main'>หน่วยงาน</th>
@@ -179,7 +179,7 @@ switch ($_SESSION['user_type']) {
                   <input type='checkbox' id='select_all' name='select_all' class='checkbox'/>
                   </center>
                   </th>
-                  <th id='tb_sharp'>#</th>
+                  <th id='tb_sharp'>ลำดับ</th>
                   <th id='tb_detail_sub-nd'>ชื่อบุคลากร</th>
                   <th id='tb_detail_sub-th'>ตำแหน่ง</th>
                   <th id='tb_detail_main'>หน่วยงาน</th>
@@ -264,7 +264,7 @@ switch ($_SESSION['user_type']) {
           <thead id='Table_Default'>
               <tr>
               <th id='tb_checkbox'>เลือก</th>
-              <th id='tb_sharp'>#</th>
+              <th id='tb_sharp'>ลำดับ</th>
               <th id='tb_detail_sub-nd'>ชื่อบุคลากร</th>
               <th id='tb_detail_sub-th'>ตำแหน่ง</th>
               <th id='tb_detail_main'>หน่วยงาน</th>
@@ -333,7 +333,7 @@ switch ($_SESSION['user_type']) {
                   <input type='checkbox' id='select_all' name='select_all' class='checkbox'/>
                   </center>
                   </th>
-                  <th id='tb_sharp'>#</th>
+                  <th id='tb_sharp'>ลำดับ</th>
                   <th id='tb_detail_sub-nd'>ชื่อบุคลากร</th>
                   <th id='tb_detail_sub-th'>ตำแหน่ง</th>
                   <th id='tb_tools'>เครื่องมือ</th>
@@ -413,7 +413,7 @@ switch ($_SESSION['user_type']) {
             <thead id='Table_Default'>
                 <tr>
                 <th id='tb_checkbox'>เลือก</th>
-                <th id='tb_sharp'>#</th>
+                <th id='tb_sharp'>ลำดับ</th>
                 <th id='tb_detail_sub-nd'>ชื่อบุคลากร</th>
                 <th id='tb_detail_sub-th'>ตำแหน่ง</th>
                 <th id='tb_tools'>เครื่องมือ</th>
@@ -460,7 +460,7 @@ switch ($_SESSION['user_type']) {
                   <input type='checkbox' id='select_all' name='select_all' class='checkbox'/>
                   </center>
                   </th>
-                  <th id='tb_sharp'>#</th>
+                  <th id='tb_sharp'>ลำดับ</th>
                   <th id='tb_detail_sub-nd'>ชื่อบุคลากร</th>
                   <th id='tb_detail_sub-th'>ตำแหน่ง</th>
                   <th id='tb_tools'>เครื่องมือ</th>
@@ -542,7 +542,7 @@ switch ($_SESSION['user_type']) {
           <thead id='Table_Default'>
               <tr>
               <th id='tb_checkbox'>เลือก</th>
-              <th id='tb_sharp'>#</th>
+              <th id='tb_sharp'>ลำดับ</th>
               <th id='tb_detail_sub-nd'>ชื่อบุคลากร</th>
               <th id='tb_detail_sub-th'>ตำแหน่ง</th>
               <th id='tb_tools'>เครื่องมือ</th>
