@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     // ---------------คลิกดูรายละเอียดในตาราง-------------
     //ตารางจัดการ
     $('.handleRMADetail').click(function() {
@@ -630,4 +631,6 @@ $(document).ready(function() {
         $(this).parent('div').parent('div').remove();
         x--;
     });
+
+    
 });

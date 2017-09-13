@@ -162,6 +162,7 @@ function filtertable2() { //in edit passenger (ADD)
       else tr[i].style.display = "none";
     }
   }
+  
 }
 
 function filtertable3() { //in edit passenger (Edit)

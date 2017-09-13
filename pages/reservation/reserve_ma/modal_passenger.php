@@ -26,7 +26,7 @@
                   </div>
                 </div>
 
-                <div class="table-responsive">
+                <div class="table-responsive tspassenger">
                   <table id="PersonnelTableSelect" class="table table-condensed table-bordered table-hover">
                     <thead id="Tb_sPersonnel">
                       <tr>
@@ -39,6 +39,8 @@
                       <?php
                       $sql = "
                       SELECT * FROM personnel p
+                      LEFT OUTER JOIN user_type us
+                      ON p.user_type_id = us.user_type_id
                       LEFT JOIN title_name t
                       ON p.title_name_id = t.title_name_id
                       LEFT JOIN position po
@@ -50,7 +52,7 @@
                       FROM passenger WHERE reservation_id = ".$_GET['id'].")
                       AND personnel_id NOT IN
                       (SELECT personnel_id FROM reservation WHERE reservation_id = ".$_GET['id'].")
-                      AND position_name <> 'คนขับรถยนต์' AND position_name <> 'เจ้าหน้าที่รักษาความปลอดภัย'
+                      AND us.user_level <> 2
                       ORDER BY department_name ASC
                       ";
 
@@ -71,7 +73,7 @@
                            </center>
                           </td>
                           <td><?php echo $row["title_name"].$row["personnel_name"]; ?></td>
-                          <td class="text-center"><?php echo $row["department_name"]; ?></td>
+                          <td><?php echo $row["department_name"]; ?></td>
                           </tr>
                           <?php
                         }
@@ -191,7 +193,7 @@
                   </div>
                 </div>
 
-                <div class="table-responsive">
+                <div class="table-responsive tspassenger">
                   <table id="PersonnelTableEdit" class="table table-condensed table-bordered table-hover">
                     <thead id="Tb_sPersonnel">
                       <tr>

@@ -13,7 +13,7 @@ if(isset($_POST['handleSearch']))
     <table id='myTable' class='table table-striped table-bordered table-hover'>
         <thead id='Table_Default'>
             <tr>
-                <th id='tb_sharp'>#</th>
+                <th id='tb_sharp'>ลำดับ</th>
                 <th id='tb_detail_main'>คำนำหน้าชื่อ</th>
                 <th id='tb_tools'>เครื่องมือ</th>
             </tr>
@@ -57,7 +57,7 @@ if(isset($_POST['handleSearch']))
     <table class='table table-striped table-bordered table-hover'>
         <thead id='Table_Default'>
             <tr>
-              <th id='tb_sharp'>#</th>
+              <th id='tb_sharp'>ลำดับ</th>
               <th id='tb_detail_main'>คำนำหน้าชื่อ</th>
               <th id='tb_tools'>เครื่องมือ</th>
             </tr>
@@ -84,7 +84,7 @@ else
     <table id='myTable' class='table table-striped table-bordered table-hover'>
         <thead id='Table_Default'>
             <tr>
-              <th id='tb_sharp'>#</th>
+              <th id='tb_sharp'>ลำดับ</th>
               <th id='tb_detail_main'>คำนำหน้าชื่อ</th>
               <th id='tb_tools'>เครื่องมือ</th>
             </tr>
@@ -128,7 +128,7 @@ else
     <table class='table table-striped table-bordered table-hover'>
         <thead id='Table_Default'>
             <tr>
-              <th id='tb_sharp'>#</th>
+              <th id='tb_sharp'>ลำดับ</th>
               <th id='tb_detail_main'>คำนำหน้าชื่อ</th>
               <th id='tb_tools'>เครื่องมือ</th>
             </tr>

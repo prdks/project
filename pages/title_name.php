@@ -21,31 +21,30 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row" style="margin-bottom:10px;">
-              <div class="col-lg-6 col-xs-4">
-                <a class='btn btn-success' role='button' data-toggle="modal" data-target="#Insert_modal">
-                  เพิ่มข้อมูล
-                </a>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <form action="<?=$_SERVER['PHP_SELF'];?>" method="POST">
-                  <div class="input-group">
-                    <input name="search_box" type="text" class="form-control" placeholder="พิมพ์เพื่อค้นหา">
-                    <div class="input-group-btn">
-                      <button class="btn btn-default handleSearch" name="handleSearch" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            ข้อมูลคำนำหน้าชื่อ
+                        <div class="panel-heading clearfix">
+                            <div class="pull-left" style="margin-left: -5px;">
+                              <a class='btn btn-sm btn-success' role='button' data-toggle="modal" data-target="#Insert_modal">
+                              <i class="fa fa-plus" data-toggle='tooltip' data-placement='top' title='เพิ่มข้อมูล'></i>
+                              </a>
+                            </div>
+                            
+                            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">
+                            &nbsp; ข้อมูลคำนำหน้าชื่อ
+                            </h3>
+                            
+                            <form action="<?=$_SERVER['PHP_SELF'];?>" method="POST">
+                            <div class="btn-group pull-right">
+                              ค้นหาข้อมูล :
+                              <input name="search_box" type="text" placeholder="พิมพ์ข้อความ" class="custom_input">
+                              <button class="btn pull-right btn-default handleSearch" name="handleSearch" type="submit" style="height: 30px;">
+                                <i class="fa fa-search"></i>
+                              </button>
+                            </div>
+                          </form>
                         </div>
                         <!-- /.panel-heading -->
                                 <div class="table-responsive">

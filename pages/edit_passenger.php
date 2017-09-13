@@ -36,18 +36,6 @@
                   เพิ่มข้อมูล
                 </a>
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <form action="<?=$_SERVER['PHP_SELF'];?>" method="POST">
-                  <div class="input-group">
-                    <input name="search_box" type="text" class="form-control" placeholder="พิมพ์เพื่อค้นหา">
-                    <div class="input-group-btn">
-                      <button class="btn btn-default handleSearch" name="handleSearch" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
             </div>
 
             <div class="row">
@@ -101,7 +89,7 @@
                                  if ($row['department_id'] != null) {
                                   echo $row['department_name'];
                                 }else {
-                                  echo "-";
+                                  echo "ไม่ระบุหน่วยงาน";
                                 }
                                 ?>
                                 </td>
