@@ -22,26 +22,30 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row" style="margin-bottom:10px;">
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
-                <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
-                  <div class="input-group">
-                    <input id="masearch" name="search_box" onkeyup="filterreservemalist()" type="text" class="form-control" placeholder="พิมพ์เพื่อค้นหา">
-                    <div class="input-group-btn">
-                      <button class="btn btn-default handleSearch" name="handleSearch" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            รายการจองใช้รถยนต์
+                    <div class="panel-heading clearfix">
+                        <div class="pull-left" style="margin-left: -5px;">
+                        <a class='btn btn-sm btn-success' role='button' href="reservation.php" target="_blank">
+                        <i class="fa fa-plus" data-toggle='tooltip' data-placement='top' title='เพิ่มรายการจอง'></i>
+                        </a>
                         </div>
+                        
+                        <h3 class="panel-title pull-left" style="padding-top: 7.5px;">
+                        &nbsp; รายการจองใช้รถยนต์
+                        </h3>
+                        
+                        <form action="<?=$_SERVER['PHP_SELF'];?>" method="POST">
+                        <div class="btn-group pull-right">
+                        ค้นหาข้อมูล :
+                        <input name="search_box" type="text" placeholder="พิมพ์ข้อความ" class="custom_input">
+                        <button class="btn pull-right btn-default handleSearch" name="handleSearch" type="submit" style="height: 30px;">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        </div>
+                    </form>
+                    </div>
                         <!-- /.panel-heading -->
                               <!-- /.panel-body -->
                                     <?php include 'reservation/reserve_ma/table.php';?>
