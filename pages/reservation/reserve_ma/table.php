@@ -155,7 +155,7 @@ switch ($_SESSION['user_type']) {
                   <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
                 </button>
           
-                <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+                <a href="form_with_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
                   <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
                 </a>
               </td>
@@ -316,7 +316,7 @@ switch ($_SESSION['user_type']) {
                   <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
                 </button>
           
-                <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+                <a href="form_with_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
                   <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
                 </a>
               </td>
@@ -499,7 +499,7 @@ switch ($_SESSION['user_type']) {
               <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
             </button>
       
-            <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+            <a href="form_with_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
               <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
             </a>
           </td>
@@ -641,7 +641,7 @@ switch ($_SESSION['user_type']) {
             <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
           </button>
     
-          <a href="form_without_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+          <a href="form_with_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
             <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
           </a>
         </td>

@@ -174,14 +174,25 @@
 </div>
 <!-- หมายเหตุไม่อนุมัติ -->
 <?php
-$note = explode(",",$row['reserve_note']);
+if($row['reserve_note'] == NULL)
+{
+  $reason = "";  
+  $note = "";
+}
+else 
+{
+  $txt = explode(",",$row['reserve_note']);
+  $reason = $txt[0];  
+  $note = $txt[1];
+}
+
 ?>
 <div class="form-group" id="edit_reason">
   <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
     <span class="requestfield">*</span> เหตุผล :
   </label>
   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-    <input type="text" id="edit_reason_area" name="note[]" class="form-control" placeholder="พิมพ์เหตุผลการยกเลิก" value="<?php echo $note[0]; ?>" required>
+    <input type="text" id="edit_reason_area" name="note[]" class="form-control" placeholder="พิมพ์เหตุผลการยกเลิก" value="<?php echo $reason; ?>" required>
   </div>
 </div>
 <!-- เหตุผลเพิ่มเติม -->
@@ -191,6 +202,6 @@ $note = explode(",",$row['reserve_note']);
   </label>
   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
       <textarea  rows="3" type="text" class="form-control" id="edit_note_area" name="note[]"
-      placeholder="พิมพ์หมายเหตุเพิ่มเติม" style="resize:none;"><?php echo $note[1]; ?></textarea>
+      placeholder="พิมพ์หมายเหตุเพิ่มเติม" style="resize:none;"><?php echo $note; ?></textarea>
   </div>
 </div>

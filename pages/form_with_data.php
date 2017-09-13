@@ -149,8 +149,18 @@ if (isset($_GET['id']))
 	</tr>
 	<!-- ประโยคต้นคำร้อง -->
 	<tr>
-		<td colspan="20" style="text-align: justify;">ขออนุญาตใช้รถยนต์<?php echo $_SESSION['system_name']; ?> พร้อมพนักงานขับรถยนต์
-			&nbsp;เพื่อเดินทางไปที่ <?php echo $row['location']; ?>
+		<td colspan="20" style="text-align: justify;">
+		<section>
+		ขออนุญาตใช้รถยนต์<?php echo $_SESSION['system_name']; ?> พร้อมพนักงานขับรถยนต์
+			&nbsp;เพื่อเดินทางไปที่ 
+			<?php 
+			$location = $row['location']; 
+			$arrLocation = explode(",", $location);
+			foreach ($arrLocation as $key => $value) 
+			{
+			  echo ($key+1).".".$value."  ";
+			}
+			?>
 			&nbsp;สำหรับปฏิบัติราชการ <?php echo $row['requirement_detail']; ?>
 			<?php
 			if ($row['date_start'] === $row['date_end']) //ถ้าไปวันเดียว
@@ -197,7 +207,7 @@ if (isset($_GET['id']))
 				<?php while ($b = $a->fetch_assoc()) 
 					{
 						$count++;
-						echo $count.") ".$b['title'].$b['name']." <br>";
+						echo $count.". ".$b['title'].$b['name']." <br>";
 					}
 			?>
 			</td>
@@ -223,7 +233,7 @@ if (isset($_GET['id']))
 					{
 						$count++;
 						if($count <= 6 ){
-							echo $count.") ".$b['title'].$b['name']." <br>";
+							echo $count.". ".$b['title'].$b['name']." <br>";
 							if($count == 6){ echo "</td>";}
 						}
 						if($count == 7)
@@ -232,7 +242,7 @@ if (isset($_GET['id']))
 						<td colspan="8" style="vertical-align: text-top;">
 						<?php
 						}
-						if($count > 6 ){echo $count.") ".$b['title'].$b['name']." <br>";}
+						if($count > 6 ){echo $count.". ".$b['title'].$b['name']." <br>";}
 					}
 				?>
 				</td>
@@ -358,14 +368,14 @@ if (isset($_GET['id']))
 <?php 
 if($row['reservation_status'] == 2 || $row['reservation_status'] == 3 )
 {
-	
+	$note = explode(",",$row['reserve_note']);
 	?>
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
 		<tr>
 			<td width="70%"></td>
 			<td width="24%" align="center">
-			<?php echo substr($row['reserve_note'], 0, strpos($row['reserve_note'], ','));?>
+			<?php echo $note[0];?>
 			</td>
 			<td width="16%"></td>
 		</tr>

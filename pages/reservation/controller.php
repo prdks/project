@@ -1097,8 +1097,19 @@ elseif ($mode == 'getCars_For_Edit')
     $kilometer_total = $_POST['kilometer_total'];
     $reservation_status = $_POST['reservation_status'];
     $usage_status = $_POST['usage_status'];
-    $note = $_POST['note'];
     
+
+    if($usage_status == 3)
+    {
+      $txt = implode(",",$_POST['note']);
+      $note = ", reserve_note = '".$txt."'";
+      
+    }
+    else
+    {
+      $note = ", reserve_note = NULL";
+    } 
+
     if($reservation_status == 0)
     {
       $sql = "update reservation
@@ -1115,9 +1126,9 @@ elseif ($mode == 'getCars_For_Edit')
       , kilometer_in = '0'
       , kilometer_total = '0'
       , reservation_status = '".$reservation_status."'
-      , usage_status = '".$usage_status."'
-      , reserve_note = '".$note."'
-      , second_approver_id = NULL
+      , usage_status = '".$usage_status."'";
+      $sql .= $note;
+      $sql .= ", second_approver_id = NULL
       , update_status_date = '".date("Y-m-d H:i:s")."'
       where reservation_id = '".$id."'";
     }
@@ -1137,9 +1148,9 @@ elseif ($mode == 'getCars_For_Edit')
       , kilometer_in = '".$kilometer_in."'
       , kilometer_total = '".$kilometer_total."'
       , reservation_status = '".$reservation_status."'
-      , usage_status = '".$usage_status."'
-      , reserve_note = '".$note."'
-      , second_approver_id = (SELECT personnel_id FROM personnel WHERE personnel_name = '".$_SESSION['user_name']."')
+      , usage_status = '".$usage_status."'";
+      $sql .= $note;
+      $sql .= ", second_approver_id = (SELECT personnel_id FROM personnel WHERE personnel_name = '".$_SESSION['user_name']."')
       , update_status_date = '".date("Y-m-d H:i:s")."'
       where reservation_id = '".$id."'";
     }

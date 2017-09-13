@@ -150,11 +150,11 @@ $(document).ready(function() {
                         $(this).attr('disabled', true)
                     }
                 });
-                $('#edit_reason_area').val('');
+                //$('#edit_reason_area').val('');
                 $('#edit_reason_area').attr('required', false);
                 $('#edit_reason').hide();
-                $('#edit_note_area').val('');
-                $('#edit_note_area').attr('required', false);
+                //$('#edit_note_area').val('');
+
                 $('#edit_note').hide();
             } else if (res == 1) {
                 $('input[name=usage_status]').each(function() {
@@ -162,17 +162,17 @@ $(document).ready(function() {
                         $(this).attr('disabled', false)
                         if ($(this).val() == ues) {
                             $(this).click();
-                            $('#edit_reason_area').val('');
+                            //$('#edit_reason_area').val('');
                             $('#edit_reason_area').attr('required', false);
                             $('#edit_reason').hide();
-                            $('#edit_note_area').val('');
-                            $('#edit_note_area').attr('required', false);
+                            //$('#edit_note_area').val('');
+            
                             $('#edit_note').hide();
                             if (ues == 3) {
                                 $('#edit_reason').show();
                                 $('#edit_reason_area').attr('required', true);
                                 $('#edit_note').show();
-                                $('#edit_note_area').attr('required', true)
+
                             }
                         }
                     } else {
@@ -190,7 +190,7 @@ $(document).ready(function() {
                 });
                 $('#edit_reason').show();
                 $('#edit_reason_area').attr('required', true);
-                $('#edit_note_area').attr('required', true);
+                
                 $('#edit_note').show();
             }
         }
@@ -222,11 +222,11 @@ $(document).ready(function() {
                                     $(this).attr('disabled', true)
                                 }
                             });
-                            $('#edit_reason_area').val('');
+                            //$('#edit_reason_area').val('');
                             $('#edit_reason_area').attr('required', false);
                             $('#edit_reason').hide();
-                            $('#edit_note_area').val('');
-                            $('#edit_note_area').attr('required', false);
+                            //$('#edit_note_area').val('');
+            
                             $('#edit_note').hide();
 
                             $('#dp-tout').val('');
@@ -272,10 +272,10 @@ $(document).ready(function() {
                     $(this).attr('disabled', true)
                 }
             });
-            $('#edit_reason_area').val('');
+            //$('#edit_reason_area').val('');
             $('#edit_reason_area').attr('required', false);
             $('#edit_reason').hide();
-            $('#edit_note_area').val('');
+            //$('#edit_note_area').val('');
             $('#edit_note_area').attr('required', false);
             $('#edit_note').hide();
         } else if (res == 2 || res == 3) {
@@ -289,7 +289,7 @@ $(document).ready(function() {
             });
             $('#edit_reason').show();
             $('#edit_reason_area').attr('required', true);
-            $('#edit_note_area').attr('required', true);
+            
             $('#edit_note').show();
         }
     });
@@ -298,13 +298,13 @@ $(document).ready(function() {
         if ($(this).val() == 3) {
             $('#edit_reason').show();
             $('#edit_reason_area').attr('required', true);
-            $('#edit_note_area').attr('required', true);
+            
             $('#edit_note').show();
         } else {
-            $('#edit_reason_area').val('');
+            //$('#edit_reason_area').val('');
             $('#edit_reason_area').attr('required', false);
             $('#edit_reason').hide();
-            $('#edit_note_area').val('');
+            //$('#edit_note_area').val('');
             $('#edit_note_area').attr('required', false);
             $('#edit_note').hide();
         }
