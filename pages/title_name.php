@@ -52,7 +52,7 @@
                                 <!-- /.table-responsive -->
                                 <?php include 'title_name/modal.php'; ?>
                     </div>
-                   
+                    <span class="pull-left"><?php echo "แสดง ".($start_count+1)." ถึง ".$count." รายการ | จากทั้งหมด ".$total_data." รายการ"; ?></span>
                     <ul class="pagination pagination-md pull-right" style="margin:0px;">
                         <?php
                         if($total_page > 1)
