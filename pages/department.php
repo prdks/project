@@ -67,8 +67,8 @@
                                 <?php
                                 if($page == 1){ $linkURL = "";}
                                 else{ 
-                                    if(isset($_POST['search_box'])){$linkURL = "title_name.php?page=".($page-1)."&word=".$_POST['search_box'];}
-                                    else{$linkURL = "title_name.php?page=".($page-1);}
+                                    if(isset($_POST['search_box'])){$linkURL = "department.php?page=".($page-1)."&word=".$_POST['search_box'];}
+                                    else{$linkURL = "department.php?page=".($page-1);}
                                 }
                                 ?>
                                 <a href="<?php echo $linkURL;?>">&laquo;</a>
@@ -81,7 +81,7 @@
                             for ($i=1; $i <= $total_page ; $i++)
                             {
                                 ?>
-                                <li <?php if($page==$i){echo 'class=active';}?> ><a href="title_name.php?page=<?php echo $i.'&word='.$_POST['search_box']; ?>"><?php echo $i; ?></a></li>
+                                <li <?php if($page==$i){echo 'class=active';}?> ><a href="department.php?page=<?php echo $i.'&word='.$_POST['search_box']; ?>"><?php echo $i; ?></a></li>
                                 <?php
                             }
                         }
@@ -90,7 +90,7 @@
                             for ($i=1; $i <= $total_page ; $i++)
                             {
                                 ?>
-                                <li <?php if($page==$i){echo 'class=active';}?> ><a href="title_name.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                <li <?php if($page==$i){echo 'class=active';}?> ><a href="department.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                                 <?php
                             }
                         }
@@ -102,8 +102,8 @@
                             <li <?php if($page==$total_page){echo 'disabled';}?>>
                                 <?php if($page == $total_page){ $linkURL = "";}
                                 else{
-                                    if(isset($_POST['search_box'])){$linkURL = "title_name.php?page=".($page+1)."&word=".$_POST['search_box'];}
-                                    else{$linkURL = "title_name.php?page=".($page+1);}
+                                    if(isset($_POST['search_box'])){$linkURL = "department.php?page=".($page+1)."&word=".$_POST['search_box'];}
+                                    else{$linkURL = "department.php?page=".($page+1);}
                                 } ?>
                                 <a href="<?php echo $linkURL;?>">&raquo;</a>
                             </li>
