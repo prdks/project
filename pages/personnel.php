@@ -19,34 +19,7 @@
                     <h3 class="page-header">การจัดการข้อมูลบุคลากร</h3>
                 </div>
             </div>
-<!-- 
-            <div class="row" style="margin-bottom:10px;">
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <a class="btn btn-success" id="btn_insert_modal" data-toggle="modal" data-target="#Insert_modal">
-                  เพิ่มข้อมูล
-                </a>
-                <a class="btn btn-danger" id="btn_delet_modal" data-toggle="modal" data-target="#Delete_modal">
-                  ลบข้อมูล
-                </a>
-                <a class="btn btn-info" href="permission.php">
-                  กำหนดสิทธิ์
-                </a>
-              </div>
 
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <form action="" method="post">
-                  <div class="input-group">
-                    <input name="search_box" type="text" class="form-control" placeholder="พิมพ์เพื่อค้นหา">
-                    <div class="input-group-btn">
-                      <button class="btn btn-default" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div> -->
-            <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
@@ -83,6 +56,61 @@
                         </div>
                         <?php include 'personnel/modal.php'; ?>
                         </div>
+                        <span class="pull-left"><?php echo "แสดง ".($start_count+1)." ถึง ".$count." จากทั้งหมด ".$total_data." รายการ"; ?></span>
+                    <ul class="pagination pagination-md pull-right" style="margin:0px;">
+                        <?php
+                        if($total_page > 1)
+                        {
+                            ?>
+                            <li <?php if($page==1){echo 'disabled';}?>>
+                                <?php
+                                if($page == 1){ $linkURL = "";}
+                                else{ 
+                                    if(isset($_POST['search_box'])){$linkURL = "personnel.php?page=".($page-1)."&word=".$_POST['search_box'];}
+                                    else{$linkURL = "personnel.php?page=".($page-1);}
+                                }
+                                ?>
+                                <a href="<?php echo $linkURL;?>">&laquo;</a>
+                            </li>
+                            <?php
+                        }
+
+                        if(isset($_POST['search_box']))
+                        {
+                            for ($i=1; $i <= $total_page ; $i++)
+                            {
+                                ?>
+                                <li <?php if($page==$i){echo 'class=active';}?> ><a href="personnel.php?page=<?php echo $i.'&word='.$_POST['search_box']; ?>"><?php echo $i; ?></a></li>
+                                <?php
+                            }
+                        }
+                        else 
+                        {
+                            for ($i=1; $i <= $total_page ; $i++)
+                            {
+                                ?>
+                                <li <?php if($page==$i){echo 'class=active';}?> ><a href="personnel.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                <?php
+                            }
+                        }
+                        
+
+                        if($total_page > 1)
+                        {
+                            ?>
+                            <li <?php if($page==$total_page){echo 'disabled';}?>>
+                                <?php if($page == $total_page){ $linkURL = "";}
+                                else{
+                                    if(isset($_POST['search_box'])){$linkURL = "personnel.php?page=".($page+1)."&word=".$_POST['search_box'];}
+                                    else{$linkURL = "personnel.php?page=".($page+1);}
+                                } ?>
+                                <a href="<?php echo $linkURL;?>">&raquo;</a>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                        
+                    </ul>
                         <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
