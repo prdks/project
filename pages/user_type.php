@@ -55,6 +55,61 @@
                                 <?php include 'user_type/modal.php'; ?>
                             <!-- /.panel-body -->
                         </div>
+                        <span class="pull-left"><?php echo "แสดง ".($start_count+1)." ถึง ".$count." จากทั้งหมด ".$total_data." รายการ"; ?></span>
+                    <ul class="pagination pagination-md pull-right" style="margin:0px;">
+                        <?php
+                        if($total_page > 1)
+                        {
+                            ?>
+                            <li <?php if($page==1){echo 'disabled';}?>>
+                                <?php
+                                if($page == 1){ $linkURL = "";}
+                                else{ 
+                                    if(isset($_POST['search_box'])){$linkURL = "title_name.php?page=".($page-1)."&word=".$_POST['search_box'];}
+                                    else{$linkURL = "title_name.php?page=".($page-1);}
+                                }
+                                ?>
+                                <a href="<?php echo $linkURL;?>">&laquo;</a>
+                            </li>
+                            <?php
+                        }
+
+                        if(isset($_POST['search_box']))
+                        {
+                            for ($i=1; $i <= $total_page ; $i++)
+                            {
+                                ?>
+                                <li <?php if($page==$i){echo 'class=active';}?> ><a href="title_name.php?page=<?php echo $i.'&word='.$_POST['search_box']; ?>"><?php echo $i; ?></a></li>
+                                <?php
+                            }
+                        }
+                        else 
+                        {
+                            for ($i=1; $i <= $total_page ; $i++)
+                            {
+                                ?>
+                                <li <?php if($page==$i){echo 'class=active';}?> ><a href="title_name.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                <?php
+                            }
+                        }
+                        
+
+                        if($total_page > 1)
+                        {
+                            ?>
+                            <li <?php if($page==$total_page){echo 'disabled';}?>>
+                                <?php if($page == $total_page){ $linkURL = "";}
+                                else{
+                                    if(isset($_POST['search_box'])){$linkURL = "title_name.php?page=".($page+1)."&word=".$_POST['search_box'];}
+                                    else{$linkURL = "title_name.php?page=".($page+1);}
+                                } ?>
+                                <a href="<?php echo $linkURL;?>">&raquo;</a>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                        
+                    </ul>
                         <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
