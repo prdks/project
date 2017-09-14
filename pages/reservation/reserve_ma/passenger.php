@@ -28,7 +28,7 @@ $res2 = $conn->query($sql2);
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th id="tb_sharp">#</th>
+          <th id="tb_sharp">ลำดับ</th>
           <th id="tb_detail_main">ชื่อผู้โดยสาร</th>
           <th id="tb_detail_main">หน่วยงาน</th>
         </tr>
@@ -51,7 +51,7 @@ if ($res2_row !== 0) // ถ้าใน Table มีข้อมูล
        if ($ro['department_id'] != 0) {
         echo $ro['department_name'];
       }else {
-        echo "-";
+        echo "ไม่ระบุหน่วยงาน";
       }
       ?>
       </td>

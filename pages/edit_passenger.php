@@ -66,7 +66,7 @@
                       <table class="table table-striped table-bordered table-hover">
                           <thead>
                             <tr>
-                              <th id="tb_sharp">#</th>
+                              <th id="tb_sharp">ลำดับ</th>
                               <th id="tb_detail_main">ชื่อผู้โดยสาร</th>
                               <th id="tb_detail_sub-nd">หน่วยงาน</th>
                               <th id="tb_tools">เครื่องมือ</th>
