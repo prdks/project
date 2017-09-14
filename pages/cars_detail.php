@@ -24,7 +24,7 @@
                   <div class="input-group">
                     <input name="search_box" type="text" class="form-control" placeholder="พิมพ์เพื่อค้นหา">
                     <div class="input-group-btn">
-                      <button class="btn btn-default handleSearch" name="handleSearch" type="submit">
+                      <button class="btn btn-default handleSearch" type="submit">
                         <i class="glyphicon glyphicon-search"></i>
                       </button>
                     </div>

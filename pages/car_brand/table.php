@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['handleSearch']))
+ if(isset($_POST['search_box']))
 {
   $word = $_POST['search_box'];
   $sql = "select * from car_brand where car_brand_name LIKE '%".$word."%' ORDER BY car_brand_name ASC";

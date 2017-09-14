@@ -36,7 +36,7 @@
                             <div class="btn-group pull-right">
                             ค้นหาข้อมูล :
                             <input name="search_box" type="text" placeholder="พิมพ์ข้อความ" class="custom_input">
-                            <button class="btn pull-right btn-default handleSearch" name="handleSearch" type="submit" style="height: 30px;">
+                            <button class="btn pull-right btn-default handleSearch" type="submit" style="height: 30px;">
                                 <i class="fa fa-search"></i>
                             </button>
                             </div>

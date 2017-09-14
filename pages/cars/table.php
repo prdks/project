@@ -1,7 +1,7 @@
 <?php
 switch ($_SESSION['user_type']) {
   case 0:
-  if(isset($_POST['handleSearch']))
+   if(isset($_POST['search_box']))
   {
     $word = $_POST['search_box'];
     $sql = "SELECT c.* , b.* , p.* , t.* , d.* from cars c
@@ -225,7 +225,7 @@ switch ($_SESSION['user_type']) {
   }
     break;
   case 4:
-  if(isset($_POST['handleSearch']))
+   if(isset($_POST['search_box']))
   {
     $word = $_POST['search_box'];
     $sql = "SELECT c.* , b.* , p.* , t.* from cars c

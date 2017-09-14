@@ -38,7 +38,7 @@
                   <div class="input-group">
                     <input name="search_box" type="text" class="form-control" placeholder="พิมพ์เพื่อค้นหา">
                     <div class="input-group-btn">
-                      <button class="btn btn-default" name="handleSearch" type="submit">
+                      <button class="btn btn-default" type="submit">
                         <i class="glyphicon glyphicon-search"></i>
                       </button>
                     </div>
@@ -71,7 +71,7 @@
                         <div class="btn-group pull-right">
                           ค้นหาข้อมูล :
                           <input name="search_box" type="text" placeholder="พิมพ์ข้อความ" class="custom_input">
-                          <button class="btn pull-right btn-default handleSearch" name="handleSearch" type="submit" style="height: 30px;">
+                          <button class="btn pull-right btn-default handleSearch" type="submit" style="height: 30px;">
                             <i class="fa fa-search"></i>
                           </button>
                         </div>

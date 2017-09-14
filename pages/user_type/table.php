@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['handleSearch']))
+ if(isset($_POST['search_box']))
 {
   $word = $_POST['search_box'];
   $sql = "select * from user_type WHERE user_type_name LIKE '%".$word."%' ORDER BY user_level ASC";
