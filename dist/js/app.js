@@ -12,6 +12,7 @@ $(function () {
     $('.table-responsive').css( "overflow", "inherit" );
 });
 
+
 // -------------------------------------------------------------
   //  เมื่อกดปุ่มแก้ไข จะส่งค่าไปที่ box
   $('.handleEdit').click(function() {

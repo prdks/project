@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     //---------------- title ----------------
     $("#form_insert_title").submit(function(e) {
         e.preventDefault();

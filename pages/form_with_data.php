@@ -149,8 +149,8 @@ if (isset($_GET['id']))
 	</tr>
 	<!-- ประโยคต้นคำร้อง -->
 	<tr>
-		<td colspan="20" style="text-align: justify;">
-		<section>
+		<td colspan="20">
+		<pre style="text-align: justify;">
 		ขออนุญาตใช้รถยนต์<?php echo $_SESSION['system_name']; ?> พร้อมพนักงานขับรถยนต์
 			&nbsp;เพื่อเดินทางไปที่ 
 			<?php 
@@ -178,6 +178,7 @@ if (isset($_GET['id']))
 				<?php
 			}
 			?>
+		</pre>
 		</td>
 	</tr>
 	<!-- รายชื่อคนไป -->

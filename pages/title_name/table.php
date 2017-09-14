@@ -1,13 +1,28 @@
+
 <?php
-if(isset($_POST['handleSearch']))
+ $rows = 10;
+
+if(isset($_GET['word'])){$_POST['search_box'] = $_GET['word'];}
+
+if(isset($_POST['search_box']))
 {
   $word = $_POST['search_box'];
-  $sql = "select * from title_name WHERE title_name LIKE '%".$word."%' ORDER BY title_name ASC";
+
+  $total_data = mysqli_num_rows($conn->query("select * from title_name WHERE title_name LIKE '%".$word."%' ORDER BY title_name ASC "));
+  $total_page = ceil($total_data/$rows);
+  if(isset($_GET['page'])){$page = $_GET['page'];}
+  else{$page = '';}
+  if($page==""){ $page = 1;}
+  $start =  ($page-1) * $rows;
+  if($page != 1){$count = ($page*$rows)-$rows;}
+  else{$count = 0;}
+
+  $sql = "select * from title_name WHERE title_name LIKE '%".$word."%' ORDER BY title_name ASC Limit $start,$rows";
   $result = $conn->query($sql);
   $result_row = mysqli_num_rows($result);
   if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
   {
-    $count = 0;
+    
     echo "
 
     <table id='myTable' class='table table-striped table-bordered table-hover'>
@@ -18,10 +33,11 @@ if(isset($_POST['handleSearch']))
                 <th id='tb_tools'>เครื่องมือ</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class='page-content'>
     ";
 
     while($row = $result->fetch_array()){
+
       $count += 1;
       echo "
       <tr>
@@ -62,7 +78,7 @@ if(isset($_POST['handleSearch']))
               <th id='tb_tools'>เครื่องมือ</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class='page-content'>
       <tr>
       <td class='text-center' colspan='3'>ไม่พบข้อมูล</td>
       </tr>
@@ -73,12 +89,21 @@ if(isset($_POST['handleSearch']))
 }
 else
 {
-  $sql = "select * from title_name ORDER BY title_name ASC";
+
+  $total_data = mysqli_num_rows($conn->query("select * from title_name ORDER BY title_name ASC "));
+  $total_page = ceil($total_data/$rows);
+  if(isset($_GET['page'])){$page = $_GET['page'];}
+  else{$page = '';}
+  if($page==""){ $page = 1;}
+  $start =  ($page-1) * $rows;
+  if($page != 1){$count = ($page*$rows)-$rows;}
+  else{$count = 0;}
+
+  $sql = "select * from title_name ORDER BY title_name ASC Limit $start,$rows";
   $result = $conn->query($sql);
   $result_row = mysqli_num_rows($result);
   if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
   {
-    $count = 0;
     echo "
 
     <table id='myTable' class='table table-striped table-bordered table-hover'>
@@ -89,7 +114,7 @@ else
               <th id='tb_tools'>เครื่องมือ</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class='page-content'>
     ";
 
     while($row = $result->fetch_array()){
@@ -133,7 +158,7 @@ else
               <th id='tb_tools'>เครื่องมือ</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class='page-content'>
       <tr>
       <td class='text-center' colspan='3'>ไม่พบข้อมูล</td>
       </tr>
