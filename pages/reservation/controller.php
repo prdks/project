@@ -1340,4 +1340,173 @@ elseif ($mode == 'getCars_For_Edit')
       echo json_encode(array('result' => 'error', 'id' => $reserve_id));
     }
   }
+  elseif ($mode == 'query_edit_passnger') 
+  {
+    $sql = "
+    SELECT * FROM personnel p
+    LEFT OUTER JOIN user_type us
+    ON p.user_type_id = us.user_type_id
+    LEFT JOIN title_name t
+    ON p.title_name_id = t.title_name_id
+    LEFT JOIN position po
+    ON p.position_id = po.position_id
+    LEFT JOIN department d
+    ON p.department_id = d.department_id
+    WHERE personnel_name NOT IN
+    (SELECT SUBSTRING_INDEX(passenger_name,' ',-2)
+    FROM passenger WHERE reservation_id = ".$_POST['id'].")
+    AND personnel_id NOT IN
+    (SELECT personnel_id FROM reservation WHERE reservation_id = ".$_POST['id'].")
+    AND us.user_level <> 2
+    ORDER BY department_name ASC
+    ";
+
+    $result = $conn->query($sql);
+    $result_row = mysqli_num_rows($result);
+    if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
+    {
+      while($row = $result->fetch_assoc())
+      {
+        echo '
+        <tr>
+        <td>
+          <center>
+            <button type="button" class="btn btn-primary btn-xs handleEditSelectPassenger"
+           data-id='.$row["personnel_id"].'  data-old="" data-reservekeys='.$_POST['id'].'>
+           เลือก
+         </button>
+         </center>
+        </td>
+        <td>'.$row["title_name"].$row["personnel_name"].'</td>
+        <td>'.$row["department_name"].'</td>
+        </tr>
+        ';
+      }
+    }else {
+      echo "<tr><td colspan='4' class='text-center'>ไม่มีข้อมูลบุคลากร</td></tr>";
+    }
+
+  }
+  elseif ($mode == 'search_query_edit_passnger') 
+  {
+    $word = $_POST['word'];
+
+    $sql = "
+    SELECT * FROM personnel p
+    LEFT OUTER JOIN user_type us
+    ON p.user_type_id = us.user_type_id
+    LEFT JOIN title_name t
+    ON p.title_name_id = t.title_name_id
+    LEFT JOIN position po
+    ON p.position_id = po.position_id
+    LEFT JOIN department d
+    ON p.department_id = d.department_id
+    WHERE personnel_name NOT IN
+    (SELECT SUBSTRING_INDEX(passenger_name,' ',-2)
+    FROM passenger WHERE reservation_id = ".$_POST['id'].")
+    AND personnel_id NOT IN
+    (SELECT personnel_id FROM reservation WHERE reservation_id = ".$_POST['id'].")
+    AND us.user_level <> 2
+    AND 
+    (
+      personnel_name LIKE '%".$word."%'
+      OR
+      department_name LIKE '%".$word."%'
+    )
+    ORDER BY department_name ASC
+    ";
+
+    $result = $conn->query($sql);
+    $result_row = mysqli_num_rows($result);
+    if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
+    {
+      while($row = $result->fetch_assoc())
+      {
+        echo '
+        <tr>
+        <td>
+          <center>
+          <button type="button" class="btn btn-primary btn-xs handleEditSelectPassenger"
+          data-id='.$row["personnel_id"].'  data-old="" data-reservekeys='.$_POST['id'].'>
+           เลือก
+         </button>
+         </center>
+        </td>
+        <td>'.$row["title_name"].$row["personnel_name"].'</td>
+        <td>'.$row["department_name"].'</td>
+        </tr>
+        ';
+      }
+    }else {
+      echo "<tr><td colspan='4' class='text-center'>ไม่มีข้อมูลบุคลากร</td></tr>";
+    }
+  }
+  elseif ($mode == 'edit_key_passenger') 
+  {
+    $old = $_POST['old'];
+    $reserve_id = $_POST['reserve_id'];
+    $name = $_POST['title'].' '.$_POST['name'];
+    $dep = $_POST['dep'];
+    
+    if ($dep !== "ไม่ระบุ") {
+      $sql = "select * from passenger where passenger_name ='".$name."'
+      AND reservation_id = ".$reserve_id."
+      AND department_id = (select department_id from department where department_name = '".$dep."')";
+    }
+    else {
+      $sql = "select * from passenger where passenger_name ='".$name."'
+      AND reservation_id = ".$reserve_id."";
+    }
+    
+    $result = $conn->query($sql);
+    if($result){
+      $sql = "update passenger
+      set passenger_name = '".$name."'
+      ,department_id = (SELECT department_id FROM department WHERE department_name = '".$dep."')
+      ,reservation_id = '".$reserve_id."'
+      where passenger_id = '".$old."'";
+    
+      if($conn->query($sql)===true){
+        $sql = "SELECT COUNT(passenger_id) as total FROM passenger WHERE reservation_id = '".$reserve_id."'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+    
+        $sql = "
+        update reservation
+        set passenger_total = '".$row['total']."'
+        where reservation_id = '".$reserve_id."'";
+    
+          if($conn->query($sql)===true){echo json_encode(array('result' => '1', 'id' => $reserve_id));}
+        }else {echo json_encode(array('result' => '0', 'id' => $reserve_id));}
+    }else{echo json_encode(array('result' => 'error', 'id' => $reserve_id));}
+  }
+  elseif ($mode == 'deletePassenger') 
+  {
+    $delete_id = $_POST['id'];
+    $reserve_id = $_POST['reserve_id'];
+    
+    $sql = "select * from passenger where passenger_id ='".$delete_id."'";
+    $result = $conn->query($sql);
+    if($result){
+      $sql = "delete from passenger
+      where passenger_id = '".$delete_id."'";
+    
+      if($conn->query($sql)===true){
+    
+        $sql = "SELECT COUNT(passenger_id) as total FROM passenger WHERE reservation_id = '".$reserve_id."'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+    
+        $sql = "
+        update reservation
+        set passenger_total = '".$row['total']."'
+        where reservation_id = '".$reserve_id."'";
+        
+        if($conn->query($sql)===true){echo json_encode(array('result' => '1', 'id' => $reserve_id));}
+      }
+      else {echo json_encode(array('result' => '0', 'id' => $reserve_id));}
+    }else{
+      echo json_encode(array('result' => 'error', 'id' => $reserve_id));
+    }
+  }
 ?>

@@ -160,12 +160,21 @@
             <div id="editfromsystem" class="tab-pane fade in active">
               <br>
               <div class="panel panel-default">
-                <div class="panel-heading">รายชื่อบุคลากร
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
-                    <input type="text" class="form-control input-sm" id="search_input3" onkeyup="filtertable3()" placeholder="พิมพ์เพื่อค้นหา">
+                <div class="panel-heading clearfix">
+                  <h3 class="panel-title pull-left" style="padding-top: 7.5px;">
+                  &nbsp; รายชื่อบุคลากร
+                  </h3>
+                  
+                  <form id="search_passenger_edit_rma">
+                  <div class="btn-group pull-right">
+                    ค้นหาข้อมูล :
+                    <input id="search_input3" data-id="<?php echo $_GET['id'];?>" placeholder="พิมพ์เพื่อค้นหา" type="text" placeholder="พิมพ์ข้อความ" class="custom_input">
+                    <button class="btn pull-right btn-default" type="submit" style="height: 30px;">
+                      <i class="fa fa-search"></i>
+                    </button>
                   </div>
-                </div>
-
+                </form>
+              </div>
                 <div class="table-responsive tspassenger">
                   <table id="PersonnelTableEdit" class="table table-condensed table-bordered table-hover">
                     <thead id="Tb_sPersonnel">
@@ -175,52 +184,9 @@
                         <th id="tb_detail_sub-nd">หน่วยงาน</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <?php
-                      $sql = "
-                      SELECT * FROM personnel p
-                      LEFT JOIN title_name t
-                      ON p.title_name_id = t.title_name_id
-                      LEFT JOIN position po
-                      ON p.position_id = po.position_id
-                      LEFT JOIN department d
-                      ON p.department_id = d.department_id
-                      WHERE personnel_name NOT IN
-                      (SELECT SUBSTRING_INDEX(passenger_name,' ',-2)
-                      FROM passenger WHERE reservation_id = ".$_GET['id'].")
-                      AND personnel_id NOT IN
-                      (SELECT personnel_id FROM reservation WHERE reservation_id = ".$_GET['id'].")
-                      AND position_name <> 'คนขับรถยนต์' AND position_name <> 'เจ้าหน้าที่รักษาความปลอดภัย'
-                      ORDER BY department_name ASC
-                      ";
-
-                      $result = $conn->query($sql);
-                      $result_row = mysqli_num_rows($result);
-                      if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
-                      {
-                        while($row = $result->fetch_assoc())
-                        {
-                          ?>
-                          <tr>
-                          <td>
-                            <center>
-                              <button type="button" class="btn btn-primary btn-xs handleEditSelectPassenger"
-                             data-id="<?php echo $row["personnel_id"];?>" data-old=""
-                             data-reservekeys="<?php echo $_GET['id']?>">
-                             เลือก
-                           </button>
-                           </center>
-                          </td>
-                          <td><?php echo $row["title_name"].$row["personnel_name"]; ?></td>
-                          <td class="text-center"><?php echo $row["department_name"]; ?></td>
-                          </tr>
-                          <?php
-                        }
-                      }else {
-                        echo "<tr><td colspan='4' class='text-center'>ไม่มีข้อมูลบุคลากร</td></tr>";
-                      }
-                      ?>
-                      </tbody>
+                    <tbody id="edit_passenger_tbody">
+                    </tbody>
+                    
                     </table>
                 </div>
 
@@ -233,7 +199,8 @@
                   กำหนดเอง
                 </div>
                 <div class="panel-body">
-                  <form class="form-horizontal" action="reservation/reserve_ma/edit_passenger.php?reserve_id=<?php echo $_GET['id']?>" method="post">
+                  <form id="edit_passenger_rma_form" class="form-horizontal">
+                    <input type="hidden" name="reserve_id" value="<?php echo $_GET['id'];?>">
                     <!-- คำนำหน้าชื่อ -->
                     <div class="form-group">
                       <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
@@ -307,11 +274,11 @@
 <!-- END Edit Modal -->
 <!-- Delete Modal -->
 <div id="delete_passenger_modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-md">
 
     <!-- Modal content-->
     <div class="modal-content">
-      <form id="delete_title_form" class="form-horizontal" action="reservation/reserve_ma/delete_passenger.php" method="post">
+      <form id="delete_passenger_rma_form" class="form-horizontal">
       <div class="modal-body">
         <div class="form-group text-center">
             <br />

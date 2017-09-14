@@ -168,7 +168,7 @@ $(document).ready(function() {
                             $('#edit_reason_area').attr('required', false);
                             $('#edit_reason').hide();
                             //$('#edit_note_area').val('');
-            
+
                             $('#edit_note').hide();
                             if (ues == 3) {
                                 $('#edit_reason').show();
@@ -192,7 +192,7 @@ $(document).ready(function() {
                 });
                 $('#edit_reason').show();
                 $('#edit_reason_area').attr('required', true);
-                
+
                 $('#edit_note').show();
             }
         }
@@ -228,7 +228,7 @@ $(document).ready(function() {
                             $('#edit_reason_area').attr('required', false);
                             $('#edit_reason').hide();
                             //$('#edit_note_area').val('');
-            
+
                             $('#edit_note').hide();
 
                             $('#dp-tout').val('');
@@ -291,7 +291,7 @@ $(document).ready(function() {
             });
             $('#edit_reason').show();
             $('#edit_reason_area').attr('required', true);
-            
+
             $('#edit_note').show();
         }
     });
@@ -300,7 +300,7 @@ $(document).ready(function() {
         if ($(this).val() == 3) {
             $('#edit_reason').show();
             $('#edit_reason_area').attr('required', true);
-            
+
             $('#edit_note').show();
         } else {
             //$('#edit_reason_area').val('');
@@ -311,9 +311,9 @@ $(document).ready(function() {
             $('#edit_note').hide();
         }
     });
-    
+
     // passenger
-    $('#insert_passenger_rma').click(function () {
+    $('#insert_passenger_rma').click(function() {
         var id = $(this).attr('data-id');
         $.ajax({
             type: "POST",
@@ -333,7 +333,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "reservation/controller.php",
-            data: { id:id, word:word, mode: 'search_query_add_passnger' },
+            data: { id: id, word: word, mode: 'search_query_add_passnger' },
             success: function(data) {
                 $('#add_passenger_tbody').html(data);
                 $('#search_input2').val('');
@@ -341,15 +341,13 @@ $(document).ready(function() {
             }
         });
     });
-
     
     $("#add_passenger_rma_form").submit(function(e) {
         e.preventDefault();
         insert_key_passenger();
     });
 
-    function insert_passenger() 
-    {
+    function insert_passenger() {
         $('.handleAddSelectPassenger').click(function() {
             var person_id = $(this).attr('data-id');
             var reserve_id = $(this).attr('data-reservekeys');
@@ -362,36 +360,36 @@ $(document).ready(function() {
                     if (data.result == 1) //insert สำเร็จ
                     {
                         swal({
-                            title: "เพิ่มข้อมูลสำเร็จ",
-                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                             type: "success",
-                            timer: 2000,
-                            showConfirmButton: false,
-                          },
-                          function(){ window.location.assign('edit_passenger.php?id=' + reserve_id); }
+                                title: "เพิ่มข้อมูลสำเร็จ",
+                                text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                                type: "success",
+                                timer: 2000,
+                                showConfirmButton: false,
+                            },
+                            function() { window.location.assign('edit_passenger.php?id=' + reserve_id); }
                         );
-                        
+
                     } else if (data.result == 0) //insert ไม่สำเร็จ
                     {
                         swal({
-                            title: "ข้อมูลนี้มีอยู่แล้ว<br>กรุณาทำรายการใหม่",
-                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                             type: "error",
-                            timer: 2000,
-                            html: true,
-                            showConfirmButton: false,
-                          },
-                          function(){ window.location.assign('edit_passenger.php?id=' + reserve_id); }
+                                title: "ข้อมูลนี้มีอยู่แล้ว<br>กรุณาทำรายการใหม่",
+                                text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                                type: "error",
+                                timer: 2000,
+                                html: true,
+                                showConfirmButton: false,
+                            },
+                            function() { window.location.assign('edit_passenger.php?id=' + reserve_id); }
                         );
-                        
+
                     }
                 }
             });
         });
-         
+
     }
-    function insert_key_passenger() 
-    {
+
+    function insert_key_passenger() {
         var data = $('#add_passenger_rma_form').serializeArray();
         data.push({ name: 'mode', value: 'insertKeyPassenger' });
         $.ajax({
@@ -403,40 +401,183 @@ $(document).ready(function() {
                 if (data.result == 1) //insert สำเร็จ
                 {
                     swal({
-                        title: "เพิ่มข้อมูลสำเร็จ",
-                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                         type: "success",
-                        timer: 2000,
-                        showConfirmButton: false,
-                      },
-                      function(){ window.location.assign('edit_passenger.php?id=' + data.id); }
+                            title: "เพิ่มข้อมูลสำเร็จ",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                            type: "success",
+                            timer: 2000,
+                            showConfirmButton: false,
+                        },
+                        function() { window.location.assign('edit_passenger.php?id=' + data.id); }
                     );
-                    
+
                 } else if (data.result == 0) //insert ไม่สำเร็จ
                 {
                     swal({
-                        title: "ไม่สามารถเพิ่มข้อมูลได้<br>กรุณาทำรายการใหม่",
-                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                         type: "error",
-                        timer: 2000,
-                        html: true,
-                        showConfirmButton: false,
-                      },
-                      function(){ window.location.assign('edit_passenger.php?id=' +  data.id); }
+                            title: "ไม่สามารถเพิ่มข้อมูลได้<br>กรุณาทำรายการใหม่",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                            type: "error",
+                            timer: 2000,
+                            html: true,
+                            showConfirmButton: false,
+                        },
+                        function() { window.location.assign('edit_passenger.php?id=' + data.id); }
                     );
-                    
+
+                } else if (data.result === 'error') {
+                    swal({
+                            title: "ข้อมูลนี้มีอยู่แล้ว<br>กรุณาทำรายการใหม่",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                            type: "error",
+                            timer: 2000,
+                            html: true,
+                            showConfirmButton: false,
+                        },
+                        function() { window.location.assign('edit_passenger.php?id=' + data.id); }
+                    );
                 }
-                else if (data.result === 'error')
+            }
+        });
+    }
+
+    $("#search_passenger_edit_rma").submit(function(e) {
+        e.preventDefault();
+        var id = $('#search_input3').attr('data-id');
+        var word = $('#search_input3').val();
+        $.ajax({
+            type: "POST",
+            url: "reservation/controller.php",
+            data: { id: id, word: word, mode: 'search_query_edit_passnger' },
+            success: function(data) {
+                $('#edit_passenger_tbody').html(data);
+                $('#search_input3').val('');
+                
+            }
+        });
+    });
+
+
+    $('.handleEditPassenger').click(function() {
+        var resid = $(this).attr('data-resid');
+        var id = $(this).attr('data-id');
+        $.ajax({
+            type: "POST",
+            url: "reservation/controller.php",
+            data: { id: resid, mode: 'query_edit_passnger' },
+            success: function(data) {
+                $('#edit_passenger_tbody').html(data);
+
+                $.ajax({
+                    type: "POST",
+                    url: "reservation/controller.php",
+                    data: { id: id, mode: 'get_passenger' },
+                    dataType: 'json',
+                    success: function(data) {
+                        $('.handleEditSelectPassenger').attr('data-old', id);
+                        $('#edit-data-old').val(id);
+                        $('#edit_title_name').val(data.title);
+                        $('#edit_person_name').val(data.name);
+                        if (data.department !== null) {
+                            $('#edit_department').val(data.department)
+                        } else {
+                            $('#edit_department').val('ไม่ระบุ')
+                        }
+
+                    }
+                });
+
+                $('.handleEditSelectPassenger').click(function() {
+                    var old = $(this).attr('data-old');
+                    var person_id = $(this).attr('data-id');
+                    var reserve_id = $(this).attr('data-reservekeys');
+                    $.ajax({
+                        type: "POST",
+                        url: "reservation/controller.php",
+                        data: { old: old, person_id: person_id, reserve_id: reserve_id, mode: 'editSelectPassenger' },
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.result == 1) //edit สำเร็จ
+                            {
+                                swal({
+                                        title: "แก้ไขข้อมูลสำเร็จ",
+                                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                                        type: "success",
+                                        timer: 2000,
+                                        showConfirmButton: false,
+                                    },
+                                    function() { window.location.assign('edit_passenger.php?id=' + reserve_id); }
+                                );
+        
+                            } else if (data.result == 0) //edit ไม่สำเร็จ
+                            {
+                                swal({
+                                        title: "ไม่สามารถแก้ไขข้อมูลได้<br>กรุณาทำรายการใหม่",
+                                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                                        type: "error",
+                                        timer: 2000,
+                                        html: true,
+                                        showConfirmButton: false,
+                                    },
+                                    function() { window.location.assign('edit_passenger.php?id=' + reserve_id); }
+                                );
+                            }
+                        }
+                    });
+                });
+                
+            }
+        });
+    });
+
+    $("#edit_passenger_rma_form").submit(function(e) {
+        e.preventDefault();
+        edit_key_passenger();
+    });
+
+    function edit_key_passenger() 
+    {
+        var data = $('#edit_passenger_rma_form').serializeArray();
+        data.push({ name: 'mode', value: 'edit_key_passenger' });
+        $.ajax({
+            type: "POST",
+            url: "reservation/controller.php",
+            data: data,
+            dataType: 'json',
+            success: function(data) {
+                if (data.result == 1) //insert สำเร็จ
                 {
-                  swal({
-                        title: "ข้อมูลนี้มีอยู่แล้ว<br>กรุณาทำรายการใหม่",
-                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
-                         type: "error",
-                        timer: 2000,
-                        html: true,
-                        showConfirmButton: false,
-                      },
-                      function(){ window.location.assign('edit_passenger.php?id=' +  data.id); }
+                    swal({
+                            title: "แก้ไขข้อมูลสำเร็จ",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                            type: "success",
+                            timer: 2000,
+                            showConfirmButton: false,
+                        },
+                        function() { window.location.assign('edit_passenger.php?id=' + data.id); }
+                    );
+
+                } else if (data.result == 0) //insert ไม่สำเร็จ
+                {
+                    swal({
+                            title: "ไม่สามารถแก้ไขข้อมูลได้<br>กรุณาทำรายการใหม่",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                            type: "error",
+                            timer: 2000,
+                            html: true,
+                            showConfirmButton: false,
+                        },
+                        function() { window.location.assign('edit_passenger.php?id=' + data.id); }
+                    );
+
+                } else if (data.result === 'error') {
+                    swal({
+                            title: "ข้อมูลนี้มีอยู่แล้ว<br>กรุณาทำรายการใหม่",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                            type: "error",
+                            timer: 2000,
+                            html: true,
+                            showConfirmButton: false,
+                        },
+                        function() { window.location.assign('edit_passenger.php?id=' + data.id); }
                     );
                 }
             }
@@ -463,51 +604,62 @@ $(document).ready(function() {
         });
     });
 
-    $('.handleEditPassenger').click(function() {
-        var id = $(this).attr('data-id');
+    $("#delete_passenger_rma_form").submit(function(e) {
+        e.preventDefault();
+        delete_rma_passenger();
+    });
+
+    function delete_rma_passenger() 
+    {
+        var data = $('#delete_passenger_rma_form').serializeArray();
+        data.push({ name: 'mode', value: 'deletePassenger' });
         $.ajax({
             type: "POST",
             url: "reservation/controller.php",
-            data: { id: id, mode: 'get_passenger' },
+            data: data,
             dataType: 'json',
             success: function(data) {
-                $('.handleEditSelectPassenger').attr('data-old', id);
-                $('#edit-data-old').val(id);
-                $('#edit_title_name').val(data.title);
-                $('#edit_person_name').val(data.name);
-                if (data.department !== null) {
-                    $('#edit_department').val(data.department)
-                } else {
-                    $('#edit_department').val('ไม่ระบุ')
+                if (data.result == 1) //สำเร็จ
+                {
+                  swal({
+                        title: "ลบข้อมูลสำเร็จ",
+                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                         type: "success",
+                        timer: 2000,
+                        showConfirmButton: false,
+                      },
+                      function(){ window.location.assign('edit_passenger.php?id=' + data.id); }
+                    );
                 }
-
+                else if (data.result == 0) //ไม่สำเร็จ
+                {
+                  swal({
+                        title: "ไม่สามารถลบข้อมูลได้<br>กรุณาทำรายการใหม่",
+                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                         type: "error",
+                        timer: 2000,
+                        showConfirmButton: false,
+                        html: true,
+                      },
+                      function(){ window.location.assign('edit_passenger.php?id=' + data.id); }
+                    );
+                }
+                else if (data.result === 'error')
+                {
+                  swal({
+                        title: "ไม่สามารถลบข้อมูลได้<br>เนื่องจากมีการใช้งานอยู่",
+                        text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                         type: "error",
+                        timer: 2000,
+                        showConfirmButton: false,
+                        html: true,
+                      },
+                      function(){ window.location.assign('edit_passenger.php?id=' + data.id);  }
+                    );
+                }
             }
         });
-    });
-
-    $('.handleEditSelectPassenger').click(function() {
-        var old = $(this).attr('data-old');
-        var person_id = $(this).attr('data-id');
-        var reserve_id = $(this).attr('data-reservekeys');
-        $.ajax({
-            type: "POST",
-            url: "reservation/controller.php",
-            data: { old: old, person_id: person_id, reserve_id: reserve_id, mode: 'editSelectPassenger' },
-            dataType: 'json',
-            success: function(data) {
-                if (data.result == 1) //edit สำเร็จ
-                {
-                    swal('แก้ไขข้อมูลสำเร็จ');
-                    window.location.assign('edit_passenger.php?id=' + reserve_id);
-                } else if (data.result == 0) //edit ไม่สำเร็จ
-                {
-                    swal('ไม่สามารถแก้ไขข้อมูลได้ กรุณาทำรายการใหม่');
-                    window.location.assign('edit_passenger.php?id=' + reserve_id);
-                }
-            }
-        });
-    });
-
+    }
 
 
     $('#linkEditCars').click(function() {
@@ -669,54 +821,52 @@ $(document).ready(function() {
         });
     }
 
-    $('#delete_other_approve').click(function(){
+    $('#delete_other_approve').click(function() {
         var id = $(this).attr('data-id');
         swal({
-            title: "<h3><b>ต้องการลบข้อมูลการอนุมัติหรือไม่</b></h3>",
-            type: "warning",
-            showCancelButton: true,
-            html: true,
-            cancelButtonText: "ยกเลิก",
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "ลบข้อมูล",
-            closeOnConfirm: false
-          },
-          function(){
-            $.ajax({
-                type: "POST",
-                url: "reservation/controller.php",
-                data: {id:  id, mode: 'deleteOtherApprove'},
-                dataType: 'json',
-                success: function(data){
-                  if (data.result == 1) //สำเร็จ
-                  {
-                    swal({
-                          title: "ลบสำเร็จ",
-                           type: "success",
-                           timer: 2000,
-                          confirmButtonText: "ตกลง",
-                          showConfirmButton: false,
-                        },
-                        function()
+                title: "<h3><b>ต้องการลบข้อมูลการอนุมัติหรือไม่</b></h3>",
+                type: "warning",
+                showCancelButton: true,
+                html: true,
+                cancelButtonText: "ยกเลิก",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "ลบข้อมูล",
+                closeOnConfirm: false
+            },
+            function() {
+                $.ajax({
+                    type: "POST",
+                    url: "reservation/controller.php",
+                    data: { id: id, mode: 'deleteOtherApprove' },
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.result == 1) //สำเร็จ
                         {
-                            window.location.assign('reserve_ma_edit.php?id=' + id);
+                            swal({
+                                    title: "ลบสำเร็จ",
+                                    type: "success",
+                                    timer: 2000,
+                                    confirmButtonText: "ตกลง",
+                                    showConfirmButton: false,
+                                },
+                                function() {
+                                    window.location.assign('reserve_ma_edit.php?id=' + id);
+                                }
+                            );
+                        } else if (data.result == 0) //ไม่สำเร็จ
+                        {
+                            swal({
+                                title: "ไม่สามารถลบข้อมูลได้<br>กรุณาทำรายการใหม่",
+                                type: "error",
+                                timer: 2000,
+                                confirmButtonText: "ตกลง",
+                                showConfirmButton: false,
+                                html: true,
+                            });
                         }
-                      );
-                  }
-                  else if (data.result == 0) //ไม่สำเร็จ
-                  {
-                    swal({
-                          title: "ไม่สามารถลบข้อมูลได้<br>กรุณาทำรายการใหม่",
-                           type: "error",
-                           timer: 2000,
-                           confirmButtonText: "ตกลง",
-                           showConfirmButton: false,
-                          html: true,
-                        });
-                  }
-                }
-              });
-          });
+                    }
+                });
+            });
     });
 
     // ปุ่มเพิ่มสถานที่
@@ -741,5 +891,5 @@ $(document).ready(function() {
         x--;
     });
 
-    
+
 });

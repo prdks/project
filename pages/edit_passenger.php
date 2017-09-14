@@ -96,7 +96,7 @@
                                 </td>
                                 <td class="text-center">
                                   <button type="button" class="btn btn-warning handleEditPassenger" role="button"
-                                  data-toggle="modal" data-target="#edit_passenger_modal" data-id="<?php echo $row["passenger_id"];?>">
+                                  data-toggle="modal" data-target="#edit_passenger_modal" data-resid="<?php echo $_GET['id'];?>" data-id="<?php echo $row["passenger_id"];?>">
                                     <span class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></span>
                                   </button>
 
