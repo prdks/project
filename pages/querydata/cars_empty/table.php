@@ -1,4 +1,11 @@
 <?php
+ $rows = 10;
+ if(isset($_GET['btn'])){$_POST['query_cars_empty'] = $_GET['btn'];}
+if(isset($_GET['dstart'])){$_POST['date_start'] = $_GET['dstart'];}
+if(isset($_GET['dend'])){$_POST['date_end'] = $_GET['dend'];}
+if(isset($_GET['tstart'])){$_POST['time_start'] = $_GET['tstart'];}
+if(isset($_GET['tend'])){$_POST['time_end'] = $_GET['tend'];}
+
 if (isset($_POST['query_cars_empty'])) {
   $date_start = $_POST['date_start'];
   $date_end = $_POST['date_end'];
@@ -40,8 +47,18 @@ if (isset($_POST['query_cars_empty'])) {
          ('".$time_end."' BETWEEN  reserv_stime  AND reserv_etime ))
       )
     AND c.status <> 'งดจอง'
-    ORDER BY car_reg";
+    Group by car_reg ORDER BY car_reg";
 
+    $total_data = mysqli_num_rows($conn->query($sql));
+    $total_page = ceil($total_data/$rows);
+    if(isset($_GET['page'])){$page = $_GET['page'];}
+    else{$page = '';}
+    if($page==""){ $page = 1;}
+    $start =  ($page-1) * $rows;
+    if($page != 1){$count = ($page*$rows)-$rows; $start_count = $count;}
+    else{$count = 0; $start_count = $count;}
+  
+    $sql .= " Limit $start,$rows";
     $result = $conn->query($sql);
     $result_row = mysqli_num_rows($result);
     if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
@@ -70,6 +87,7 @@ if (isset($_POST['query_cars_empty'])) {
       ";
       while($row = $result->fetch_assoc())
       {
+        $count++;
         echo "
         <tr>
         <td class='text-center'>".$row['car_reg']."</td>
@@ -103,6 +121,63 @@ if (isset($_POST['query_cars_empty'])) {
       </div>
       </div>
       </div>";
+      ?>
+      <span class="pull-left"><?php if($total_data != 0){ $start_count++; } else { $start_count= 0; } echo "แสดง ".$start_count." ถึง ".$count." จากทั้งหมด ".$total_data." รายการ"; ?></span>
+      <ul class="pagination pagination-md pull-right" style="margin:0px;">
+          <?php
+          if($total_page > 1)
+          {
+              ?>
+              <li <?php if($page==1){echo 'disabled';}?>>
+                  <?php
+                  if($page == 1){ $linkURL = "";}
+                  else{ 
+                      if(isset($_POST['query_cars_empty'])){$linkURL = "cars_empty.php?page=".($page-1)."&btn=t&dstart=".$_POST['date_start']."&dend=".$_POST['date_end']."&tstart=".$_POST['time_start']."&tend=".$_POST['time_end'];}
+                      else{$linkURL = "cars_empty.php?page=".($page-1);}
+                  }
+                  ?>
+                  <a href="<?php echo $linkURL;?>">&laquo;</a>
+              </li>
+              <?php
+          }
+  
+          if(isset($_POST['query_cars_empty']))
+          {
+              for ($i=1; $i <= $total_page ; $i++)
+              {
+                  ?>
+                  <li <?php if($page==$i){echo 'class=active';}?> ><a href="cars_empty.php?page=<?php echo $i."&btn=t&dstart=".$_POST['date_start']."&dend=".$_POST['date_end']."&tstart=".$_POST['time_start']."&tend=".$_POST['time_end']; ?>"><?php echo $i; ?></a></li>
+                  <?php
+              }
+          }
+          else 
+          {
+              for ($i=1; $i <= $total_page ; $i++)
+              {
+                  ?>
+                  <li <?php if($page==$i){echo 'class=active';}?> ><a href="cars_empty.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                  <?php
+              }
+          }
+          
+  
+          if($total_page > 1)
+          {
+              ?>
+              <li <?php if($page==$total_page){echo 'disabled';}?>>
+                  <?php if($page == $total_page){ $linkURL = "";}
+                  else{
+                      if(isset($_POST['query_cars_empty'])){$linkURL = "cars_empty.php?page=".($page+1)."&btn=t&dstart=".$_POST['date_start']."&dend=".$_POST['date_end']."&tstart=".$_POST['time_start']."&tend=".$_POST['time_end'];}
+                      else{$linkURL = "cars_empty.php?page=".($page+1);}
+                  } ?>
+                  <a href="<?php echo $linkURL;?>">&raquo;</a>
+              </li>
+              <?php
+          }
+          ?>
+          
+      </ul>
+      <?php
     }else {
       echo "
       <div class='row' >
@@ -134,6 +209,7 @@ if (isset($_POST['query_cars_empty'])) {
     </div>
     </div>";
     }
+    
       break;
 
     case 4:
@@ -172,6 +248,16 @@ if (isset($_POST['query_cars_empty'])) {
     GROUP BY car_reg
     ORDER BY department_name asc";
 
+    $total_data = mysqli_num_rows($conn->query($sql));
+    $total_page = ceil($total_data/$rows);
+    if(isset($_GET['page'])){$page = $_GET['page'];}
+    else{$page = '';}
+    if($page==""){ $page = 1;}
+    $start =  ($page-1) * $rows;
+    if($page != 1){$count = ($page*$rows)-$rows; $start_count = $count;}
+    else{$count = 0; $start_count = $count;}
+  
+    $sql .= " Limit $start,$rows";
     $result = $conn->query($sql);
     $result_row = mysqli_num_rows($result);
     if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
@@ -200,6 +286,7 @@ if (isset($_POST['query_cars_empty'])) {
       ";
       while($row = $result->fetch_assoc())
       {
+        $count++;
         echo "
         <tr>
         <td class='text-center'>".$row['car_reg']."</td>
@@ -233,6 +320,63 @@ if (isset($_POST['query_cars_empty'])) {
       </div>
       </div>
       </div>";
+      ?>
+      <span class="pull-left"><?php if($total_data != 0){ $start_count++; } else { $start_count= 0; } echo "แสดง ".$start_count." ถึง ".$count." จากทั้งหมด ".$total_data." รายการ"; ?></span>
+      <ul class="pagination pagination-md pull-right" style="margin:0px;">
+          <?php
+          if($total_page > 1)
+          {
+              ?>
+              <li <?php if($page==1){echo 'disabled';}?>>
+                  <?php
+                  if($page == 1){ $linkURL = "";}
+                  else{ 
+                      if(isset($_POST['query_cars_empty'])){$linkURL = "cars_empty.php?page=".($page-1)."&btn=t&dstart=".$_POST['date_start']."&dend=".$_POST['date_end']."&tstart=".$_POST['time_start']."&tend=".$_POST['time_end'];}
+                      else{$linkURL = "cars_empty.php?page=".($page-1);}
+                  }
+                  ?>
+                  <a href="<?php echo $linkURL;?>">&laquo;</a>
+              </li>
+              <?php
+          }
+  
+          if(isset($_POST['query_cars_empty']))
+          {
+              for ($i=1; $i <= $total_page ; $i++)
+              {
+                  ?>
+                  <li <?php if($page==$i){echo 'class=active';}?> ><a href="cars_empty.php?page=<?php echo $i."&btn=t&dstart=".$_POST['date_start']."&dend=".$_POST['date_end']."&tstart=".$_POST['time_start']."&tend=".$_POST['time_end']; ?>"><?php echo $i; ?></a></li>
+                  <?php
+              }
+          }
+          else 
+          {
+              for ($i=1; $i <= $total_page ; $i++)
+              {
+                  ?>
+                  <li <?php if($page==$i){echo 'class=active';}?> ><a href="cars_empty.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                  <?php
+              }
+          }
+          
+  
+          if($total_page > 1)
+          {
+              ?>
+              <li <?php if($page==$total_page){echo 'disabled';}?>>
+                  <?php if($page == $total_page){ $linkURL = "";}
+                  else{
+                      if(isset($_POST['query_cars_empty'])){$linkURL = "cars_empty.php?page=".($page+1)."&btn=t&dstart=".$_POST['date_start']."&dend=".$_POST['date_end']."&tstart=".$_POST['time_start']."&tend=".$_POST['time_end'];}
+                      else{$linkURL = "cars_empty.php?page=".($page+1);}
+                  } ?>
+                  <a href="<?php echo $linkURL;?>">&raquo;</a>
+              </li>
+              <?php
+          }
+          ?>
+          
+      </ul>
+      <?php
     }else {
       echo "
       <div class='row' >

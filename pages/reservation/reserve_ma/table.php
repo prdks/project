@@ -185,9 +185,10 @@ switch ($_SESSION['user_type']) {
           }
           else 
           {
+      
             ?>
               <tr>
-              <td class="text-center" colspan="7">ไม่มีรายการรออนุมัติ</td>
+              <td class="text-center" colspan="7">ไม่พบรายการจองใช้รถยนต์</td>
               </tr>
               </tbody>
               </table>
@@ -357,6 +358,7 @@ switch ($_SESSION['user_type']) {
           }
           else 
           {
+      
             $sql = "ALTER TABLE reservation AUTO_INCREMENT = 1";
             $conn->query($sql);
             $sql = "ALTER TABLE location AUTO_INCREMENT = 1";
@@ -365,7 +367,7 @@ switch ($_SESSION['user_type']) {
             $conn->query($sql);
             ?>
               <tr>
-              <td class="text-center" colspan="7">ไม่มีรายการรออนุมัติ</td>
+              <td class="text-center" colspan="7">ไม่พบรายการจองใช้รถยนต์</td>
               </tr>
               </tbody>
               </table>
@@ -551,6 +553,32 @@ switch ($_SESSION['user_type']) {
       }
       else 
       {
+  
+        ?>
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th id="tb_detail_sub-th">วันที่ใช้รถยนต์ใช้</th>
+                    <th id="tb_detail_sub-th">เวลา</th>
+                    <th id="tb_detail_main">จองใช้เพื่อ</th>
+                    <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
+                    <th id="tb_detail_sub-sv">สถานะการจอง</th>
+                    <th id="tb_detail_sub-sv">สถานะการใช้</th>
+                </tr>
+            </thead>
+            <tbody>
+          <tr>
+          <td class="text-center" colspan="6">ไม่พบรายการจองใช้รถยนต์</td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+        <?php
+      }
+    }
+    else 
+    {
         
     $sql = "
     SELECT * FROM reservation r
@@ -704,6 +732,7 @@ switch ($_SESSION['user_type']) {
     }
     else 
     {
+
       ?>
       <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover">
@@ -719,14 +748,13 @@ switch ($_SESSION['user_type']) {
           </thead>
           <tbody>
         <tr>
-        <td class="text-center" colspan="6">ไม่มีรายการรออนุมัติ</td>
+        <td class="text-center" colspan="6">ไม่พบรายการจองใช้รถยนต์</td>
         </tr>
         </tbody>
         </table>
         </div>
       <?php
     }
-      }
     }
   }
     break;

@@ -53,8 +53,15 @@
                                     <?php include 'reservation/reserve_ma/modal.php';?>
                             <!-- /.panel-body -->
                         </div>
-                        <span class="pull-left"><?php echo "แสดง ".($start_count+1)." ถึง ".$count." จากทั้งหมด ".$total_data." รายการ"; ?></span>
-                    <ul class="pagination pagination-md pull-right" style="margin:0px;">
+                        <span class="pull-left">
+                            <?php 
+                            if($total_data != 0){ $start_count++; }
+                            else { $start_count= 0; }
+
+                            echo "แสดง ".$start_count." ถึง ".$count." จากทั้งหมด ".$total_data." รายการ"; 
+                            ?>
+                        </span>
+                        <ul class="pagination pagination-md pull-right" style="margin:0px;">
                         <?php
                         if($total_page > 1)
                         {
