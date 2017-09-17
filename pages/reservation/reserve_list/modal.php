@@ -8,9 +8,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title"><i class="fa fa-file-text fa-fw"></i>รายละเอียดการจองรถยนต์</h4>
       </div>
-      <div class="modal-body">
-        <div id="show_reservation_detail"  class="table-responsive">
-        </div>
+      <div class="modal-body" id="show_reservation_detail">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>

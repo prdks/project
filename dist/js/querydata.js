@@ -10,7 +10,19 @@ $(document).ready(function() {
                 $('.detail_car_modal').html(data);
             }
         });
-
     });
+
+    $('.handleRerserveDetail').click(function () {
+        var id = $(this).attr('data-id');
+        $.ajax({
+            type: "POST",
+            url: "reservation/controller.php",
+            data: { id: id, mode: 'getTableDetail' },
+            success: function(data) {
+                $('#show_reservation_detail').html(data);
+            }
+        });
+    });
+
 
 });

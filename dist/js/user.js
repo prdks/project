@@ -1,4 +1,22 @@
 $(document).ready(function() {
+
+    $('.handleUserRerserveDetail').click(function () {
+        var id = $(this).attr('data-id');
+        $.ajax({
+            type: "POST",
+            url: "reservation/controller.php",
+            data: { id: id, mode: 'getTableDetail' },
+            success: function(data) {
+                $('#show_detail_user').html(data);
+            },
+            error : function(data) { console.log(data)}
+        });
+
+        $('#printpdf').attr('href', 'form_with_data.php?id='+id)
+        $('#printpdf').attr('target', '_blank')
+        
+    });
+
     $("button[id$='cancel_btn']").click(function() {
         window.location.href = "index.php"
     });
