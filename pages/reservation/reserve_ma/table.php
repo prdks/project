@@ -169,10 +169,10 @@ switch ($_SESSION['user_type']) {
                 data-toggle="modal" data-target="#RMA_delete_modal" data-id="<?php echo $row["reservation_id"];?>">
                   <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
                 </button>
-          
-                <a href="form_with_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+      
+                <button data-toggle="modal" data-target="#modal-print-form" class="btn btn-sm btn-info handlePrint" data-id="<?php echo $row["reservation_id"];?>">
                   <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
-                </a>
+                </button>
               </td>
               </tr>
                 <?php
@@ -342,10 +342,10 @@ switch ($_SESSION['user_type']) {
                 data-toggle="modal" data-target="#RMA_delete_modal" data-id="<?php echo $row["reservation_id"];?>">
                   <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
                 </button>
-          
-                <a href="form_with_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+      
+                <button data-toggle="modal" data-target="#modal-print-form" class="btn btn-sm btn-info handlePrint" data-id="<?php echo $row["reservation_id"];?>">
                   <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
-                </a>
+                </button>
               </td>
               </tr>
                 <?php
@@ -537,10 +537,10 @@ switch ($_SESSION['user_type']) {
             data-toggle="modal" data-target="#RMA_delete_modal" data-id="<?php echo $row["reservation_id"];?>">
               <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
             </button>
-      
-            <a href="form_with_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+  
+            <button data-toggle="modal" data-target="#modal-print-form" class="btn btn-sm btn-info handlePrint" data-id="<?php echo $row["reservation_id"];?>">
               <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
-            </a>
+            </button>
           </td>
           </tr>
             <?php
@@ -716,10 +716,10 @@ switch ($_SESSION['user_type']) {
           data-toggle="modal" data-target="#RMA_delete_modal" data-id="<?php echo $row["reservation_id"];?>">
             <span class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></span>
           </button>
-    
-          <a href="form_with_data.php?id=<?php echo $row["reservation_id"];?>" target="_blank" class="btn btn-sm btn-info">
+
+          <button data-toggle="modal" data-target="#modal-print-form" class="btn btn-sm btn-info handlePrint" data-id="<?php echo $row["reservation_id"];?>">
             <span class="fa fa-print" data-toggle="tooltip" data-placement="top" title="พิมพ์ใบขอนุมัติ"></span>
-          </a>
+          </button>
         </td>
         </tr>
           <?php

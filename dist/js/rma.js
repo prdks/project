@@ -891,5 +891,21 @@ $(document).ready(function() {
         x--;
     });
 
+    $('.handlePrint').click(function () {
+        var id = $(this).attr('data-id')
+        $('#hidden_id_for_print').val(id)
+    });
 
+    $('#linktoprint').click(function () {
+        var mode = $('#mode_for_print').val()
+        var id = $('#hidden_id_for_print').val()
+        var url
+        if(mode == 0){ url = 'form_without_data.php?id='+id;}
+        if(mode == 1){ url = 'form_with_data.php?id='+id;}
+        if(mode == 2){ url = 'form_without_data_noQR.php?id='+id;}
+        if(mode == 3){ url = 'form_with_data_noQR.php?id='+id;}
+
+        $(this).attr('href',url)
+        $(this).attr('target', '_blank')
+    });
 });

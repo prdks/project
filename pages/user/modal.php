@@ -13,7 +13,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
         <a id="printpdf">
-          <button type="button" class="btn btn-primary"><i class="fa fa-print"></i> พิมพ์บันทึกข้อความ</button>
+          <button type="button" class="btn btn-primary"><i class="fa fa-print"></i> พิมพ์ใบขออนุมัติ</button>
         </a>
       </div>
     </div>

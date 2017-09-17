@@ -73,11 +73,10 @@ if (isset($_GET['id']))
 	</style>
 </head>
 <body>
-	<table width="80%" border="0" align="center" height="50">
-	  <tbody>
-			<tr>
-	    <td width="12%" height="50" align="center"><img src="viewqrcode.php?id=<?php echo $id;?>" width="65" height="65"></td>
-	    <td width="68%" height="50">
+<table width="80%" border="0" align="center" height="50">
+<tbody>
+	  <tr>
+  <td width="100%">
 	      <div align="center"><h3>ใบขออนุมัติใช้รถยนต์<?php echo $_SESSION['system_name'];?></h3></div>
 	    </td>
 	  	</tr>

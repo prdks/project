@@ -149,37 +149,34 @@ if (isset($_GET['id']))
 	</tr>
 	<!-- ประโยคต้นคำร้อง -->
 	<tr>
-		<td colspan="20">
-		<pre style="text-align: justify;">
-		ขออนุญาตใช้รถยนต์<?php echo $_SESSION['system_name']; ?> พร้อมพนักงานขับรถยนต์
-			&nbsp;เพื่อเดินทางไปที่ 
-			<?php 
-			$location = $row['location']; 
-			$arrLocation = explode(",", $location);
-			foreach ($arrLocation as $key => $value) 
-			{
-			  echo ($key+1).".".$value."  ";
-			}
-			?>
-			&nbsp;สำหรับปฏิบัติราชการ <?php echo $row['requirement_detail']; ?>
+	<td colspan="20" style="word-wrap:break-word;text-align: justify;">
+	ขออนุญาตใช้รถยนต์<?php echo $_SESSION['system_name']; ?> พร้อมพนักงานขับรถยนต์ เพื่อเดินทางไปที่
+	<?php 
+		$location = $row['location']; 
+		$arrLocation = explode(",", $location);
+		foreach ($arrLocation as $key => $value) 
+		{
+		  echo ($key+1).".".$value."  ";
+		}
+		?>
+		สำหรับปฏิบัติราชการ <?php echo $row['requirement_detail']; ?>
+		<?php
+		if ($row['date_start'] === $row['date_end']) //ถ้าไปวันเดียว
+		{
+			?>ในวันที่ <?php echo DateThai($row['date_start']); ?>
+			ตั้งแต่เวลา <?php echo TimeThai($row['reserv_stime'])." ถึง ".TimeThai($row['reserv_etime']); ?>
 			<?php
-			if ($row['date_start'] === $row['date_end']) //ถ้าไปวันเดียว
-			{
-				?>ในวันที่ <?php echo DateThai($row['date_start']); ?>
-				ตั้งแต่เวลา <?php echo TimeThai($row['reserv_stime'])." ถึง ".TimeThai($row['reserv_etime']); ?>
-				<?php
-			}
-			else //หลายวัน
-			{
-				?>ในวันที่ <?php echo DateThai($row['date_start']); ?>
-				เวลา <?php echo TimeThai($row['reserv_stime']); ?>
-				ถึงวันที่ <?php echo DateThai($row['date_end']); ?>
-				เวลา <?php echo TimeThai($row['reserv_etime']); ?>
-				<?php
-			}
-			?>
-		</pre>
-		</td>
+		}
+		else //หลายวัน
+		{
+			?>ในวันที่ <?php echo DateThai($row['date_start']); ?>
+			เวลา <?php echo TimeThai($row['reserv_stime']); ?>
+			ถึงวันที่ <?php echo DateThai($row['date_end']); ?>
+			เวลา <?php echo TimeThai($row['reserv_etime']); ?>
+			<?php
+		}
+		?>
+	</td>
 	</tr>
 	<!-- รายชื่อคนไป -->
 	<?php
@@ -271,7 +268,11 @@ if (isset($_GET['id']))
 		<td width="100%" align="right">
 			ลงชื่อ
 			&nbsp;&nbsp;
-			.......................................
+			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+			<?php 
+			for ($i=0; $i < 45; $i++) { echo "&nbsp;";}
+			?>
+			</u>
 			&nbsp;&nbsp;
 			ผู้ขออนุมัติ
 		</td>
@@ -290,10 +291,10 @@ if (isset($_GET['id']))
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tbody>
 	<tr>
-		<td width="40%" align="right">
-			(..........................................)&nbsp;
+		<td width="54%"></td>
+		<td width="50%" align="center">
+			(<?php echo $row['title_name'].$row['personnel_name'];?>)&nbsp;
 		</td>
-		<td width="4%"></td>
 	</tr>
 </tbody>
 </table>
@@ -376,71 +377,62 @@ if($row['reservation_status'] == 2 || $row['reservation_status'] == 3 )
 		<tr>
 			<td width="70%"></td>
 			<td width="24%" align="center">
-			<?php echo $note[0];?>
+			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+			&nbsp;&nbsp;&nbsp;<?php echo $note[0];?>&nbsp;&nbsp;&nbsp;
+			</u>
 			</td>
 			<td width="16%"></td>
 		</tr>
 	</tbody>
 	</table>
+	<?php
+}
 
-	<table width="100%" border="0" cellpadding="0" cellspacing="0">
-	<tbody>
-		<tr>
-			<td width="70%"></td>
-			<td width="24%" align="right">
-			.......................................
-			</td>
-			<td width="16%"></td>
-		</tr>
-	</tbody>
-	</table>
-	<?php
-}
-else
-{
-	?>
-	<table width="100%" border="0" cellpadding="0" cellspacing="0">
-	<tbody>
-		<tr>
-			<td width="70%"></td>
-			<td width="24%" align="right">
-			.......................................
-			</td>
-			<td width="16%"></td>
-		</tr>
-	</tbody>
-	</table>
-	<?php
-}
 ?>
 
-
-
-<table width="100%" border="0" align="center" cellpadding="0">
-<tbody>
-	<tr>
-    <td colspan="2" height="10">&nbsp;</td>
-  </tr>
-</tbody>
-</table>
-
-<table width="100%" border="0" align="center" cellpadding="0">
+<table width="100%" border="0" align="center" style="padding-buttom:10px; padding-top:20px;">
 <tbody>
 	<tr>
 		<td width="7%"></td>
-		<td width="63%">.......................................</td>
-		<td width="24%" align="right">.......................................</td>
-		<td width="16%"></td>
+		<td width="62%">
+			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+			<?php 
+			for ($i=0; $i < 45; $i++) { echo "&nbsp;";}
+			?>
+			</u>
+		</td>
+		<td width="24%" align="right">
+			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+			<?php 
+			for ($i=0; $i < 45; $i++) { echo "&nbsp;";}
+			?>
+			</u>
+		</td>
+		<td width="15%"></td>
   </tr>
 </tbody>
 </table>
+
+
 
 <table width="100%" border="0" align="center" cellpadding="5">
 <tbody>
 	<tr>
-		<td width="6%"></td>
-		<td width="64%">(.....................................)</td>
-		<td width="25%" align="right">(.....................................)</td>
+		<td width="5%"></td>
+		<td width="60%">
+			(&nbsp;<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+			<?php 
+			for ($i=0; $i < 40; $i++) { echo "&nbsp;";}
+			?>
+			</u>&nbsp;)
+		</td>
+		<td width="30%" align="right">
+			(&nbsp;<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+			<?php 
+			for ($i=0; $i < 40; $i++) { echo "&nbsp;";}
+			?>
+			</u>&nbsp;)
+		</td>
 		<td width="15%"></td>
   </tr>
 </tbody>
@@ -465,7 +457,17 @@ else
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tbody>
 	<tr>
-		<td width="95%" align="right">วันที่.......................................</td>
+		<td width="95%" align="right">
+		วันที่
+		<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+		<?php 
+		for ($i=0; $i < 45; $i++) { 
+			if($i == 15 || $i == 30){ echo "/";}
+			echo "&nbsp;";
+		}
+		?>
+		</u>
+		</td>
 		<td width="5%"></td>
 	</tr>
 </tbody>
@@ -495,8 +497,9 @@ if ($row['date_start'] === $row['date_end']) //ถ้าไปวันเดี
 <tbody>
 	<tr>
 		<td width="50%">รถยนต์ หมายเลขทะเบียน <?php echo $row['car_reg']; ?></td>
-		<td width="45%" align="right">วันที่ ......................................</td>
-		<td width="5%"></td>
+		<td width="45%" align="right">
+		วันที่ ......................................
+		</td>
 	</tr>
 </tbody>
 </table>
@@ -506,7 +509,6 @@ if ($row['date_start'] === $row['date_end']) //ถ้าไปวันเดี
 	<tr>
 		<td width="50%">เวลาออก ........................................................... น.</td>
 		<td width="45%" align="right">เลขกิโลเมตรเมื่อออก .....................................</td>
-		<td width="5%"></td>
 	</tr>
 </tbody>
 </table>
@@ -516,7 +518,6 @@ if ($row['date_start'] === $row['date_end']) //ถ้าไปวันเดี
 	<tr>
 		<td width="50%">เวลากลับ ........................................................... น.</td>
 		<td width="45%" align="right">เลขกิโลเมตรเมื่อกลับ .....................................</td>
-		<td width="5%"></td>
 	</tr>
 </tbody>
 </table>
@@ -548,7 +549,6 @@ else
 			<td width="25%">วันที่ ................................</td>
 			<td width="25%">เวลาออก ..................... น.</td>
 			<td width="45%" align="right">เลขกิโลเมตรเมื่อออก .....................................</td>
-			<td width="5%"></td>
 		</tr>
 	</tbody>
 	</table>
@@ -559,7 +559,6 @@ else
 			<td width="25%">วันที่ ................................</td>
 			<td width="25%">เวลากลับ ..................... น.</td>
 			<td width="45%" align="right">เลขกิโลเมตรเมื่อกลับ .....................................</td>
-			<td width="5%"></td>
 		</tr>
 	</tbody>
 	</table>
@@ -588,7 +587,6 @@ else
 	<tr>
 		<td width="50%"></td>
 		<td width="45%" align="right">(ลายมือชื่อ).......................................</td>
-		<td width="5%"></td>
   </tr>
 </tbody>
 </table>

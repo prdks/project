@@ -76,8 +76,7 @@ if (isset($_GET['id']))
 	<table width="80%" border="0" align="center" height="50">
 	  <tbody>
 			<tr>
-	    <td width="12%" height="50" align="center"><img src="viewqrcode.php?id=<?php echo $id;?>" width="65" height="65"></td>
-	    <td width="68%" height="50">
+	    <td width="100%">
 	      <div align="center"><h3>ใบขออนุมัติใช้รถยนต์<?php echo $_SESSION['system_name'];?></h3></div>
 	    </td>
 	  	</tr>
@@ -149,34 +148,34 @@ if (isset($_GET['id']))
 	</tr>
 	<!-- ประโยคต้นคำร้อง -->
 	<tr>
-		<td colspan="20" style="word-wrap:break-word;text-align: justify;">
-		ขออนุญาตใช้รถยนต์<?php echo $_SESSION['system_name']; ?> พร้อมพนักงานขับรถยนต์ เพื่อเดินทางไปที่
-		<?php 
-			$location = $row['location']; 
-			$arrLocation = explode(",", $location);
-			foreach ($arrLocation as $key => $value) 
-			{
-			  echo ($key+1).".".$value."  ";
-			}
-			?>
-			สำหรับปฏิบัติราชการ <?php echo $row['requirement_detail']; ?>
+	<td colspan="20" style="word-wrap:break-word;text-align: justify;">
+	ขออนุญาตใช้รถยนต์<?php echo $_SESSION['system_name']; ?> พร้อมพนักงานขับรถยนต์ เพื่อเดินทางไปที่
+	<?php 
+		$location = $row['location']; 
+		$arrLocation = explode(",", $location);
+		foreach ($arrLocation as $key => $value) 
+		{
+		  echo ($key+1).".".$value."  ";
+		}
+		?>
+		สำหรับปฏิบัติราชการ <?php echo $row['requirement_detail']; ?>
+		<?php
+		if ($row['date_start'] === $row['date_end']) //ถ้าไปวันเดียว
+		{
+			?>ในวันที่ <?php echo DateThai($row['date_start']); ?>
+			ตั้งแต่เวลา <?php echo TimeThai($row['reserv_stime'])." ถึง ".TimeThai($row['reserv_etime']); ?>
 			<?php
-			if ($row['date_start'] === $row['date_end']) //ถ้าไปวันเดียว
-			{
-				?>ในวันที่ <?php echo DateThai($row['date_start']); ?>
-				ตั้งแต่เวลา <?php echo TimeThai($row['reserv_stime'])." ถึง ".TimeThai($row['reserv_etime']); ?>
-				<?php
-			}
-			else //หลายวัน
-			{
-				?>ในวันที่ <?php echo DateThai($row['date_start']); ?>
-				เวลา <?php echo TimeThai($row['reserv_stime']); ?>
-				ถึงวันที่ <?php echo DateThai($row['date_end']); ?>
-				เวลา <?php echo TimeThai($row['reserv_etime']); ?>
-				<?php
-			}
-			?>
-		</td>
+		}
+		else //หลายวัน
+		{
+			?>ในวันที่ <?php echo DateThai($row['date_start']); ?>
+			เวลา <?php echo TimeThai($row['reserv_stime']); ?>
+			ถึงวันที่ <?php echo DateThai($row['date_end']); ?>
+			เวลา <?php echo TimeThai($row['reserv_etime']); ?>
+			<?php
+		}
+		?>
+	</td>
 	</tr>
 	<!-- รายชื่อคนไป -->
 	<?php
@@ -324,10 +323,34 @@ if (isset($_GET['id']))
 		<td width="7%"></td>
 		<td width="57%">เพื่อโปรดพิจารณาอนุมัติรถยนต์หมายเลขทะเบียน</td>
 		<td width="15%" align="right">
-                &#9723; อนุมัติ
+			<?php 
+			if($row['reservation_status'] == 1)
+			{
+				?>
+				&#9745; อนุมัติ
+				<?php
+			}
+			else{
+				?>
+				&#9723; อนุมัติ
+				<?php
+			}
+			?>
 		</td>
 		<td width="15%" align="right">
-		        &#9723; ไม่อนุมัติ
+		<?php 
+			if($row['reservation_status'] == 2 || $row['reservation_status'] == 3 )
+			{
+				?>
+				&#9745; ไม่อนุมัติ
+				<?php
+			}
+			else{
+				?>
+				&#9723; ไม่อนุมัติ
+				<?php
+			}
+			?>
 		</td>
 		<td width="17%"></td>
 	</tr>
@@ -343,107 +366,111 @@ if (isset($_GET['id']))
 </tbody>
 </table>
 
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
-	<tbody>
-		<tr>
-			<td width="70%"></td>
-			<td width="24%" align="right">
-			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
-			<?php 
-			for ($i=0; $i < 40; $i++) { echo "&nbsp;";}
-			?>
-			</u>
-			</td>
-			<td width="15%"></td>
-		</tr>
-	</tbody>
-	</table>
-
-
-
-
-	<table width="100%" border="0" align="center" style="padding-buttom:10px; padding-top:20px;">
-	<tbody>
-		<tr>
-			<td width="7%"></td>
-			<td width="62%">
-				<u style="border-bottom: 1px dotted #000;text-decoration: none;">
-				<?php 
-				for ($i=0; $i < 45; $i++) { echo "&nbsp;";}
-				?>
-				</u>
-			</td>
-			<td width="24%" align="right">
-				<u style="border-bottom: 1px dotted #000;text-decoration: none;">
-				<?php 
-				for ($i=0; $i < 45; $i++) { echo "&nbsp;";}
-				?>
-				</u>
-			</td>
-			<td width="15%"></td>
-	  </tr>
-	</tbody>
-	</table>
-	
-	
-	
-	<table width="100%" border="0" align="center" cellpadding="5">
-	<tbody>
-		<tr>
-			<td width="5%"></td>
-			<td width="60%">
-				(&nbsp;<u style="border-bottom: 1px dotted #000;text-decoration: none;">
-				<?php 
-				for ($i=0; $i < 40; $i++) { echo "&nbsp;";}
-				?>
-				</u>&nbsp;)
-			</td>
-			<td width="30%" align="right">
-				(&nbsp;<u style="border-bottom: 1px dotted #000;text-decoration: none;">
-				<?php 
-				for ($i=0; $i < 40; $i++) { echo "&nbsp;";}
-				?>
-				</u>&nbsp;)
-			</td>
-			<td width="15%"></td>
-	  </tr>
-	</tbody>
-	</table>
-	
-	<table width="100%" border="0" align="center" cellpadding="0">
-	<tbody>
-		<tr>
-			<td width="7%"></td>
-			<td width="43%">ตำแหน่ง หัวหน้าสำนักคณบดี</td>
-			<td width="50%" align="right">ตำแหน่ง คณบดี/รองคณบดีปฏิบัติราชการแทนคณบดี</td>
-	  </tr>
-	</tbody>
-	</table>
-	
-	<table width="100%" border="0" align="center" cellpadding="5">
-	<tbody>
-		<tr><td></td></tr>
-	</tbody>
-	</table>
-	
+<?php 
+if($row['reservation_status'] == 2 || $row['reservation_status'] == 3 )
+{
+	$note = explode(",",$row['reserve_note']);
+	?>
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
 		<tr>
-			<td width="95%" align="right">
-			วันที่
+			<td width="70%"></td>
+			<td width="24%" align="center">
 			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
-			<?php 
-			for ($i=0; $i < 45; $i++) { 
-				if($i == 15 || $i == 30){ echo "/";}
-				echo "&nbsp;";
-			}
-			?>
+			&nbsp;&nbsp;&nbsp;<?php echo $note[0];?>&nbsp;&nbsp;&nbsp;
 			</u>
 			</td>
-			<td width="5%"></td>
+			<td width="16%"></td>
 		</tr>
 	</tbody>
 	</table>
+	<?php
+}
+
+?>
+
+<table width="100%" border="0" align="center" style="padding-buttom:10px; padding-top:20px;">
+<tbody>
+	<tr>
+		<td width="7%"></td>
+		<td width="62%">
+			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+			<?php 
+			for ($i=0; $i < 45; $i++) { echo "&nbsp;";}
+			?>
+			</u>
+		</td>
+		<td width="24%" align="right">
+			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+			<?php 
+			for ($i=0; $i < 45; $i++) { echo "&nbsp;";}
+			?>
+			</u>
+		</td>
+		<td width="15%"></td>
+  </tr>
+</tbody>
+</table>
+
+
+
+<table width="100%" border="0" align="center" cellpadding="5">
+<tbody>
+	<tr>
+		<td width="5%"></td>
+		<td width="60%">
+			(&nbsp;<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+			<?php 
+			for ($i=0; $i < 40; $i++) { echo "&nbsp;";}
+			?>
+			</u>&nbsp;)
+		</td>
+		<td width="30%" align="right">
+			(&nbsp;<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+			<?php 
+			for ($i=0; $i < 40; $i++) { echo "&nbsp;";}
+			?>
+			</u>&nbsp;)
+		</td>
+		<td width="15%"></td>
+  </tr>
+</tbody>
+</table>
+
+<table width="100%" border="0" align="center" cellpadding="0">
+<tbody>
+	<tr>
+		<td width="7%"></td>
+		<td width="43%">ตำแหน่ง หัวหน้าสำนักคณบดี</td>
+		<td width="50%" align="right">ตำแหน่ง คณบดี/รองคณบดีปฏิบัติราชการแทนคณบดี</td>
+  </tr>
+</tbody>
+</table>
+
+<table width="100%" border="0" align="center" cellpadding="5">
+<tbody>
+	<tr><td></td></tr>
+</tbody>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+	<tr>
+		<td width="95%" align="right">
+		วันที่
+		<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+		<?php 
+		for ($i=0; $i < 45; $i++) { 
+			if($i == 15 || $i == 30){ echo "/";}
+			echo "&nbsp;";
+		}
+		?>
+		</u>
+		</td>
+		<td width="5%"></td>
+	</tr>
+</tbody>
+</table>
 
 <table width="100%" border="0" align="center" cellpadding="0">
 <tbody>
@@ -452,7 +479,6 @@ if (isset($_GET['id']))
     </tr>
 </tbody>
 </table>
-
 
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tbody>

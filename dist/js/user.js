@@ -12,8 +12,8 @@ $(document).ready(function() {
             error : function(data) { console.log(data)}
         });
 
-        $('#printpdf').attr('href', 'form_with_data.php?id='+id)
-        $('#printpdf').attr('target', '_blank')
+        $('#printpdf').attr('href', 'form_without_data.php?id='+id)
+        $('#printpdf').attr('target', '_blank') 
         
     });
 
