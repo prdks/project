@@ -73,7 +73,7 @@
             ?>
           </td>
           <td class="text-center"><?php echo date("H:i",strtotime($row["reserv_stime"]))." - ".date("H:i",strtotime($row["reserv_etime"]))."น.";?></td>
-          <td><?php echo $row["requirement_detail"]; ?></td>
+          <td class="detail_colum" ><?php echo $row["requirement_detail"]; ?></td>
           <td class="text-center"><?php echo $row["car_reg"]; ?></td>
           <td class="text-center">
         <?php
@@ -227,7 +227,7 @@ else
             ?>
           </td>
           <td class="text-center"><?php echo date("H:i",strtotime($row["reserv_stime"]))." - ".date("H:i",strtotime($row["reserv_etime"]))."น.";?></td>
-          <td><?php echo $row["requirement_detail"]; ?></td>
+          <td class="detail_colum" ><?php echo $row["requirement_detail"]; ?></td>
           <td class="text-center"><?php echo $row["car_reg"]; ?></td>
           <td class="text-center">
         <?php

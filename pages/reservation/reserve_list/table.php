@@ -34,7 +34,7 @@ if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
     <tr id="<?php echo $row["reservation_id"];?>">
       <td class="text-center"><?php echo DateThai($row["date_start"]) ?></td>
       <td class="text-center"><?php echo date("H:i",strtotime($row["reserv_stime"]))." - ".date("H:i",strtotime($row["reserv_etime"]))."น."; ?></td>
-      <td><?php echo $row["requirement_detail"]; ?></td>
+      <td class="detail_colum" ><?php echo $row["requirement_detail"]; ?></td>
       <td class="text-center"><?php echo $row["car_reg"]; ?></td>
       <td class="text-center">
     <?php

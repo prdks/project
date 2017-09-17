@@ -805,7 +805,7 @@ $(document).ready(function() {
                         type: "success",
                         timer: 2000,
                         showConfirmButton: false,
-                    });
+                    },function(){ location.reload(); });
                 } else if (data.result === 'error') {
                     swal({
                         title: "ไม่สามารถแก้ไขข้อมูลได้<br>กรุณาทำรายการใหม่",
@@ -814,7 +814,7 @@ $(document).ready(function() {
                         timer: 2000,
                         showConfirmButton: false,
                         html: true,
-                    });
+                    },function(){ location.reload(); });
                 }
             },
             error: function(data) { console.log(data) }

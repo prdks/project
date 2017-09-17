@@ -26,22 +26,106 @@ if ($mode == 'getDetail')
     if($row['picture_3'] !== null){$pic3 = 1;}else{$pic3 = 0;}
     if($row['picture_4'] !== null){$pic4 = 1;}else{$pic4 = 0;}
 
-    $arr = array(
-              'reg' => $row['car_reg'],
-              'brand' => $row['car_brand_name'],
-              'kind' => $row['car_kind'],
-              'detail' => $row['car_detail'],
-              'seat' => $row['seat'],
-              'driver' => $row['personnel_name'],
-              'department' => $row['department_name'],
-              'status' => $row['status'],
-              'pic1' => $pic1,
-              'pic2' => $pic2,
-              'pic3' => $pic3,
-              'pic4' => $pic4,
-              'note' => $row['note']
-            );
-    echo json_encode($arr);
+    ?>
+    <table class="table table-bordered">
+    <!-- ทะเบียนรถยนต์ -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ทะเบียนรถยนต์ :</td>
+    <td><?php echo $row['car_reg']; ?></td>
+    </tr>
+    <!-- ยี่ห้อ -->
+    <tr>
+    <td class="field-label col-xs-3 topic">ยี่ห้อ :</td>
+    <td><?php echo $row['car_brand_name']; ?></td>
+    </tr>
+    <!-- รุ่น -->
+    <tr>
+    <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 topic">รุ่น :</td>
+    <td><?php echo $row['car_kind'];?></td>
+    </tr>
+    <!-- รายละเอียด  -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">รายละเอียด :</td>
+    <td class="detail_colum_indetail">
+    <?php
+    if($row['car_detail'] !== "" || $row['car_detail'] != NULL){ echo $row['car_detail']; }
+    else { echo "-";}
+    ?>
+    </td>
+    </tr>
+    <!-- จำนวนที่นั่ง -->
+    <tr>
+    <td class="field-label col-xs-3 topic">จำนวนที่นั่ง :</td>
+    <td><?php echo $row['seat']?> ที่นั่ง</td>
+    </tr>
+    <!-- คนขับรถยนต์ -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">คนขับรถยนต์ :</td>
+    <td><?php echo $row['personnel_name']; ?></td>
+    </tr>
+    <!-- สังกัดหน่วยงาน -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">สังกัดหน่วยงาน :</td>
+    <td><?php echo $row['department_name']; ?></td>
+    </tr>
+    <!-- สถานะรถยนต์ -->
+    <?php if ($row['status'] === 'จองได้')
+    {
+      ?>
+      <tr>
+      <td class="field-label col-xs-3 topic">สถานะรถยนต์ :</td>
+      <td>
+      <span class='label label-md label-success'>จองได้</span>
+      </td>
+      </tr>
+      <?php
+    }
+    else
+    {
+      ?>
+      <tr>
+      <td class="field-label col-xs-3 topic">สถานะรถยนต์ :</td>
+      <td>
+      <span class='label label-md label-danger'>งดจอง</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="field-label col-xs-3 topic text-danger">หมายเหตุ :</td>
+      <td class="text-danger"><?php echo $row['note'];?></td>
+      </tr>
+      <?php
+    }
+    
+    $state_pic = 0;
+    $str_pic = '<div class="table-responsive"><table><tr><td class="child">';
+    if ($pic1 != 0) {$state_pic++; $str_pic .= '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=1&id=' . $id . '"></section></td>'; }
+    if ($pic2 != 0) {$state_pic++; $str_pic .= '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=2&id=' . $id . '"></section></td>'; }
+    if ($pic3 != 0) {$state_pic++; $str_pic .= '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=3&id=' . $id . '"></section></td>'; }
+    if ($pic4 != 0) {$state_pic++; $str_pic .= '<td><section class="contain"><img src="viewimg.php?mode=car&imgindex=4&id=' . $id . '"></section></td>'; }
+    $str_pic .= '</td></tr><table></div>';
+    if($state_pic > 0)
+    {
+      ?>
+      <!-- รูปรถยนต์ -->
+      <tr>
+      <td class="field-label col-xs-3 topic">รูปภาพรถยนต์ :</td>
+      <td class="detail_colum"><?php echo $str_pic;?></td>
+      </tr>
+      <?php
+    }
+    else 
+    {
+      ?>
+      <!-- รูปรถยนต์ -->
+      <tr>
+      <td class="field-label col-xs-3 topic">รูปภาพรถยนต์ :</td>
+      <td class="detail_colum">-</td>
+      </tr>
+      <?php
+    }
+    ?>
+  </table>
+    <?php
 
 }
 elseif ($mode == 'getEdit')

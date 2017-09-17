@@ -789,6 +789,260 @@ elseif ($mode == 'getCars_For_Edit')
       echo json_encode(array('result' => 'error'));
     }
   }
+  elseif ($mode == 'getTableDetail_Minimal') 
+  {
+    function TimeThai($strDate)
+    {
+      $strYear = date("Y",strtotime($strDate))+543;
+      $strMonth= date("n",strtotime($strDate));
+      $strDay= date("j",strtotime($strDate));
+      $strHour= date("H",strtotime($strDate));
+      $strMinute= date("i",strtotime($strDate));
+      $strSeconds= date("s",strtotime($strDate));
+      $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+      $strMonthThai=$strMonthCut[$strMonth];
+      return "$strHour:$strMinute"."น.";
+    }
+
+    $sql = "
+    SELECT * FROM reservation r
+    LEFT JOIN cars c
+    ON r.car_id = c.car_id
+    LEFT JOIN car_brand b
+    ON c.car_brand_id = b.car_brand_id
+    LEFT JOIN personnel p
+    ON r.personnel_id = p.personnel_id
+    LEFT JOIN title_name t
+    ON p.title_name_id = t.title_name_id
+    WHERE r.reservation_id = '".$_POST['id']."'";
+
+    $result = $conn->query($sql);
+    while ($row = $result->fetch_assoc())
+    {
+      $id = $row['reservation_id']; //ไอดีการจอง
+      $title = TimeThai($row['reserv_stime'])."(".$row['car_brand_name']." ".$row['seat']." ที่นั่ง) - ".$row['requirement_detail']; //title
+      $detail = $row['requirement_detail']; //รายละเอียดการจอง
+      $location = $row['location']; //สถานที่
+
+      /*การจัดการวันที่จอง*/
+      $start = $row['date_start']; //วันแรกที่จองใช้รถ
+      $end = $row['date_end']; //วันสุดท้ายที่จองใช้รถ
+      $timestart = $row['reserv_stime']; //ช่วงเวลาเริ่ม
+      $timeend = $row['reserv_etime']; //ช่วงเวลาสิ้นสุด
+      if ($row['date_start'] === $row['date_end']) {
+        $reservation_date = DateThai($row['date_start'])." เวลา ".TimeThai($row['reserv_stime'])." - ".TimeThai($row['reserv_etime']);
+      }else {
+        $reservation_date = DateThai($row['date_start'])."เวลา ".TimeThai($row['reserv_stime'])." ถึง ".DateThai($row['date_end'])." เวลา ".TimeThai($row['reserv_etime']);
+      }
+      if ($start !== $end) {$allday = true;}
+      else {$allday = false;}
+
+      /*สถานที่นัดหมาย*/
+      if ($row['appointment_place'] == null) {$appointment = 'ยังไม่กำหนด';}
+      else {$appointment = $row['appointment_place'];}
+
+      /*สถานะการจอง*/
+      if ($row['reservation_status'] == 0) {$rstatus = '<span class="label label-md label-primary">รออนุมัติ</span>'; $colorRStatus = '#428bca';}
+      elseif ($row['reservation_status'] == 1) {$rstatus = '<span class="label label-md label-success">อนุมัติ</span>'; $colorRStatus = '#5cb85c';}
+      elseif ($row['reservation_status'] == 2) {$rstatus = '<span class="label label-md label-danger">ไม่อนุมัติ</span>'; $colorRStatus = '#d9534f';}
+      elseif ($row['reservation_status'] == 3) {$rstatus = '<span class="label label-md label-danger">ยกเลิก</span>'; $colorRStatus = '#d9534f';}
+
+      /*สถานะการใช้*/
+      if ($row['usage_status'] == 0) {$ustatus = 'รออนุมัติ';}
+      elseif ($row['usage_status'] == 1) {$ustatus = 'กำลังดำเนินการ';}
+      elseif ($row['usage_status'] == 2) {$ustatus = 'ดำเนินการเสร็จสิ้น';}
+      elseif ($row['usage_status'] == 3) {$ustatus = 'ยกเลิก'; $colorRStatus = '#d9534f';}
+
+      /*่หมายเหตุการยกเลิก*/
+      if ($row['reserve_note'] != '' || $row['reserve_note'] != NULL) {$note = str_replace(","," ",$row['reserve_note']);}
+      elseif($row['reserve_note'] == '' || $row['reserve_note'] == NULL) {$note = "-";}
+      $timestamp = DateTimeThai($row['timestamp']); //วันที่ทำรายการ
+
+      /*ข้อมูลคนทำรายการ*/
+      $person = $row['title_name'].$row['personnel_name']; //ชื่อคนทำรายการ
+      $tel = $row['phone_number']; //เบอร์โทรศัพท์
+
+
+      /*ข้อมูลรถยนต์ที่จอง*/
+      $car_reg = $row['car_reg']; //เลขทะเบียน
+      $car_brand = $row['car_brand_name']; //ยี่ห้อรถยนต์
+      $car_kind = $row['car_kind']; //รุ่นรถยนต์
+      $seat = $row['seat']; //จำนวนที่นั่ง
+
+      /*ผู้โดยสาร*/
+      $passener_name = array();
+      $passenger_department = array();
+
+      $sql_passenger ="
+      SELECT passenger_name , department_id as department FROM passenger
+      WHERE reservation_id = ".$row['reservation_id'];
+      $c = $conn->query($sql_passenger);
+      while($d = $c->fetch_assoc()){
+        array_push($passener_name,$d['passenger_name']);
+        array_push($passenger_department,$d['department']);
+      }
+
+      $allPassenger = "";
+      if(!isset($passener_name))
+      {
+        $allPassenger = "ไม่มีผู้โดยสารเพิ่มเติม";
+      }
+      else 
+      {
+
+        $coutPassenger = sizeof($passener_name);
+        $allPassenger = array();
+        $arrDepartment = array();
+        $arrName = array();
+        $onePassenger = array();
+        $passenger = "";
+    
+        for ($i=0; $i < $coutPassenger ; $i++)
+        {
+          if($passenger_department[$i] !== NULL)
+          {
+            $sql_department = "
+            SELECT department_name FROM department
+            WHERE department_id = ".$passenger_department[$i];
+            $a = $conn->query($sql_department);
+            $b = $a->fetch_assoc();
+
+            $arrDepartment[$i] = "<b>".$b['department_name']."</b><br>";
+            $arrName[$i] = $passener_name[$i]."<br />";
+          }
+          else {
+            $arrDepartment[$i] = "<b>ไม่ระบุหน่วยงาน</b><br>";
+            $arrName[$i] = $passener_name[$i]."<br />";
+          }
+          
+        }
+    
+        $coutInDepartment = array_count_values(array_values($arrDepartment));
+        $nameDepartment = array_values(array_unique($arrDepartment));
+    
+        sort($nameDepartment);
+    
+        $count = 0;
+    
+        for ($a=0; $a < sizeof($nameDepartment); $a++) 
+        { 
+          $name = $nameDepartment[$a];
+          $n = $coutInDepartment[$name];
+          array_push($allPassenger, $name);
+    
+          $passenger = array();
+          for ($b=0; $b < $n ; $b++) 
+          { 
+            array_push($passenger, $arrName[$count]);
+            $count++;
+          }
+          sort($passenger);
+    
+          for ($c=0; $c < sizeof($passenger); $c++) 
+          { 
+            array_push($allPassenger, $passenger[$c]);
+          }
+    
+        }
+    
+      }
+
+      /*คนอนุมัติคนสุดท้าย(จนท.ดูแลรถยนต์)*/
+      if ($row['second_approver_id'] != null)
+      {
+          $sql_approve = "
+          SELECT * FROM personnel p
+          LEFT JOIN reservation r
+          ON r.second_approver_id = p.personnel_id
+          LEFT JOIN title_name t
+          ON p.title_name_id = t.title_name_id
+          WHERE r.second_approver_id = '".$row['second_approver_id']."'";
+          $e = $conn->query($sql_approve);
+          $g = $e->fetch_assoc();
+          $person_approve = $g['title_name'].$g['personnel_name'];
+          $tel_approve = $g['phone_number'];
+          $updateStatus = DateThai($row['update_status_date']); //วันที่แก้ไขล่าสุด
+
+      }else {$person_approve = '-'; $tel_approve = '-'; $updateStatus = '-';}
+
+
+      /*คนขับรถยนต์*/
+      $sql_driver = "
+      SELECT * FROM cars c
+      LEFT JOIN personnel p
+      ON c.personnel_id = p.personnel_id
+      LEFT JOIN title_name t
+      ON p.title_name_id = t.title_name_id
+      WHERE c.car_id =".$row['car_id'];
+      $res = $conn->query($sql_driver);
+      $r = $res->fetch_assoc();
+      $name_driver = $r['title_name'].$r['personnel_name'];
+      $tel_driver = $r['phone_number'];
+
+    ?>
+    <table class="table table-bordered">
+    <!-- ผู้ติดต่อ -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ผู้ติดต่อ :</td>
+    <td><?php echo $person; ?>&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> <?php echo $tel; ?></td>
+    </tr>
+    <!-- วันที่ใช้รถยนต์ -->
+    <tr>
+    <td class="field-label col-xs-3 topic">วันที่ใช้รถยนต์ :</td>
+    <td><?php echo $reservation_date; ?></td>
+    </tr>
+    <!-- จองใช้เพื่อ -->
+    <tr>
+    <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 topic">จองใช้เพื่อ :</td>
+    <td class="detail_colum_indetail"><?php echo $detail;?></td>
+    </tr>
+    <!-- สถานที่จะไป -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">สถานที่จะไป :</td>
+    <td>
+      <?php
+      $arrLocation = explode(",", $location);
+      foreach ($arrLocation as $key => $value) 
+      {
+        echo ($key+1).". ".$value."<br>";
+      }
+       ?>
+    </td>
+    </tr>
+    <!-- รายชื่อผู้โดยสาร -->
+    <tr>
+    <td class="field-label col-xs-3 topic">รายชื่อผู้โดยสาร :</td>
+    <td><dl><?php 
+    foreach ($allPassenger as $key => $value) 
+    {
+      echo  $value;
+    }
+    ?></dl></td>
+    </tr>
+    <!-- ให้รถไปรับที่ -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">ให้รถไปรับที่ :</td>
+    <td><?php echo $appointment; ?></td>
+    </tr>
+    <!-- รถยนต์ที่จอง -->
+    <tr>
+    <td class="field-label col-xs-3 topic">รถยนต์ที่จอง :</td>
+    <td><?php echo $car_reg; ?>/ ยี่ห้อ <?php echo $car_brand; ?> / รุ่น <?php echo $car_kind; ?> / <?php echo $seat; ?> ที่นั่ง </td>
+    </tr>
+    <!-- พนักงานขับรถยนต์ -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">พนักงานขับรถ :</td>
+    <td><?php echo $name_driver; ?>&nbsp;&nbsp;&nbsp;<b>โทรศัพท์</b> <?php echo $tel_driver; ?></td>
+    </tr>
+    <!-- วันที่ทำรายการ -->
+    <tr>
+    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 topic">วันที่ทำรายการ :</td>
+    <td><?php echo $timestamp; ?></td>
+    </tr>
+  </table>
+    <?php
+    }
+  }
   elseif($mode == 'getTableDetail')
   {
     function TimeThai($strDate)

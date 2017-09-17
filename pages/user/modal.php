@@ -6,7 +6,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">รายละเอียดการจองรถยนต์</h4>
+        <h4 class="modal-title"><i class="fa fa-file-text fa-fw"></i>รายละเอียดการจองรถยนต์</h4>
       </div>
       <div class="modal-body">
         <div id="show_detail"  class="table-responsive">

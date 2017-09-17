@@ -6,13 +6,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">รายละเอียดการจองรถยนต์</h4>
+        <h4 class="modal-title"><i class="fa fa-file-text fa-fw"></i>รายละเอียดการจองรถยนต์</h4>
       </div>
 
       <form id="approve_form" class="form-horizontal">
       <div class="modal-body">
-
-        <dl class="dl-horizontal">
+        <div id="detail_area_for_approve"></div>
+        <!-- <dl class="dl-horizontal">
           <dt>จองใช้เพื่อ :</dt>
           <dd id="show-detail"></dd>
           <br />
@@ -36,9 +36,9 @@
           <br />
           <dt>เบอร์โทรศัพท์ :</dt>
           <dd id="show-phone"></dd>
-        </dl>
-        <ul class="nav nav-tabs span2 clearfix"></ul>
-        <br />
+        </dl> -->
+        <!-- <ul class="nav nav-tabs span2 clearfix"></ul>
+        <br /> -->
         
         <div class="row">
           

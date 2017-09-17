@@ -5,6 +5,7 @@
       <?php
         include '_head.php';
       ?>
+        <script src="../dist/js/querydata.js"></script>
 </head>
 
 <body>
