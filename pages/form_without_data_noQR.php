@@ -73,10 +73,10 @@ if (isset($_GET['id']))
 	</style>
 </head>
 <body>
-<table width="80%" border="0" align="center" height="50">
+<table width="80%" border="0" align="center" height="100">
 <tbody>
 	  <tr>
-  <td width="100%">
+  <td width="100%" height="85">
 	      <div align="center"><h3>ใบขออนุมัติใช้รถยนต์<?php echo $_SESSION['system_name'];?></h3></div>
 	    </td>
 	  	</tr>

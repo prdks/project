@@ -101,21 +101,6 @@ $(document).ready(function() {
         });
 
     });
-    $('input[name=kilometer_total]').change(function() {
-        var val = $(this).val();
-        if (val > 0) {
-            $('input[name=reservation_status]').each(function() {
-                if ($(this).val() == 1) {
-                    $(this).click();
-                }
-            });
-            $('input[name=usage_status]').each(function() {
-                if ($(this).val() == 2) {
-                    $(this).click();
-                }
-            });
-        }
-    });
 
     $('input[name=kilometer_out]').change(function() {
         $('input[name=kilometer_in]').prop('min', $(this).val());
@@ -134,6 +119,19 @@ $(document).ready(function() {
         var kout = $('input[name=kilometer_out]').val();
         var kin = $('input[name=kilometer_in]').val();
         $('input[name=kilometer_total]').val(kin - kout);
+
+        if ($('input[name=kilometer_total]').val() > 0) {
+            $('input[name=reservation_status]').each(function() {
+                if ($(this).val() == 1) {
+                    $(this).click();
+                }
+            });
+            $('input[name=usage_status]').each(function() {
+                if ($(this).val() == 2) {
+                    $(this).click();
+                }
+            });
+        }
 
     });
 
