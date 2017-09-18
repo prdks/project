@@ -50,6 +50,8 @@
             </select>
           </div>
           <input type="hidden" id="show-id" name="id" value="">
+          <input type="hidden" id="name_person" name="name_person" >
+          <input type="hidden" name="me" value="<?php echo $_SESSION['title_name'].$_SESSION['user_name'];?>">
         </div>
 
       </div>

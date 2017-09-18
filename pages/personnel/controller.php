@@ -202,6 +202,9 @@ elseif ($mode == 'setPermission')
   $id = $_POST['id'];
   $type = $_POST['user_type'];
 
+  if($_POST['name_person'] === $_POST['me']){ $name = 1; }
+  else { $name = 0; }
+
   if($type == 5)
   {
     $sql = "SELECT COUNT(personnel_id) as result FROM personnel p
@@ -220,16 +223,16 @@ elseif ($mode == 'setPermission')
         $sql = "update personnel
         set user_type_id = (select user_type_id from user_type where user_level = '".$type."')
         where personnel_id = '".$id."'";
-      
-        if($conn->query($sql)===true){echo json_encode(array('result' => '1','id' => $id , 'type' => $type));
-        }else {echo json_encode(array('result' => '0','id' => $id , 'type' => $type));}
+
+        if($conn->query($sql)===true){echo json_encode(array('result' => '1','person' => $name , 'type' => $type));
+        }else {echo json_encode(array('result' => '0','person' => $name , 'type' => $type));}
         
-      }else {echo json_encode(array('result' => 'error','id' => $id , 'type' => $type));}
+      }else {echo json_encode(array('result' => 'error','person' => $name , 'type' => $type));}
 
     }
     else
     {
-      echo json_encode(array('result' => 'error','id' => $id , 'type' => $type));
+      echo json_encode(array('result' => 'error','id' => $name , 'type' => $type));
     } 
   }
   else 
@@ -242,12 +245,12 @@ elseif ($mode == 'setPermission')
       set user_type_id = (select user_type_id from user_type where user_level = '".$type."')
       where personnel_id = '".$id."'";
     
-      if($conn->query($sql)===true){echo json_encode(array('result' => '1','id' => $id , 'type' => $type));}
-      else {echo json_encode(array('result' => '0','id' => $id , 'type' => $type));}
+      if($conn->query($sql)===true){echo json_encode(array('result' => '1','person' => $name , 'type' => $type));}
+      else {echo json_encode(array('result' => '0','person' => $name , 'type' => $type));}
     }
     else
     {
-      echo json_encode(array('result' => 'error','id' => $id , 'type' => $type));
+      echo json_encode(array('result' => 'error','person' => $name , 'type' => $type));
     }
   }
   

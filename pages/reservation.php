@@ -131,11 +131,17 @@
 
                                       <div id="getPersonFromDB" class="col-lg-12">
                                         <div class="panel panel-default">
-                                          <div class="panel-heading">
-                                            รายชื่อบุคลากร
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
-                                              <input type="text" class="form-control input-sm" id="search_input" onkeyup="filtertable()" placeholder="พิมพ์เพื่อค้นหา">
-                                            </div>
+                                            <div class="panel-heading clearfix">
+    
+                                              <h3 class="panel-title pull-left" style="padding-top: 7.5px;">
+                                              รายชื่อบุคลากร
+                                              </h3>
+
+
+                                              <div class="btn-group pull-right">
+                                                ค้นหา :
+                                                <input type="text" class="custom_input" id="search_input" onkeyup="filtertable()" placeholder="พิมพ์เพื่อค้นหา">
+                                              </div>
                                           </div>
                                           
                                             <div id="Table_sPersonnel" class="table-responsive tspersonnel">

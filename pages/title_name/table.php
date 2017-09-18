@@ -1,7 +1,7 @@
 
 <?php
  $rows = 10;
-
+ 
 if(isset($_GET['word'])){$_POST['search_box'] = $_GET['word'];}
 
 if(isset($_POST['search_box']))
@@ -96,8 +96,8 @@ else
   else{$page = '';}
   if($page==""){ $page = 1;}
   $start =  ($page-1) * $rows;
-  if($page != 1){$count = ($page*$rows)-$rows;}
-  else{$count = 0;}
+  if($page != 1){$count = ($page*$rows)-$rows; $start_count = $count;}
+  else{$count = 0; $start_count = $count;}
 
   $sql .= "Limit $start,$rows";
   $result = $conn->query($sql);
