@@ -73,7 +73,7 @@ $(document).ready(function() {
         $('#show-phone').html(data.phone);
         $('#show-department').html(data.department);
         $('#show-position').html(data.position);
-        $('#show-usertype').val(data.type);
+        $('#show-usertype').val(data.level);
         $('#show-id').val(id);
       }
     });
@@ -281,7 +281,22 @@ $(document).ready(function() {
                         function() { window.location.assign('permission.php'); }
                     );
                 } else if (data.result === 'error') {
-                    swal({
+                    if(data.type == 5)
+                    {
+                        swal({
+                            title: "ไม่สามารถเปลี่ยนได้เนื่องจากจำนวนเกินที่กำหนด",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                            type: "error",
+                            timer: 2000,
+                            showConfirmButton: false,
+                            html: true,
+                        },
+                        function() { window.location.assign('permission.php'); }
+                    );
+                    }
+                    else
+                    {
+                        swal({
                             title: "ข้อมูลไม่ถูกต้อง ไม่สามารถแก้ไขข้อมูลได้ กรุณาทำรายการใหม่",
                             text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
                             type: "error",
@@ -291,6 +306,8 @@ $(document).ready(function() {
                         },
                         function() { window.location.assign('permission.php'); }
                     );
+                    }
+                    
                 }
             }
         });

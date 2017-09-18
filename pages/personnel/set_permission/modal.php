@@ -43,7 +43,7 @@
               $result = $conn->query($sql);
               while($row = $result->fetch_assoc()){
                 ?>
-                <option value="<?php echo $row['user_type_name'];?>"><?php echo $row['user_type_name'];?></option>
+                <option value="<?php echo $row['user_level'];?>"><?php echo $row['user_type_name'];?></option>
                 <?php
               }
               ?>

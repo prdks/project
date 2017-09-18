@@ -8,7 +8,7 @@ if ($mode == 'getDetail')
     $sql = "
       SELECT
         personnel_id,personnel_name, email, phone_number , title_name,
-        position_name , department_name,user_type_name
+        position_name , department_name,user_type_name,user_level
       FROM personnel psn
       LEFT OUTER JOIN title_name t
         ON psn.title_name_id = t.title_name_id
@@ -29,7 +29,8 @@ if ($mode == 'getDetail')
               'phone' => $row['phone_number'],
               'department' => $row['department_name'],
               'position' => $row['position_name'],
-              'type' => $row['user_type_name']
+              'type' => $row['user_type_name'],
+              'level' => $row['user_level']
             );
     echo json_encode($arr);
 }
@@ -200,22 +201,56 @@ elseif ($mode == 'setPermission')
 {
   $id = $_POST['id'];
   $type = $_POST['user_type'];
-  
-  $sql = "select * from personnel where personnel_id ='".$id."'";
-  $result = $conn->query($sql);
-  if($result)
+
+  if($type == 5)
   {
-    $sql = "update personnel
-    set user_type_id = (select user_type_id from user_type where user_type_name = '".$type."')
-    where personnel_id= '".$id."'";
-  
-    if($conn->query($sql)===true){echo json_encode(array('result' => '1'));}
-    else {echo json_encode(array('result' => '0'));}
+    $sql = "SELECT COUNT(personnel_id) as result FROM personnel p
+    LEFT OUTER JOIN user_type u
+    ON p.user_type_id = u.user_type_id
+    WHERE u.user_level = 5
+    AND p.personnel_id <> ".$id;
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    if($row['result'] == 0)
+    {
+      $sql = "select * from personnel where personnel_id ='".$id."'";
+      $result = $conn->query($sql);
+      if($result)
+      {
+        $sql = "update personnel
+        set user_type_id = (select user_type_id from user_type where user_level = '".$type."')
+        where personnel_id = '".$id."'";
+      
+        if($conn->query($sql)===true){echo json_encode(array('result' => '1','id' => $id , 'type' => $type));
+        }else {echo json_encode(array('result' => '0','id' => $id , 'type' => $type));}
+        
+      }else {echo json_encode(array('result' => 'error','id' => $id , 'type' => $type));}
+
+    }
+    else
+    {
+      echo json_encode(array('result' => 'error','id' => $id , 'type' => $type));
+    } 
   }
-  else
+  else 
   {
-    echo json_encode(array('result' => 'error'));
+    $sql = "select * from personnel where personnel_id ='".$id."'";
+    $result = $conn->query($sql);
+    if($result)
+    {
+      $sql = "update personnel
+      set user_type_id = (select user_type_id from user_type where user_level = '".$type."')
+      where personnel_id = '".$id."'";
+    
+      if($conn->query($sql)===true){echo json_encode(array('result' => '1','id' => $id , 'type' => $type));}
+      else {echo json_encode(array('result' => '0','id' => $id , 'type' => $type));}
+    }
+    else
+    {
+      echo json_encode(array('result' => 'error','id' => $id , 'type' => $type));
+    }
   }
+  
 }
 elseif ($mode == 'uploadFilePersonnel') 
 {
