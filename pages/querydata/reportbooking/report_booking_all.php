@@ -158,7 +158,7 @@ if (isset($_GET['date_start'])  && isset($_GET['date_end']))
         <thead>
             <tr>
                 <th id="tb_detail_sub-th">วันที่ใช้รถยนต์</th>
-                <th id="tb_detail_sub-th">เวลา</th>
+                <th id="tb_detail_sub-th">ช่วงเวลา</th>
                 <th id="tb_detail_main">จองใช้เพื่อ</th>
                 <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                 <th id="tb_detail_sub-sv">สถานะการจอง</th>

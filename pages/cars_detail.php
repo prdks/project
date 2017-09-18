@@ -25,7 +25,7 @@
                                 <div class="panel-heading clearfix">
                                     
                                     <h3 class="panel-title pull-left" style="padding-top: 7.5px;">
-                                    &nbsp; ข้อมูลรถยนต์
+                                    ข้อมูลรถยนต์
                                     </h3>
                                     
                                     <form action="<?=$_SERVER['PHP_SELF'];?>" method="POST">

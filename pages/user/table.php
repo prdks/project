@@ -2,6 +2,10 @@
  $rows = 20;
  
  if(isset($_GET['word'])){$_POST['search_box'] = $_GET['word'];}
+ if(isset($_GET['sdate'])){$_POST['search_sdate'] = $_GET['sdate'];}
+ if(isset($_GET['ldate'])){$_POST['search_ldate'] = $_GET['ldate'];}
+ if(isset($_GET['status'])){$_POST['status'] = $_GET['status'];}
+
 
  if(isset($_POST['search_box']))
  {
@@ -16,27 +20,55 @@
    ON p.title_name_id = t.title_name_id
    LEFT JOIN department d
    ON p.department_id = d.department_id
-   WHERE p.personnel_name = '".$_SESSION['user_name']."'
-   AND (
-       r.requirement_detail like '%".$word."%'
-       OR
-       r.date_start like '%".$word."%'
-       OR
-       r.date_end like '%".$word."%'
-       OR
-       r.reserv_stime like '%".$word."%'
-       OR
-       r.reserv_etime like '%".$word."%'
-       OR
-       r.appointment_place like '%".$word."%'
-       OR
-       p.personnel_name like '%".$word."%'
-       OR
-       c.car_reg like '%".$word."%'
-   )
-   ORDER BY reservation_id ASC 
-   ,date_start ASC 
-   ,reserv_stime ASC";
+   WHERE p.personnel_name = '".$_SESSION['user_name']."' ";
+   
+   if($word !== '')
+   {
+     $sql .= "
+       AND (
+         r.requirement_detail like '%".$word."%'
+         OR
+         r.reserv_stime like '%".$word."%'
+         OR
+         r.reserv_etime like '%".$word."%'
+         OR
+         r.appointment_place like '%".$word."%'
+         OR
+         p.personnel_name like '%".$word."%'
+         OR
+         c.car_reg like '%".$word."%'
+     )";
+   }
+
+   if($_POST['search_sdate'] !== '' && $_POST['search_ldate'] !== '')
+   {
+     $sdate = $_POST['search_sdate'];
+     $ldate = $_POST['search_ldate'];
+     $search_Date = "
+     AND
+     ((r.date_start BETWEEN '".$sdate."' AND '".$ldate."')
+     OR 
+     (r.date_end BETWEEN '".$sdate."' AND '".$ldate."')
+     OR 
+      ('".$sdate."' BETWEEN r.date_start  AND r.date_end)
+     OR 
+      ('".$ldate."' BETWEEN  r.date_start  AND r.date_end ))";
+
+      $sql .= $search_Date;
+   }
+
+   $status = $_POST['status'];
+   if($status !== 'all')
+   {
+     $search_status = "
+     AND r.reservation_status = ".$status;
+     $sql .= $search_status;
+   }    
+
+   $sql .= " ORDER BY r.date_start ASC ,r.reserv_stime ASC";
+
+   
+
    $total_data = mysqli_num_rows($conn->query($sql));
    $total_page = ceil($total_data/$rows);
    if(isset($_GET['page'])){$page = $_GET['page'];}
@@ -47,6 +79,7 @@
    else{$count = 0; $start_count = $count;}
  
    $sql .= " Limit $start,$rows";
+
    $result = $conn->query($sql);
    $result_row = mysqli_num_rows($result);
    if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
@@ -168,8 +201,8 @@
      <table class="table table-striped table-bordered table-hover">
          <thead>
              <tr>
-                 <th id="tb_detail_sub-th">วันที่ใช้รถยนต์ใช้</th>
-                 <th id="tb_detail_sub-th">เวลา</th>
+                 <th id="tb_detail_main" class="text-center" style="width: 15%;">วันที่จองใช้รถยนต์</th>
+                 <th id="tb_detail_sub-th">ช่วงเวลา</th>
                  <th id="tb_detail_main">จองใช้เพื่อ</th>
                  <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                  <th id="tb_detail_sub-sv">สถานะการจอง</th>
@@ -200,20 +233,20 @@
  LEFT JOIN department d
  ON p.department_id = d.department_id
  WHERE p.personnel_name = '".$_SESSION['user_name']."'
- ORDER BY reservation_id ASC 
- ,date_start ASC 
- ,reserv_stime ASC";
- $total_data = mysqli_num_rows($conn->query($sql));
- $total_page = ceil($total_data/$rows);
- if(isset($_GET['page'])){$page = $_GET['page'];}
- else{$page = '';}
- if($page==""){ $page = 1;}
- $start =  ($page-1) * $rows;
- if($page != 1){$count = ($page*$rows)-$rows; $start_count = $count;}
- else{$count = 0; $start_count = $count;}
+ ORDER BY r.date_start ASC ,r.reserv_stime ASC";
 
- $sql .= " Limit $start,$rows";
- $result = $conn->query($sql);
+   $total_data = mysqli_num_rows($conn->query($sql));
+   $total_page = ceil($total_data/$rows);
+   if(isset($_GET['page'])){$page = $_GET['page'];}
+   else{$page = '';}
+   if($page==""){ $page = 1;}
+   $start =  ($page-1) * $rows;
+   if($page != 1){$count = ($page*$rows)-$rows; $start_count = $count;}
+   else{$count = 0; $start_count = $count;}
+ 
+   $sql .= " Limit $start,$rows";
+
+   $result = $conn->query($sql);
  $result_row = mysqli_num_rows($result);
  if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
  {
@@ -334,8 +367,8 @@
    <table class="table table-striped table-bordered table-hover">
        <thead>
            <tr>
-               <th id="tb_detail_sub-th">วันที่ใช้รถยนต์ใช้</th>
-               <th id="tb_detail_sub-th">เวลา</th>
+               <th id="tb_detail_main" class="text-center" style="width: 15%;">วันที่จองใช้รถยนต์</th>
+               <th id="tb_detail_sub-th">ช่วงเวลา</th>
                <th id="tb_detail_main">จองใช้เพื่อ</th>
                <th id="tb_detail_sub-th">ทะเบียนรถยนต์</th>
                <th id="tb_detail_sub-sv">สถานะการจอง</th>

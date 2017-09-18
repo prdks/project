@@ -27,21 +27,32 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                     <div class="panel-heading clearfix">
-                            
-                            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">
-                            รายการรออนุมัติ
-                            </h3>
-                            
-                            <form action="<?=$_SERVER['PHP_SELF'];?>" method="POST">
-                            <div class="btn-group pull-right">
-                            ค้นหาข้อมูล :
-                            <input name="search_box" type="text" placeholder="พิมพ์ข้อความ" class="custom_input">
-                            <button class="btn pull-right btn-default handleSearch" type="submit" style="height: 30px;">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            </div>
-                        </form>
-                        </div>
+                    
+                    <h3 class="panel-title pull-left" style="padding-top: 7.5px;">
+                    รายการรออนุมัติ
+                    </h3>
+
+                </div>
+                <div class="panel-body bodysearch clearfix">
+                    
+                    <form action="<?=$_SERVER['PHP_SELF'];?>" method="POST" class="form-inline">
+
+                    <div class="input-group pull-left">
+                        <span class="input-group-addon">วันที่จอง</span>
+                        <input type="date" name="search_sdate" class="form-control">
+                        <span class="input-group-addon">ถึง</span>
+                        <input type="date" name="search_ldate" class="form-control">
+                    </div>
+
+                    <div class="btn-group pull-right">
+                    ค้นหาข้อมูล :
+                    <input name="search_box" type="text" placeholder="พิมพ์ข้อความ" class="form-control">
+                    <button class="btn pull-right btn-default handleSearch" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    </div>
+                </form>
+                </div>
                         <!-- /.panel-heading -->
                               <!-- /.panel-body -->
                                     <?php include 'reservation/reserve_approve/table.php';?>
@@ -49,8 +60,68 @@
                                     <?php include 'reservation/reserve_approve/modal.php';?>
                             <!-- /.panel-body -->
                         </div>
+
                         <!-- /.panel -->
                 </div>
+
+                <span class="pull-left">
+                            <?php 
+                            if($total_data != 0){ $start_count++; }
+                            else { $start_count= 0; }
+
+                            echo "แสดง ".$start_count." ถึง ".$count." จากทั้งหมด ".$total_data." รายการ"; 
+                            ?>
+                        </span>
+                        <ul class="pagination pagination-md pull-right" style="margin:0px;">
+                        <?php
+                        if($total_page > 1)
+                        {
+                            ?>
+                            <li <?php if($page==1){echo 'disabled';}?>>
+                                <?php
+                                if($page == 1){ $linkURL = "";}
+                                else{ 
+                                    $linkURL = "reserve_ma.php?page=".($page-1);
+                                    if(isset($_POST['search_box'])){$linkURL .= "&word=".$_POST['search_box'];}
+                                    if(isset($_POST['search_sdate'])){$linkURL .= "&sdate=".$_POST['search_sdate'];}
+                                    if(isset($_POST['search_ldate'])){$linkURL .= "&ldate=".$_POST['search_ldate'];}
+                                }
+                                ?>
+                                <a href="<?php echo $linkURL;?>">&laquo;</a>
+                            </li>
+                            <?php
+                        }
+
+                        for ($i=1; $i <= $total_page ; $i++)
+                        {
+                            $linkURL = "reserve_ma.php?page=".$i;
+                            if(isset($_POST['search_box'])){$linkURL .= "&word=".$_POST['search_box'];}
+                            if(isset($_POST['search_sdate'])){$linkURL .= "&sdate=".$_POST['search_sdate'];}
+                            if(isset($_POST['search_ldate'])){$linkURL .= "&ldate=".$_POST['search_ldate'];}
+                            ?>
+                            <li <?php if($page==$i){echo 'class=active';}?> ><a href="<?php echo $linkURL; ?>"><?php echo $i; ?></a></li>
+                            <?php
+                        }
+
+
+                        if($total_page > 1)
+                        {
+                            ?>
+                            <li <?php if($page==$total_page){echo 'disabled';}?>>
+                                <?php if($page == $total_page){ $linkURL = "";}
+                                else{
+                                    $linkURL = "reserve_ma.php?page=".($page+1);
+                                    if(isset($_POST['search_box'])){$linkURL .= "&word=".$_POST['search_box'];}
+                                    if(isset($_POST['search_sdate'])){$linkURL .= "&sdate=".$_POST['search_sdate'];}
+                                    if(isset($_POST['search_ldate'])){$linkURL .= "&ldate=".$_POST['search_ldate'];}
+                                } ?>
+                                <a href="<?php echo $linkURL;?>">&raquo;</a>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                        
+                    </ul>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
