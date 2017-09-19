@@ -24,6 +24,15 @@ $(document).ready(function() {
         });
     }
 
+    function sorting(json_object, key_to_sort_by) {
+        function sortByKey(a, b) {
+            var x = a[key_to_sort_by];
+            var y = b[key_to_sort_by];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        json_object.sort(sortByKey);
+    }
+    
     $('#note').hide();
     $('#status').change(function() {
         var s = $(this).val();

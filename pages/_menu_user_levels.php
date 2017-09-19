@@ -63,8 +63,8 @@ switch ($type) {
             <li><a href="title_name.php">ข้อมูลคำนำหน้าชื่อ</a></li>
             <li><a href="position.php">ข้อมูลตำแหน่ง</a></li>
             <li><a href="department.php">ข้อมูลหน่วยงาน</a></li>
-            <li><a href="user_type.php">ข้อมูลประเภทผู้ใช้งาน</a></li>
             <li><a href="car_brand.php">ข้อมูลยี่ห้อรถยนต์</a></li>
+            <li><a href="user_type.php">ข้อมูลประเภทผู้ใช้งาน</a></li>
           </ul>
       </li>
       <li><a href="uploadfile.php"><i class="fa fa-upload fa-fw"></i> การนำเข้าข้อมูลรายชื่อ</a></li>
@@ -265,62 +265,6 @@ switch ($type) {
                 $row = $result->fetch_array();
                 $num_approve = $row['reservecout'];
 
-                if ($num_approve != 0)
-                {
-                  ?>
-                <span class="badge badge-danger pull-right"><?php echo $num_approve; ?></span>
-                <?php
-                }
-                ?>
-              </a></li>
-              </ul>
-        </li>
-        <?php
-        if ($_SESSION['url_googleform'] != "")
-        {
-        ?>
-        <li class="text-center last_menu"><a href="<?php echo $_SESSION['url_googleform'];?>" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์</a></li>
-        <?php
-        }
-        else
-        {
-          ?>
-          <li class="text-center last_menu" >
-            <a class="disabled" href="#" target="_blank"><i class="fa fa-comments fa-fw"></i> แบบประเมินการปฏิบัติงานของพนักงานขับรถยนต์
-            </a>
-          </li>
-          <?php
-        }
-      }
-      break;
-      case 6:
-      {
-        ?>
-        <li><a href="index.php"><i class="fa fa-calendar fa-fw"></i> ปฏิทินการจองใช้รถยนต์</a></li>
-        <li>
-        <a href="#"><i class="fa fa-search fa-fw"></i> ค้นหาข้อมูล<span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-        <li><a href="cars_empty.php">สอบถามรถยนต์ว่าง</a></li>
-        <li><a href="cars_detail.php">ดูรายละเอียดรถยนต์</a></li>
-        <li><a href="reserve_list.php">รายการจองและใช้รถยนต์</a></li>
-        </ul>
-      </li>
-      <li><a href="reservation.php"><i class="fa fa-edit fa-fw"></i> การจองรถยนต์ผ่านเว็บ</a></li>
-      <li><a href="form_empty.php" target="_blank"><i class="fa fa-print fa-fw"></i> พิมพ์ใบขออนุมัติใช้รถยนต์</a></li>
-        <li>
-              <a href="#"><i class="fa fa-star fa-fw"></i> ประจำวัน<span class="fa arrow"></span></a>
-              <ul class="nav nav-second-level">
-
-              <li><a href="reserve_approve.php">รายการรออนุมัติการจอง
-                <?php
-                $sql = "
-                SELECT COUNT(reservation_id) as reservecout
-                FROM reservation
-                WHERE fist_approve_status = 0
-                ";
-                $result = $conn->query($sql);
-                $row = $result->fetch_array();
-                $num_approve = $row['reservecout'];
                 if ($num_approve != 0)
                 {
                   ?>
