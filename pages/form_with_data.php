@@ -265,36 +265,25 @@ if (isset($_GET['id']))
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tbody>
 	<tr>
-		<td width="100%" align="right">
-			ลงชื่อ
-			&nbsp;&nbsp;
-			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+		<td width="60%" align="right">ลงชื่อ</td>
+		<td width="30%" align="center">
 			<?php 
-			for ($i=0; $i < 45; $i++) { echo "&nbsp;";}
+			for ($i=0; $i < 45; $i++) { echo ".";}
 			?>
-			</u>
-			&nbsp;&nbsp;
-			ผู้ขออนุมัติ
 		</td>
+		<td width="10%">ผู้ขออนุมัติ</td>
 	</tr>
 </tbody>
 </table>
 
-<table width="100%" border="0" align="center" cellpadding="0">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding-top:10px;">
 <tbody>
 	<tr>
-    <td colspan="2">&nbsp;</td>
-  </tr>
-</tbody>
-</table>
-
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
-<tbody>
-	<tr>
-		<td width="54%"></td>
-		<td width="50%" align="center">
-			(<?php echo $row['title_name'].$row['personnel_name'];?>)&nbsp;
-		</td>
+	<td width="60%" align="right"></td>
+	<td width="30%" align="center">
+	(<?php echo $row['title_name'].$row['personnel_name'];?>)&nbsp;
+	</td>
+	<td width="10%"></td>
 	</tr>
 </tbody>
 </table>
@@ -390,49 +379,33 @@ if($row['reservation_status'] == 2 || $row['reservation_status'] == 3 )
 
 ?>
 
-<table width="100%" border="0" align="center" style="padding-buttom:10px; padding-top:20px;">
+
+<table width="100%" border="0" align="center" cellpadding="0">
 <tbody>
 	<tr>
-		<td width="7%"></td>
-		<td width="62%">
-			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
-			<?php 
-			for ($i=0; $i < 45; $i++) { echo "&nbsp;";}
-			?>
-			</u>
-		</td>
-		<td width="24%" align="right">
-			<u style="border-bottom: 1px dotted #000;text-decoration: none;">
-			<?php 
-			for ($i=0; $i < 45; $i++) { echo "&nbsp;";}
-			?>
-			</u>
-		</td>
-		<td width="15%"></td>
+	<td colspan="2" height="10">&nbsp;</td>
   </tr>
 </tbody>
 </table>
 
 
+<table width="100%" border="0" align="center" cellpadding="0">
+<tbody>
+	<tr>
+		<td width="7%"></td>
+		<td width="63%">.......................................</td>
+		<td width="24%" align="right">.......................................</td>
+		<td width="16%"></td>
+  </tr>
+</tbody>
+</table>
 
 <table width="100%" border="0" align="center" cellpadding="5">
 <tbody>
 	<tr>
-		<td width="5%"></td>
-		<td width="60%">
-			(&nbsp;<u style="border-bottom: 1px dotted #000;text-decoration: none;">
-			<?php 
-			for ($i=0; $i < 40; $i++) { echo "&nbsp;";}
-			?>
-			</u>&nbsp;)
-		</td>
-		<td width="30%" align="right">
-			(&nbsp;<u style="border-bottom: 1px dotted #000;text-decoration: none;">
-			<?php 
-			for ($i=0; $i < 40; $i++) { echo "&nbsp;";}
-			?>
-			</u>&nbsp;)
-		</td>
+		<td width="6%"></td>
+		<td width="64%">(.....................................)</td>
+		<td width="25%" align="right">(.....................................)</td>
 		<td width="15%"></td>
   </tr>
 </tbody>
@@ -459,14 +432,14 @@ if($row['reservation_status'] == 2 || $row['reservation_status'] == 3 )
 	<tr>
 		<td width="95%" align="right">
 		วันที่
-		<u style="border-bottom: 1px dotted #000;text-decoration: none;">
+		
 		<?php 
 		for ($i=0; $i < 45; $i++) { 
 			if($i == 15 || $i == 30){ echo "/";}
-			echo "&nbsp;";
+			echo ".";
 		}
 		?>
-		</u>
+		
 		</td>
 		<td width="5%"></td>
 	</tr>
@@ -585,8 +558,8 @@ else
 <table width="100%" border="0" align="center" cellpadding="0">
 <tbody>
 	<tr>
-		<td width="50%"></td>
-		<td width="45%" align="right">(ลายมือชื่อ).......................................</td>
+		<td width="75%" align="right">(ลายมือชื่อ)</td>
+		<td width="25%" align="center">.......................................</td>
   </tr>
 </tbody>
 </table>
@@ -606,10 +579,9 @@ $e = $d->fetch_assoc();
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tbody>
 	<tr>
-		<td width="85%" align="right">
-			(<?php echo $e['title_name'].$e['personnel_name']; ?>)
+		<td width="75%" >
 		</td>
-		<td width="5%"></td>
+		<td width="25%" align="center">(<?php echo $e['title_name'].$e['personnel_name']; ?>)</td>
 	</tr>
 </tbody>
 </table>
@@ -617,8 +589,8 @@ $e = $d->fetch_assoc();
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tbody>
 	<tr>
-		<td width="85%" align="right">พนักงานขับรถยนต์</td>
-		<td width="5%"></td>
+		<td width="75%" align="right"></td>
+		<td width="25%" align="center">พนักงานขับรถยนต์</td>
 	</tr>
 </tbody>
 </table>
