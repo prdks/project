@@ -28,15 +28,8 @@ $(function() {
             data: { id: id, mode: 'getDetail' },
             dataType: 'json',
             success: function(data) {
-
-                if (npage === 'user_type') {
-                    $('#update_id').val(id)
-                    $('#show_update').val(data.name)
-                    $('#show_level').val(data.user_level)
-                } else {
-                    $('#update_id').val(id)
-                    $('#show_update').val(data.name)
-                }
+                $('#update_id').val(id)
+                $('#show_update').val(data.name)
             }
         });
     });

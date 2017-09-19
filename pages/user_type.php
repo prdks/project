@@ -26,14 +26,8 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <div class="pull-left" style="margin-left: -5px;">
-                          <a class='btn btn-sm btn-success' role='button' data-toggle="modal" data-target="#Insert_modal">
-                          <i class="fa fa-plus" data-toggle='tooltip' data-placement='top' title='เพิ่มข้อมูล'></i>
-                          </a>
-                        </div>
-                        
                         <h3 class="panel-title pull-left" style="padding-top: 7.5px;">
-                        &nbsp; ข้อมูลประเภทผู้ใช้งาน
+                        ข้อมูลประเภทผู้ใช้งาน
                         </h3>
                         
                         <form action="<?=$_SERVER['PHP_SELF'];?>" method="POST">
