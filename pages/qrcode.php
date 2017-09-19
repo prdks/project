@@ -5,7 +5,7 @@
       <?php
         include '_head.php';
       ?>
-
+      <script src="../dist/js/entkl.js"></script>
 </head>
 <body id="enterkl">
 
@@ -33,14 +33,21 @@
               <?php
             }
             if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
-              if ($_SESSION['user_type'] == 3) {
+              if ($_SESSION['user_type'] == 3) 
+              {
                 include 'enterkl/form.php';
                 ?>
+
                 <center>
                   <a class="btn btn-danger" href="_logout.php?key=enterkl" onclick="handleSignOutClick()"><i class="fa fa-sign-out fa-fw"></i>ออกจากระบบ</a>
                 </center>
+
+                <br>
+
                 <?php
-              }else {
+              }
+              else 
+              {
                 echo "
                 <!DOCTYPE html>
                 <script>

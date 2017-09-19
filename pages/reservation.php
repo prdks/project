@@ -264,9 +264,8 @@
                                   <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx Complete Preview xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
                                   <div class="tab-pane" role="tabpanel" id="complete">
                                     <form id="Insert_Reservation_Form">
-                                      <?php include 'reservation/reserve_form/completeForm.php'; ?>
-                                      <!-- <div id="divCompletePage">
-                                      </div> -->
+                                      <?php include 'reservation/reserve_form/CompleteForm.php'; ?>
+
                                       <br />
                                       <br />
                                       <ul class="list-inline pull-right">
