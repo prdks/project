@@ -5,6 +5,7 @@
       <?php
         include '_head.php';
       ?>
+      <script src="../dist/js/user.js"></script>
 </head>
 
 <body>
@@ -20,7 +21,7 @@
               </div>
             </div>
             <!-- /.row -->
-            <form id="new_user_form" class="form-horizontal" action="new_user/insert.php" method="post">
+            <form id="new_user_form" class="form-horizontal">
               <!-- คำนำหน้าชื่อ -->
               <div class="form-group">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
@@ -110,7 +111,7 @@
               <input type="hidden" name="user_level" value="1">
               <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 text-right">
-                  <button href="index.php" onclick="deletesession()" type="reset" id="cancel_btn" class="btn btn-default">ยกเลิก</button>
+                  <a href="_logout.php" type="button" id="cancel_btn" class="btn btn-default">ยกเลิก</a>
                   <button type="submit" class="btn btn-primary">ตกลง</button>
                 </div>
               </div>
@@ -120,13 +121,5 @@
         <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
-
-    <?php
-    function deletesession()
-    {
-      session_destroy();
-    }
-    ?>
-
 </body>
 </html>

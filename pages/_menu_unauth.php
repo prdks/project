@@ -6,10 +6,11 @@
         </a>
         <ul class="dropdown-menu dropdown-user">
             <li>
-              <form id="form_login" action="new_user/check.php"method="post">
+              <form id="form_login" action="user/controller.php"method="post">
               <a id="signin-button" onclick="handleSignInClick()" role="button">
                 <i class="fa fa-google fa-fw"></i>ผู้ใช้งานทั่วไป
               </a>
+              <input type="hidden" name="mode" value="LoginAuth">
               <input type="hidden" id="hd_email" name="hd_email" value="">
               <input type="hidden" id="name" name="name" value="">
               <input type="hidden" id="pqrcode" name="pqrcode" value="null">

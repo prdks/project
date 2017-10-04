@@ -51,29 +51,10 @@ if($mode == 'NewUser')
     }
       $_SESSION['loggedin'] = true;
   
-      echo "
-      <!DOCTYPE html>
-      <script>
-      function redir()
-      {
-      window.location.assign('../index.php');
-      }
-      </script>
-      <body onload='redir();'></body>
-      ";
+      echo json_encode(array('result' => '1'));
   }else{
     session_destroy();
-    echo "
-    <!DOCTYPE html>
-    <script>
-    function redir()
-    {
-    alert('ผิดพลาด กรุณาทำรายการใหม่');
-    window.location.assign('../index.php');
-    }
-    </script>
-    <body onload='redir();'></body>
-    ";
+    echo json_encode(array('result' => 'error'));
   }
 }
 elseif ($mode == 'LoginAuth') 
@@ -87,8 +68,16 @@ elseif ($mode == 'LoginAuth')
   if($result->num_rows === 0){
     $_SESSION['email'] = $email;
     $_SESSION['user_name'] = $name;
-
-    echo json_encode(array('result' => '0'));
+    echo "
+    <!DOCTYPE html>
+    <script>
+    function redir()
+    {
+    window.location.assign('../new_user.php');
+    }
+    </script>
+    <body onload='redir();'></body>
+    ";
   
   }elseif ($result->num_rows > 0) {
     if ($s != null) { // ถ้าล้อคอินจากหน้าที่แสกน qrcode
@@ -117,9 +106,16 @@ elseif ($mode == 'LoginAuth')
           $_SESSION['user_type'] = $row['user_level'];
       }
       $_SESSION['loggedin'] = true;
-
-      echo json_encode(array('result' => '1','id' => $s));
-
+      echo "
+      <!DOCTYPE html>
+      <script>
+      function redir()
+      {
+      window.location.assign('../qrcode.php?id=".$s."');
+      }
+      </script>
+      <body onload='redir();'></body>
+      ";
     }else {
         $sql = "
           SELECT
@@ -146,8 +142,16 @@ elseif ($mode == 'LoginAuth')
             $_SESSION['user_type'] = $row['user_level'];
         }
         $_SESSION['loggedin'] = true;
-
-        echo json_encode(array('result' => '2'));
+        echo "
+        <!DOCTYPE html>
+        <script>
+        function redir()
+        {
+          window.location.assign('../index.php');
+        }
+        </script>
+        <body onload='redir();'></body>
+        ";
     }
   
   }

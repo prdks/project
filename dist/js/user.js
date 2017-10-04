@@ -25,6 +25,12 @@ $(document).ready(function() {
         e.preventDefault();
         updateProfile();
     });
+
+    $("#new_user_form").submit(function(e) {
+        e.preventDefault();
+        NewUser();
+    });
+
     // ------------------ Function ---------------------
     function updateProfile() {
         var data = $('#editprofileform').serializeArray();
@@ -74,4 +80,40 @@ $(document).ready(function() {
         });
     }
 
+    function NewUser() {
+        var data = $('#new_user_form').serializeArray();
+        data.push({ name: 'mode', value: 'NewUser' });
+        $.ajax({
+            type: "POST",
+            url: "user/controller.php",
+            data: data,
+            dataType: 'json',
+            success: function(data) {
+                if (data.result == 1) //สำเร็จ
+                {
+                    swal({
+                            title: "เพิ่มข้อมูลสำเร็จ",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                            type: "success",
+                            timer: 2000,
+                            showConfirmButton: false,
+                        },
+                        function() { window.location.assign('index.php'); }
+                    );
+                } else if (data.result === 'error') {
+                    swal({
+                            title: "ไม่สามารถเพิ่มข้อมูลได้<br>กรุณาทำรายการใหม่",
+                            text: "แจ้งเตือนจะปิดเองภายใน 2 วินาที",
+                            type: "error",
+                            timer: 2000,
+                            showConfirmButton: false,
+                            html: true,
+                        },
+                        function() { window.location.assign('index.php'); }
+                    );
+                }
+            },
+            error: function(data) {console.log(data)}
+        });
+    }
 });
