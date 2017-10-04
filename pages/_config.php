@@ -1,7 +1,7 @@
 <?php
 // ------------- CONFIG GOOGLE APIT ----------
-$_SESSION['clientId'] = '311898119234-9ak2l5llohjqsaqvkfhtibhu3dp4f8s7.apps.googleusercontent.com';
-$_SESSION['apiKey'] = 'AIzaSyDATtdNtA9Rj105rKzJ8kZQAMum9kmv4nU';
+$_SESSION['clientId'] = '383494155126-8lgknklqfpbru2dd6knjq3q6vkfq0fkc.apps.googleusercontent.com';
+$_SESSION['apiKey'] = 'AIzaSyDCQWWPxXKFJoqJ6vMnX0T4k1CMFTpmlM0';
 
 // ------------- CONFIG DATABASE -------------
 $servername = "localhost";

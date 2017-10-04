@@ -39,7 +39,7 @@
                 ?>
 
                 <center>
-                  <a class="btn btn-danger" href="_logout.php?key=enterkl" onclick="handleSignOutClick()"><i class="fa fa-sign-out fa-fw"></i>ออกจากระบบ</a>
+                  <a class="btn btn-danger" href="_logout.php?key=enterkl" ><i class="fa fa-sign-out fa-fw"></i>ออกจากระบบ</a>
                 </center>
 
                 <br>

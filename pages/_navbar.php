@@ -28,7 +28,7 @@
         </span>
       </a>
   </div>
-
+  <span class="text-right">
     <!-- /.navbar-header -->
     <?php
     if(!isset($_SESSION['loggedin'])){
@@ -38,6 +38,7 @@
       include '_menu_auth.php';
     }
     ?>
+    </span>
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse" >
             <ul class="nav" id="side-menu">

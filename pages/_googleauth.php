@@ -11,6 +11,10 @@ function handleClientLoad() {
   // Loading the auth2 library is optional here since `gapi.client.init` function will load
   // it if not already loaded. Loading it upfront can save one network request.
   gapi.load('client:auth2', initClient);
+
+  window.onbeforeunload = function(e){
+    gapi.auth2.getAuthInstance().signOut();
+  };
 }
 
 function initClient() {
@@ -20,6 +24,7 @@ function initClient() {
       apiKey: apiKey,
       discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
       clientId: clientId,
+      prompt: 'select_account',
       hosted_domain: '<?php echo $_SESSION['domain_name'];?>',
       scope: 'profile'
   }).then(function () {
@@ -46,10 +51,6 @@ function handleSignInClick(event) {
   gapi.auth2.getAuthInstance().signIn();
 }
 
-function handleSignOutClick(event) {
-    gapi.auth2.getAuthInstance().signOut();
-}
-
 function makeApiCall() {
   // Make an API call to the People API, and print the user's given name.
       gapi.client.people.people.get({
@@ -69,6 +70,7 @@ function makeApiCall() {
           }else {
             gapi.auth2.getAuthInstance().signOut();
             window.alert('กรุณาเข้าระบบด้วยอีเมล์ของ<?php echo $_SESSION['system_name'];?>');
+            gapi.auth2.getAuthInstance().signOut();
             window.location.reload();
 
           }
@@ -80,6 +82,6 @@ function makeApiCall() {
 
 </script>
 <script async defer src="https://apis.google.com/js/api.js"
-onload="this.onload=function(){};handleClientLoad()"
+onload="this.onload=function(){};handleClientLoad() "
 onreadystatechange="if (this.readyState === 'complete') this.onload()">
 </script>

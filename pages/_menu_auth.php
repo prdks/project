@@ -107,7 +107,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a id="signout-button" href="_logout.php" onclick="handleSignOutClick()"><i class="fa fa-sign-out fa-fw"></i>ออกจากระบบ</a>
+              <a id="signout-button" href="_logout.php" ><i class="fa fa-sign-out fa-fw"></i>ออกจากระบบ</a>
             </li>
         </ul>
     </li>
