@@ -238,21 +238,20 @@ else
         LEFT JOIN department d
         ON p.department_id = d.department_id
         WHERE reservation_status = 0
-        AND d.department_id = ".$department['department_id']."
         ORDER BY r.date_start ASC ,r.reserv_stime ASC";
 
        
 
-       $total_data = mysqli_num_rows($conn->query($sql));
-       $total_page = ceil($total_data/$rows);
-       if(isset($_GET['page'])){$page = $_GET['page'];}
-       else{$page = '';}
-       if($page==""){ $page = 1;}
-       $start =  ($page-1) * $rows;
-       if($page != 1){$count = ($page*$rows)-$rows; $start_count = $count;}
-       else{$count = 0; $start_count = $count;}
+      //  $total_data = mysqli_num_rows($conn->query($sql));
+      //  $total_page = ceil($total_data/$rows);
+      //  if(isset($_GET['page'])){$page = $_GET['page'];}
+      //  else{$page = '';}
+      //  if($page==""){ $page = 1;}
+      //  $start =  ($page-1) * $rows;
+      //  if($page != 1){$count = ($page*$rows)-$rows; $start_count = $count;}
+      //  else{$count = 0; $start_count = $count;}
      
-       $sql .= " Limit $start,$rows";
+      //  $sql .= " Limit $start,$rows";
 
        $result = $conn->query($sql);
         $result_row = mysqli_num_rows($result);
