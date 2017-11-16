@@ -34,45 +34,63 @@
 
                 </div>
                 <div class="panel-body bodysearch clearfix">
-                    
                     <form action="<?=$_SERVER['PHP_SELF'];?>" method="POST" class="form-inline">
 
-                    <div class="input-group pull-left">
-                        <span class="input-group-addon">วันที่จอง</span>
-                        <input type="date" name="search_sdate" class="form-control">
-                        <span class="input-group-addon">ถึง</span>
-                        <input type="date" name="search_ldate" class="form-control">
-                    </div>
-
-                    <div class="btn-group pull-right">
-                    ค้นหาข้อมูล :
-                    <input name="search_box" type="text" placeholder="พิมพ์ข้อความ" class="form-control">
-                    <button class="btn pull-right btn-default handleSearch" type="submit">
-                        <i class="fa fa-search"></i>
-                    </button>
-                    </div>
-                </form>
-                </div>
-                        <!-- /.panel-heading -->
-                              <!-- /.panel-body -->
-                                    <?php include 'reservation/reserve_approve/table.php';?>
-                                <!-- /.table-responsive -->
-                                    <?php include 'reservation/reserve_approve/modal.php';?>
-                            <!-- /.panel-body -->
+                        <div class="input-group pull-left">
+                            <span class="input-group-addon">วันที่จอง</span>
+                            <input type="date" name="search_sdate" class="form-control">
+                            <span class="input-group-addon">ถึง</span>
+                            <input type="date" name="search_ldate" class="form-control">
                         </div>
-
-                        <!-- /.panel -->
+                        <div class="btn-group pull-right">
+                            ค้นหาข้อมูล :
+                            <input name="search_box" type="text" placeholder="พิมพ์ข้อความ" class="form-control">
+                                <button class="btn pull-right btn-default handleSearch" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                        </div>
+                    </form>
                 </div>
 
-                <span class="pull-left">
+                <div class="table-responsive">
+                 <?php
+                 switch ($_SESSION['user_type']) {
+                    case 0:
+                    {
+                      include 'reservation/reserve_approve/table-0.php';
+                    }
+                      break;
+                    
+                    case 4:
+                    {
+                      include 'reservation/reserve_approve/table-4.php';
+                    }
+                      break;
+                    case 5:
+                    {
+                      include 'reservation/reserve_approve/table-5-6.php';
+                    }
+                      break;
+                    case 6:
+                    {
+                      include 'reservation/reserve_approve/table-5-6.php';
+                    }
+                      break;
+                  }
+                 ?>
+                 </div>
+
+            </div>
+
+                <!-- <span class="pull-left">
                             <?php 
                             if($total_data != 0){ $start_count++; }
                             else { $start_count= 0; }
 
                             echo "แสดง ".$start_count." ถึง ".$count." จากทั้งหมด ".$total_data." รายการ"; 
                             ?>
-                        </span>
-                        <ul class="pagination pagination-md pull-right" style="margin:0px;">
+                </span>
+                    <ul class="pagination pagination-md pull-right" style="margin:0px;">
                         <?php
                         if($total_page > 1)
                         {
@@ -121,7 +139,7 @@
                         }
                         ?>
                         
-                    </ul>
+                    </ul> -->
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
@@ -130,5 +148,6 @@
 
     </div>
     <!-- /#wrapper -->
+    <?php include 'reservation/reserve_approve/modal.php';?>
 </body>
 </html>

@@ -66,7 +66,7 @@ function FullDateThai($strDate)
     while ($row = $result->fetch_assoc())
     {
       $id = $row['reservation_id']; //ไอดีการจอง
-      $title = TimeThai($row['reserv_stime'])."(".$row['car_brand_name']." ".$row['seat']." ที่นั่ง) - ".$row['requirement_detail']; //title
+      $title = TimeThai($row['reserv_stime'])."(".$row['car_reg'].") - ".$row['requirement_detail']; //title
       $detail = $row['requirement_detail']; //รายละเอียดการจอง
       $arrLocation = explode(",", $row['location']); //สถานที่
       $location = "";

@@ -12,34 +12,6 @@
       <form id="approve_form" class="form-horizontal">
       <div class="modal-body">
         <div id="detail_area_for_approve"></div>
-        <!-- <dl class="dl-horizontal">
-          <dt>จองใช้เพื่อ :</dt>
-          <dd id="show-detail"></dd>
-          <br />
-          <dt>รถยนต์ที่จอง :</dt>
-          <dd id="show-cars"></dd>
-          <br />
-          <dt>วันที่ใช้รถยนต์ :</dt>
-          <dd id="show-date"></dd>
-          <br />
-          <dt>รายชื่อผู้โดยสาร :</dt>
-          <dd id="show-passenger"></dd>
-          <br />
-          <dt>สถานที่จะไป :</dt>
-          <dd id="show-location"></dd>
-          <br />
-          <dt>จุดนัดพบ :</dt>
-          <dd id="show-meet"></dd>
-          <br />
-          <dt>ผู้ติดต่อ :</dt>
-          <dd id="show-person"></dd>
-          <br />
-          <dt>เบอร์โทรศัพท์ :</dt>
-          <dd id="show-phone"></dd>
-        </dl> -->
-        <!-- <ul class="nav nav-tabs span2 clearfix"></ul>
-        <br /> -->
-        
         <div class="row">
           
         <?php
@@ -111,6 +83,12 @@
 
           </div>
 
+          <?php
+          if(($No1['Result']+$No3['Result']) == 0)
+          {
+            echo "EMPTY";
+          }
+          ?>
             <div class="col-lg-4 container-fluid">
               <div class="panel panel-primary">
                   <div class="panel-heading">
