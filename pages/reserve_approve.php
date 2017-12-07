@@ -82,7 +82,7 @@
 
             </div>
 
-                <!-- <span class="pull-left">
+                <span class="pull-left">
                             <?php 
                             if($total_data != 0){ $start_count++; }
                             else { $start_count= 0; }
@@ -112,7 +112,7 @@
 
                         for ($i=1; $i <= $total_page ; $i++)
                         {
-                            $linkURL = "reserve_ma.php?page=".$i;
+                            $linkURL = "reserve_approve.php?page=".$i;
                             if(isset($_POST['search_box'])){$linkURL .= "&word=".$_POST['search_box'];}
                             if(isset($_POST['search_sdate'])){$linkURL .= "&sdate=".$_POST['search_sdate'];}
                             if(isset($_POST['search_ldate'])){$linkURL .= "&ldate=".$_POST['search_ldate'];}
@@ -128,7 +128,7 @@
                             <li <?php if($page==$total_page){echo 'disabled';}?>>
                                 <?php if($page == $total_page){ $linkURL = "";}
                                 else{
-                                    $linkURL = "reserve_ma.php?page=".($page+1);
+                                    $linkURL = "reserve_approve.php?page=".($page+1);
                                     if(isset($_POST['search_box'])){$linkURL .= "&word=".$_POST['search_box'];}
                                     if(isset($_POST['search_sdate'])){$linkURL .= "&sdate=".$_POST['search_sdate'];}
                                     if(isset($_POST['search_ldate'])){$linkURL .= "&ldate=".$_POST['search_ldate'];}
@@ -139,7 +139,7 @@
                         }
                         ?>
                         
-                    </ul> -->
+                    </ul>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->

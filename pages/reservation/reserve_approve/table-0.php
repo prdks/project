@@ -1,4 +1,9 @@
 <?php
+ $rows = 20;
+ 
+ if(isset($_GET['word'])){$_POST['search_box'] = $_GET['word'];}
+ if(isset($_GET['sdate'])){$_POST['search_sdate'] = $_GET['sdate'];}
+ if(isset($_GET['ldate'])){$_POST['search_ldate'] = $_GET['ldate'];}
 
  if(isset($_POST['search_box']))
 {
@@ -75,8 +80,20 @@
        $sql .= " ORDER BY r.date_start ASC ,r.reserv_stime ASC";
 
 
+       $total_data = mysqli_num_rows($conn->query($sql));
+       $total_page = ceil($total_data/$rows);
+       if(isset($_GET['page'])){$page = $_GET['page'];}
+       else{$page = '';}
+       if($page==""){ $page = 1;}
+       $start =  ($page-1) * $rows;
+       if($page != 1){$count = ($page*$rows)-$rows; $start_count = $count;}
+       else{$count = 0; $start_count = $count;}
+     
+       $sql .= " Limit $start,$rows";
+
        $result = $conn->query($sql);
         $result_row = mysqli_num_rows($result);
+
         if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
         {
         ?>
@@ -204,44 +221,62 @@ else
               </tr>
           </thead>
           <tbody>
-    <?php
-
-      $dsql = "
-      SELECT d.department_id,d.department_name FROM reservation r
-      LEFT JOIN personnel p
-      ON r.personnel_id = p.personnel_id
-      LEFT JOIN department d
-      ON p.department_id = d.department_id
-      WHERE reservation_status = 0
-      GROUP BY department_name
-      ORDER BY department_name ASC";
-      $res = $conn->query($dsql);
-      while($r = $res->fetch_assoc())
-      {
-        ?>
-        <tr><td colspan="7"><?php echo $r['department_name'];?></td></tr>
         <?php
-          $sql = "
-          SELECT * FROM reservation r
-          LEFT JOIN cars c
-          ON r.car_id = c.car_id
-          LEFT JOIN personnel p
-          ON r.personnel_id = p.personnel_id
-          LEFT JOIN title_name t
-          ON p.title_name_id = t.title_name_id
-          LEFT JOIN department d
-          ON p.department_id = d.department_id
-          WHERE reservation_status = 0 
-          AND d.department_id = ".$r['department_id']."
-          ORDER BY r.date_start ASC ,r.reserv_stime ASC";
+        $sql = "
+        SELECT * FROM reservation r
+        LEFT JOIN cars c
+        ON r.car_id = c.car_id
+        LEFT JOIN personnel p
+        ON r.personnel_id = p.personnel_id
+        LEFT JOIN title_name t
+        ON p.title_name_id = t.title_name_id
+        LEFT JOIN department d
+        ON p.department_id = d.department_id
+        WHERE reservation_status = 0 
+        ORDER BY d.department_name ASC,r.date_start ASC ,r.reserv_stime ASC";
+     
+       
+       $total_data = mysqli_num_rows($conn->query($sql));
+       $total_page = ceil($total_data/$rows);
 
-        $result = $conn->query($sql);
-        $result_row = mysqli_num_rows($result);
+       if(isset($_GET['page'])){$page = $_GET['page'];}
+       else{$page = '';}
+       if($page==""){ $page = 1;}
+       $start =  ($page-1) * $rows;
+       if($page != 1){$count = ($page*$rows)-$rows; $start_count = $count;}
+       else{$count = 0; $start_count = $count;}
+
+       $sql .= " Limit $start,$rows";
+
+       $result = $conn->query($sql);
+       $result_row = mysqli_num_rows($result);
+
         if ($result_row !== 0) // ถ้าใน Table มีข้อมูล
         {
-          
           while($row = $result->fetch_assoc())
           {
+            $count++;
+            $dep = 1;
+            $department_sql = "select * from department order by department_name asc";
+            $department_result = $conn->query($department_sql);
+            while($d = $department_result->fetch_assoc())
+            {
+              if($row["department_id"] == $d["department_id"])
+              {
+                ?>
+               <?php
+                $dep--;
+                
+                ?>
+                 <tr><td colspan="7"><?php echo $d['department_name'];?></td></tr>
+                <?php
+                
+                ?>
+               <?php
+              }
+              
+            }
+
             ?>
             <tr>
               <td class="text-center">
@@ -284,7 +319,6 @@ else
             </tbody>
           <?php
         }
-      }
       ?>
       </tbody>
       </table>
